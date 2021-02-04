@@ -3,7 +3,9 @@
 ## Cell Society
 
 ## Names and NetIDs
-
+Ji Yun Hyo - jh160, 
+Shaw Phillips - sp422, 
+Harrison Huang - hlh38
 
 ### High Level Design Ideas
 
