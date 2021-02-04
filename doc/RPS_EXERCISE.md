@@ -32,7 +32,7 @@ This class's purpose is to manage each match:
 ```
 
 This class's purpose is to manage players
-```java=
+```java
 public class Player{    
     public Player(){
         private int score;
