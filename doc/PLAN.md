@@ -2,9 +2,9 @@
 ### Team Number
 Team 01
 ### Names
-Ji Yun Hyo - jh160
-Shaw Phillips - sp422
-Harrison Huang - hlh38
+Ji Yun Hyo - jh160  
+Shaw Phillips - sp422  
+Harrison Huang - hlh38  
 #### Examples
 
 Here is a graphical look at my design:
