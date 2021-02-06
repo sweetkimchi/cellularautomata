@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8?">
+<Simulation simulation="SimulationName">
+	<title>Name of Simulation</title>
+	<author>Author</author>
+	<description>Description of simulation</description>
+	<parameter>Parameter Value</parameter>
+	<parameter>Parameter Value</parameter>
+	<parameter>Parameter Value</parameter>
+	<width>Grid Width</width>
+	<height>Grid Height</height>
+</Simulation>
