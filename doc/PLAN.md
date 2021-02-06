@@ -29,7 +29,7 @@ taken from [Brilliant Examples of Sketched UI Wireframes and Mock-Ups](https://o
 
 ## Configuration File Format
 Example Fire XML File
-```xml=
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <Simulation simulation="FireExample">
 	<title>Fire Example</title>
@@ -41,7 +41,7 @@ Example Fire XML File
 </Simulation>
 ```
 Exmaple WaTor XML File
-```xml=
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <Simulation simulation="WaTor Example">
     <title>WaTor Example</title>
