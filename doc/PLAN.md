@@ -1,7 +1,10 @@
 # Cell Society Design Plan
 ### Team Number
+Team 01
 ### Names
-
+Ji Yun Hyo - jh160
+Shaw Phillips - sp422
+Harrison Huang - hlh38
 #### Examples
 
 Here is a graphical look at my design:
@@ -60,7 +63,8 @@ Exmaple WaTor XML File
 ## Team Responsibilities
 
  * Team Member #1
-
+Shaw- - Controller (configurationfile)
  * Team Member #2
-
+Harrison - View
  * Team Member #3
+Jiyun - Model
