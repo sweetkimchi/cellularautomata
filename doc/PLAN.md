@@ -25,7 +25,31 @@ taken from [Brilliant Examples of Sketched UI Wireframes and Mock-Ups](https://o
 
 
 ## Configuration File Format
-
+Example Fire XML File
+```xml=
+<?xml version="1.0" encoding="UTF-8"?>
+<Simulation simulation="FireExample">
+	<title>Fire Example</title>
+	<desciption>Example simulation of spreading fire</desciption>
+	<author>Shaw</author>
+	<rows>50</rows>
+	<cols>50</cols>
+	<probCatch>.25</probCatch>
+</Simulation>
+```
+Exmaple WaTor XML File
+```xml=
+<?xml version="1.0" encoding="UTF-8"?>
+<Simulation simulation="WaTor Example">
+    <title>WaTor Example</title>
+    <description>Example WaTor Simulation</description>
+    <rows>30</rows>
+    <cols>30></cols>
+    <fishRate>1</fishRate>
+    <sharkRate>20</sharkRate>
+    <sharkStarve>15</sharkStarve>
+</Simulation>
+```
 
 ## Design Details
 
