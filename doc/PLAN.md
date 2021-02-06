@@ -47,7 +47,7 @@ Exmaple WaTor XML File
     <title>WaTor Example</title>
     <description>Example WaTor Simulation</description>
     <rows>30</rows>
-    <cols>30></cols>
+    <cols>30</cols>
     <fishRate>1</fishRate>
     <sharkRate>20</sharkRate>
     <sharkStarve>15</sharkStarve>
