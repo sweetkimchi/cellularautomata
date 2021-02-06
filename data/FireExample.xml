@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Simulation simulation="FireExample">
+	<title>Fire Example</title>
+	<desciption>Example simulation of spreading fire</desciption>
+	<author>Shaw</author>
+	<rows>50</rows>
+	<cols>50</cols>
+	<probCatch>.25</probCatch>
+</Simulation>
