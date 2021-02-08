@@ -43,6 +43,7 @@ public class SimulationEngine {
      * Default constructor
      */
     public SimulationEngine() {
+        System.out.println("START of the Simulation");
     }
 
 }
