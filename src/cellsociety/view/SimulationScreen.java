@@ -18,6 +18,7 @@ public class SimulationScreen {
     public SliderGraphics sliderGraphics;
 
     public SimulationScreen() {
+        System.out.println("Hello world!");
     }
 
 }
