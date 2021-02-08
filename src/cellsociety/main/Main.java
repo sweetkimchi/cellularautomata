@@ -1,13 +1,22 @@
-package cellsociety;
+
+import java.util.*;
 
 /**
- * Feel free to completely change this code or delete it entirely. 
+ * 
  */
-public class Main {
+public class Main extends Application {
+
     /**
-     * Start of the program.
+     * Default constructor
      */
-    public static void main (String[] args) {
-        System.out.println("Hello world");
+    public Main() {
     }
+
+    /**
+     * 
+     */
+    public void main() {
+        // TODO implement here
+    }
+
 }
