@@ -1,3 +1,4 @@
+package cellsociety.view;
 
 import java.util.*;
 

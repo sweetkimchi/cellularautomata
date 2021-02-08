@@ -1,5 +1,6 @@
 package cellsociety.segregationmodel;
 
+import cellsociety.rules.Rules;
 import java.util.*;
 
 /**

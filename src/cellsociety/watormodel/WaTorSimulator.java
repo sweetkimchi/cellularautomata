@@ -1,5 +1,6 @@
 package cellsociety.watormodel;
 
+import cellsociety.grid.Simulator;
 import java.util.*;
 
 /**

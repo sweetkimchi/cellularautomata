@@ -1,5 +1,6 @@
 package cellsociety.springoffire;
 
+import cellsociety.grid.Simulator;
 import java.util.*;
 
 /**

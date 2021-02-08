@@ -1,5 +1,6 @@
 package cellsociety.springoffire;
 
+import cellsociety.cell.Cell;
 import java.util.*;
 
 /**
@@ -21,9 +22,5 @@ public class SpreadingOfFireCell extends Cell {
         // TODO implement here
     }
 
-    /**
-     * 
-     */
-    public abstract void checkNextState();
 
 }

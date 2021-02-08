@@ -1,5 +1,6 @@
 package cellsociety.segregationmodel;
 
+import cellsociety.cell.Cell;
 import java.util.*;
 
 /**
@@ -20,9 +21,5 @@ public class SegregationCell extends Cell {
         // TODO implement here
     }
 
-    /**
-     * 
-     */
-    public abstract void checkNextState();
 
 }

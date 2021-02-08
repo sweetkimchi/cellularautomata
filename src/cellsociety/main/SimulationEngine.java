@@ -1,16 +1,17 @@
 
+import cellsociety.configurationfile.Decoder;
+import cellsociety.configurationfile.XMLPopulator;
+import cellsociety.rules.Data;
+import cellsociety.view.SimulationScreen;
 import java.util.*;
+import javafx.stage.Stage;
 
 /**
  * 
  */
 public class SimulationEngine {
 
-    /**
-     * Default constructor
-     */
-    public SimulationEngine() {
-    }
+
 
     /**
      * 
@@ -36,5 +37,11 @@ public class SimulationEngine {
      * 
      */
     public XMLPopulator populator;
+
+    /**
+     * Default constructor
+     */
+    public SimulationEngine() {
+    }
 
 }

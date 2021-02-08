@@ -1,4 +1,6 @@
+package cellsociety.percolation;
 
+import cellsociety.rules.Rules;
 import java.util.*;
 
 /**

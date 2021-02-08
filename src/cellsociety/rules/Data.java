@@ -16,17 +16,17 @@ public class Data {
     /**
      * 
      */
-    public void title;
+    public String title;
 
     /**
      * 
      */
-    public void numRow;
+    public int numRow;
 
     /**
      * 
      */
-    public void numColumn;
+    public int numColumn;
 
 
 }

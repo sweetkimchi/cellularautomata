@@ -13,10 +13,5 @@ public class Parameters {
     public Parameters() {
     }
 
-    /**
-     * 
-     */
-    public void Attribute1;
-
 
 }

@@ -1,4 +1,6 @@
+package cellsociety.percolation;
 
+import cellsociety.grid.*;
 import java.util.*;
 
 /**

@@ -16,12 +16,8 @@ public class GridManager {
     /**
      * 
      */
-    public int array grid;
+    public List<List<Integer>> grid;
 
-    /**
-     * 
-     */
-    public void Attribute2;
 
 
 }

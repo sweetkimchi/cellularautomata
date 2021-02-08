@@ -1,4 +1,6 @@
+package cellsociety.percolation;
 
+import cellsociety.cell.Cell;
 import java.util.*;
 
 /**
@@ -19,9 +21,5 @@ public class PercolationCell extends Cell {
         // TODO implement here
     }
 
-    /**
-     * 
-     */
-    public abstract void checkNextState();
 
 }

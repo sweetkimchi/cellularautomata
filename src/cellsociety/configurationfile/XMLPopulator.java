@@ -1,6 +1,7 @@
 package cellsociety.configurationfile;
 
 import java.util.*;
+import cellsociety.rules.*;
 
 /**
  * 

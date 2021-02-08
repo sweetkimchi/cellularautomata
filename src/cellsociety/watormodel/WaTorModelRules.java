@@ -1,5 +1,6 @@
 package cellsociety.watormodel;
 
+import cellsociety.rules.Rules;
 import java.util.*;
 
 /**

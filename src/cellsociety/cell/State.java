@@ -16,17 +16,17 @@ public class State {
     /**
      * 
      */
-    public void xCoord;
+    public int xCoord;
 
     /**
      * 
      */
-    public void yCoord;
+    public int yCoord;
 
     /**
      * 
      */
-    public void image;
+    public int image;
 
 
     /**

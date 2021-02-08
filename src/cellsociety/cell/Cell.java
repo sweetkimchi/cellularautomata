@@ -16,22 +16,12 @@ public abstract class Cell {
     /**
      * 
      */
-    public void currentState;
-
-    /**
-     * 
-     */
     public State currentState;
 
     /**
      * 
      */
     public State nextState;
-
-    /**
-     * 
-     */
-    public void gridPosition;
 
     /**
      * 
