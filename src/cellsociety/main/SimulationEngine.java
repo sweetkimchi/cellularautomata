@@ -1,3 +1,4 @@
+package cellsociety.main;
 
 import cellsociety.configurationfile.Decoder;
 import cellsociety.configurationfile.XMLPopulator;

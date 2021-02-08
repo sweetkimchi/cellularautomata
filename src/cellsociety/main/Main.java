@@ -1,3 +1,4 @@
+package cellsociety.main;
 
 import java.util.*;
 import javafx.application.Application;
