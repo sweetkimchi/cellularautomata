@@ -1,7 +1,6 @@
-package cellsociety.springoffire;
+package cellsociety.model.springoffire;
 
-import cellsociety.configurationfile.XMLPopulator;
-import java.util.*;
+import cellsociety.controller.XMLPopulator;
 
 /**
  * 

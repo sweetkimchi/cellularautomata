@@ -1,7 +1,6 @@
-package cellsociety.watormodel;
+package cellsociety.model.watormodel;
 
-import cellsociety.configurationfile.XMLPopulator;
-import java.util.*;
+import cellsociety.controller.XMLPopulator;
 
 /**
  * 

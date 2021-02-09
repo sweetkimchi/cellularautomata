@@ -1,17 +1,17 @@
-package cellsociety.segregationmodel;
+package cellsociety.model.gameoflife;
 
 import cellsociety.cell.Cell;
-import java.util.*;
+import cellsociety.cell.State;
 
 /**
  * 
  */
-public class SegregationCell extends Cell {
-
+public class GameOfLifeCell extends Cell {
+    State state;
     /**
      * Default constructor
      */
-    public SegregationCell() {
+    public GameOfLifeCell() {
     }
 
     /**

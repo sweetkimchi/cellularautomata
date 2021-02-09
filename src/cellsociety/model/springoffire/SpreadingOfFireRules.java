@@ -1,7 +1,6 @@
-package cellsociety.springoffire;
+package cellsociety.model.springoffire;
 
 import cellsociety.rules.Rules;
-import java.util.*;
 
 /**
  * 

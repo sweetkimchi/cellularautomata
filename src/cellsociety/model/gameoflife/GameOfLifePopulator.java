@@ -1,7 +1,6 @@
-package cellsociety.gameoflife;
+package cellsociety.model.gameoflife;
 
-import cellsociety.configurationfile.XMLPopulator;
-import java.util.*;
+import cellsociety.controller.XMLPopulator;
 
 /**
  * 

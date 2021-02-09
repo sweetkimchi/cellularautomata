@@ -1,19 +1,17 @@
-package cellsociety.springoffire;
+package cellsociety.model.watormodel;
 
 import cellsociety.cell.Cell;
-import java.util.*;
 
 /**
  * 
  */
-public class SpreadingOfFireCell extends Cell {
+public class WaTorModelCell extends Cell {
 
     /**
      * Default constructor
      */
-    public SpreadingOfFireCell() {
+    public WaTorModelCell() {
     }
-
 
     /**
      * 
@@ -21,6 +19,5 @@ public class SpreadingOfFireCell extends Cell {
     public void checkNextState() {
         // TODO implement here
     }
-
 
 }

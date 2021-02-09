@@ -1,7 +1,6 @@
-package cellsociety.gameoflife;
+package cellsociety.model.gameoflife;
 
 import cellsociety.grid.Simulator;
-import java.util.*;
 
 /**
  * 

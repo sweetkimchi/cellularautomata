@@ -1,6 +1,5 @@
-package cellsociety.configurationfile;
+package cellsociety.controller;
 
-import java.util.*;
 import cellsociety.rules.*;
 
 /**

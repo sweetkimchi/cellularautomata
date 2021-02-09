@@ -1,17 +1,16 @@
-package cellsociety.watormodel;
+package cellsociety.model.segregationmodel;
 
 import cellsociety.cell.Cell;
-import java.util.*;
 
 /**
  * 
  */
-public class WaTorModelCell extends Cell {
+public class SegregationCell extends Cell {
 
     /**
      * Default constructor
      */
-    public WaTorModelCell() {
+    public SegregationCell() {
     }
 
     /**
@@ -20,5 +19,6 @@ public class WaTorModelCell extends Cell {
     public void checkNextState() {
         // TODO implement here
     }
+
 
 }

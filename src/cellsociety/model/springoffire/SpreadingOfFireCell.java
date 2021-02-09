@@ -1,19 +1,18 @@
-package cellsociety.gameoflife;
+package cellsociety.model.springoffire;
 
 import cellsociety.cell.Cell;
-import cellsociety.cell.State;
-import java.util.*;
 
 /**
  * 
  */
-public class GameOfLifeCell extends Cell {
-    State state;
+public class SpreadingOfFireCell extends Cell {
+
     /**
      * Default constructor
      */
-    public GameOfLifeCell() {
+    public SpreadingOfFireCell() {
     }
+
 
     /**
      * 

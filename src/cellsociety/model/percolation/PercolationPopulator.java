@@ -1,7 +1,6 @@
-package cellsociety.percolation;
+package cellsociety.model.percolation;
 
-import cellsociety.configurationfile.XMLPopulator;
-import java.util.*;
+import cellsociety.controller.XMLPopulator;
 
 /**
  * 

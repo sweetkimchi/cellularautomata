@@ -1,7 +1,6 @@
-package cellsociety.percolation;
+package cellsociety.model.percolation;
 
 import cellsociety.grid.*;
-import java.util.*;
 
 /**
  * 

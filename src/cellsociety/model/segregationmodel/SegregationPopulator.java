@@ -1,7 +1,6 @@
-package cellsociety.segregationmodel;
+package cellsociety.model.segregationmodel;
 
-import cellsociety.configurationfile.XMLPopulator;
-import java.util.*;
+import cellsociety.controller.XMLPopulator;
 
 /**
  * 

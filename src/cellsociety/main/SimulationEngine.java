@@ -1,10 +1,9 @@
 package cellsociety.main;
 
-import cellsociety.configurationfile.Decoder;
-import cellsociety.configurationfile.XMLPopulator;
+import cellsociety.controller.Decoder;
+import cellsociety.controller.XMLPopulator;
 import cellsociety.rules.Data;
 import cellsociety.view.SimulationScreen;
-import java.util.*;
 import javafx.stage.Stage;
 
 /**

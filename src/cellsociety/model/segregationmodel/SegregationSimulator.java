@@ -1,7 +1,6 @@
-package cellsociety.segregationmodel;
+package cellsociety.model.segregationmodel;
 
 import cellsociety.grid.Simulator;
-import java.util.*;
 
 /**
  * 

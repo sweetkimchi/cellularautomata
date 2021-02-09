@@ -1,6 +1,4 @@
-package cellsociety.configurationfile;
-
-import java.util.*;
+package cellsociety.controller;
 
 /**
  * 
