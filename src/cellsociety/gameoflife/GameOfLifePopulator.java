@@ -1,4 +1,4 @@
-package cellsociety.segregationmodel;
+package cellsociety.gameoflife;
 
 import cellsociety.configurationfile.XMLPopulator;
 import java.util.*;

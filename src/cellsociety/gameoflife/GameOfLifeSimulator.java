@@ -1,4 +1,4 @@
-package cellsociety.segregationmodel;
+package cellsociety.gameoflife;
 
 import cellsociety.grid.Simulator;
 import java.util.*;
