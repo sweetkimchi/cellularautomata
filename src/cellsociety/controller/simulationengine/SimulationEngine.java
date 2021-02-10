@@ -42,12 +42,11 @@ public class SimulationEngine {
     /**
      * Default constructor
      */
-    public SimulationEngine(Stage stage) {
-        initialize(stage);
+    public SimulationEngine() {
         System.out.println("START of the Simulation");
     }
 
-    private void initialize(Stage stage){
+    public void startSimulationEngine(Stage stage){
         SimulationScreen simulationScreen = new SimulationScreen(stage);
        // GameOfLifeSimulator gameOfLifeSimulator = new GameOfLifeSimulator();
     }
