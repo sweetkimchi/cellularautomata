@@ -13,4 +13,19 @@ public class PercolationSimulator extends Simulator {
     public PercolationSimulator() {
     }
 
+    @Override
+    protected void initializeRules() {
+
+    }
+
+    @Override
+    protected void initializeCells() {
+
+    }
+
+    @Override
+    protected void initializeGrid() {
+
+    }
+
 }
