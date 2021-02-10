@@ -13,6 +13,11 @@ public class WaTorModelCell extends Cell {
     public WaTorModelCell() {
     }
 
+    @Override
+    public int getNumberOfNeighbors() {
+        return 0;
+    }
+
     /**
      * 
      */
