@@ -11,44 +11,27 @@ import javafx.stage.Stage;
  * 
  */
 public class SimulationEngine {
-
-
-
-    /**
-     * 
-     */
+    private Stage stage;
     public Decoder decoder;
-
-    /**
-     * 
-     */
     public Data data;
-
-    /**
-     * 
-     */
     public SimulationScreen simulationScreen;
-
-    /**
-     * 
-     */
-    public Stage stage;
-
-    /**
-     * 
-     */
     public XMLParser populator;
 
     /**
      * Default constructor
      */
-    public SimulationEngine() {
-        System.out.println("START of the Simulation");
+    public SimulationEngine(Stage stage) {
+        this.stage = stage;
     }
 
-    public void startSimulationEngine(Stage stage){
+    public void startSimulationEngine(){
+
         SimulationScreen simulationScreen = new SimulationScreen(stage);
         GameOfLifeSimulator gameOfLifeSimulator = new GameOfLifeSimulator();
+    }
+
+    public void start(){
+
     }
 
 }
