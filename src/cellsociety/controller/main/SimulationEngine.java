@@ -1,4 +1,4 @@
-package cellsociety.main;
+package cellsociety.controller.main;
 
 import cellsociety.controller.Decoder;
 import cellsociety.controller.XMLPopulator;
@@ -10,7 +10,6 @@ import javafx.stage.Stage;
  * 
  */
 public class SimulationEngine {
-
 
 
     /**
@@ -42,7 +41,12 @@ public class SimulationEngine {
      * Default constructor
      */
     public SimulationEngine() {
-        System.out.println("START of the Simulation");
+        simulationScreen = new SimulationScreen();
     }
 
+    public void initialize(Stage primaryStage) {
+
+        simulationScreen.initialize(primaryStage);
+
+    }
 }
