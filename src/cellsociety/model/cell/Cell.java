@@ -46,6 +46,8 @@ public abstract class Cell {
         // TODO implement here
     }
 
+    public abstract int getNumberOfNeighbors();
+
     /**
      * 
      */
