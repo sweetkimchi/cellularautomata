@@ -1,7 +1,8 @@
 package cellsociety.controller.simulationengine;
 
 import cellsociety.controller.Decoder;
-import cellsociety.controller.XMLPopulator;
+import cellsociety.controller.XMLParser;
+import cellsociety.model.gameoflife.GameOfLifeSimulator;
 import cellsociety.model.rules.Data;
 import cellsociety.view.SimulationScreen;
 import javafx.stage.Stage;
@@ -36,13 +37,18 @@ public class SimulationEngine {
     /**
      * 
      */
-    public XMLPopulator populator;
+    public XMLParser populator;
 
     /**
      * Default constructor
      */
-    public SimulationEngine() {
+    public SimulationEngine(Stage stage) {
+        initialize(stage);
         System.out.println("START of the Simulation");
+    }
+
+    private void initialize(Stage stage){
+        GameOfLifeSimulator gameOfLifeSimulator = new GameOfLifeSimulator();
     }
 
 }

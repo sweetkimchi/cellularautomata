@@ -5,12 +5,12 @@ import cellsociety.model.rules.*;
 /**
  * 
  */
-public abstract class XMLPopulator {
+public abstract class XMLParser {
 
     /**
      * Default constructor
      */
-    public XMLPopulator() {
+    public XMLParser() {
     }
 
     /**

@@ -7,10 +7,12 @@ import java.util.*;
  */
 public abstract class Cell {
 
+    State state;
     /**
      * Default constructor
      */
     public Cell() {
+
     }
 
     /**
