@@ -17,9 +17,7 @@ public class Main extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        SimulationEngine simulationEngine = new SimulationEngine(primaryStage);
-
-        primaryStage.show();
+    public void start(Stage stage){
+      SimulationEngine simulationEngine = new SimulationEngine(stage);
     }
 }
