@@ -1,4 +1,4 @@
-package cellsociety.cell;
+package cellsociety.model.cell;
 
 import java.util.*;
 

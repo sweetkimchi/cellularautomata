@@ -1,6 +1,6 @@
 package cellsociety.model.springoffire;
 
-import cellsociety.grid.Simulator;
+import cellsociety.controller.grid.Simulator;
 
 /**
  * 

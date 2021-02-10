@@ -1,6 +1,6 @@
 package cellsociety.controller;
 
-import cellsociety.rules.*;
+import cellsociety.model.rules.*;
 
 /**
  * 

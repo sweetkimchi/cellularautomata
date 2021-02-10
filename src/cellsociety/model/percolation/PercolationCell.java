@@ -1,6 +1,6 @@
 package cellsociety.model.percolation;
 
-import cellsociety.cell.Cell;
+import cellsociety.model.cell.Cell;
 
 /**
  * 

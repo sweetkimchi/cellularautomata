@@ -1,6 +1,4 @@
-package cellsociety.grid;
-
-import java.util.*;
+package cellsociety.controller.grid;
 
 /**
  * 

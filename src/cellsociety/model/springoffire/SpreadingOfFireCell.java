@@ -1,6 +1,6 @@
 package cellsociety.model.springoffire;
 
-import cellsociety.cell.Cell;
+import cellsociety.model.cell.Cell;
 
 /**
  * 

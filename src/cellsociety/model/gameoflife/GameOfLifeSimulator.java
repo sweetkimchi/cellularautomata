@@ -1,6 +1,6 @@
 package cellsociety.model.gameoflife;
 
-import cellsociety.grid.Simulator;
+import cellsociety.controller.grid.Simulator;
 
 /**
  * 

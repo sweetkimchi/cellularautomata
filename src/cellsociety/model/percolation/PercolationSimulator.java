@@ -1,6 +1,6 @@
 package cellsociety.model.percolation;
 
-import cellsociety.grid.*;
+import cellsociety.controller.grid.*;
 
 /**
  * 

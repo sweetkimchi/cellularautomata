@@ -1,6 +1,6 @@
 package cellsociety.model.segregationmodel;
 
-import cellsociety.rules.Rules;
+import cellsociety.model.rules.Rules;
 
 /**
  * 

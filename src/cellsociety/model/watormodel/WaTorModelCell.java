@@ -1,6 +1,6 @@
 package cellsociety.model.watormodel;
 
-import cellsociety.cell.Cell;
+import cellsociety.model.cell.Cell;
 
 /**
  * 

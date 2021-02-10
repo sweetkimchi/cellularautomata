@@ -1,6 +1,4 @@
-package cellsociety.rules;
-
-import java.util.*;
+package cellsociety.model.rules;
 
 /**
  * 

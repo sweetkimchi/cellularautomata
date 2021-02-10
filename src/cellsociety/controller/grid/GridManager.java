@@ -1,4 +1,4 @@
-package cellsociety.grid;
+package cellsociety.controller.grid;
 
 import java.util.*;
 

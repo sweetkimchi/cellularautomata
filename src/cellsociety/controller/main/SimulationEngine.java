@@ -1,8 +1,8 @@
-package cellsociety.main;
+package cellsociety.controller.main;
 
 import cellsociety.controller.Decoder;
 import cellsociety.controller.XMLPopulator;
-import cellsociety.rules.Data;
+import cellsociety.model.rules.Data;
 import cellsociety.view.SimulationScreen;
 import javafx.stage.Stage;
 

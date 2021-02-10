@@ -1,7 +1,7 @@
 package cellsociety.model.gameoflife;
 
-import cellsociety.cell.Cell;
-import cellsociety.cell.State;
+import cellsociety.model.cell.Cell;
+import cellsociety.model.cell.State;
 
 /**
  * 
