@@ -29,8 +29,8 @@ public class SimulationScreen {
 
     public SimulationScreen(Stage stage) {
         this.stage = stage;
-        initialize();
         sceneNodes = new Group();
+        initialize();
     }
 
     public void initialize() {
