@@ -5,9 +5,9 @@ package cellsociety.model.cell;
  */
 public class State {
 
+    public boolean alive;
     private int xCoord;
     private int yCoord;
-    private boolean alive;
     /**
      * Default constructor
      * Initializes the state of each cell according to the data fed

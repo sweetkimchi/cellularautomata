@@ -29,6 +29,9 @@ public class GameOfLifeRule extends Rules {
     }
 
     private void judgeStateOfCell(GameOfLifeCell cell){
+        if(cell.getNumberOfNeighbors() <= lowerSurvivalBoundary){
+            cell.state.alive = false;
+        }
     }
 
 }
