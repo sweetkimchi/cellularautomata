@@ -19,6 +19,7 @@ public class GameOfLifeCell extends Cell {
 
     @Override
     public int getNumberOfNeighbors() {
+        return 0;
     }
 
     /**

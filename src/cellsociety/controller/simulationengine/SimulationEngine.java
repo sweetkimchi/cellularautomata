@@ -48,7 +48,7 @@ public class SimulationEngine {
 
     public void startSimulationEngine(Stage stage){
         SimulationScreen simulationScreen = new SimulationScreen(stage);
-       // GameOfLifeSimulator gameOfLifeSimulator = new GameOfLifeSimulator();
+        GameOfLifeSimulator gameOfLifeSimulator = new GameOfLifeSimulator();
     }
 
 }

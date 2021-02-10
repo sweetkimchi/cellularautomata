@@ -13,4 +13,19 @@ public class WaTorSimulator extends Simulator {
     public WaTorSimulator() {
     }
 
+    @Override
+    protected void initializeRules() {
+
+    }
+
+    @Override
+    protected void initializeCells() {
+
+    }
+
+    @Override
+    protected void initializeGrid() {
+
+    }
+
 }
