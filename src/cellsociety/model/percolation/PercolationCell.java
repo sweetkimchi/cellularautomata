@@ -13,6 +13,11 @@ public class PercolationCell extends Cell {
     public PercolationCell() {
     }
 
+    @Override
+    public int getNumberOfNeighbors() {
+        return 0;
+    }
+
     /**
      * 
      */

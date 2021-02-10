@@ -13,6 +13,11 @@ public class SpreadingOfFireCell extends Cell {
     public SpreadingOfFireCell() {
     }
 
+    @Override
+    public int getNumberOfNeighbors() {
+        return 0;
+    }
+
 
     /**
      * 

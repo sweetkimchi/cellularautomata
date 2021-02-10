@@ -13,6 +13,11 @@ public class SegregationCell extends Cell {
     public SegregationCell() {
     }
 
+    @Override
+    public int getNumberOfNeighbors() {
+        return 0;
+    }
+
     /**
      * 
      */
