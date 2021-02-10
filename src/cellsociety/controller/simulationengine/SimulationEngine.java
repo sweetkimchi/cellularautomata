@@ -48,7 +48,8 @@ public class SimulationEngine {
     }
 
     private void initialize(Stage stage){
-        GameOfLifeSimulator gameOfLifeSimulator = new GameOfLifeSimulator();
+        SimulationScreen simulationScreen = new SimulationScreen(stage);
+       // GameOfLifeSimulator gameOfLifeSimulator = new GameOfLifeSimulator();
     }
 
 }
