@@ -1,4 +1,4 @@
-package cellsociety.controller.main;
+package cellsociety.controller.simulationengine;
 
 import cellsociety.controller.Decoder;
 import cellsociety.controller.XMLPopulator;

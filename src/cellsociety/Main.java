@@ -1,6 +1,6 @@
 package cellsociety;
 
-import cellsociety.controller.main.SimulationEngine;
+import cellsociety.controller.simulationengine.SimulationEngine;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
