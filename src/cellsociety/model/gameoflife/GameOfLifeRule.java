@@ -68,13 +68,13 @@ public class GameOfLifeRule extends Rules {
                 if(x + 1 < statesOfAllCells.length && y + 1 < statesOfAllCells[0].length && statesOfAllCells[x+1][y+1].alive){
                     numberOfNeighbor++;
                 }
-                System.out.print(" " + numberOfNeighbor + " ");
+          //      System.out.print(" " + numberOfNeighbor + " ");
                 numberOfNeighbors[x][y] = numberOfNeighbor;
                 //    statesOfAllCells[x][y].alive = decideState(numberOfNeighbor);
             }
-            System.out.println();
+        //    System.out.println();
         }
-        System.out.println();
+      //  System.out.println();
         return numberOfNeighbors;
     }
 

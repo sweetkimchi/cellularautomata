@@ -16,9 +16,14 @@ import javafx.animation.AnimationTimer;
  */
 public class GameOfLifeSimulator extends Simulator {
 
-  private ArrayList<State> LIST_NAME_BLOCK = new ArrayList<>(Arrays.asList(new State(0, 0, true), new State(0, 1, true), new State(1, 0, true),
-      new State(1, 1, true)));
-  private ArrayList<State> LIST_NAME_BLINKER = new ArrayList<>(Arrays.asList(new State(0, 0, true), new State(0, 1, true), new State(0, 2, true)));
+  private ArrayList<State> LIST_NAME_BLOCK = new ArrayList<>(
+      Arrays.asList(new State(0, 0, true), new State(0, 1, true), new State(1, 0, true),
+          new State(1, 1, true)));
+  private ArrayList<State> LIST_NAME_BLINKER = new ArrayList<>(
+      Arrays.asList(new State(0, 0, true), new State(0, 1, true), new State(0, 2, true)));
+  private ArrayList<State> LIST_NAME_TOAD = new ArrayList<>(Arrays
+      .asList(new State(0, 1, true), new State(0, 2, true), new State(1, 3, true),
+          new State(2, 0, true),new State(3, 1, true), new State(3, 2, true)));
 
   private GridManager gridManager;
   private GameOfLifeRule gameOfLifeRule;
@@ -42,8 +47,10 @@ public class GameOfLifeSimulator extends Simulator {
   private ArrayList<State> assignTemplate(String templateName) {
     if (templateName.equals("block")) {
       template = LIST_NAME_BLOCK;
-    }else if(templateName.equals("blinker")){
+    } else if (templateName.equals("blinker")) {
       template = LIST_NAME_BLINKER;
+    } else if (templateName.equals("toad")){
+      template = LIST_NAME_TOAD;
     }
     return template;
   }
@@ -67,9 +74,9 @@ public class GameOfLifeSimulator extends Simulator {
   }
 
   protected void initializeCells() {
-    for(int row = 0; row < stateOfAllCells.length; row++){
-      for(int col = 0; col < stateOfAllCells[0].length; col++){
-          cellPositions[row][col] = new GameOfLifeCell(stateOfAllCells[row][col]);
+    for (int row = 0; row < stateOfAllCells.length; row++) {
+      for (int col = 0; col < stateOfAllCells[0].length; col++) {
+        cellPositions[row][col] = new GameOfLifeCell(stateOfAllCells[row][col]);
       }
     }
   }
@@ -86,23 +93,22 @@ public class GameOfLifeSimulator extends Simulator {
     gridManager.printGrid();
   }
 
-  public State[][] getStateOfAllCells(){
+  public State[][] getStateOfAllCells() {
     return stateOfAllCells;
   }
 
 
-
-  private void runSimulation(){
+  private void runSimulation() {
     AnimationTimer animation = new AnimationTimer() {
       @Override
       public void handle(long now) {
-     // updateCellState();
+        updateCellState();
       }
     };
     animation.start();
   }
 
-  private int getNumberOfNeighbors(State[][] stateOfAllCells, int numberOfSides){
+  private int getNumberOfNeighbors(State[][] stateOfAllCells, int numberOfSides) {
     return 0;
   }
 
