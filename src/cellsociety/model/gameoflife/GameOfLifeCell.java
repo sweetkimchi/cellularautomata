@@ -13,8 +13,8 @@ public class GameOfLifeCell extends Cell {
     /**
      * Default constructor
      */
-    public GameOfLifeCell(int xCoord, int yCoord, boolean alive) {
-        state = new State(xCoord, yCoord, alive);
+    public GameOfLifeCell(State state) {
+        this.state = state;
     }
 
     @Override

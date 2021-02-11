@@ -15,26 +15,54 @@ public class GridManager {
     /**
      *
      */
+    private State[][] stateOfCells;
+    private int row;
+    private int col;
     private List<List<State>> grid;
     /**
      * Default constructor
      */
-    public GridManager() {
+    public GridManager(int row, int col) {
+        this.row = row;
+        this.col = col;
         grid = new ArrayList<>();
     }
 
-    public State[][] buildGrid(int r, int c, ArrayList<State> template){
-        State [][] stateOfCells = new State[r][c];
-        for(int row = 0; row < r; row++){
-            for(int col = 0; col < c; col++){
-                State state = new State(row, col, false);
-                stateOfCells[row][col] = state;
+    public State[][] buildGrid(ArrayList<State> template){
+        State [][] stateOfCells = new State[row][col];
+        for(int r = 0; r < row; r++){
+            for(int c = 0; c < col; c++){
+                State state = new State(r, c, false);
+                stateOfCells[r][c] = state;
             }
         }
         for(State s : template){
-            stateOfCells[r /2 + s.getxCoord()][c /2 + s.getyCoord()].alive = true;
+            stateOfCells[row /2 + s.getxCoord()][col /2 + s.getyCoord()].alive = true;
         }
+        this.stateOfCells = stateOfCells;
         return stateOfCells;
+    }
+
+    public State[][] getStateOfCells(){
+        return stateOfCells;
+    }
+
+    public void printGrid() {
+        for (int x = 0; x < row; x++) {
+            for (int y = 0; y < col; y++) {
+                if(stateOfCells[x][y].alive) {
+                    System.out.print(" O ");
+                }else{
+                    System.out.print(" . ");
+                }
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
+
+    public void updateGrid(State[][] stateOfCells){
+        this.stateOfCells = stateOfCells;
     }
 
 

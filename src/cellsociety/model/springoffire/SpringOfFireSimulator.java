@@ -19,12 +19,17 @@ public class SpringOfFireSimulator extends Simulator {
     }
 
     @Override
-    protected void initializeRules() {
+    protected void initializeConstructors() {
 
     }
 
     @Override
     protected void initializeGrid() {
+
+    }
+
+    @Override
+    public void updateCellState() {
 
     }
 
