@@ -5,7 +5,7 @@ import cellsociety.controller.XMLParser;
 /**
  *
  */
-public class SegregationParser extends XMLParser {
+public class SegregationParser{
 
   /**
    * Default constructor

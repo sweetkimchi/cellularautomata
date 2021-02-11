@@ -5,12 +5,13 @@ import cellsociety.controller.XMLParser;
 /**
  *
  */
-public class WaTorParser extends XMLParser {
+public class WaTorParser{
 
   /**
    * Default constructor
    */
   public WaTorParser() {
+    super();
   }
 
 }
