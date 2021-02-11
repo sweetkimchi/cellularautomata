@@ -34,17 +34,15 @@ public class SimulationEngine extends Simulator {
   private final ArrayList<State> LIST_NAME_TOAD = new ArrayList<>(Arrays
       .asList(new State(0, 1, true), new State(0, 2, true), new State(1, 3, true),
           new State(2, 0, true), new State(3, 1, true), new State(3, 2, true)));
-
-
+  private final SimulationScreen simulationScreen;
+  private final int row = 50;
+  private final int col = 50;
   private GridManager gridManager;
   private GameOfLifeRule gameOfLifeRule;
   private State[][] stateOfAllCells;
   private GameOfLifeCell[][] cellPositions;
-  private final SimulationScreen simulationScreen;
   private Map<Cell, List<Cell>> mapOfNeighbors;
   private ArrayList<State> template;
-  private final int row = 50;
-  private final int col = 50;
 
   /**
    * Default constructor
@@ -77,7 +75,7 @@ public class SimulationEngine extends Simulator {
     initializeConstructors();
     initializeGrid();
     initializeCells();
-  //  gridManager.printGrid();
+    //  gridManager.printGrid();
     updateCellState();
 
     runSimulation();
