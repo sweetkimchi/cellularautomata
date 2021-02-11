@@ -1,6 +1,7 @@
 package cellsociety.controller.grid;
 
 import cellsociety.model.cell.Cell;
+import cellsociety.model.cell.State;
 import cellsociety.model.gameoflife.GameOfLifeCell;
 import java.util.*;
 
@@ -14,7 +15,7 @@ public class GridManager {
     /**
      *
      */
-    private List<List<Cell>> grid;
+    private List<List<State>> grid;
     /**
      * Default constructor
      */
@@ -22,17 +23,22 @@ public class GridManager {
         grid = new ArrayList<>();
     }
 
-    public List<List<Cell>> buildGrid(int r, int c, ArrayList<ArrayList<Cell>> template){
-        for(int row = 0; row < ROWSIZE; row++){
-            for(int col = 0; col < COLUMNSIZE; col++){
-                ArrayList<Cell> neighbors = new ArrayList<>();
-            //    grid.add(new GameOfLifeCell(), neighbors);
+    public State[][] buildGrid(int r, int c, ArrayList<State> template){
+        State [][] stateOfCells = new State[r][c];
+        for(int row = 0; row < r; row++){
+            for(int col = 0; col < c; col++){
+                State state = new State(row, col, false);
+                stateOfCells[row][col] = state;
             }
         }
-        return grid;
+        for(State s : template){
+            stateOfCells[r /2 + s.getxCoord()][c /2 + s.getyCoord()].alive = true;
+        }
+        return stateOfCells;
     }
 
-    public List<List<Cell>> getGrid(){
+
+    public List<List<State>> getGrid(){
         return grid;
     }
 

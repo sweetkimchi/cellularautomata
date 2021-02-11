@@ -14,12 +14,12 @@ public class SpringOfFireSimulator extends Simulator {
     }
 
     @Override
-    protected void initializeRules() {
+    protected void initializeData() {
 
     }
 
     @Override
-    protected void initializeCells() {
+    protected void initializeRules() {
 
     }
 

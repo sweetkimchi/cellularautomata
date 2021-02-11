@@ -16,15 +16,9 @@ public abstract class Simulator {
     public Simulator() {
     }
 
-    protected void initializeData(){
-        initializeGrid();
-        initializeCells();
-        initializeRules();
-    }
+    protected abstract void initializeData();
 
     protected abstract void initializeRules();
-
-    protected abstract void initializeCells();
 
     protected abstract void initializeGrid();
 

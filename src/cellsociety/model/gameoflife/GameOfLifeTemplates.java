@@ -1,5 +1,10 @@
 package cellsociety.model.gameoflife;
 
-public enum GameOfLifeTemplates {
+import cellsociety.model.cell.State;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+public class GameOfLifeTemplates {
 
 }

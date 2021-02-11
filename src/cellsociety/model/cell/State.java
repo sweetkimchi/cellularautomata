@@ -18,4 +18,12 @@ public class State {
         this.alive = alive;
     }
 
+    public int getxCoord(){
+        return xCoord;
+    }
+
+    public int getyCoord(){
+        return yCoord;
+    }
+
 }
