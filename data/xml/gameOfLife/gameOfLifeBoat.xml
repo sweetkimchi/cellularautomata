@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<data game = "game">
+    <type>gameOfLife</type>
+    <title>Game of Life</title>
+    <author>John Conway</author>
+    <description></description>
+    <numRows>30</numRows>
+    <numCols>30</numCols>
+    <shapeCoords>0010012112</shapeCoords>
+    <template>Boat</template>
+</data>
