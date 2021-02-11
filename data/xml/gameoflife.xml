@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Simulation  simulation = "GameofLife">
+    <title>Game of Life</title>
+    <author>John Conway</author>
+    <description></description>
+    <numRows>20</numRows>
+    <numCols>20</numCols>
+    <shape>Block</shape>
+</Simulation>
