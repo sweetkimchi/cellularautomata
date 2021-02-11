@@ -20,6 +20,7 @@ public class GameOfLifeSimulator extends Simulator {
   private ArrayList<State> LIST_NAME_BLOCK = new ArrayList<>(Arrays.asList(new State(0, 0, true), new State(0, 1, true), new State(1, 0, true),
       new State(1, 1, true)));
   private ArrayList<State> LIST_NAME_BLINKER = new ArrayList<>(Arrays.asList(new State(0, 0, true), new State(0, 1, true), new State(0, 2, true)));
+  private ArrayList<State> LIST_NAME_CORNELL = new ArrayList<>(Arrays.asList(new State(1,0, true),new State(0,1, true),new State(1,1, true),new State(2,1, true)));
 
   private GridManager gridManager;
   private GameOfLifeRule gameOfLifeRule;
@@ -48,7 +49,8 @@ public class GameOfLifeSimulator extends Simulator {
       template = LIST_NAME_BLOCK;
     }else if(templateName.equals("blinker")){
       template = LIST_NAME_BLINKER;
-    }
+    }else if(templateName.equals("cornell"))
+     template = LIST_NAME_CORNELL;
     return template;
   }
 
