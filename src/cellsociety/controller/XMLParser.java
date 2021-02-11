@@ -1,4 +1,4 @@
-package xml;
+package cellsociety.controller;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -7,8 +7,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-
-import cellsociety.controller.Controller;
 import cellsociety.controller.XMLException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -44,8 +42,8 @@ public class XMLParser {
      */
     public Map<String, String> getAttribute (File dataFile) {
         Element root = getRootElement(dataFile);
-        if (! isValidFile(root, "simulation")) {
-            throw new XMLException(ERROR_MESSAGE, "simulation");
+        if (! isValidFile(root, "type")) {
+            throw new XMLException(ERROR_MESSAGE, "type");
         }
         Map<String, String> results = new HashMap<>();
         NodeList nodes = root.getChildNodes();

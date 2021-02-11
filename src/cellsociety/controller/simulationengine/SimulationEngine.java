@@ -6,7 +6,6 @@ import cellsociety.model.gameoflife.GameOfLifeSimulator;
 import cellsociety.model.rules.Data;
 import cellsociety.view.SimulationScreen;
 import javafx.stage.Stage;
-import xml.XMLParser;
 
 /**
  * 
