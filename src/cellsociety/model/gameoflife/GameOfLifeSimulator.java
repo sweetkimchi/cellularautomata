@@ -28,6 +28,10 @@ public class GameOfLifeSimulator extends Simulator {
   private ArrayList<State> LIST_NAME_JIYUN = new ArrayList<>(Arrays
       .asList(new State(1, 0, true), new State(2, 0, true), new State(0, 1, true),
           new State(1, 2, true), new State(4, 2 ,true), new State(2, 3 ,true), new State(3, 3 ,true), new State(4, 3 ,true)));
+  private ArrayList<State> LIST_NAME_TOAD = new ArrayList<>(Arrays
+      .asList(new State(0, 1, true), new State(0, 2, true), new State(1, 3, true),
+          new State(2, 0, true),new State(3, 1, true), new State(3, 2, true)));
+
 
   private GridManager gridManager;
   private GameOfLifeRule gameOfLifeRule;
