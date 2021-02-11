@@ -1,6 +1,8 @@
 package cellsociety.model.cell;
 
-import java.awt.Color;
+
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 
 /**
  * 
@@ -10,7 +12,7 @@ public class State {
     public boolean alive;
     private int xCoord;
     private int yCoord;
-    public Color color;
+    public Paint color;
     /**
      * Default constructor
      * Initializes the state of each cell according to the data fed
@@ -24,9 +26,9 @@ public class State {
 
     private void setColor(){
         if(alive){
-            color = Color.ORANGE;
+            color = Paint.valueOf("orange");
         }else{
-            color = Color.BLACK;
+            color = Paint.valueOf("black");
         }
     }
 
