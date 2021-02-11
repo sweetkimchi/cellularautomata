@@ -3,13 +3,13 @@
 ## Breakout with Inheritance
 
 ## Names and NetIDs
-Ji Yun Hyo - jh160
-Shaw Phillips - sp422
-Harrison Huang - hlh38
+
+Ji Yun Hyo - jh160 Shaw Phillips - sp422 Harrison Huang - hlh38
 
 ### Block
 
 This superclass's purpose as an abstraction:
+
 ```java
  public class Block {
      public int health ()
@@ -21,6 +21,7 @@ This superclass's purpose as an abstraction:
 #### Subclasses (the Open part)
 
 This subclass's high-level behavorial differences from the superclass:
+
 ```java
  public class ExplodingBlock extends Block {
      public int something ()
@@ -29,12 +30,13 @@ This subclass's high-level behavorial differences from the superclass:
 ```
 
 #### Affect on Game/Level class (the Closed part)
-No effect
 
+No effect
 
 ### Power-up
 
 This superclass's purpose as an abstraction:
+
 ```java
  public class PowerUp {
      public int something ()
@@ -45,6 +47,7 @@ This superclass's purpose as an abstraction:
 #### Subclasses (the Open part)
 
 This subclass's high-level behavorial differences from the superclass:
+
 ```java
  public class Laser extends PowerUp {
      public int something ()
@@ -55,11 +58,10 @@ This subclass's high-level behavorial differences from the superclass:
 
 #### Effect on Game/Level class (the Closed part)
 
-
-
 ### Level
 
 This superclass's purpose as an abstraction:
+
 ```java
  public class Level {
      public int something ()
@@ -70,6 +72,7 @@ This superclass's purpose as an abstraction:
 #### Subclasses (the Open part)
 
 This subclass's high-level behavorial differences from the superclass:
+
 ```java
  public class BossLevel extends Level {
      public int something ()
@@ -78,8 +81,6 @@ This subclass's high-level behavorial differences from the superclass:
 ```
 
 #### Affect on Game class (the Closed part)
-
-
 
 ### Others?
 

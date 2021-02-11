@@ -35,9 +35,9 @@ public class GameOfLifeRule extends Rules {
       for (int y = 0; y < statesOfAllCells[0].length; y++) {
         statesOfAllCells[x][y].alive = decideState(numberOfAliveNeighbors[x][y],
             statesOfAllCells[x][y].alive);
-        if(statesOfAllCells[x][y].alive){
+        if (statesOfAllCells[x][y].alive) {
           statesOfAllCells[x][y].setColor("yellow");
-        }else{
+        } else {
           statesOfAllCells[x][y].setColor("black");
         }
       }
@@ -50,10 +50,11 @@ public class GameOfLifeRule extends Rules {
     if (alive) {
       if (numberOfNeighbor < lowerSurvivalBoundary) {
         return false;
-      } else
-          return numberOfNeighbor <= upperSurvivalBoundary;
+      } else {
+        return numberOfNeighbor <= upperSurvivalBoundary;
+      }
     } else {
-        return numberOfNeighbor == 3;
+      return numberOfNeighbor == 3;
     }
 
   }

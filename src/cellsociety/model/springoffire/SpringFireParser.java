@@ -5,7 +5,7 @@ import cellsociety.controller.XMLParser;
 /**
  *
  */
-public class SpringFireParser extends XMLParser {
+public class SpringFireParser{
 
   /**
    * Default constructor
