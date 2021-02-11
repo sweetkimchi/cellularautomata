@@ -26,8 +26,13 @@ public class SimulationEngine {
 
     public void startSimulationEngine(){
 
+<<<<<<< HEAD
         //SimulationScreen simulationScreen = new SimulationScreen(stage);
         String template = "blinker";
+=======
+        SimulationScreen simulationScreen = new SimulationScreen(stage);
+        String template = "toad";
+>>>>>>> 32c588640d349eaa42de51af7873a72858417ca0
         GameOfLifeSimulator gameOfLifeSimulator = new GameOfLifeSimulator(template);
     }
 
