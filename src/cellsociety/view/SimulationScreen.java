@@ -38,5 +38,7 @@ public class SimulationScreen {
         scene = new Scene(sceneNodes, WINDOW_WIDTH, WINDOW_HEIGHT);
         stage.setScene(scene);
         stage.show();
+
+        gridGraphics = new GridGraphics(stage);
     }
 }
