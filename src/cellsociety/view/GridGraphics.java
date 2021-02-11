@@ -41,26 +41,13 @@ public class GridGraphics {
     gridPane.setHgap(.5);
 
     //Setting the Grid alignment
-    gridPane.setAlignment(Pos.CENTER);
-
-//        Random random = new Random();
-//        String color;
-//        for (int r=0; r<20; r++) {
-//            for (int c=0; c<20; c++) {
-//                if (random.nextDouble()<.2) {
-//                    color = "yellow";
-//                }
-//                else color = "black";
-//                gridPane.add(new Rectangle(20,20, Paint.valueOf(color)),
-//                                r+30,c);
-//            }
-//        }
+    gridPane.setAlignment(Pos.CENTER_RIGHT);
 
     //Creating a scene object
     Scene scene = new Scene(gridPane);
 
     //Setting title to the Stage
-    stage.setTitle("Grid Template");
+    stage.setTitle("Cell Society Simulation");
 
     //Adding scene to the stage
     stage.setScene(scene);
@@ -70,7 +57,7 @@ public class GridGraphics {
     gridPane.getChildren().clear();
     for (int r = 0; r < states.length; r++) {
       for (int c = 0; c < states[0].length; c++) {
-        gridPane.add(new Rectangle(13, 13, states[r][c].color), r, c);
+        gridPane.add(new Rectangle(10, 10, states[r][c].color), r, c);
       }
     }
   }
