@@ -17,31 +17,32 @@ import javafx.stage.Stage;
  */
 public class GameOfLifeSimulator extends Simulator {
 
-  private ArrayList<State> LIST_NAME_BLOCK = new ArrayList<>(
+  private final ArrayList<State> LIST_NAME_BLOCK = new ArrayList<>(
       Arrays.asList(new State(0, 0, true), new State(0, 1, true), new State(1, 0, true),
           new State(1, 1, true)));
-  private ArrayList<State> LIST_NAME_BLINKER = new ArrayList<>(
+  private final ArrayList<State> LIST_NAME_BLINKER = new ArrayList<>(
       Arrays.asList(new State(0, 0, true), new State(0, 1, true), new State(0, 2, true)));
-  private ArrayList<State> LIST_NAME_CORNELL = new ArrayList<>(Arrays
+  private final ArrayList<State> LIST_NAME_CORNELL = new ArrayList<>(Arrays
       .asList(new State(1, 0, true), new State(0, 1, true), new State(1, 1, true),
           new State(2, 1, true)));
-  private ArrayList<State> LIST_NAME_JIYUN = new ArrayList<>(Arrays
+  private final ArrayList<State> LIST_NAME_JIYUN = new ArrayList<>(Arrays
       .asList(new State(1, 0, true), new State(2, 0, true), new State(0, 1, true),
-          new State(1, 2, true), new State(4, 2 ,true), new State(2, 3 ,true), new State(3, 3 ,true), new State(4, 3 ,true)));
-  private ArrayList<State> LIST_NAME_TOAD = new ArrayList<>(Arrays
+          new State(1, 2, true), new State(4, 2, true), new State(2, 3, true),
+          new State(3, 3, true), new State(4, 3, true)));
+  private final ArrayList<State> LIST_NAME_TOAD = new ArrayList<>(Arrays
       .asList(new State(0, 1, true), new State(0, 2, true), new State(1, 3, true),
-          new State(2, 0, true),new State(3, 1, true), new State(3, 2, true)));
+          new State(2, 0, true), new State(3, 1, true), new State(3, 2, true)));
 
 
   private GridManager gridManager;
   private GameOfLifeRule gameOfLifeRule;
   private State[][] stateOfAllCells;
   private GameOfLifeCell[][] cellPositions;
-  private SimulationScreen simulationScreen;
+  private final SimulationScreen simulationScreen;
   private Map<Cell, List<Cell>> mapOfNeighbors;
   private ArrayList<State> template;
-  private int row = 50;
-  private int col = 50;
+  private final int row = 50;
+  private final int col = 50;
 
   /**
    * Default constructor
@@ -62,7 +63,7 @@ public class GameOfLifeSimulator extends Simulator {
       template = LIST_NAME_BLINKER;
     } else if (templateName.equals("cornell")) {
       template = LIST_NAME_CORNELL;
-    } else if(templateName.equals("jiyun")){
+    } else if (templateName.equals("jiyun")) {
       template = LIST_NAME_JIYUN;
     }
     return template;

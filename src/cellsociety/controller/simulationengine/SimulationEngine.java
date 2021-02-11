@@ -8,31 +8,32 @@ import cellsociety.view.SimulationScreen;
 import javafx.stage.Stage;
 
 /**
- * 
+ *
  */
 public class SimulationEngine {
-    private Stage stage;
-    public Decoder decoder;
-    public Data data;
-    public SimulationScreen simulationScreen;
-    public XMLParser populator;
 
-    /**
-     * Default constructor
-     */
-    public SimulationEngine(Stage stage) {
-        this.stage = stage;
-    }
+  public Decoder decoder;
+  public Data data;
+  public SimulationScreen simulationScreen;
+  public XMLParser populator;
+  private final Stage stage;
 
-    public void startSimulationEngine(){
+  /**
+   * Default constructor
+   */
+  public SimulationEngine(Stage stage) {
+    this.stage = stage;
+  }
 
-        //SimulationScreen simulationScreen = new SimulationScreen(stage);
-        String template = "jiyun";
-        GameOfLifeSimulator gameOfLifeSimulator = new GameOfLifeSimulator(template);
-    }
+  public void startSimulationEngine() {
 
-    public void start(){
+    //SimulationScreen simulationScreen = new SimulationScreen(stage);
+    String template = "jiyun";
+    GameOfLifeSimulator gameOfLifeSimulator = new GameOfLifeSimulator(template);
+  }
 
-    }
+  public void start() {
+
+  }
 
 }

@@ -1,7 +1,6 @@
 package cellsociety.view;
 
 import cellsociety.model.cell.State;
-import java.util.*;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -11,39 +10,37 @@ import javafx.stage.Stage;
  */
 public class SimulationScreen {
 
-    private static final String WINDOW_TITLE = "Cell Society";
-    public static final int WINDOW_WIDTH = 800;
-    public static final int WINDOW_HEIGHT = 600;
-    private Group sceneNodes;
-    private Scene scene;
-    private Stage stage;
+  public static final int WINDOW_WIDTH = 800;
+  public static final int WINDOW_HEIGHT = 600;
+  private static final String WINDOW_TITLE = "Cell Society";
+  public CellGraphics cellGraphics;
+  public ButtonGraphics buttonGraphics;
+  public GraphGraphics graphGraphics;
+  public GridGraphics gridGraphics;
+  /**
+   *
+   */
+  public SliderGraphics sliderGraphics;
+  private final Group sceneNodes;
+  private Scene scene;
+  private final Stage stage;
 
-    public CellGraphics cellGraphics;
-    public ButtonGraphics buttonGraphics;
-    public GraphGraphics graphGraphics;
-    public GridGraphics gridGraphics;
+  public SimulationScreen(Stage stage) {
+    this.stage = stage;
+    sceneNodes = new Group();
+    initialize();
+  }
 
-    /**
-     *
-     */
-    public SliderGraphics sliderGraphics;
+  public void initialize() {
+    stage.setTitle(WINDOW_TITLE);
+    scene = new Scene(sceneNodes, WINDOW_WIDTH, WINDOW_HEIGHT);
+    stage.setScene(scene);
+    stage.show();
 
-    public SimulationScreen(Stage stage) {
-        this.stage = stage;
-        sceneNodes = new Group();
-        initialize();
-    }
+    gridGraphics = new GridGraphics(stage);
+  }
 
-    public void initialize() {
-        stage.setTitle(WINDOW_TITLE);
-        scene = new Scene(sceneNodes, WINDOW_WIDTH, WINDOW_HEIGHT);
-        stage.setScene(scene);
-        stage.show();
-
-        gridGraphics = new GridGraphics(stage);
-    }
-
-    public void update(State[][] states) {
-        gridGraphics.update(states);
-    }
+  public void update(State[][] states) {
+    gridGraphics.update(states);
+  }
 }

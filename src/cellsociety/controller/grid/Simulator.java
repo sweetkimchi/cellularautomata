@@ -1,42 +1,44 @@
 package cellsociety.controller.grid;
 
 import cellsociety.model.cell.Cell;
-import java.util.*;
+import java.util.List;
+import java.util.Map;
 
 /**
- * 
+ *
  */
 public abstract class Simulator {
 
-    private GridManager gridManager;
-    private Map<Cell, List<Cell>> grid;
-    /**
-     * Default constructor
-     */
-    public Simulator() {
-    }
+  private GridManager gridManager;
+  private Map<Cell, List<Cell>> grid;
 
-    protected abstract void initializeData();
+  /**
+   * Default constructor
+   */
+  public Simulator() {
+  }
 
-    protected abstract void initializeConstructors();
+  protected abstract void initializeData();
 
-    protected abstract void initializeGrid();
+  protected abstract void initializeConstructors();
+
+  protected abstract void initializeGrid();
 
 
-    public Map<Cell, List<Cell>> processGridForVisualization(){
-        return grid;
-    }
+  public Map<Cell, List<Cell>> processGridForVisualization() {
+    return grid;
+  }
 
-    /**
-     * 
-     */
-    public abstract void updateCellState();
+  /**
+   *
+   */
+  public abstract void updateCellState();
 
-    /**
-     * 
-     */
-    public void updateSimulatorView() {
-        // TODO implement here
-    }
+  /**
+   *
+   */
+  public void updateSimulatorView() {
+    // TODO implement here
+  }
 
 }
