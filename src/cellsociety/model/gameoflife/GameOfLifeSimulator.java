@@ -36,8 +36,8 @@ public class GameOfLifeSimulator extends Simulator {
   private SimulationScreen simulationScreen;
   private Map<Cell, List<Cell>> mapOfNeighbors;
   private ArrayList<State> template;
-  private int row = 30;
-  private int col = 30;
+  private int row = 50;
+  private int col = 50;
 
   /**
    * Default constructor

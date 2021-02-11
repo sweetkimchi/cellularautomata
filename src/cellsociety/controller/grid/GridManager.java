@@ -51,14 +51,14 @@ public class GridManager {
         for (int x = 0; x < row; x++) {
             for (int y = 0; y < col; y++) {
                 if(stateOfCells[x][y].alive) {
-                    System.out.print(" O ");
+         //           System.out.print(" O ");
                 }else{
-                    System.out.print(" . ");
+        //            System.out.print(" . ");
                 }
             }
-            System.out.println();
+   //         System.out.println();
         }
-        System.out.println();
+   //     System.out.println();
     }
 
     public void updateGrid(State[][] stateOfCells){
