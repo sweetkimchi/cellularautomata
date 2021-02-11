@@ -42,8 +42,8 @@ public class GridGraphics {
         gridPane.setPadding(new Insets(10, 10, 10, 10));
 
         //Setting the vertical and horizontal gaps between the columns
-        gridPane.setVgap(2);
-        gridPane.setHgap(2);
+        gridPane.setVgap(.5);
+        gridPane.setHgap(.5);
 
         //Setting the Grid alignment
         gridPane.setAlignment(Pos.CENTER);
@@ -71,13 +71,14 @@ public class GridGraphics {
         stage.setScene(scene);
     }
     public void update(State[][] states) {
+        gridPane.getChildren().clear();
         for (int r=0; r<states.length; r++) {
             for (int c=0; c<states[0].length; c++) {
                 if (states[r][c].alive) {
-                    gridPane.add(new Rectangle(10,10, Paint.valueOf("orange")), r,c);
+                    gridPane.add(new Rectangle(13,13, Paint.valueOf("yellow")), r,c);
                 }
                 else {
-                    gridPane.add(new Rectangle(10,10, Paint.valueOf("black")), r,c);
+                    gridPane.add(new Rectangle(13,13, Paint.valueOf("black")), r,c);
                 }
 
             }
