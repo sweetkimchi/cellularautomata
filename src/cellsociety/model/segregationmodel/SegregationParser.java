@@ -1,11 +1,9 @@
 package cellsociety.model.segregationmodel;
 
-import cellsociety.controller.XMLParser;
-
 /**
  *
  */
-public class SegregationParser{
+public class SegregationParser {
 
   /**
    * Default constructor

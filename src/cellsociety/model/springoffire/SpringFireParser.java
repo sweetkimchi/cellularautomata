@@ -1,11 +1,9 @@
 package cellsociety.model.springoffire;
 
-import cellsociety.controller.XMLParser;
-
 /**
  *
  */
-public class SpringFireParser{
+public class SpringFireParser {
 
   /**
    * Default constructor
