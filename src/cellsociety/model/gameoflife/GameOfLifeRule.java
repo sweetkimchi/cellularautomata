@@ -1,6 +1,7 @@
 package cellsociety.model.gameoflife;
 
 import cellsociety.model.cell.Cell;
+import cellsociety.model.cell.State;
 import cellsociety.model.rules.Rules;
 
 /**
@@ -28,10 +29,71 @@ public class GameOfLifeRule extends Rules {
         upperSurvivalBoundary = 3;
     }
 
-    private void judgeStateOfCell(GameOfLifeCell cell){
-        if(cell.getNumberOfNeighbors() <= lowerSurvivalBoundary){
-            cell.state.alive = false;
+    public State[][] judgeStateOfEachCell(State[][] statesOfAllCells){
+        int[][] numberOfAliveNeighbors = numberOfAliveNeighbors(statesOfAllCells);
+        for(int x = 0; x < statesOfAllCells.length; x++) {
+            for (int y = 0; y < statesOfAllCells[0].length; y++) {
+                statesOfAllCells[x][y].alive = decideState(numberOfAliveNeighbors[x][y], statesOfAllCells[x][y].alive);
+            }
         }
+        return statesOfAllCells;
     }
 
+    private int[][] numberOfAliveNeighbors(State[][] statesOfAllCells){
+        int[][] numberOfNeighbors = new int[statesOfAllCells.length][statesOfAllCells[0].length];
+        for(int x = 0; x < statesOfAllCells.length; x++){
+            for(int y = 0; y < statesOfAllCells[0].length;y++){
+                int numberOfNeighbor = 0;
+                if(x - 1 >= 0 && y - 1 >= 0 && statesOfAllCells[x-1][y-1].alive){
+                    numberOfNeighbor++;
+                }
+                if(x - 1 >= 0 && y >= 0 && statesOfAllCells[x-1][y].alive){
+                    numberOfNeighbor++;
+                }
+                if(x - 1 >= 0 && y + 1 < statesOfAllCells[0].length && statesOfAllCells[x-1][y+1].alive){
+                    numberOfNeighbor++;
+                }
+                if(y - 1 >= 0 && statesOfAllCells[x][y - 1].alive){
+                    numberOfNeighbor++;
+                }
+                if(y + 1 < statesOfAllCells[0].length && statesOfAllCells[x][y + 1].alive){
+                    numberOfNeighbor++;
+                }
+                if(x +1 < statesOfAllCells.length && y - 1 >= 0 && statesOfAllCells[x+1][y-1].alive){
+                    numberOfNeighbor++;
+                }
+                if(x + 1 < statesOfAllCells.length && y >= 0 && statesOfAllCells[x+1][y].alive){
+                    numberOfNeighbor++;
+                }
+                if(x + 1 < statesOfAllCells.length && y + 1 < statesOfAllCells[0].length && statesOfAllCells[x+1][y+1].alive){
+                    numberOfNeighbor++;
+                }
+                System.out.print(" " + numberOfNeighbor + " ");
+                numberOfNeighbors[x][y] = numberOfNeighbor;
+                //    statesOfAllCells[x][y].alive = decideState(numberOfNeighbor);
+            }
+            System.out.println();
+        }
+        System.out.println();
+        return numberOfNeighbors;
+    }
+
+    private boolean decideState(int numberOfNeighbor, boolean alive){
+        if(alive){
+            if(numberOfNeighbor < lowerSurvivalBoundary ){
+                return false;
+            }else if(numberOfNeighbor <= upperSurvivalBoundary){
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            if(numberOfNeighbor == 3){
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+    }
 }

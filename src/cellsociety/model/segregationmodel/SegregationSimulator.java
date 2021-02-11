@@ -14,17 +14,23 @@ public class SegregationSimulator extends Simulator {
     }
 
     @Override
-    protected void initializeRules() {
+    protected void initializeData() {
 
     }
 
     @Override
-    protected void initializeCells() {
+    protected void initializeConstructors() {
 
     }
+
 
     @Override
     protected void initializeGrid() {
+
+    }
+
+    @Override
+    public void updateCellState() {
 
     }
 

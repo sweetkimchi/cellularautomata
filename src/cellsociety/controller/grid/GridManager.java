@@ -1,6 +1,7 @@
 package cellsociety.controller.grid;
 
 import cellsociety.model.cell.Cell;
+import cellsociety.model.cell.State;
 import cellsociety.model.gameoflife.GameOfLifeCell;
 import java.util.*;
 
@@ -14,26 +15,58 @@ public class GridManager {
     /**
      *
      */
-    private Map<Cell, List<Cell>> grid;
+    private State[][] stateOfCells;
+    private int row;
+    private int col;
+    private List<List<State>> grid;
     /**
      * Default constructor
      */
-    public GridManager() {
-        grid = new HashMap<>();
-        buildGrid();
+    public GridManager(int row, int col) {
+        this.row = row;
+        this.col = col;
+        grid = new ArrayList<>();
     }
 
-    private Map<Cell, List<Cell>> buildGrid(){
-        for(int row = 0; row < ROWSIZE; row++){
-            for(int col = 0; col < COLUMNSIZE; col++){
-                ArrayList<Cell> neighbors = new ArrayList<>();
-                grid.put(new GameOfLifeCell(), neighbors);
+    public State[][] buildGrid(ArrayList<State> template){
+        State [][] stateOfCells = new State[row][col];
+        for(int r = 0; r < row; r++){
+            for(int c = 0; c < col; c++){
+                State state = new State(r, c, false);
+                stateOfCells[r][c] = state;
             }
         }
-        return grid;
+        for(State s : template){
+            stateOfCells[row /2 + s.getxCoord()][col /2 + s.getyCoord()].alive = true;
+        }
+        this.stateOfCells = stateOfCells;
+        return stateOfCells;
     }
 
-    public Map<Cell, List<Cell>> getGrid(){
+    public State[][] getStateOfCells(){
+        return stateOfCells;
+    }
+
+    public void printGrid() {
+        for (int x = 0; x < row; x++) {
+            for (int y = 0; y < col; y++) {
+                if(stateOfCells[x][y].alive) {
+                    System.out.print(" O ");
+                }else{
+                    System.out.print(" . ");
+                }
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
+
+    public void updateGrid(State[][] stateOfCells){
+        this.stateOfCells = stateOfCells;
+    }
+
+
+    public List<List<State>> getGrid(){
         return grid;
     }
 

@@ -13,8 +13,8 @@ public class GameOfLifeCell extends Cell {
     /**
      * Default constructor
      */
-    public GameOfLifeCell() {
-
+    public GameOfLifeCell(State state) {
+        this.state = state;
     }
 
     @Override
