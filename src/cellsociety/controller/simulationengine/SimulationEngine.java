@@ -77,7 +77,7 @@ public class SimulationEngine extends Simulator {
     initializeConstructors();
     initializeGrid();
     initializeCells();
-    gridManager.printGrid();
+  //  gridManager.printGrid();
     updateCellState();
 
     runSimulation();
