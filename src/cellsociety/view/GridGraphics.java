@@ -1,34 +1,30 @@
 package cellsociety.view;
 
 import cellsociety.model.cell.State;
-import java.util.*;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
- * 
+ *
  */
 public class GridGraphics {
 
-    private GridPane gridPane;
+  private GridPane gridPane;
 
-    /**
-     * Default constructor
-     */
-    public GridGraphics(Stage stage) {
-        initialize(stage);
-    }
+  /**
+   * Default constructor
+   */
+  public GridGraphics(Stage stage) {
+    initialize(stage);
+  }
 
-    private void initialize(Stage stage) {
-        gridPane = new GridPane();
+  private void initialize(Stage stage) {
+    gridPane = new GridPane();
 
 //        Button button1 = new Button("Button 1");
 //        Button button2 = new Button("Button 2");
@@ -36,17 +32,17 @@ public class GridGraphics {
 //        gridPane.add(button1, 0, 2);
 //        gridPane.add(button2, 0, 4);
 
-        gridPane.setMinSize(800, 600);
+    gridPane.setMinSize(800, 600);
 
-        //Setting the padding
-        gridPane.setPadding(new Insets(10, 10, 10, 10));
+    //Setting the padding
+    gridPane.setPadding(new Insets(10, 10, 10, 10));
 
-        //Setting the vertical and horizontal gaps between the columns
-        gridPane.setVgap(.5);
-        gridPane.setHgap(.5);
+    //Setting the vertical and horizontal gaps between the columns
+    gridPane.setVgap(.5);
+    gridPane.setHgap(.5);
 
-        //Setting the Grid alignment
-        gridPane.setAlignment(Pos.CENTER);
+    //Setting the Grid alignment
+    gridPane.setAlignment(Pos.CENTER);
 
 //        Random random = new Random();
 //        String color;
@@ -61,28 +57,28 @@ public class GridGraphics {
 //            }
 //        }
 
-        //Creating a scene object
-        Scene scene = new Scene(gridPane);
+    //Creating a scene object
+    Scene scene = new Scene(gridPane);
 
-        //Setting title to the Stage
-        stage.setTitle("Grid Template");
+    //Setting title to the Stage
+    stage.setTitle("Grid Template");
 
-        //Adding scene to the stage
-        stage.setScene(scene);
-    }
-    public void update(State[][] states) {
-        gridPane.getChildren().clear();
-        for (int r=0; r<states.length; r++) {
-            for (int c=0; c<states[0].length; c++) {
-                if (states[r][c].alive) {
-                    gridPane.add(new Rectangle(13,13, Paint.valueOf("yellow")), r,c);
-                }
-                else {
-                    gridPane.add(new Rectangle(13,13, Paint.valueOf("black")), r,c);
-                }
+    //Adding scene to the stage
+    stage.setScene(scene);
+  }
 
-            }
+  public void update(State[][] states) {
+    gridPane.getChildren().clear();
+    for (int r = 0; r < states.length; r++) {
+      for (int c = 0; c < states[0].length; c++) {
+        if (states[r][c].alive) {
+          gridPane.add(new Rectangle(13, 13, Paint.valueOf("yellow")), r, c);
+        } else {
+          gridPane.add(new Rectangle(13, 13, Paint.valueOf("black")), r, c);
         }
+
+      }
     }
+  }
 
 }

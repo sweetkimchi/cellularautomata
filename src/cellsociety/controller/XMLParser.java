@@ -1,22 +1,22 @@
 package cellsociety.controller;
 
-import cellsociety.model.rules.*;
+import cellsociety.model.rules.Data;
 
 /**
- * 
+ *
  */
 public abstract class XMLParser {
 
-    /**
-     * Default constructor
-     */
-    public XMLParser() {
-    }
+  /**
+   *
+   */
+  public Data data;
 
-    /**
-     * 
-     */
-    public Data data;
+  /**
+   * Default constructor
+   */
+  public XMLParser() {
+  }
 
 
 }
