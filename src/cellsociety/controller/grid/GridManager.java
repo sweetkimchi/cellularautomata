@@ -9,18 +9,15 @@ import java.util.List;
  */
 public class GridManager {
 
-  private static final int ROWSIZE = 100;
-  private static final int COLUMNSIZE = 100;
-  /**
-   *
-   */
   private State[][] stateOfCells;
   private final int row;
   private final int col;
   private final List<List<State>> grid;
 
   /**
-   * Default constructor
+   *
+   * @param row
+   * @param col
    */
   public GridManager(int row, int col) {
     this.row = row;
