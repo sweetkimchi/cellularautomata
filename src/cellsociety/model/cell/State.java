@@ -22,7 +22,7 @@ public class State {
     this.alive = alive;
   }
 
-  private void setColor(String colorName) {
+  public void setColor(String colorName) {
     color = Paint.valueOf(colorName);
   }
 
