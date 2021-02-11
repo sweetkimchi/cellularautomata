@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Map;
 import javafx.animation.AnimationTimer;
 import javafx.stage.Stage;
-import xml.XMLParser;
 
 /**
  *
