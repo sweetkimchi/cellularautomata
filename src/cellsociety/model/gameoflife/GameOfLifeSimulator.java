@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import javafx.animation.AnimationTimer;
+import javafx.stage.Stage;
 
 /**
  *
@@ -34,8 +35,11 @@ public class GameOfLifeSimulator extends Simulator {
    * Default constructor
    */
   public GameOfLifeSimulator(String templateName) {
+    simulationScreen = new SimulationScreen(new Stage());
+
     assignTemplate(templateName);
     initializeData();
+
 
   }
 
@@ -72,6 +76,7 @@ public class GameOfLifeSimulator extends Simulator {
           cellPositions[row][col] = new GameOfLifeCell(stateOfAllCells[row][col]);
       }
     }
+    simulationScreen.update(stateOfAllCells);
   }
 
   protected void initializeGrid() {
@@ -83,7 +88,8 @@ public class GameOfLifeSimulator extends Simulator {
   public void updateCellState() {
     stateOfAllCells = gameOfLifeRule.judgeStateOfEachCell(stateOfAllCells);
     gridManager.updateGrid(stateOfAllCells);
-    gridManager.printGrid();
+    //gridManager.printGrid();
+    simulationScreen.update(stateOfAllCells);
   }
 
   public State[][] getStateOfAllCells(){
@@ -96,7 +102,7 @@ public class GameOfLifeSimulator extends Simulator {
     AnimationTimer animation = new AnimationTimer() {
       @Override
       public void handle(long now) {
-     // updateCellState();
+        updateCellState();
       }
     };
     animation.start();

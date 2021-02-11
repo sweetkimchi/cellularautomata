@@ -1,5 +1,6 @@
 package cellsociety.view;
 
+import cellsociety.model.cell.State;
 import java.util.*;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -40,5 +41,9 @@ public class SimulationScreen {
         stage.show();
 
         gridGraphics = new GridGraphics(stage);
+    }
+
+    public void update(State[][] states) {
+        gridGraphics.update(states);
     }
 }

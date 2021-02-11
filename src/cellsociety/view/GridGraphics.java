@@ -1,5 +1,6 @@
 package cellsociety.view;
 
+import cellsociety.model.cell.State;
 import java.util.*;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -17,6 +18,8 @@ import javafx.stage.Stage;
  */
 public class GridGraphics {
 
+    private GridPane gridPane;
+
     /**
      * Default constructor
      */
@@ -25,13 +28,13 @@ public class GridGraphics {
     }
 
     private void initialize(Stage stage) {
-        GridPane gridPane = new GridPane();
+        gridPane = new GridPane();
 
-        Button button1 = new Button("Button 1");
-        Button button2 = new Button("Button 2");
-
-        gridPane.add(button1, 0, 2);
-        gridPane.add(button2, 0, 4);
+//        Button button1 = new Button("Button 1");
+//        Button button2 = new Button("Button 2");
+//
+//        gridPane.add(button1, 0, 2);
+//        gridPane.add(button2, 0, 4);
 
         gridPane.setMinSize(800, 600);
 
@@ -45,18 +48,18 @@ public class GridGraphics {
         //Setting the Grid alignment
         gridPane.setAlignment(Pos.CENTER);
 
-        Random random = new Random();
-        String color;
-        for (int r=0; r<20; r++) {
-            for (int c=0; c<20; c++) {
-                if (random.nextDouble()<.2) {
-                    color = "yellow";
-                }
-                else color = "black";
-                gridPane.add(new Rectangle(20,20, Paint.valueOf(color)),
-                                r+30,c);
-            }
-        }
+//        Random random = new Random();
+//        String color;
+//        for (int r=0; r<20; r++) {
+//            for (int c=0; c<20; c++) {
+//                if (random.nextDouble()<.2) {
+//                    color = "yellow";
+//                }
+//                else color = "black";
+//                gridPane.add(new Rectangle(20,20, Paint.valueOf(color)),
+//                                r+30,c);
+//            }
+//        }
 
         //Creating a scene object
         Scene scene = new Scene(gridPane);
@@ -66,6 +69,19 @@ public class GridGraphics {
 
         //Adding scene to the stage
         stage.setScene(scene);
+    }
+    public void update(State[][] states) {
+        for (int r=0; r<states.length; r++) {
+            for (int c=0; c<states[0].length; c++) {
+                if (states[r][c].alive) {
+                    gridPane.add(new Rectangle(10,10, Paint.valueOf("orange")), r,c);
+                }
+                else {
+                    gridPane.add(new Rectangle(10,10, Paint.valueOf("black")), r,c);
+                }
+
+            }
+        }
     }
 
 }
