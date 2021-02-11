@@ -71,12 +71,7 @@ public class GridGraphics {
     gridPane.getChildren().clear();
     for (int r = 0; r < states.length; r++) {
       for (int c = 0; c < states[0].length; c++) {
-        if (states[r][c].alive) {
-          gridPane.add(new Rectangle(13, 13, Paint.valueOf("yellow")), r, c);
-        } else {
-          gridPane.add(new Rectangle(13, 13, Paint.valueOf("black")), r, c);
-        }
-
+        gridPane.add(new Rectangle(13, 13, states[r][c].color), r, c);
       }
     }
   }

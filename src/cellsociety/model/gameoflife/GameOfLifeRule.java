@@ -35,6 +35,11 @@ public class GameOfLifeRule extends Rules {
       for (int y = 0; y < statesOfAllCells[0].length; y++) {
         statesOfAllCells[x][y].alive = decideState(numberOfAliveNeighbors[x][y],
             statesOfAllCells[x][y].alive);
+        if(statesOfAllCells[x][y].alive){
+          statesOfAllCells[x][y].setColor("yellow");
+        }else{
+          statesOfAllCells[x][y].setColor("black");
+        }
       }
     }
     return statesOfAllCells;
