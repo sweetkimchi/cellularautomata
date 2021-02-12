@@ -7,11 +7,15 @@ import cellsociety.model.cell.State;
  */
 public abstract class Rules {
 
+  private String ALIVE_COLOR = "";
+  private String DEAD_COLOR;
   /**
    * Default constructor
    */
   public Rules() {
   }
+
+  protected abstract boolean decideState(int i, boolean alive);
 
   protected int[][] numberOfAliveNeighbors(State[][] statesOfAllCells) {
     int[][] numberOfNeighbors = new int[statesOfAllCells.length][statesOfAllCells[0].length];
@@ -53,6 +57,13 @@ public abstract class Rules {
     //  System.out.println();
     return numberOfNeighbors;
   }
+
+  /**
+   * judges the state of each cell using the rule of the specific model class
+   * @param statesOfAllCells starting states of all cells
+   * @return updated states of all cells
+   */
+  public abstract State[][] judgeStateOfEachCell(State[][] statesOfAllCells);
 
 
 }
