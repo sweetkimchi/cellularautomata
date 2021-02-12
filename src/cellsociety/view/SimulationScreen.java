@@ -35,9 +35,10 @@ public class SimulationScreen {
   public void initialize() {
     BorderPane root = new BorderPane();
     gridGraphics = new GridGraphics();
+    root.setRight(gridGraphics.getGridPane());
 
     stage.setTitle(WINDOW_TITLE);
-    scene = new Scene(gridGraphics.getGridPane(), WINDOW_WIDTH, WINDOW_HEIGHT);
+    scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
     stage.setScene(scene);
     stage.show();
 
