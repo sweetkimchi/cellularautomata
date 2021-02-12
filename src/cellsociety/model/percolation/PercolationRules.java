@@ -16,8 +16,8 @@ public class PercolationRules extends Rules {
 
 
   @Override
-  protected boolean decideState(int i, boolean alive) {
-    return false;
+  protected String decideState(int i, boolean alive) {
+    return "";
   }
 
   /**
@@ -29,6 +29,16 @@ public class PercolationRules extends Rules {
   @Override
   public State[][] judgeStateOfEachCell(State[][] statesOfAllCells) {
     return new State[0][];
+  }
+
+  /**
+   * specifices the starting states of the cells according to the simulation rule
+   *
+   * @return type of cells
+   */
+  @Override
+  public String getStartingPositionCellType() {
+    return null;
   }
 
 }
