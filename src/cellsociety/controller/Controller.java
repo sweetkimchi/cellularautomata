@@ -5,32 +5,41 @@ import javafx.stage.FileChooser.ExtensionFilter;
 import cellsociety.controller.XMLParser;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 public class Controller {
     public static final String DATA_FILE_EXTENSION = "*.xml";
     public final static FileChooser FILE_CHOOSER = makeChooser(DATA_FILE_EXTENSION);
+    public static final String TYPE = "type";
+    public static final String TITLE = "title";
+    public static final String AUTHOR = "author";
+    public static final String DESC = "description";
     public static final String NUM_ROWS = "numRows";
     public static final String NUM_COLS = "numCols";
-    public static final String SHAPE = "shape";
-    public static final String SHAPE_COORDS = "shapeCoords";
-    public static final String AUTHOR = "author";
-    public static final String TITLE = "title";
-    private ArrayList<Integer> coords;
+    public static final String COORDS = "shapeCoords";
+    public static final String TEMPLATE = "template";
 
-    public void start(){
+    private String myType;
+    private String myTitle;
+    private String myAuthor;
+    private String myTemplate;
+    private int myRows;
+    private int myCols;
+    private ArrayList<Integer> myCoords;
+
+    public void initVals(){
         File dataFile = FILE_CHOOSER.showOpenDialog(null);
-        XMLParser parser = new XMLParser("simulation");
+        XMLParser parser = new XMLParser("game");
         Map<String, String> attributes = parser.getAttribute(dataFile);
-        setSimulationParams(attributes);
-    }
-    private void setSimulationParams(Map<String, String> simAttributes){
-        int numRows = Integer.parseInt(simAttributes.get(NUM_ROWS));
-        int numCols = Integer.parseInt(simAttributes.get(NUM_COLS));
-        String shape = simAttributes.get(SHAPE);
-        String coordsAsString = simAttributes.get(SHAPE_COORDS);
-        coords = new ArrayList<>();
-        for(int i=0; i<coordsAsString.length(); i++) coords.add(Integer.parseInt(coordsAsString));
+        myType = attributes.get(TYPE);
+        myTitle = attributes.get(TITLE);
+        myAuthor = attributes.get(AUTHOR);
+        myTemplate = attributes.get(TEMPLATE);
+        myRows = Integer.parseInt(attributes.get(NUM_ROWS));
+        myCols = Integer.parseInt(attributes.get(NUM_COLS));
+        myCoords = new ArrayList<>();
+        for(int i=0; i<attributes.get(COORDS).length(); i++) myCoords.add(Integer.parseInt(attributes.get(COORDS)));
     }
     private static FileChooser makeChooser(String extension){
         FileChooser result = new FileChooser();
@@ -38,5 +47,26 @@ public class Controller {
         result.setInitialDirectory(new File(System.getProperty("user.dir")));
         result.getExtensionFilters().setAll(new ExtensionFilter("Text Files", extension));
         return result;
+    }
+    public String getType(){
+        return myType;
+    }
+    public String getTitle(){
+        return myTitle;
+    }
+    public String getAuthor(){
+        return myAuthor;
+    }
+    public String getTemplate(){
+        return myTemplate;
+    }
+    public int getRows(){
+        return myRows;
+    }
+    public int getCols(){
+        return myCols;
+    }
+    public ArrayList<Integer> getCoords(){
+        return myCoords;
     }
 }
