@@ -54,5 +54,12 @@ public abstract class Rules {
     return numberOfNeighbors;
   }
 
+  /**
+   * Judges the state of each cell with the rules defined by the model
+   * @param statesOfAllCells the current states of each cell
+   * @return the new states of each cell
+   */
+  public abstract State[][] judgeStateOfEachCell(State[][] statesOfAllCells);
+
 
 }
