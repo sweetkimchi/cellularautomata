@@ -52,12 +52,14 @@ public class SimulationEngine extends Simulator {
    */
   public SimulationEngine() {
     simulationScreen = new SimulationScreen(new Stage());
+    initializeDecoder();
     initializeData();
 
 
   }
 
-  private ArrayList<State> makeInitialTemplate(ArrayList<String> coordinates) {
+  private ArrayList<State> constructStartingStateForSimulation(ArrayList<String> coordinates) {
+    template = new ArrayList<>();
     for (int i = 0; i + 1 < coordinates.size(); i += 2) {
       State state = new State(Integer.parseInt(coordinates.get(i)),
           Integer.parseInt(coordinates.get(i + 1)), true);
@@ -66,11 +68,18 @@ public class SimulationEngine extends Simulator {
     return template;
   }
 
+  private void initializeDecoder(){
+    decoder = new Decoder();
+    decoder.readValuesFromXMLFile();
+  }
+
 
   @Override
   protected void initializeData() {
-    initializeConstructors();
-    makeInitialTemplate(decoder.getCoords());
+    row = decoder.getRows();
+    col = decoder.getCols();
+    initializeModelConstructors();
+    constructStartingStateForSimulation(decoder.getCoords());
     initializeGrid();
     initializeCells();
     //  gridManager.printGrid();
@@ -78,20 +87,13 @@ public class SimulationEngine extends Simulator {
     runSimulation();
   }
 
-  protected void initializeConstructors() {
+  protected void initializeModelConstructors() {
     gameOfLifeRule = new GameOfLifeRule();
-    decoder = new Decoder();
-    decoder.readValuesFromXMLFile();
-    template = new ArrayList<>();
     //need to be fixed for a better design
-    row = decoder.getRows();
-    col = decoder.getCols();
-
-    cellPositions = new GameOfLifeCell[row][col];
-    gridManager = new GridManager(row, col);
   }
 
   protected void initializeCells() {
+    cellPositions = new GameOfLifeCell[row][col];
     for (int row = 0; row < stateOfAllCells.length; row++) {
       for (int col = 0; col < stateOfAllCells[0].length; col++) {
         cellPositions[row][col] = new GameOfLifeCell(stateOfAllCells[row][col]);
@@ -101,6 +103,7 @@ public class SimulationEngine extends Simulator {
   }
 
   protected void initializeGrid() {
+    gridManager = new GridManager(row, col);
     stateOfAllCells = gridManager.buildGrid(template);
     initializeCells();
   }
