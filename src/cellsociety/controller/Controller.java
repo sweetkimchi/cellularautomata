@@ -1,12 +1,11 @@
 package cellsociety.controller;
 
-import javafx.stage.FileChooser;
-import javafx.stage.FileChooser.ExtensionFilter;
-import cellsociety.controller.XMLParser;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 
 public class Controller {
     public static final String DATA_FILE_EXTENSION = "*.xml";

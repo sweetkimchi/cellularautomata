@@ -1,11 +1,9 @@
 package cellsociety.model.gameoflife;
 
-import cellsociety.controller.XMLParser;
-
 /**
  *
  */
-public class GameOfLifeParser extends XMLParser {
+public class GameOfLifeParser {
 
   /**
    * Default constructor

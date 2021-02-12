@@ -9,13 +9,12 @@ import java.util.List;
  */
 public class GridManager {
 
-  private State[][] stateOfCells;
   private final int row;
   private final int col;
   private final List<List<State>> grid;
+  private State[][] stateOfCells;
 
   /**
-   *
    * @param row
    * @param col
    */

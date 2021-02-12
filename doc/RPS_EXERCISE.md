@@ -4,13 +4,17 @@
 
 ## Shaw Phillips (sp422), Harrison Huang (hlh38), Jiyun Hyo (jh160)
 
-
 ### High Level Design Ideas
-Game engine class that determines functions of the game, deals with presenting outputs. Match class will manage each match between players, deciding which one wins. Player class will deal with storing each player's score and their weapon choice for each round played. Weapon class handles the weapon file and information about each weapon.
+
+Game engine class that determines functions of the game, deals with presenting outputs. Match class
+will manage each match between players, deciding which one wins. Player class will deal with storing
+each player's score and their weapon choice for each round played. Weapon class handles the weapon
+file and information about each weapon.
 
 ### CRC Card Classes
 
 This class's purpose or value is to manage something:
+
 ```java
  public class Game {
      public startMatch();
@@ -22,6 +26,7 @@ This class's purpose or value is to manage something:
 ```
 
 This class's purpose is to manage each match:
+
 ```java
  public class Match {
      public Player winner;
@@ -32,6 +37,7 @@ This class's purpose is to manage each match:
 ```
 
 This class's purpose is to manage players
+
 ```java
 public class Player{    
     public Player(){
@@ -53,7 +59,9 @@ public class Player{
     }
 }
 ```
+
 This class's purpose is to manage information about the weapons.
+
 ```java    
 public class Weapon{
     private int weaponNum;
@@ -72,34 +80,40 @@ public class Weapon{
 
 ### Use Cases
 
- * A new game is started with five players, their scores are reset to 0.
+* A new game is started with five players, their scores are reset to 0.
+
  ```java
  Player player = new Player();
  player.resetScore();
  ```
 
- * A player chooses his RPS "weapon" with which he wants to play for this round.
+* A player chooses his RPS "weapon" with which he wants to play for this round.
+
  ```java
  Something thing = new Something();
  Value v = thing.getValue();
  v.update(13);
  ```
 
- * Given three players' choices, one player wins the round, and their scores are updated.
+* Given three players' choices, one player wins the round, and their scores are updated.
+
  ```java
  Something thing = new Something();
  Value v = thing.getValue();
  v.update(13);
  ```
 
- * A new choice is added to an existing game and its relationship to all the other choices is updated.
+* A new choice is added to an existing game and its relationship to all the other choices is
+  updated.
+
  ```java
  Something thing = new Something();
  Value v = thing.getValue();
  v.update(13);
  ```
 
- * A new game is added to the system, with its own relationships for its all its "weapons".
+* A new game is added to the system, with its own relationships for its all its "weapons".
+
  ```java
  Something thing = new Something();
  Value v = thing.getValue();

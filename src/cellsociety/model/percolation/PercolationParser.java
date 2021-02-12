@@ -1,11 +1,9 @@
 package cellsociety.model.percolation;
 
-import cellsociety.controller.XMLParser;
-
 /**
  *
  */
-public class PercolationParser extends XMLParser {
+public class PercolationParser {
 
   /**
    * Default constructor
