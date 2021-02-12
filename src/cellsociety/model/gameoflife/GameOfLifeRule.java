@@ -17,7 +17,7 @@ public class GameOfLifeRule extends Rules {
   private final int upperSurvivalBoundary;
 
   /**
-   * Default constructor
+   * Default Constructor
    */
   public GameOfLifeRule() {
         /*
@@ -29,6 +29,11 @@ public class GameOfLifeRule extends Rules {
     upperSurvivalBoundary = 3;
   }
 
+  /**
+   *
+   * @param statesOfAllCells
+   * @return
+   */
   public State[][] judgeStateOfEachCell(State[][] statesOfAllCells) {
     int[][] numberOfAliveNeighbors = numberOfAliveNeighbors(statesOfAllCells);
     for (int x = 0; x < statesOfAllCells.length; x++) {

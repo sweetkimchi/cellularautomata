@@ -3,14 +3,10 @@ package cellsociety.controller.simulationengine;
 import cellsociety.controller.Decoder;
 import cellsociety.controller.grid.GridManager;
 import cellsociety.controller.grid.Simulator;
-import cellsociety.model.cell.Cell;
 import cellsociety.model.cell.State;
-import cellsociety.model.gameoflife.GameOfLifeCell;
 import cellsociety.model.gameoflife.GameOfLifeRule;
 import cellsociety.view.SimulationScreen;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 import javafx.animation.AnimationTimer;
 import javafx.stage.Stage;
 
@@ -42,8 +38,6 @@ public class SimulationEngine extends Simulator {
   private GridManager gridManager;
   private GameOfLifeRule gameOfLifeRule;
   private State[][] stateOfAllCells;
-  private GameOfLifeCell[][] cellPositions;
-  private Map<Cell, List<Cell>> mapOfNeighbors;
   private ArrayList<State> template;
   private Decoder decoder;
 
@@ -92,15 +86,7 @@ public class SimulationEngine extends Simulator {
     //need to be fixed for a better design
   }
 
-//  protected void initializeCells() {
-//    cellPositions = new GameOfLifeCell[row][col];
-//    for (int row = 0; row < stateOfAllCells.length; row++) {
-//      for (int col = 0; col < stateOfAllCells[0].length; col++) {
-//        cellPositions[row][col] = new GameOfLifeCell(stateOfAllCells[row][col]);
-//      }
-//    }
-//    simulationScreen.update(stateOfAllCells);
-//  }
+
 
   protected void initializeGrid() {
     gridManager = new GridManager(row, col);
