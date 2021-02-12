@@ -1,4 +1,4 @@
-package cellsociety.model.springoffire;
+package cellsociety.model.spreadingoffire;
 
 import cellsociety.model.cell.State;
 import cellsociety.model.rules.Rules;

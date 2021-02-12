@@ -8,7 +8,7 @@ import cellsociety.model.gameoflife.GameOfLifeRule;
 import cellsociety.model.percolation.PercolationRules;
 import cellsociety.model.rules.Rules;
 import cellsociety.model.segregationmodel.SegregationModelRules;
-import cellsociety.model.springoffire.SpreadingOfFireRules;
+import cellsociety.model.spreadingoffire.SpreadingOfFireRules;
 import cellsociety.model.watormodel.WaTorModelRules;
 import cellsociety.view.SimulationScreen;
 import java.util.ArrayList;
