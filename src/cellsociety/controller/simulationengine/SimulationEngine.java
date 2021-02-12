@@ -52,7 +52,7 @@ public class SimulationEngine extends Simulator {
   /**
    * Default constructor
    */
-  public SimulationEngine(String templateName) {
+  public SimulationEngine() {
     simulationScreen = new SimulationScreen(new Stage());
     initializeData();
 
