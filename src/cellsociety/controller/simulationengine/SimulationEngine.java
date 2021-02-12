@@ -39,8 +39,8 @@ public class SimulationEngine extends Simulator {
 
 
   private final SimulationScreen simulationScreen;
-  private final int row = 50;
-  private final int col = 50;
+  private int row;
+  private int col;
   private GridManager gridManager;
   private GameOfLifeRule gameOfLifeRule;
   private State[][] stateOfAllCells;
@@ -59,9 +59,9 @@ public class SimulationEngine extends Simulator {
 
   }
 
-  private ArrayList<State> makeInitialTemplate(ArrayList<Integer> coordinates) {
+  private ArrayList<State> makeInitialTemplate(ArrayList<String> coordinates) {
     for(int i = 0; i + 1 < coordinates.size(); i+=2){
-      State state = new State(coordinates.get(i), coordinates.get(i+1), true);
+      State state = new State(Integer.parseInt(coordinates.get(i)), Integer.parseInt(coordinates.get(i+1)), true);
       template.add(state);
     }
     return template;
@@ -84,6 +84,10 @@ public class SimulationEngine extends Simulator {
     controller = new Controller();
     controller.initVals();
     template = new ArrayList<>();
+    //need to be fixed for a better design
+    row = controller.getRows();
+    col = controller.getCols();
+
     cellPositions = new GameOfLifeCell[row][col];
     gridManager = new GridManager(row, col);
   }

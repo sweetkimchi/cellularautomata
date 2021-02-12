@@ -2,6 +2,7 @@ package cellsociety.controller;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import javafx.stage.FileChooser;
@@ -25,7 +26,7 @@ public class Controller {
     private String myTemplate;
     private int myRows;
     private int myCols;
-    private ArrayList<Integer> myCoords;
+    private ArrayList<String> myCoords;
 
     public void initVals(){
         File dataFile = FILE_CHOOSER.showOpenDialog(null);
@@ -37,8 +38,9 @@ public class Controller {
         myTemplate = attributes.get(TEMPLATE);
         myRows = Integer.parseInt(attributes.get(NUM_ROWS));
         myCols = Integer.parseInt(attributes.get(NUM_COLS));
-        myCoords = new ArrayList<>();
-        for(int i=0; i<attributes.get(COORDS).length(); i++) myCoords.add(Integer.parseInt(attributes.get(COORDS).substring(i,i+1)));
+        myCoords = new ArrayList<>(Arrays.asList(attributes.get(COORDS).split("[,]", 0)));
+        System.out.println(myCoords);
+//        for(int i=0; i<attributes.get(COORDS).length(); i++) myCoords.add(Integer.parseInt(attributes.get(COORDS).substring(i,i+1)));
     }
     private static FileChooser makeChooser(String extension){
         FileChooser result = new FileChooser();
@@ -65,7 +67,7 @@ public class Controller {
     public int getCols(){
         return myCols;
     }
-    public ArrayList<Integer> getCoords(){
+    public ArrayList<String> getCoords(){
         return myCoords;
     }
 }

@@ -4,7 +4,7 @@
   <description></description>
   <numCols>30</numCols>
   <numRows>30</numRows>
-  <shapeCoords>10012112</shapeCoords>
+  <shapeCoords>1,0,0,1,2,1,1,2</shapeCoords>
   <template>tub</template>
   <title>Game of Life</title>
   <type>gameOfLife</type>
