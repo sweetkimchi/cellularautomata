@@ -20,7 +20,7 @@ public abstract class Simulator {
 
   protected abstract void initializeData();
 
-  protected abstract void initializeModelConstructors();
+  protected abstract void initializeModelConstructors(String type);
 
   protected abstract void initializeGrid();
 

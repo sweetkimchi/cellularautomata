@@ -5,38 +5,23 @@ import cellsociety.controller.grid.GridManager;
 import cellsociety.controller.grid.Simulator;
 import cellsociety.model.cell.State;
 import cellsociety.model.gameoflife.GameOfLifeRule;
+import cellsociety.model.percolation.PercolationRules;
+import cellsociety.model.rules.Rules;
+import cellsociety.model.segregationmodel.SegregationModelRules;
+import cellsociety.model.springoffire.SpreadingOfFireRules;
+import cellsociety.model.watormodel.WaTorModelRules;
 import cellsociety.view.SimulationScreen;
 import java.util.ArrayList;
 import javafx.animation.AnimationTimer;
 import javafx.stage.Stage;
 
-/**
- *
- */
 public class SimulationEngine extends Simulator {
-
-//  private final ArrayList<State> LIST_NAME_BLOCK = new ArrayList<>(
-//      Arrays.asList(new State(0, 0, true), new State(0, 1, true), new State(1, 0, true),
-//          new State(1, 1, true)));
-//  private final ArrayList<State> LIST_NAME_BLINKER = new ArrayList<>(
-//      Arrays.asList(new State(0, 0, true), new State(0, 1, true), new State(0, 2, true)));
-//  private final ArrayList<State> LIST_NAME_CORNELL = new ArrayList<>(Arrays
-//      .asList(new State(1, 0, true), new State(0, 1, true), new State(1, 1, true),
-//          new State(2, 1, true)));
-//  private final ArrayList<State> LIST_NAME_JIYUN = new ArrayList<>(Arrays
-//      .asList(new State(1, 0, true), new State(2, 0, true), new State(0, 1, true),
-//          new State(1, 2, true), new State(4, 2, true), new State(2, 3, true),
-//          new State(3, 3, true), new State(4, 3, true)));
-//  private final ArrayList<State> LIST_NAME_TOAD = new ArrayList<>(Arrays
-//      .asList(new State(0, 1, true), new State(0, 2, true), new State(1, 3, true),
-//          new State(2, 0, true), new State(3, 1, true), new State(3, 2, true)));
-
 
   private final SimulationScreen simulationScreen;
   private int row;
   private int col;
   private GridManager gridManager;
-  private GameOfLifeRule gameOfLifeRule;
+  private Rules rules;
   private State[][] stateOfAllCells;
   private ArrayList<State> template;
   private Decoder decoder;
@@ -48,8 +33,6 @@ public class SimulationEngine extends Simulator {
     simulationScreen = new SimulationScreen(new Stage());
     initializeDecoder();
     initializeData();
-
-
   }
 
   private ArrayList<State> constructStartingStateForSimulation(ArrayList<String> coordinates) {
@@ -62,7 +45,7 @@ public class SimulationEngine extends Simulator {
     return template;
   }
 
-  private void initializeDecoder(){
+  private void initializeDecoder() {
     decoder = new Decoder();
     decoder.readValuesFromXMLFile();
   }
@@ -72,31 +55,43 @@ public class SimulationEngine extends Simulator {
   protected void initializeData() {
     row = decoder.getRows();
     col = decoder.getCols();
-    initializeModelConstructors();
+    initializeModelConstructors(decoder.getType());
     constructStartingStateForSimulation(decoder.getCoords());
     initializeGrid();
-  //  initializeCells();
-    //  gridManager.printGrid();
     updateCellState();
     runSimulation();
   }
 
-  protected void initializeModelConstructors() {
-    gameOfLifeRule = new GameOfLifeRule();
+  protected void initializeModelConstructors(String game) {
+
+    if (game.equals("gameoflife")) {
+      rules = new GameOfLifeRule();
+    }
+    if (game.equals("percolation")) {
+      rules = new PercolationRules();
+    }
+    if (game.equals("segregationmodel")) {
+      rules = new SegregationModelRules();
+    }
+    if (game.equals("spreadingoffire")) {
+      rules = new SpreadingOfFireRules();
+    }
+    if (game.equals("watormodel")) {
+      rules = new WaTorModelRules();
+    }
     //need to be fixed for a better design
   }
-
 
 
   protected void initializeGrid() {
     gridManager = new GridManager(row, col);
     stateOfAllCells = gridManager.buildGrid(template);
- //   initializeCells();
+    //   initializeCells();
   }
 
   @Override
   public void updateCellState() {
-    stateOfAllCells = gameOfLifeRule.judgeStateOfEachCell(stateOfAllCells);
+    stateOfAllCells = rules.judgeStateOfEachCell(stateOfAllCells);
     gridManager.updateGrid(stateOfAllCells);
     //gridManager.printGrid();
     simulationScreen.update(stateOfAllCells);

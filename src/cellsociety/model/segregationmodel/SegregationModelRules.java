@@ -14,12 +14,11 @@ public class SegregationModelRules extends Rules {
   public SegregationModelRules() {
   }
 
-  /**
-   * Judges the state of each cell with the rules defined by the model
-   *
-   * @param statesOfAllCells the current states of each cell
-   * @return the new states of each cell
-   */
+  @Override
+  protected boolean decideState(int i, boolean alive) {
+    return false;
+  }
+
   @Override
   public State[][] judgeStateOfEachCell(State[][] statesOfAllCells) {
     return new State[0][];

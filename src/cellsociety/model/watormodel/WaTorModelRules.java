@@ -25,4 +25,9 @@ public class WaTorModelRules extends Rules {
     return new State[0][];
   }
 
+  @Override
+  protected boolean decideState(int i, boolean alive) {
+    return false;
+  }
+
 }

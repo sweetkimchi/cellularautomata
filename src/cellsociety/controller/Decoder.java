@@ -40,7 +40,7 @@ public class Decoder {
     File dataFile = FILE_CHOOSER.showOpenDialog(null);
     XMLParser parser = new XMLParser("game");
     Map<String, String> attributes = parser.getAttribute(dataFile);
-    myType = attributes.get(TYPE);
+    myType = attributes.get(TYPE).toLowerCase();
     myTitle = attributes.get(TITLE);
     myAuthor = attributes.get(AUTHOR);
     myTemplate = attributes.get(TEMPLATE);
