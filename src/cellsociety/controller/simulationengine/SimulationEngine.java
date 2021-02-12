@@ -39,7 +39,7 @@ public class SimulationEngine extends Simulator {
     template = new ArrayList<>();
     for (int i = 0; i + 1 < coordinates.size(); i += 2) {
       State state = new State(Integer.parseInt(coordinates.get(i)),
-          Integer.parseInt(coordinates.get(i + 1)), true);
+          Integer.parseInt(coordinates.get(i + 1)), rules.getStartingPositionCellType());
       template.add(state);
     }
     return template;
@@ -85,7 +85,7 @@ public class SimulationEngine extends Simulator {
 
   protected void initializeGrid() {
     gridManager = new GridManager(row, col);
-    stateOfAllCells = gridManager.buildGrid(template);
+    stateOfAllCells = gridManager.buildGrid(template, rules.getStartingPositionCellType());
     //   initializeCells();
   }
 

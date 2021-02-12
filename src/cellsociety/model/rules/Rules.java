@@ -7,7 +7,7 @@ import cellsociety.model.cell.State;
  */
 public abstract class Rules {
 
-  private String ALIVE_COLOR = "";
+  private String ALIVE_COLOR;
   private String DEAD_COLOR;
   /**
    * Default constructor
@@ -15,37 +15,37 @@ public abstract class Rules {
   public Rules() {
   }
 
-  protected abstract boolean decideState(int i, boolean alive);
+  protected abstract String decideState(int i, boolean alive);
 
-  protected int[][] numberOfAliveNeighbors(State[][] statesOfAllCells) {
+  protected int[][] numberOfAliveNeighbors(State[][] statesOfAllCells, String type) {
     int[][] numberOfNeighbors = new int[statesOfAllCells.length][statesOfAllCells[0].length];
     for (int x = 0; x < statesOfAllCells.length; x++) {
       for (int y = 0; y < statesOfAllCells[0].length; y++) {
         int numberOfNeighbor = 0;
-        if (x - 1 >= 0 && y - 1 >= 0 && statesOfAllCells[x - 1][y - 1].alive) {
+        if (x - 1 >= 0 && y - 1 >= 0 && statesOfAllCells[x - 1][y - 1].type.equals(type)) {
           numberOfNeighbor++;
         }
-        if (x - 1 >= 0 && y >= 0 && statesOfAllCells[x - 1][y].alive) {
+        if (x - 1 >= 0 && y >= 0 && statesOfAllCells[x - 1][y].type.equals(type)) {
           numberOfNeighbor++;
         }
         if (x - 1 >= 0 && y + 1 < statesOfAllCells[0].length && statesOfAllCells[x - 1][y
-            + 1].alive) {
+            + 1].type.equals(type)) {
           numberOfNeighbor++;
         }
-        if (y - 1 >= 0 && statesOfAllCells[x][y - 1].alive) {
+        if (y - 1 >= 0 && statesOfAllCells[x][y - 1].type.equals(type)) {
           numberOfNeighbor++;
         }
-        if (y + 1 < statesOfAllCells[0].length && statesOfAllCells[x][y + 1].alive) {
+        if (y + 1 < statesOfAllCells[0].length && statesOfAllCells[x][y + 1].type.equals(type)) {
           numberOfNeighbor++;
         }
-        if (x + 1 < statesOfAllCells.length && y - 1 >= 0 && statesOfAllCells[x + 1][y - 1].alive) {
+        if (x + 1 < statesOfAllCells.length && y - 1 >= 0 && statesOfAllCells[x + 1][y - 1].type.equals(type)) {
           numberOfNeighbor++;
         }
-        if (x + 1 < statesOfAllCells.length && y >= 0 && statesOfAllCells[x + 1][y].alive) {
+        if (x + 1 < statesOfAllCells.length && y >= 0 && statesOfAllCells[x + 1][y].type.equals(type)) {
           numberOfNeighbor++;
         }
         if (x + 1 < statesOfAllCells.length && y + 1 < statesOfAllCells[0].length
-            && statesOfAllCells[x + 1][y + 1].alive) {
+            && statesOfAllCells[x + 1][y + 1].type.equals(type)) {
           numberOfNeighbor++;
         }
         //     System.out.print(" " + numberOfNeighbor + " ");
@@ -64,6 +64,12 @@ public abstract class Rules {
    * @return updated states of all cells
    */
   public abstract State[][] judgeStateOfEachCell(State[][] statesOfAllCells);
+
+  /**
+   * specifices the starting states of the cells according to the simulation rule
+   * @return type of cells
+   */
+  public abstract String getStartingPositionCellType();
 
 
 }

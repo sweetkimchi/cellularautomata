@@ -25,9 +25,19 @@ public class WaTorModelRules extends Rules {
     return new State[0][];
   }
 
+  /**
+   * specifices the starting states of the cells according to the simulation rule
+   *
+   * @return type of cells
+   */
   @Override
-  protected boolean decideState(int i, boolean alive) {
-    return false;
+  public String getStartingPositionCellType() {
+    return null;
+  }
+
+  @Override
+  protected String decideState(int i, boolean alive) {
+    return "";
   }
 
 }
