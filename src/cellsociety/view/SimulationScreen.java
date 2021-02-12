@@ -3,6 +3,7 @@ package cellsociety.view;
 import cellsociety.model.cell.State;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 /**
@@ -12,9 +13,7 @@ public class SimulationScreen {
 
   public static final int WINDOW_WIDTH = 800;
   public static final int WINDOW_HEIGHT = 600;
-  private static final String WINDOW_TITLE = "Cell Society";
-  private final Group sceneNodes;
-  private final Stage stage;
+  private static final String WINDOW_TITLE = "Cell Society Simulation";
   public CellGraphics cellGraphics;
   public ButtonGraphics buttonGraphics;
   public GraphGraphics graphGraphics;
@@ -23,7 +22,9 @@ public class SimulationScreen {
    *
    */
   public SliderGraphics sliderGraphics;
+  private final Group sceneNodes;
   private Scene scene;
+  private final Stage stage;
 
   public SimulationScreen(Stage stage) {
     this.stage = stage;
@@ -32,12 +33,16 @@ public class SimulationScreen {
   }
 
   public void initialize() {
+    BorderPane root = new BorderPane();
+    gridGraphics = new GridGraphics();
+
     stage.setTitle(WINDOW_TITLE);
-    scene = new Scene(sceneNodes, WINDOW_WIDTH, WINDOW_HEIGHT);
+    scene = new Scene(gridGraphics.getGridPane(), WINDOW_WIDTH, WINDOW_HEIGHT);
     stage.setScene(scene);
     stage.show();
 
-    gridGraphics = new GridGraphics(stage);
+
+
   }
 
   public void update(State[][] states) {
