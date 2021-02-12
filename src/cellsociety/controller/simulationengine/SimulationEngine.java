@@ -81,7 +81,7 @@ public class SimulationEngine extends Simulator {
     initializeModelConstructors();
     constructStartingStateForSimulation(decoder.getCoords());
     initializeGrid();
-    initializeCells();
+  //  initializeCells();
     //  gridManager.printGrid();
     updateCellState();
     runSimulation();
@@ -92,20 +92,20 @@ public class SimulationEngine extends Simulator {
     //need to be fixed for a better design
   }
 
-  protected void initializeCells() {
-    cellPositions = new GameOfLifeCell[row][col];
-    for (int row = 0; row < stateOfAllCells.length; row++) {
-      for (int col = 0; col < stateOfAllCells[0].length; col++) {
-        cellPositions[row][col] = new GameOfLifeCell(stateOfAllCells[row][col]);
-      }
-    }
-    simulationScreen.update(stateOfAllCells);
-  }
+//  protected void initializeCells() {
+//    cellPositions = new GameOfLifeCell[row][col];
+//    for (int row = 0; row < stateOfAllCells.length; row++) {
+//      for (int col = 0; col < stateOfAllCells[0].length; col++) {
+//        cellPositions[row][col] = new GameOfLifeCell(stateOfAllCells[row][col]);
+//      }
+//    }
+//    simulationScreen.update(stateOfAllCells);
+//  }
 
   protected void initializeGrid() {
     gridManager = new GridManager(row, col);
     stateOfAllCells = gridManager.buildGrid(template);
-    initializeCells();
+ //   initializeCells();
   }
 
   @Override
