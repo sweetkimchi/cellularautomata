@@ -1,6 +1,6 @@
 package cellsociety.controller.simulationengine;
 
-import cellsociety.controller.Controller;
+import cellsociety.controller.Decoder;
 import cellsociety.controller.grid.GridManager;
 import cellsociety.controller.grid.Simulator;
 import cellsociety.model.cell.Cell;
@@ -9,7 +9,6 @@ import cellsociety.model.gameoflife.GameOfLifeCell;
 import cellsociety.model.gameoflife.GameOfLifeRule;
 import cellsociety.view.SimulationScreen;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import javafx.animation.AnimationTimer;
@@ -47,7 +46,7 @@ public class SimulationEngine extends Simulator {
   private GameOfLifeCell[][] cellPositions;
   private Map<Cell, List<Cell>> mapOfNeighbors;
   private ArrayList<State> template;
-  private Controller controller;
+  private Decoder decoder;
 
   /**
    * Default constructor
@@ -71,7 +70,7 @@ public class SimulationEngine extends Simulator {
   @Override
   protected void initializeData() {
     initializeConstructors();
-    makeInitialTemplate(controller.getCoords());
+    makeInitialTemplate(decoder.getCoords());
     initializeGrid();
     initializeCells();
     //  gridManager.printGrid();
@@ -81,12 +80,12 @@ public class SimulationEngine extends Simulator {
 
   protected void initializeConstructors() {
     gameOfLifeRule = new GameOfLifeRule();
-    controller = new Controller();
-    controller.initVals();
+    decoder = new Decoder();
+    decoder.readValuesFromXMLFile();
     template = new ArrayList<>();
     //need to be fixed for a better design
-    row = controller.getRows();
-    col = controller.getCols();
+    row = decoder.getRows();
+    col = decoder.getCols();
 
     cellPositions = new GameOfLifeCell[row][col];
     gridManager = new GridManager(row, col);
