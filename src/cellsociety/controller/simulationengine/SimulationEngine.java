@@ -37,6 +37,7 @@ public class SimulationEngine extends Simulator {
           new State(2, 0, true), new State(3, 1, true), new State(3, 2, true)));
 
 
+
   private final SimulationScreen simulationScreen;
   private final int row = 50;
   private final int col = 50;
