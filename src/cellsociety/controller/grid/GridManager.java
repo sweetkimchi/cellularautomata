@@ -37,16 +37,17 @@ public class GridManager {
     int ySize = 0;
 
     for (State s : template) {
-      if(xSize < s.getxCoord()){
+      if (xSize < s.getxCoord()) {
         xSize = s.getxCoord();
       }
-      if(ySize < s.getyCoord()){
+      if (ySize < s.getyCoord()) {
         ySize = s.getyCoord();
       }
     }
 
     for (State s : template) {
-      stateOfCells[row / 2 + s.getxCoord() - xSize/2][col / 2 + s.getyCoord() - ySize/2].alive = true;
+      stateOfCells[row / 2 + s.getxCoord() - xSize / 2][col / 2 + s.getyCoord()
+          - ySize / 2].alive = true;
     }
     this.stateOfCells = stateOfCells;
     return stateOfCells;

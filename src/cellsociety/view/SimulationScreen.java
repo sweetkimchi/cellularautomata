@@ -14,6 +14,8 @@ public class SimulationScreen {
   public static final int WINDOW_WIDTH = 800;
   public static final int WINDOW_HEIGHT = 600;
   private static final String WINDOW_TITLE = "Cell Society Simulation";
+  private final Group sceneNodes;
+  private final Stage stage;
   public CellGraphics cellGraphics;
   public ButtonGraphics buttonGraphics;
   public GraphGraphics graphGraphics;
@@ -22,9 +24,7 @@ public class SimulationScreen {
    *
    */
   public SliderGraphics sliderGraphics;
-  private final Group sceneNodes;
   private Scene scene;
-  private final Stage stage;
 
   public SimulationScreen(Stage stage) {
     this.stage = stage;
@@ -41,7 +41,6 @@ public class SimulationScreen {
     scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
     stage.setScene(scene);
     stage.show();
-
 
 
   }

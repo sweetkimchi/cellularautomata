@@ -36,7 +36,6 @@ public class SimulationEngine extends Simulator {
 //          new State(2, 0, true), new State(3, 1, true), new State(3, 2, true)));
 
 
-
   private final SimulationScreen simulationScreen;
   private int row;
   private int col;
@@ -59,8 +58,9 @@ public class SimulationEngine extends Simulator {
   }
 
   private ArrayList<State> makeInitialTemplate(ArrayList<String> coordinates) {
-    for(int i = 0; i + 1 < coordinates.size(); i+=2){
-      State state = new State(Integer.parseInt(coordinates.get(i)), Integer.parseInt(coordinates.get(i+1)), true);
+    for (int i = 0; i + 1 < coordinates.size(); i += 2) {
+      State state = new State(Integer.parseInt(coordinates.get(i)),
+          Integer.parseInt(coordinates.get(i + 1)), true);
       template.add(state);
     }
     return template;

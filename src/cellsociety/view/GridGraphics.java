@@ -5,7 +5,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
 
 /**
  *
@@ -51,6 +50,7 @@ public class GridGraphics {
 //    //Adding scene to the stage
 //    stage.setScene(scene);
   }
+
   public GridPane getGridPane() {
     return gridPane;
   }
