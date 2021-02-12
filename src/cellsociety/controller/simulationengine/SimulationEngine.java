@@ -3,14 +3,10 @@ package cellsociety.controller.simulationengine;
 import cellsociety.controller.Decoder;
 import cellsociety.controller.grid.GridManager;
 import cellsociety.controller.grid.Simulator;
-import cellsociety.model.cell.Cell;
 import cellsociety.model.cell.State;
-import cellsociety.model.gameoflife.GameOfLifeCell;
 import cellsociety.model.gameoflife.GameOfLifeRule;
 import cellsociety.view.SimulationScreen;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 import javafx.animation.AnimationTimer;
 import javafx.stage.Stage;
 
@@ -42,8 +38,6 @@ public class SimulationEngine extends Simulator {
   private GridManager gridManager;
   private GameOfLifeRule gameOfLifeRule;
   private State[][] stateOfAllCells;
-  private GameOfLifeCell[][] cellPositions;
-  private Map<Cell, List<Cell>> mapOfNeighbors;
   private ArrayList<State> template;
   private Decoder decoder;
 
@@ -52,12 +46,14 @@ public class SimulationEngine extends Simulator {
    */
   public SimulationEngine() {
     simulationScreen = new SimulationScreen(new Stage());
+    initializeDecoder();
     initializeData();
 
 
   }
 
-  private ArrayList<State> makeInitialTemplate(ArrayList<String> coordinates) {
+  private ArrayList<State> constructStartingStateForSimulation(ArrayList<String> coordinates) {
+    template = new ArrayList<>();
     for (int i = 0; i + 1 < coordinates.size(); i += 2) {
       State state = new State(Integer.parseInt(coordinates.get(i)),
           Integer.parseInt(coordinates.get(i + 1)), true);
@@ -66,43 +62,36 @@ public class SimulationEngine extends Simulator {
     return template;
   }
 
+  private void initializeDecoder(){
+    decoder = new Decoder();
+    decoder.readValuesFromXMLFile();
+  }
+
 
   @Override
   protected void initializeData() {
-    initializeConstructors();
-    makeInitialTemplate(decoder.getCoords());
+    row = decoder.getRows();
+    col = decoder.getCols();
+    initializeModelConstructors();
+    constructStartingStateForSimulation(decoder.getCoords());
     initializeGrid();
-    initializeCells();
+  //  initializeCells();
     //  gridManager.printGrid();
     updateCellState();
     runSimulation();
   }
 
-  protected void initializeConstructors() {
+  protected void initializeModelConstructors() {
     gameOfLifeRule = new GameOfLifeRule();
-    decoder = new Decoder();
-    decoder.readValuesFromXMLFile();
-    template = new ArrayList<>();
     //need to be fixed for a better design
-    row = decoder.getRows();
-    col = decoder.getCols();
-
-    cellPositions = new GameOfLifeCell[row][col];
-    gridManager = new GridManager(row, col);
   }
 
-  protected void initializeCells() {
-    for (int row = 0; row < stateOfAllCells.length; row++) {
-      for (int col = 0; col < stateOfAllCells[0].length; col++) {
-        cellPositions[row][col] = new GameOfLifeCell(stateOfAllCells[row][col]);
-      }
-    }
-    simulationScreen.update(stateOfAllCells);
-  }
+
 
   protected void initializeGrid() {
+    gridManager = new GridManager(row, col);
     stateOfAllCells = gridManager.buildGrid(template);
-    initializeCells();
+ //   initializeCells();
   }
 
   @Override
