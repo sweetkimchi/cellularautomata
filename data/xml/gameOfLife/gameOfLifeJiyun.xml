@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<data game="game">
+  <author>Ji Yun Hyo</author>
+  <description></description>
+  <numCols>30</numCols>
+  <numRows>30</numRows>
+  <shapeCoords>1020011242233343</shapeCoords>
+  <template>jiyun</template>
+  <title>Game of Life</title>
+  <type>gameOfLife</type>
+</data>

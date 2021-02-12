@@ -38,7 +38,7 @@ public class Controller {
         myRows = Integer.parseInt(attributes.get(NUM_ROWS));
         myCols = Integer.parseInt(attributes.get(NUM_COLS));
         myCoords = new ArrayList<>();
-        for(int i=0; i<attributes.get(COORDS).length(); i++) myCoords.add(Integer.parseInt(attributes.get(COORDS)));
+        for(int i=0; i<attributes.get(COORDS).length(); i++) myCoords.add(Integer.parseInt(attributes.get(COORDS).substring(i,i+1)));
     }
     private static FileChooser makeChooser(String extension){
         FileChooser result = new FileChooser();

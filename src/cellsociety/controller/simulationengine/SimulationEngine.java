@@ -1,5 +1,6 @@
 package cellsociety.controller.simulationengine;
 
+import cellsociety.controller.Controller;
 import cellsociety.controller.grid.GridManager;
 import cellsociety.controller.grid.Simulator;
 import cellsociety.model.cell.Cell;
@@ -34,6 +35,8 @@ public class SimulationEngine extends Simulator {
   private final ArrayList<State> LIST_NAME_TOAD = new ArrayList<>(Arrays
       .asList(new State(0, 1, true), new State(0, 2, true), new State(1, 3, true),
           new State(2, 0, true), new State(3, 1, true), new State(3, 2, true)));
+
+
   private final SimulationScreen simulationScreen;
   private final int row = 50;
   private final int col = 50;
@@ -43,28 +46,22 @@ public class SimulationEngine extends Simulator {
   private GameOfLifeCell[][] cellPositions;
   private Map<Cell, List<Cell>> mapOfNeighbors;
   private ArrayList<State> template;
+  private Controller controller;
 
   /**
    * Default constructor
    */
   public SimulationEngine(String templateName) {
     simulationScreen = new SimulationScreen(new Stage());
-
-    assignTemplate(templateName);
     initializeData();
 
 
   }
 
-  private ArrayList<State> assignTemplate(String templateName) {
-    if (templateName.equals("block")) {
-      template = LIST_NAME_BLOCK;
-    } else if (templateName.equals("blinker")) {
-      template = LIST_NAME_BLINKER;
-    } else if (templateName.equals("cornell")) {
-      template = LIST_NAME_CORNELL;
-    } else if (templateName.equals("jiyun")) {
-      template = LIST_NAME_JIYUN;
+  private ArrayList<State> makeInitialTemplate(ArrayList<Integer> coordinates) {
+    for(int i = 0; i + 1 < coordinates.size(); i+=2){
+      State state = new State(coordinates.get(i), coordinates.get(i+1), true);
+      template.add(state);
     }
     return template;
   }
@@ -73,16 +70,19 @@ public class SimulationEngine extends Simulator {
   @Override
   protected void initializeData() {
     initializeConstructors();
+    makeInitialTemplate(controller.getCoords());
     initializeGrid();
     initializeCells();
     //  gridManager.printGrid();
     updateCellState();
-
     runSimulation();
   }
 
   protected void initializeConstructors() {
     gameOfLifeRule = new GameOfLifeRule();
+    controller = new Controller();
+    controller.initVals();
+    template = new ArrayList<>();
     cellPositions = new GameOfLifeCell[row][col];
     gridManager = new GridManager(row, col);
   }
