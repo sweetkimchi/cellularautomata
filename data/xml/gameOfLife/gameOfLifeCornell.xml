@@ -2,8 +2,8 @@
 <data game="game">
   <author>Cornell</author>
   <description></description>
-  <numCols>30</numCols>
-  <numRows>30</numRows>
+  <numCols>50</numCols>
+  <numRows>50</numRows>
   <shapeCoords>1,0,0,1,1,1,2,1</shapeCoords>
   <template>cornell</template>
   <title>Game of Life</title>

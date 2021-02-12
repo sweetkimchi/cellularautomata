@@ -2,8 +2,8 @@
 <data game="game">
   <author>Ji Yun Hyo</author>
   <description></description>
-  <numCols>30</numCols>
-  <numRows>30</numRows>
+  <numCols>50</numCols>
+  <numRows>50</numRows>
   <shapeCoords>1,0,2,0,0,1,1,2,4,2,2,3,3,3,4,3</shapeCoords>
   <template>jiyun</template>
   <title>Game of Life</title>
