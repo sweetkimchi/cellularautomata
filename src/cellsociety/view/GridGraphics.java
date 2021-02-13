@@ -23,12 +23,6 @@ public class GridGraphics {
   private void initialize() {
     gridPane = new GridPane();
 
-//        Button button1 = new Button("Button 1");
-//        Button button2 = new Button("Button 2");
-//
-//        gridPane.add(button1, 0, 2);
-//        gridPane.add(button2, 0, 4);
-
     //gridPane.setMinSize(800, 600);
 
     //Setting the padding
@@ -41,14 +35,6 @@ public class GridGraphics {
     //Setting the Grid alignment
     gridPane.setAlignment(Pos.CENTER_RIGHT);
 
-//    //Creating a scene object
-//    Scene scene = new Scene(gridPane);
-//
-//    //Setting title to the Stage
-//    stage.setTitle("Cell Society Simulation");
-//
-//    //Adding scene to the stage
-//    stage.setScene(scene);
   }
 
   public GridPane getGridPane() {
@@ -62,6 +48,10 @@ public class GridGraphics {
         gridPane.add(new Rectangle(10, 10, states[r][c].color), r, c);
       }
     }
+  }
+
+  public void reset() {
+    gridPane.getChildren().clear();
   }
 
 }
