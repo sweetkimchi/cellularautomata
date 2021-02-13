@@ -65,6 +65,9 @@ public class Decoder {
   public String getAuthor() {
     return myAuthor;
   }
+  public String getDesc(){
+    return myDesc;
+  }
   public int getRows() {
     return myRows;
   }
