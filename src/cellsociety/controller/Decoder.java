@@ -20,29 +20,18 @@ public class Decoder {
   public static final String COORDS = "shapeCoords";
   public static final String TEMPLATE = "template";
   public static final String MODEL = "model";
-  public static final String FS_RATIO = "fishsharkratio";
-  public static final String EMPTY_RATIO = "emptyratio";
-  public static final String SEED = "randomseed";
-  public static final String FISH_RATE = "fishreproduce";
-  public static final String SHARK_RATE = "sharkreproduce";
-  public static final String SHARK_LIVES = "sharklives";
-  public static final String ENERGY = "energyfromeating";
 
-  private ArrayList<Integer> myType;
+
+
+
+  private Map<String, String> myAttributes;
   private String myModel;
   private String myTitle;
   private String myAuthor;
   private String myTemplate;
   private int myRows;
   private int myCols;
-  private int mySeed;
-  private int fishRate;
-  private int sharkRate;
-  private int sharkLives;
-  private int energy;
-  private float myFSRatio;
-  private float myEmptyRatio;
-  private ArrayList<String> myCoords;
+
 
   private static FileChooser makeChooser(String extension) {
     FileChooser result = new FileChooser();
@@ -55,25 +44,22 @@ public class Decoder {
   public void readValuesFromXMLFile() {
     File dataFile = FILE_CHOOSER.showOpenDialog(null);
     XMLParser parser = new XMLParser("game");
-    Map<String, String> attributes = parser.getAttribute(dataFile);
-    myTitle = attributes.get(TITLE);
-    myAuthor = attributes.get(AUTHOR);
-    myTemplate = attributes.get(TEMPLATE);
-    myRows = Integer.parseInt(attributes.get(NUM_ROWS));
-    myCols = Integer.parseInt(attributes.get(NUM_COLS));
-    myModel = attributes.get(MODEL);
-    myType = new ArrayList<>(Integer.parseInt(attributes.get(TYPE)));
-    myCoords = new ArrayList<>(Arrays.asList(attributes.get(COORDS).split("[,]", 0)));
+    myAttributes = parser.getAttribute(dataFile);
+    myTitle = myAttributes.get(TITLE);
+    myAuthor = myAttributes.get(AUTHOR);
+    myTemplate = myAttributes.get(TEMPLATE);
+    myRows = Integer.parseInt(myAttributes.get(NUM_ROWS));
+    myCols = Integer.parseInt(myAttributes.get(NUM_COLS));
+    myModel = myAttributes.get(MODEL);
+    //gameoflife initializers
+
     //waTor initializers
-    myFSRatio = Float.parseFloat(attributes.get(FS_RATIO));
-    myEmptyRatio = Float.parseFloat(attributes.get(EMPTY_RATIO));
-    mySeed = Integer.parseInt(attributes.get(SEED));
-    fishRate = Integer.parseInt(attributes.get(FISH_RATE));
-    sharkRate = Integer.parseInt(attributes.get(SHARK_RATE));
-    sharkLives = Integer.parseInt(attributes.get(SHARK_LIVES));
-    energy = Integer.parseInt(attributes.get(ENERGY));
+
 //    System.out.println(myCoords);
 //        for(int i=0; i<attributes.get(COORDS).length(); i++) myCoords.add(Integer.parseInt(attributes.get(COORDS).substring(i,i+1)));
+  }
+  public Map<String, String> getAttributes(){
+    return myAttributes;
   }
 // general parameters
   public String getModel() {
@@ -100,33 +86,12 @@ public class Decoder {
     return myCols;
   }
 
-  public ArrayList<String> getCoords() {
-    return myCoords;
-  }
+
 // gameOfLife getters
-  public ArrayList<Integer> getType(){
-    return myType;
-  }
+
 
 // waTor getters
-  public float getFSRatio(){
-    return myFSRatio;
-  }
-  public float getEmptyRatio(){
-    return myEmptyRatio;
-  }
-  public int getSeed(){
-    return mySeed;
-  }
-  public int getFishRate(){
-    return fishRate;
-  }
-  public int getSharkRate(){
-    return sharkRate;
-  }
-  public int getEnergy(){
-    return energy;
-  }
+
 
 
 
