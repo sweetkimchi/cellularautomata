@@ -2,8 +2,6 @@ package cellsociety.model.watormodel;
 
     import cellsociety.model.cell.State;
     import cellsociety.model.rules.Rules;
-    import java.awt.Paint;
-    import java.lang.reflect.Array;
     import java.util.ArrayList;
     import java.util.Random;
 
@@ -41,94 +39,105 @@ public class WaTorModelRules extends Rules {
       statesOfAllCells[newX][newY].numberOfMoves += ENERGY_FROM_FISH;
       return new State(xCoord,yCoord, EMPTY);
   }
-  private State decideState(State[][] statesOfAllCells, int xCoord, int yCoord, String type) {
+
+  private State decideFishState(State[][] statesOfAllCells, int xCoord, int yCoord, String type) {
+    ArrayList<State> emptyCells = new ArrayList<>();
+    if(xCoord - 1 >= 0 && statesOfAllCells[xCoord-1][yCoord].type.equals(EMPTY)){
+      //left cell
+      emptyCells.add(statesOfAllCells[xCoord-1][yCoord]);
+
+    }
+    if(xCoord >= 0 && yCoord - 1 >= 0 && statesOfAllCells[xCoord][yCoord - 1].type.equals(EMPTY)){
+      //upper cell
+      emptyCells.add(statesOfAllCells[xCoord][yCoord-1]);
+    }
+    if (yCoord + 1 < statesOfAllCells[0].length && statesOfAllCells[xCoord][yCoord + 1].type.equals(EMPTY)) {
+      //lower cell
+      emptyCells.add(statesOfAllCells[xCoord][yCoord+1]);
+    }
+    if(xCoord + 1 < statesOfAllCells.length && statesOfAllCells[xCoord+1][yCoord].type.equals(EMPTY)){
+      //right cell
+      emptyCells.add(statesOfAllCells[xCoord+1][yCoord]);
+    }
+    System.out.println("SIZE: " + emptyCells.size());
+    if(!emptyCells.isEmpty()){
+      int index = random.nextInt(emptyCells.size());
+      State dummy = emptyCells.get(index);
+      System.out.println(index);
+      statesOfAllCells[dummy.getxCoord()][dummy.getyCoord()] = new State(dummy.getxCoord(), dummy.getyCoord(), FISH, FISH_COLOR,
+          dummy.numberOfMoves++);
+      return new State(xCoord,yCoord,EMPTY,EMPTY_COLOR,0);
+    }
 
     return statesOfAllCells[xCoord][yCoord];
   }
 
-//  private State decideState(State[][] statesOfAllCells, int xCoord, int yCoord, String type) {
-//    ArrayList<State> emptyCells = new ArrayList<>();
-//    ArrayList<State> fishCells = new ArrayList<>();
-//    if(type.equals(SHARK)){
-//      if(xCoord - 1 >= 0){
-//        //left cell
-//        if(statesOfAllCells[xCoord-1][yCoord].type.equals(FISH)){
-//          fishCells.add(statesOfAllCells[xCoord-1][yCoord]);
-//        }else if(statesOfAllCells[xCoord-1][yCoord].type.equals(EMPTY)){
-//          emptyCells.add(statesOfAllCells[xCoord-1][yCoord]);
-//        }
-//
-//      }else if(xCoord >= 0 && yCoord - 1 >= 0){
-//        //upper cell
-//        if(statesOfAllCells[xCoord][yCoord-1].type.equals(FISH)){
-//          fishCells.add(statesOfAllCells[xCoord][yCoord-1]);
-//        }else if(statesOfAllCells[xCoord][yCoord-1].type.equals(EMPTY)){
-//          emptyCells.add(statesOfAllCells[xCoord][yCoord-1]);
-//        }
-//
-//      } else if (yCoord + 1 < statesOfAllCells[0].length) {
-//        //lower cell
-//        if(statesOfAllCells[xCoord][yCoord + 1].type.equals(FISH)){
-//          fishCells.add(statesOfAllCells[xCoord][yCoord+1]);
-//        }else if(statesOfAllCells[xCoord][yCoord +1].type.equals(EMPTY)){
-//          emptyCells.add(statesOfAllCells[xCoord][yCoord+1]);
-//        }
-//
-//      }else if(xCoord + 1 < statesOfAllCells.length){
-//        //right cell
-//        if(statesOfAllCells[xCoord+1][yCoord].type.equals(FISH)){
-//          fishCells.add(statesOfAllCells[xCoord+1][yCoord]);
-//        }else if(statesOfAllCells[xCoord+1][yCoord].type.equals(EMPTY)){
-//          emptyCells.add(statesOfAllCells[xCoord+1][yCoord]);
-//        }
-//      }
-//
-//      if(!fishCells.isEmpty()){
-//        int index = random.nextInt(fishCells.size());
-//        State dummy = fishCells.get(index);
-//        statesOfAllCells[dummy.getxCoord()][dummy.getyCoord()] = new State(dummy.getxCoord(), dummy.getyCoord(), SHARK, SHARK_COLOR, statesOfAllCells[xCoord][yCoord].numberOfMoves += ENERGY_FROM_FISH);
-//
-//        setColor(statesOfAllCells[dummy.getxCoord()][dummy.getyCoord()]);
-//
-//        return new State(xCoord,yCoord, EMPTY, EMPTY_COLOR, 0);
-//      }
-//
-//      if(emptyCells.isEmpty()){
-//        if(statesOfAllCells[xCoord][yCoord].numberOfMoves <= 0){
-//          return new State(xCoord,yCoord, EMPTY, EMPTY_COLOR, 0);
-//        }else{
-//          statesOfAllCells[xCoord][yCoord].numberOfMoves--;
-//          return statesOfAllCells[xCoord][yCoord];
-//        }
-//
-//      }else{
-//        int index = random.nextInt(emptyCells.size());
-//        State dummy = emptyCells.get(index);
-//        statesOfAllCells[dummy.getxCoord()][dummy.getyCoord()] = new State(dummy.getxCoord(), dummy.getyCoord(), SHARK, SHARK_COLOR, statesOfAllCells[xCoord][yCoord].numberOfMoves--);
-//        setColor(statesOfAllCells[dummy.getxCoord()][dummy.getyCoord()]);
-//
-//        return new State(xCoord,yCoord, EMPTY, EMPTY_COLOR, 0);
-//      }
-//
-//
-//    } else if(type.equals(FISH)){
-//      if(xCoord - 1 >= 0){
-//        //left cell
-//
-//      }else if(xCoord >= 0 && yCoord - 1 >= 0){
-//        //upper cell
-//
-//      } else if (yCoord + 1 < statesOfAllCells[0].length) {
-//        //lower cell
-//
-//      }else if(xCoord + 1 < statesOfAllCells.length){
-//        //right cell
-//
-//      }
-//    }
-//
-//    return statesOfAllCells[xCoord][yCoord];
-//  }
+  private State decideSharkState(State[][] statesOfAllCells, int xCoord, int yCoord, String type) {
+    ArrayList<State> emptyCells = new ArrayList<>();
+    ArrayList<State> fishCells = new ArrayList<>();
+    if(xCoord - 1 >= 0){
+      //left cell
+      if(statesOfAllCells[xCoord-1][yCoord].type.equals(FISH)){
+        fishCells.add(statesOfAllCells[xCoord-1][yCoord]);
+      }else if(statesOfAllCells[xCoord-1][yCoord].type.equals(EMPTY)){
+        emptyCells.add(statesOfAllCells[xCoord-1][yCoord]);
+      }
+
+    }
+    if(xCoord >= 0 && yCoord - 1 >= 0){
+      //upper cell
+      if(statesOfAllCells[xCoord][yCoord-1].type.equals(FISH)){
+        fishCells.add(statesOfAllCells[xCoord][yCoord-1]);
+      }else if(statesOfAllCells[xCoord][yCoord-1].type.equals(EMPTY)){
+        emptyCells.add(statesOfAllCells[xCoord][yCoord-1]);
+      }
+
+    }
+    if (yCoord + 1 < statesOfAllCells[0].length) {
+      //lower cell
+      if(statesOfAllCells[xCoord][yCoord + 1].type.equals(FISH)){
+        fishCells.add(statesOfAllCells[xCoord][yCoord+1]);
+      }else if(statesOfAllCells[xCoord][yCoord +1].type.equals(EMPTY)){
+        emptyCells.add(statesOfAllCells[xCoord][yCoord+1]);
+      }
+
+    }
+    if(xCoord + 1 < statesOfAllCells.length){
+      //right cell
+      if(statesOfAllCells[xCoord+1][yCoord].type.equals(FISH)){
+        fishCells.add(statesOfAllCells[xCoord+1][yCoord]);
+      }else if(statesOfAllCells[xCoord+1][yCoord].type.equals(EMPTY)){
+        emptyCells.add(statesOfAllCells[xCoord+1][yCoord]);
+      }
+    }
+
+    if(!fishCells.isEmpty()){
+      int index = random.nextInt(fishCells.size());
+      State dummy = fishCells.get(index);
+      statesOfAllCells[dummy.getxCoord()][dummy.getyCoord()] = new State(dummy.getxCoord(), dummy.getyCoord(), SHARK, SHARK_COLOR, statesOfAllCells[xCoord][yCoord].numberOfMoves += ENERGY_FROM_FISH);
+
+      setColor(statesOfAllCells[dummy.getxCoord()][dummy.getyCoord()]);
+
+      return new State(xCoord,yCoord, EMPTY, EMPTY_COLOR, 0);
+    }
+
+    if(emptyCells.isEmpty()){
+      if(statesOfAllCells[xCoord][yCoord].numberOfMoves <= 0){
+        return new State(xCoord,yCoord, EMPTY, EMPTY_COLOR, 0);
+      }else{
+        statesOfAllCells[xCoord][yCoord].numberOfMoves--;
+        return statesOfAllCells[xCoord][yCoord];
+      }
+
+    }else{
+      int index = random.nextInt(emptyCells.size());
+      State dummy = emptyCells.get(index);
+      statesOfAllCells[dummy.getxCoord()][dummy.getyCoord()] = new State(dummy.getxCoord(), dummy.getyCoord(), SHARK, SHARK_COLOR, statesOfAllCells[xCoord][yCoord].numberOfMoves--);
+      setColor(statesOfAllCells[dummy.getxCoord()][dummy.getyCoord()]);
+
+      return new State(xCoord,yCoord, EMPTY, EMPTY_COLOR, 0);
+    }
+  }
 
     public State[][] judgeStateOfEachCell(State[][] statesOfAllCells) {
     int[][] numberOfFishNeighbors = numberOfAliveNeighbors(statesOfAllCells, FISH);
@@ -136,8 +145,11 @@ public class WaTorModelRules extends Rules {
     int[][] numberOfEmptyNeighbors = numberOfAliveNeighbors(statesOfAllCells, EMPTY);
     for (int x = 0; x < statesOfAllCells.length; x++) {
       for (int y = 0; y < statesOfAllCells[0].length; y++) {
-        if(!statesOfAllCells[x][y].type.equals(EMPTY)){
-          statesOfAllCells[x][y] = decideState(statesOfAllCells, x, y, statesOfAllCells[x][y].type);
+        if(statesOfAllCells[x][y].type.equals(FISH)){
+          statesOfAllCells[x][y] = decideFishState(statesOfAllCells, x, y, statesOfAllCells[x][y].type);
+        }
+        else if(statesOfAllCells[x][y].type.equals(SHARK)){
+          statesOfAllCells[x][y] = decideSharkState(statesOfAllCells, x, y, statesOfAllCells[x][y].type);
         }
         setColor(statesOfAllCells[x][y]);
 
