@@ -25,6 +25,7 @@ public class Decoder {
   private int myRows;
   private int myCols;
 
+
   private static FileChooser makeChooser(String extension) {
     FileChooser result = new FileChooser();
     result.setTitle("Open Data File");
@@ -37,6 +38,7 @@ public class Decoder {
     XMLParser parser = new XMLParser("game");
     Map<String, String> attributes = parser.getAttribute(dataFile);
     myDesc = attributes.get(DESC);
+    myModel = attributes.get(MODEL).toLowerCase();
     myTitle = attributes.get(TITLE);
     myAuthor = attributes.get(AUTHOR);
     myRows = Integer.parseInt(attributes.get(NUM_ROWS));
@@ -60,9 +62,7 @@ public class Decoder {
   public String getAuthor() {
     return myAuthor;
   }
-  public String getDesc(){
-    return myDesc;
-  }
+
   public int getRows() {
     return myRows;
   }
