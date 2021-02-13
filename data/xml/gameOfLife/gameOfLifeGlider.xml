@@ -7,5 +7,5 @@
   <shapeCoords>21,20,22,21,20,22,21,22,22,22</shapeCoords>
   <template>glider</template>
   <title>Game of Life</title>
-  <type>gameOfLife</type>
+  <model>gameOfLife</model>
 </data>

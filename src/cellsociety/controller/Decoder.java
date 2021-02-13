@@ -46,7 +46,7 @@ public class Decoder {
     myTemplate = attributes.get(TEMPLATE);
     myRows = Integer.parseInt(attributes.get(NUM_ROWS));
     myCols = Integer.parseInt(attributes.get(NUM_COLS));
-  //  myCoords = new ArrayList<>(Arrays.asList(attributes.get(COORDS).split("[,]", 0)));
+    //myCoords = new ArrayList<>(Arrays.asList(attributes.get(COORDS).split("[,]", 0)));
 //        for(int i=0; i<attributes.get(COORDS).length(); i++) myCoords.add(Integer.parseInt(attributes.get(COORDS).substring(i,i+1)));
   }
 
