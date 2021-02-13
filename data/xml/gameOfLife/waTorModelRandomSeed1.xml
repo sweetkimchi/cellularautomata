@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<data game="game">
+  <author>Jiyun</author>
+  <description></description>
+  <numCols>50</numCols>
+  <numRows>50</numRows>
+  <randomseed>100</randomseed>
+  <template>random_one</template>
+  <title>WaTor Simulation</title>
+  <type>wator</type>
+</data>
