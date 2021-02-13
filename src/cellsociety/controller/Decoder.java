@@ -20,12 +20,10 @@ public class Decoder {
   private WaTorDecoder waTorDecoder;
   private String myDesc;
   private String myModel;
-  private String myType;
   private String myTitle;
   private String myAuthor;
   private int myRows;
   private int myCols;
-
 
   private static FileChooser makeChooser(String extension) {
     FileChooser result = new FileChooser();
@@ -34,7 +32,6 @@ public class Decoder {
     result.getExtensionFilters().setAll(new ExtensionFilter("Text Files", extension));
     return result;
   }
-
   public void readValuesFromXMLFile() {
     File dataFile = FILE_CHOOSER.showOpenDialog(null);
     XMLParser parser = new XMLParser("game");
@@ -48,7 +45,6 @@ public class Decoder {
     if(myModel.equals("gameOfLife")){golDecoder = new GOLDecoder(attributes);}
     else if(myModel.equals("wator")) {waTorDecoder = new WaTorDecoder(attributes);}
   }
-
   public GOLDecoder getGOLDecoder(){
     return golDecoder;
   }
@@ -58,11 +54,9 @@ public class Decoder {
   public String getModel() {
     return myModel;
   }
-
   public String getTitle() {
     return myTitle;
   }
-
   public String getAuthor() {
     return myAuthor;
   }
@@ -78,6 +72,3 @@ public class Decoder {
     return myDesc;
   }
 }
-
-
-
