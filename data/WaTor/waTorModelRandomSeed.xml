@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<data game="game">
+    <author>Jiyun</author>
+    <description></description>
+    <numCols>50</numCols>
+    <numRows>50</numRows>
+    <fishsharkratio>0.3</fishsharkratio>
+    <emptyratio>0.1</emptyratio>
+    <randomseed>100</randomseed>
+    <fishreproduce>3</fishreproduce>
+    <sharkreproduce>6</sharkreproduce>
+    <sharklives>5</sharklives>
+    <energyfromeating>3</energyfromeating>
+    <template>random_one</template>
+    <title>WaTor Simulation</title>
+    <model>wator</model>
+</data>
