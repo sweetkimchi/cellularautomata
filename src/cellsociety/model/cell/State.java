@@ -24,11 +24,11 @@ public class State {
     numberOfMoves = 0;
   }
 
-  public State(int xCoord, int yCoord, String type, String colorString) {
+  public State(int xCoord, int yCoord, String type, String colorString, int numberOfMoves) {
     this.xCoord = xCoord;
     this.yCoord = yCoord;
     this.type = type;
-    numberOfMoves = 0;
+    this.numberOfMoves = numberOfMoves;
     color = Paint.valueOf(colorString);
   }
 
