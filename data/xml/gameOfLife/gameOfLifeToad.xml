@@ -6,6 +6,7 @@
   <numRows>50</numRows>
   <shapeCoords>22,20,20,21,23,21,20,22,23,22,21,23</shapeCoords>
   <template>toad</template>
+  <type>111111</type>
   <title>Game of Life</title>
-  <type>gameOfLife</type>
+  <model>gameOfLife</model>
 </data>
