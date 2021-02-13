@@ -1,6 +1,7 @@
 package cellsociety.controller.simulationengine;
 
 import cellsociety.controller.Decoder;
+import cellsociety.controller.GOLDecoder;
 import cellsociety.controller.grid.GridManager;
 import cellsociety.controller.grid.Simulator;
 import cellsociety.model.cell.State;
@@ -26,6 +27,7 @@ public class SimulationEngine extends Simulator {
   private ArrayList<State> template;
   private Decoder decoder;
 
+
   /**
    * Default constructor
    */
@@ -48,6 +50,7 @@ public class SimulationEngine extends Simulator {
   private void initializeDecoder() {
     decoder = new Decoder();
     decoder.readValuesFromXMLFile();
+
   }
 
 
@@ -56,7 +59,13 @@ public class SimulationEngine extends Simulator {
     row = decoder.getRows();
     col = decoder.getCols();
     initializeModelConstructors(decoder.getModel());
-    constructStartingStateForSimulation(decoder.getCoords());
+    if(decoder.getModel().equals("gameOfLife")){
+      constructStartingStateForSimulation(decoder.getGOLDecoder().getMyCoords());
+    }
+    else if(decoder.getModel().equals("wator")){
+
+
+    }
     initializeGrid();
     updateCellState();
     runSimulation();
@@ -64,7 +73,7 @@ public class SimulationEngine extends Simulator {
 
   protected void initializeModelConstructors(String game) {
 
-    if (game.equals("gameoflife")) {
+    if (game.equals("gameOfLife")) {
       rules = new GameOfLifeRule();
     }
     if (game.equals("percolation")) {
