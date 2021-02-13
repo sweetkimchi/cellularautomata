@@ -15,30 +15,34 @@ public class GameOfLifeRule extends Rules {
    */
   private final int lowerSurvivalBoundary;
   private final int upperSurvivalBoundary;
+  private final String ALIVE = "alive";
+  private final String EMPTY = "empty";
+  private final String ALIVE_COLOR = "black";
+  private final String DEAD_COLOR = "lightgrey";
 
   /**
-   * Default constructor
+   * Default Constructor
    */
   public GameOfLifeRule() {
-        /*
-        Each cell with one or no neighbors dies, as if by solitude.
-        Each cell with four or more neighbors dies, as if by overpopulation.
-        Each cell with two or three neighbors survives.
-         */
+    /*
+    Each cell with one or no neighbors dies, as if by solitude.
+    Each cell with four or more neighbors dies, as if by overpopulation.
+    Each cell with two or three neighbors survives.
+     */
     lowerSurvivalBoundary = 2;
     upperSurvivalBoundary = 3;
   }
 
   public State[][] judgeStateOfEachCell(State[][] statesOfAllCells) {
-    int[][] numberOfAliveNeighbors = numberOfAliveNeighbors(statesOfAllCells);
+    int[][] numberOfAliveNeighbors = numberOfAliveNeighbors(statesOfAllCells, ALIVE);
     for (int x = 0; x < statesOfAllCells.length; x++) {
       for (int y = 0; y < statesOfAllCells[0].length; y++) {
-        statesOfAllCells[x][y].alive = decideState(numberOfAliveNeighbors[x][y],
-            statesOfAllCells[x][y].alive);
-        if(statesOfAllCells[x][y].alive){
-          statesOfAllCells[x][y].setColor("yellow");
-        }else{
-          statesOfAllCells[x][y].setColor("black");
+        statesOfAllCells[x][y].type = decideState(numberOfAliveNeighbors[x][y],
+            statesOfAllCells[x][y].type.equals(ALIVE));
+        if (statesOfAllCells[x][y].type.equals(ALIVE)) {
+          statesOfAllCells[x][y].setColor(ALIVE_COLOR);
+        } else {
+          statesOfAllCells[x][y].setColor(DEAD_COLOR);
         }
       }
     }
@@ -46,15 +50,20 @@ public class GameOfLifeRule extends Rules {
   }
 
 
-  private boolean decideState(int numberOfNeighbor, boolean alive) {
+  protected String decideState(int numberOfNeighbor, boolean alive) {
     if (alive) {
       if (numberOfNeighbor < lowerSurvivalBoundary) {
-        return false;
-      } else
-          return numberOfNeighbor <= upperSurvivalBoundary;
-    } else {
-        return numberOfNeighbor == 3;
+        return EMPTY;
+      } else if(numberOfNeighbor <= upperSurvivalBoundary){
+        return ALIVE;
+      }
+    } else if(numberOfNeighbor == 3){
+      return ALIVE;
     }
+    return "";
+  }
 
+  public String getStartingPositionCellType(){
+    return ALIVE;
   }
 }

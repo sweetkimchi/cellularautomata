@@ -1,4 +1,4 @@
-package cellsociety.model.segregationmodel;
+package cellsociety.model.spreadingoffire;
 
 import cellsociety.model.cell.State;
 import cellsociety.model.rules.Rules;
@@ -6,12 +6,12 @@ import cellsociety.model.rules.Rules;
 /**
  *
  */
-public class SegregationModelRules extends Rules {
+public class SpreadingOfFireRules extends Rules {
 
   /**
    * Default constructor
    */
-  public SegregationModelRules() {
+  public SpreadingOfFireRules() {
   }
 
   @Override
@@ -19,6 +19,12 @@ public class SegregationModelRules extends Rules {
     return "";
   }
 
+  /**
+   * judges the state of each cell using the rule of the specific model class
+   *
+   * @param statesOfAllCells starting states of all cells
+   * @return updated states of all cells
+   */
   @Override
   public State[][] judgeStateOfEachCell(State[][] statesOfAllCells) {
     return new State[0][];
@@ -33,5 +39,6 @@ public class SegregationModelRules extends Rules {
   public String getStartingPositionCellType() {
     return null;
   }
+
 
 }

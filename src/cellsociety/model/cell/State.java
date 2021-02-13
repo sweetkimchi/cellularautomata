@@ -8,18 +8,18 @@ import javafx.scene.paint.Paint;
  */
 public class State {
 
-  public boolean alive;
-  public Paint color;
   private final int xCoord;
   private final int yCoord;
+  public String type;
+  public Paint color;
 
   /**
    * Default constructor Initializes the state of each cell according to the data fed
    */
-  public State(int xCoord, int yCoord, boolean alive) {
+  public State(int xCoord, int yCoord, String type) {
     this.xCoord = xCoord;
     this.yCoord = yCoord;
-    this.alive = alive;
+    this.type = type;
   }
 
   public void setColor(String colorName) {

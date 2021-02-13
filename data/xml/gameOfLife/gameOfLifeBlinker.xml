@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<data game = "game">
-    <type>gameOfLife</type>
-    <title>Game of Life</title>
-    <author>John Conway</author>
-    <description></description>
-    <numRows>30</numRows>
-    <numCols>30</numCols>
-    <shapeCoords>000102</shapeCoords>
-    <template>Blinker</template>
+<data game="game">
+  <author>John Conway</author>
+  <description></description>
+  <numCols>50</numCols>
+  <numRows>50</numRows>
+  <shapeCoords>0,0,0,1,0,2</shapeCoords>
+  <template>blinker</template>
+  <title>Game of Life</title>
+  <type>gameOfLife</type>
 </data>

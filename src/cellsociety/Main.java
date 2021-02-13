@@ -17,7 +17,6 @@ public class Main extends Application {
 
   @Override
   public void start(Stage stage) {
-    String template = "jiyun";
-    SimulationEngine simulationEngine = new SimulationEngine(template);
+    SimulationEngine simulationEngine = new SimulationEngine();
   }
 }

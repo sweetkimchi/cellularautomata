@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <data game="game">
-  <author>John Conway</author>
+  <author>Ji Yun Hyo</author>
   <description></description>
   <numCols>50</numCols>
   <numRows>50</numRows>
-  <shapeCoords>1,0,2,1,0,2,1,2,2,2</shapeCoords>
-  <template>glider</template>
+  <shapeCoords>1,0,2,0,0,1,1,2,4,2,2,3,3,3,4,3</shapeCoords>
+  <template>jiyun</template>
   <title>Game of Life</title>
   <type>gameOfLife</type>
 </data>
