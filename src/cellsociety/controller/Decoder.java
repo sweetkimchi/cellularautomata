@@ -1,8 +1,6 @@
 package cellsociety.controller;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Map;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
