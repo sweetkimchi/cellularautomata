@@ -24,7 +24,6 @@ public class Decoder {
   private PercDecoder percDecoder;
   private String myDesc;
   private String myModel;
-  private String myType;
   private String myTitle;
   private String myAuthor;
   private int myRows;
@@ -77,9 +76,6 @@ public class Decoder {
   }
   public String getAuthor() {
     return myAuthor;
-  }
-  public String getDesc(){
-    return myDesc;
   }
   public int getRows() {
     return myRows;
