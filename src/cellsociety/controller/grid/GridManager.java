@@ -64,7 +64,7 @@ public class GridManager {
         if(probability < emptyRatio){
           State state = new State(r, c, EMPTY);
           stateOfCells[r][c] = state;
-        }else if(probability < (1 - emptyRatio) * populationRatio){
+        }else if(probability < emptyRatio + (1-emptyRatio)*populationRatio){
           State state = new State(r, c, possibleTypes.get(1));
           stateOfCells[r][c] = state;
         }else{
