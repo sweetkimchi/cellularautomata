@@ -29,6 +29,7 @@ public class Decoder {
   private int myRows;
   private int myCols;
 
+
   private static FileChooser makeChooser(String extension) {
     FileChooser result = new FileChooser();
     result.setTitle("Open Data File");
@@ -75,9 +76,6 @@ public class Decoder {
   }
   public String getAuthor() {
     return myAuthor;
-  }
-  public String getDesc(){
-    return myDesc;
   }
   public int getRows() {
     return myRows;
