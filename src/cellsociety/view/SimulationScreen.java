@@ -56,6 +56,12 @@ public class SimulationScreen {
     startButton.setOnAction(event -> simulationEngine.startSimulation());
     Button stopButton = new Button("Stop");
     stopButton.setOnAction(event -> simulationEngine.stopSimulation());
+    Button stepButton = new Button("Step");
+    stepButton.setOnAction(event -> {
+      if (simulationEngine.decoderInitialized()) {
+        simulationEngine.updateCellState();
+      }
+    });
     Button resetButton = new Button("Reset");
     resetButton.setOnAction(event -> {
       if (simulationEngine.decoderInitialized()) {
@@ -65,10 +71,12 @@ public class SimulationScreen {
     });
     Button loadNewButton = new Button("Load New");
     loadNewButton.setOnAction(event -> {
+      simulationEngine.stopSimulation();
       simulationEngine.initializeDecoder();
       simulationEngine.initializeData();
     });
-    buttonGraphics.addButtonsToPane(startButton,stopButton,resetButton,loadNewButton);
+
+    buttonGraphics.addButtonsToPane(startButton,stopButton,stepButton,resetButton,loadNewButton);
   }
 
 
