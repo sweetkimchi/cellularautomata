@@ -57,18 +57,18 @@ public class Decoder {
   public String getModel() {
     return myModel;
   }
-
   public String getTitle() {
     return myTitle;
   }
-
   public String getAuthor() {
     return myAuthor;
+  }
+  public String getDesc(){
+    return myDesc;
   }
   public int getRows() {
     return myRows;
   }
-
   public int getCols() {
     return myCols;
   }
