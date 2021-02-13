@@ -25,6 +25,7 @@ public class SimulationEngine extends Simulator {
   private State[][] stateOfAllCells;
   private ArrayList<State> template;
   private Decoder decoder;
+  private AnimationTimer animation;
   private double populationRatio = 0.3;
   private double emptyRatio = 0.3;
   private int randomSeed = 0;
@@ -33,9 +34,9 @@ public class SimulationEngine extends Simulator {
    * Default constructor
    */
   public SimulationEngine() {
-    simulationScreen = new SimulationScreen(new Stage());
-    initializeDecoder();
-    initializeData();
+    simulationScreen = new SimulationScreen(new Stage(), this);
+    //initializeDecoder();
+    //initializeData();
   }
 
   private ArrayList<State> constructStartingStateForSimulation(ArrayList<String> coordinates) {
@@ -48,19 +49,21 @@ public class SimulationEngine extends Simulator {
     return template;
   }
 
-  private void initializeDecoder() {
+  public void initializeDecoder() {
     decoder = new Decoder();
     decoder.readValuesFromXMLFile();
+  }
+  public boolean decoderInitialized() {
+    return (decoder != null);
   }
 
 
   @Override
-  protected void initializeData() {
+  public void initializeData() {
     row = decoder.getRows();
     col = decoder.getCols();
     initializeGrid();
     initializeModelConstructors(decoder.getModel());
-
     updateCellState();
     runSimulation();
   }
@@ -108,14 +111,25 @@ public class SimulationEngine extends Simulator {
 
 
   private void runSimulation() {
-    AnimationTimer animation = new AnimationTimer() {
+    animation = new AnimationTimer() {
       @Override
       public void handle(long now) {
         updateCellState();
       }
     };
-    animation.start();
+    simulationScreen.update(stateOfAllCells);
   }
+  public void startSimulation() {
+    if (animation != null) {
+      animation.start();
+    }
+  }
+  public void stopSimulation() {
+    if (animation != null) {
+      animation.stop();
+    }
+  }
+
 
   private int getNumberOfNeighbors(State[][] stateOfAllCells, int numberOfSides) {
     return 0;
