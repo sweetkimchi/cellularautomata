@@ -1,8 +1,6 @@
 package cellsociety.controller;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Map;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
@@ -17,14 +15,11 @@ public class Decoder {
   public static final String DESC = "description";
   public static final String NUM_ROWS = "numRows";
   public static final String NUM_COLS = "numCols";
-  public static final String COORDS = "shapeCoords";
-  public static final String TEMPLATE = "template";
+
   public static final String MODEL = "model";
-
-
-
-
-  private Map<String, String> myAttributes;
+  private GOLDecoder golDecoder;
+  private WaTorDecoder waTorDecoder;
+  private Map<String, String> attributes;
   private String myModel;
   private String myTitle;
   private String myAuthor;
@@ -44,13 +39,14 @@ public class Decoder {
   public void readValuesFromXMLFile() {
     File dataFile = FILE_CHOOSER.showOpenDialog(null);
     XMLParser parser = new XMLParser("game");
-    myAttributes = parser.getAttribute(dataFile);
-    myTitle = myAttributes.get(TITLE);
-    myAuthor = myAttributes.get(AUTHOR);
-    myTemplate = myAttributes.get(TEMPLATE);
-    myRows = Integer.parseInt(myAttributes.get(NUM_ROWS));
-    myCols = Integer.parseInt(myAttributes.get(NUM_COLS));
-    myModel = myAttributes.get(MODEL);
+    Map<String, String> attributes = parser.getAttribute(dataFile);
+    myTitle = attributes.get(TITLE);
+    myAuthor = attributes.get(AUTHOR);
+    myRows = Integer.parseInt(attributes.get(NUM_ROWS));
+    myCols = Integer.parseInt(attributes.get(NUM_COLS));
+    myModel = attributes.get(MODEL);
+    if(myModel.equals("gameOfLife")){golDecoder = new GOLDecoder(attributes);}
+    else if(myModel.equals("wator")) {waTorDecoder = new WaTorDecoder(attributes);}
     //gameoflife initializers
 
     //waTor initializers
@@ -58,10 +54,13 @@ public class Decoder {
 //    System.out.println(myCoords);
 //        for(int i=0; i<attributes.get(COORDS).length(); i++) myCoords.add(Integer.parseInt(attributes.get(COORDS).substring(i,i+1)));
   }
-  public Map<String, String> getAttributes(){
-    return myAttributes;
-  }
 // general parameters
+  public GOLDecoder getGOLDecoder(){
+    return golDecoder;
+  }
+  public WaTorDecoder getWaTorDecoder(){
+    return waTorDecoder;
+  }
   public String getModel() {
     return myModel;
   }
@@ -74,9 +73,7 @@ public class Decoder {
     return myAuthor;
   }
 
-  public String getTemplate() {
-    return myTemplate;
-  }
+
 
   public int getRows() {
     return myRows;
