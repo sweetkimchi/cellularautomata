@@ -1,6 +1,7 @@
 package cellsociety.model.rules;
 
 import cellsociety.model.cell.State;
+import java.util.ArrayList;
 
 /**
  *
@@ -71,5 +72,6 @@ public abstract class Rules {
    */
   public abstract String getStartingPositionCellType();
 
+  public abstract ArrayList<String> getPossibleTypes();
 
 }

@@ -25,6 +25,8 @@ public class SimulationEngine extends Simulator {
   private State[][] stateOfAllCells;
   private ArrayList<State> template;
   private Decoder decoder;
+  private double populationRatio = 0.4;
+  private double emptyRatio = 0.1;
 
   /**
    * Default constructor
@@ -55,9 +57,8 @@ public class SimulationEngine extends Simulator {
   protected void initializeData() {
     row = decoder.getRows();
     col = decoder.getCols();
-    initializeModelConstructors(decoder.getType());
-    constructStartingStateForSimulation(decoder.getCoords());
     initializeGrid();
+    initializeModelConstructors(decoder.getType());
     updateCellState();
     runSimulation();
   }
@@ -66,12 +67,15 @@ public class SimulationEngine extends Simulator {
 
     if (game.equals("gameoflife")) {
       rules = new GameOfLifeRule();
+      template = constructStartingStateForSimulation(decoder.getCoords());
+      stateOfAllCells = gridManager.buildGridWithTemplate(template, rules.getStartingPositionCellType());
     }
     if (game.equals("percolation")) {
       rules = new PercolationRules();
     }
     if (game.equals("segregationmodel")) {
-      rules = new SegregationModelRules();
+      rules = new SegregationModelRules(emptyRatio, populationRatio);
+      gridManager.buildGridWithRandomSeed(emptyRatio, populationRatio, rules.getPossibleTypes());
     }
     if (game.equals("spreadingoffire")) {
       rules = new SpreadingOfFireRules();
@@ -85,8 +89,6 @@ public class SimulationEngine extends Simulator {
 
   protected void initializeGrid() {
     gridManager = new GridManager(row, col);
-    stateOfAllCells = gridManager.buildGrid(template, rules.getStartingPositionCellType());
-    //   initializeCells();
   }
 
   @Override

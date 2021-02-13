@@ -2,6 +2,7 @@ package cellsociety.model.gameoflife;
 
 import cellsociety.model.cell.State;
 import cellsociety.model.rules.Rules;
+import java.util.ArrayList;
 
 /**
  *
@@ -65,5 +66,10 @@ public class GameOfLifeRule extends Rules {
 
   public String getStartingPositionCellType(){
     return ALIVE;
+  }
+
+  @Override
+  public ArrayList<String> getPossibleTypes() {
+    return null;
   }
 }

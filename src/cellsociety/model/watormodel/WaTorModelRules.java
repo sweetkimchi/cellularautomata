@@ -2,6 +2,7 @@ package cellsociety.model.watormodel;
 
 import cellsociety.model.cell.State;
 import cellsociety.model.rules.Rules;
+import java.util.ArrayList;
 
 /**
  *
@@ -32,6 +33,11 @@ public class WaTorModelRules extends Rules {
    */
   @Override
   public String getStartingPositionCellType() {
+    return null;
+  }
+
+  @Override
+  public ArrayList<String> getPossibleTypes() {
     return null;
   }
 

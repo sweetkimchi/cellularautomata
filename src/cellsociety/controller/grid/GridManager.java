@@ -26,7 +26,7 @@ public class GridManager {
     grid = new ArrayList<>();
   }
 
-  public State[][] buildGrid(ArrayList<State> template, String type) {
+  public State[][] buildGridWithTemplate(ArrayList<State> template, String type) {
     State[][] stateOfCells = new State[row][col];
     for (int r = 0; r < row; r++) {
       for (int c = 0; c < col; c++) {
@@ -50,6 +50,18 @@ public class GridManager {
     for (State s : template) {
       stateOfCells[row / 2 + s.getxCoord() - xSize / 2][col / 2 + s.getyCoord()
           - ySize / 2].type = type;
+    }
+    this.stateOfCells = stateOfCells;
+    return stateOfCells;
+  }
+
+  public State[][] buildGridWithRandomSeed(double emptyRatio, double populationRatio, ArrayList<String> possibleTypes){
+    State[][] stateOfCells = new State[row][col];
+    for (int r = 0; r < row; r++) {
+      for (int c = 0; c < col; c++) {
+        State state = new State(r, c, EMPTY);
+        stateOfCells[r][c] = state;
+      }
     }
     this.stateOfCells = stateOfCells;
     return stateOfCells;
