@@ -42,8 +42,8 @@ public class XMLParser {
      */
     public Map<String, String> getAttribute (File dataFile) {
         Element root = getRootElement(dataFile);
-        if (! isValidFile(root, "type")) {
-            throw new XMLException(ERROR_MESSAGE, "type");
+        if (! isValidFile(root, "game")) {
+            throw new XMLException(ERROR_MESSAGE, "game");
         }
         Map<String, String> results = new HashMap<>();
         NodeList nodes = root.getChildNodes();
