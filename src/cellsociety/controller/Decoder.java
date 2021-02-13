@@ -19,7 +19,6 @@ public class Decoder {
   public static final String MODEL = "model";
   private GOLDecoder golDecoder;
   private WaTorDecoder waTorDecoder;
-  private Map<String, String> attributes;
   private String myModel;
   private String myTitle;
   private String myAuthor;
