@@ -3,6 +3,7 @@ package cellsociety.controller.grid;
 import cellsociety.model.cell.State;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  *
@@ -55,15 +56,19 @@ public class GridManager {
     return stateOfCells;
   }
 
-  public State[][] buildGridWithRandomSeed(double emptyRatio, double populationRatio, ArrayList<String> possibleTypes){
+  public State[][] buildGridWithRandomSeed(double emptyRatio, double populationRatio, int seed, ArrayList<String> possibleTypes){
+    Random random = new Random(seed);
     State[][] stateOfCells = new State[row][col];
-    for (int r = 0; r < row; r++) {
-      for (int c = 0; c < col; c++) {
-        State state = new State(r, c, EMPTY);
-        stateOfCells[r][c] = state;
-      }
-    }
-    this.stateOfCells = stateOfCells;
+//    for (int r = 0; r < row; r++) {
+//      for (int c = 0; c < col; c++) {
+//        int x = random.nextInt(row);
+//        int y = random.nextInt(col);
+//        if(stateOfCells[r][c] == NULL)
+//        State state = new State(r, c, EMPTY);
+//        stateOfCells[r][c] = state;
+//      }
+//    }
+//    this.stateOfCells = stateOfCells;
     return stateOfCells;
   }
 

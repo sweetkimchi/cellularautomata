@@ -11,16 +11,22 @@ public class SegregationModelRules extends Rules {
 
   private double emptyRatio;
   private double populationRatio;
+  private ArrayList<String> possibleTypes;
   /**
    * Default constructor
    */
   public SegregationModelRules(double emptyRatio, double populationRatio) {
     this.emptyRatio = emptyRatio;
     this.populationRatio = populationRatio;
+    possibleTypes = new ArrayList<>();
+    possibleTypes.add("empty");
+    possibleTypes.add("shark");
+    possibleTypes.add("fish");
   }
 
   @Override
   protected String decideState(int i, boolean alive) {
+
     return "";
   }
 
@@ -41,7 +47,7 @@ public class SegregationModelRules extends Rules {
 
   @Override
   public ArrayList<String> getPossibleTypes() {
-    return null;
+    return possibleTypes;
   }
 
 }

@@ -27,6 +27,7 @@ public class SimulationEngine extends Simulator {
   private Decoder decoder;
   private double populationRatio = 0.4;
   private double emptyRatio = 0.1;
+  private int randomSeed = 0;
 
   /**
    * Default constructor
@@ -75,7 +76,7 @@ public class SimulationEngine extends Simulator {
     }
     if (game.equals("segregationmodel")) {
       rules = new SegregationModelRules(emptyRatio, populationRatio);
-      gridManager.buildGridWithRandomSeed(emptyRatio, populationRatio, rules.getPossibleTypes());
+      gridManager.buildGridWithRandomSeed(emptyRatio, populationRatio, randomSeed, rules.getPossibleTypes());
     }
     if (game.equals("spreadingoffire")) {
       rules = new SpreadingOfFireRules();
