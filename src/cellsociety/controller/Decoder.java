@@ -9,7 +9,6 @@ public class Decoder {
 
   public static final String DATA_FILE_EXTENSION = "*.xml";
   public final static FileChooser FILE_CHOOSER = makeChooser(DATA_FILE_EXTENSION);
-  public static final String TYPE = "type";
   public static final String TITLE = "title";
   public static final String AUTHOR = "author";
   public static final String DESC = "description";
@@ -19,12 +18,10 @@ public class Decoder {
   public static final String MODEL = "model";
   private GOLDecoder golDecoder;
   private WaTorDecoder waTorDecoder;
-  private Map<String, String> attributes;
+  private String myDesc;
   private String myModel;
-  private String myType;
   private String myTitle;
   private String myAuthor;
-  private String myTemplate;
   private int myRows;
   private int myCols;
 
@@ -41,6 +38,7 @@ public class Decoder {
     File dataFile = FILE_CHOOSER.showOpenDialog(null);
     XMLParser parser = new XMLParser("game");
     Map<String, String> attributes = parser.getAttribute(dataFile);
+    myDesc = attributes.get(DESC);
     myTitle = attributes.get(TITLE);
     myAuthor = attributes.get(AUTHOR);
     myRows = Integer.parseInt(attributes.get(NUM_ROWS));
@@ -48,14 +46,8 @@ public class Decoder {
     myModel = attributes.get(MODEL);
     if(myModel.equals("gameOfLife")){golDecoder = new GOLDecoder(attributes);}
     else if(myModel.equals("wator")) {waTorDecoder = new WaTorDecoder(attributes);}
-    //gameoflife initializers
-
-    //waTor initializers
-
-//    System.out.println(myCoords);
-//        for(int i=0; i<attributes.get(COORDS).length(); i++) myCoords.add(Integer.parseInt(attributes.get(COORDS).substring(i,i+1)));
   }
-// general parameters
+
   public GOLDecoder getGOLDecoder(){
     return golDecoder;
   }
@@ -73,9 +65,6 @@ public class Decoder {
   public String getAuthor() {
     return myAuthor;
   }
-
-
-
   public int getRows() {
     return myRows;
   }
@@ -83,17 +72,6 @@ public class Decoder {
   public int getCols() {
     return myCols;
   }
-
-
-// gameOfLife getters
-
-
-// waTor getters
-
-
-
-
-
 }
 
 
