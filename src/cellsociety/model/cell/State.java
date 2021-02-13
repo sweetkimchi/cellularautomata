@@ -24,6 +24,14 @@ public class State {
     numberOfMoves = 0;
   }
 
+  public State(int xCoord, int yCoord, String type, String colorString) {
+    this.xCoord = xCoord;
+    this.yCoord = yCoord;
+    this.type = type;
+    numberOfMoves = 0;
+    color = Paint.valueOf(colorString);
+  }
+
   public void setColor(String colorName) {
     color = Paint.valueOf(colorName);
   }
