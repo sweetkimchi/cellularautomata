@@ -19,8 +19,8 @@ public class WaTorModelRules extends Rules {
   private String SHARK = "shark";
   private String EMPTY = "empty";
   private final String FISH_COLOR = "green";
-  private final String SHARK_COLOR = "grey";
-  private final String EMPTY_COLOR = "blue";
+  private final String SHARK_COLOR = "blue";
+  private final String EMPTY_COLOR = "lightgrey";
   private int ENERGY_FROM_FISH = 4;
   private Random random;
   /**
@@ -84,6 +84,7 @@ public class WaTorModelRules extends Rules {
         State dummy = fishCells.get(index);
         statesOfAllCells[dummy.getxCoord()][dummy.getyCoord()] = statesOfAllCells[xCoord][yCoord];
         statesOfAllCells[dummy.getxCoord()][dummy.getyCoord()].numberOfMoves+= ENERGY_FROM_FISH;
+        setColor(statesOfAllCells[dummy.getxCoord()][dummy.getyCoord()]);
 
         return new State(xCoord,yCoord, EMPTY, EMPTY_COLOR);
       }
@@ -101,6 +102,7 @@ public class WaTorModelRules extends Rules {
         State dummy = emptyCells.get(index);
         statesOfAllCells[dummy.getxCoord()][dummy.getyCoord()] = statesOfAllCells[xCoord][yCoord];
         statesOfAllCells[dummy.getxCoord()][dummy.getyCoord()].numberOfMoves--;
+        setColor(statesOfAllCells[dummy.getxCoord()][dummy.getyCoord()]);
 
         return new State(xCoord,yCoord, EMPTY, EMPTY_COLOR);
       }
