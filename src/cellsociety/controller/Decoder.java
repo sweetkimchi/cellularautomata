@@ -21,6 +21,7 @@ public class Decoder {
   private WaTorDecoder waTorDecoder;
   private Map<String, String> attributes;
   private String myModel;
+  private String myType;
   private String myTitle;
   private String myAuthor;
   private String myTemplate;
