@@ -19,10 +19,10 @@ public class WaTorModelRules extends Rules {
   private String FISH = "fish";
   private String SHARK = "shark";
   private String EMPTY = "empty";
-  private int ENERGY_FROM_FISH = 2;
+  private int ENERGY_FROM_FISH = 4;
   private Random random;
-  private int REPRODUCE_BOUNDARY = 4;
-  private int DEFAULT_ENERGY = 3;
+  private int REPRODUCE_BOUNDARY = 2;
+  private int DEFAULT_ENERGY = 5;
 
   /**
    * Default constructor
