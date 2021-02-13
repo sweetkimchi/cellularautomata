@@ -21,12 +21,10 @@ public class Decoder {
   private SegDecoder segDecoder;
   private String myDesc;
   private String myModel;
-  private String myType;
   private String myTitle;
   private String myAuthor;
   private int myRows;
   private int myCols;
-
 
   private static FileChooser makeChooser(String extension) {
     FileChooser result = new FileChooser();
