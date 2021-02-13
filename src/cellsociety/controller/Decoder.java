@@ -1,6 +1,8 @@
 package cellsociety.controller;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
@@ -21,13 +23,10 @@ public class Decoder {
   private WaTorDecoder waTorDecoder;
   private Map<String, String> attributes;
   private String myModel;
-  private String myType;
   private String myTitle;
   private String myAuthor;
-  private String myTemplate;
   private int myRows;
   private int myCols;
-
 
   private static FileChooser makeChooser(String extension) {
     FileChooser result = new FileChooser();
@@ -36,7 +35,6 @@ public class Decoder {
     result.getExtensionFilters().setAll(new ExtensionFilter("Text Files", extension));
     return result;
   }
-
   public void readValuesFromXMLFile() {
     File dataFile = FILE_CHOOSER.showOpenDialog(null);
     XMLParser parser = new XMLParser("game");
@@ -48,14 +46,7 @@ public class Decoder {
     myModel = attributes.get(MODEL);
     if(myModel.equals("gameOfLife")){golDecoder = new GOLDecoder(attributes);}
     else if(myModel.equals("wator")) {waTorDecoder = new WaTorDecoder(attributes);}
-    //gameoflife initializers
-
-    //waTor initializers
-
-//    System.out.println(myCoords);
-//        for(int i=0; i<attributes.get(COORDS).length(); i++) myCoords.add(Integer.parseInt(attributes.get(COORDS).substring(i,i+1)));
   }
-// general parameters
   public GOLDecoder getGOLDecoder(){
     return golDecoder;
   }
@@ -65,17 +56,12 @@ public class Decoder {
   public String getModel() {
     return myModel;
   }
-
   public String getTitle() {
     return myTitle;
   }
-
   public String getAuthor() {
     return myAuthor;
   }
-
-
-
   public int getRows() {
     return myRows;
   }
@@ -83,18 +69,4 @@ public class Decoder {
   public int getCols() {
     return myCols;
   }
-
-
-// gameOfLife getters
-
-
-// waTor getters
-
-
-
-
-
 }
-
-
-
