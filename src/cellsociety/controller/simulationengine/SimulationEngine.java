@@ -26,7 +26,7 @@ public class SimulationEngine extends Simulator {
   private ArrayList<State> template;
   private Decoder decoder;
   private double populationRatio = 0.4;
-  private double emptyRatio = 0.1;
+  private double emptyRatio = 0.2;
   private int randomSeed = 0;
 
   /**

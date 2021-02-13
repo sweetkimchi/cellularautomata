@@ -18,9 +18,10 @@ public class WaTorModelRules extends Rules {
   private String FISH = "fish";
   private String SHARK = "shark";
   private String EMPTY = "empty";
-  private final String FISH_COLOR = "red";
+  private final String FISH_COLOR = "grey";
   private final String SHARK_COLOR = "green";
   private final String EMPTY_COLOR = "blue";
+  private int ENERGY_FROM_FISH = 4;
   private long randomSeed;
   /**
    * Default constructor
@@ -35,22 +36,39 @@ public class WaTorModelRules extends Rules {
     possibleTypes.add(FISH);
   }
 
-  private State decideState(State[][] statesOfAllCells, int xCoord, int yCoord, String type) {
-    ArrayList<State> possibilities = new ArrayList<>();
+  private State checkIfFishAndMove(State[][] statesOfAllCells, int xCoord, int yCoord, int newX, int newY){
+      statesOfAllCells[newX][newY] = statesOfAllCells[xCoord][yCoord];
+      statesOfAllCells[newX][newY].numberOfMoves += ENERGY_FROM_FISH;
+      return new State(xCoord,yCoord, EMPTY);
+  }
 
-    Random random = new Random(randomSeed);
+  private State decideState(State[][] statesOfAllCells, int xCoord, int yCoord, String type) {
+
     if(type.equals(SHARK)){
       if(xCoord - 1 >= 0){
         //left cell
+        //if fish, move to the new coordinate, destry the fish
+        if(statesOfAllCells[xCoord-1][yCoord].type.equals(FISH)){
+          checkIfFishAndMove(statesOfAllCells, xCoord, yCoord, xCoord-1,yCoord);
+        }
 
       }else if(xCoord >= 0 && yCoord - 1 >= 0){
         //upper cell
+        if(statesOfAllCells[xCoord][yCoord-1].type.equals(FISH)){
+          checkIfFishAndMove(statesOfAllCells, xCoord, yCoord, xCoord,yCoord-1);
+        }
 
       } else if (yCoord + 1 < statesOfAllCells[0].length) {
         //lower cell
+        if(statesOfAllCells[xCoord][yCoord + 1].type.equals(FISH)){
+          checkIfFishAndMove(statesOfAllCells, xCoord, yCoord, xCoord,yCoord+1);
+        }
 
       }else if(xCoord + 1 < statesOfAllCells.length){
         //right cell
+        if(statesOfAllCells[xCoord+1][yCoord].type.equals(FISH)){
+          checkIfFishAndMove(statesOfAllCells, xCoord, yCoord, xCoord+1,yCoord);
+        }
 
       }
     } else if(type.equals(FISH)){
@@ -68,9 +86,8 @@ public class WaTorModelRules extends Rules {
 
       }
     }
-    random.nextInt(possibilities.size());
-    statesOfAllCells
-    return ;
+
+    return statesOfAllCells[xCoord][yCoord];
   }
 
   @Override
