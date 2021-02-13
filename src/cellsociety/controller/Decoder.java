@@ -15,12 +15,12 @@ public class Decoder {
   public static final String NUM_ROWS = "numRows";
   public static final String NUM_COLS = "numCols";
 
+  public static final String MODEL = "model";
   private GOLDecoder golDecoder;
   private WaTorDecoder waTorDecoder;
   private SegDecoder segDecoder;
   private String myDesc;
   private String myModel;
-  private String myType;
   private String myTitle;
   private String myAuthor;
   private int myRows;
@@ -64,9 +64,6 @@ public class Decoder {
   }
   public String getAuthor() {
     return myAuthor;
-  }
-  public String getDesc(){
-    return myDesc;
   }
   public int getRows() {
     return myRows;
