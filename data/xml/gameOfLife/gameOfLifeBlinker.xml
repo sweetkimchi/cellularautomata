@@ -5,7 +5,8 @@
   <numCols>50</numCols>
   <numRows>50</numRows>
   <shapeCoords>0,0,0,1,0,2</shapeCoords>
+  <type>111</type>
   <template>blinker</template>
   <title>Game of Life</title>
-  <type>gameOfLife</type>
+  <model>gameOfLife</model>
 </data>

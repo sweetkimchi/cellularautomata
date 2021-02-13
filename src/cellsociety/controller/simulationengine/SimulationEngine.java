@@ -55,7 +55,7 @@ public class SimulationEngine extends Simulator {
   protected void initializeData() {
     row = decoder.getRows();
     col = decoder.getCols();
-    initializeModelConstructors(decoder.getType());
+    initializeModelConstructors(decoder.getModel());
     constructStartingStateForSimulation(decoder.getCoords());
     initializeGrid();
     updateCellState();
