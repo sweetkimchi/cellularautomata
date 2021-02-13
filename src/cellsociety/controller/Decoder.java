@@ -65,13 +65,13 @@ public class Decoder {
     myType = new ArrayList<>(Integer.parseInt(attributes.get(TYPE)));
     myCoords = new ArrayList<>(Arrays.asList(attributes.get(COORDS).split("[,]", 0)));
     //waTor initializers
-    myFSRatio = Float.parseFloat(FS_RATIO);
-    myEmptyRatio = Float.parseFloat(EMPTY_RATIO);
-    mySeed = Integer.parseInt(SEED);
-    fishRate = Integer.parseInt(FISH_RATE);
-    sharkRate = Integer.parseInt(SHARK_RATE);
-    sharkLives = Integer.parseInt(SHARK_LIVES);
-    energy = Integer.parseInt(ENERGY);
+    myFSRatio = Float.parseFloat(attributes.get(FS_RATIO));
+    myEmptyRatio = Float.parseFloat(attributes.get(EMPTY_RATIO));
+    mySeed = Integer.parseInt(attributes.get(SEED));
+    fishRate = Integer.parseInt(attributes.get(FISH_RATE));
+    sharkRate = Integer.parseInt(attributes.get(SHARK_RATE));
+    sharkLives = Integer.parseInt(attributes.get(SHARK_LIVES));
+    energy = Integer.parseInt(attributes.get(ENERGY));
 //    System.out.println(myCoords);
 //        for(int i=0; i<attributes.get(COORDS).length(); i++) myCoords.add(Integer.parseInt(attributes.get(COORDS).substring(i,i+1)));
   }
