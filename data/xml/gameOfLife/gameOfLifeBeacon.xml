@@ -7,5 +7,5 @@
   <shapeCoords>25,25,26,25,25,26,26,26,27,27,28,27,27,28,28,28</shapeCoords>
   <template>beacon</template>
   <title>Game of Life</title>
-  <type>gameOfLife</type>
+  <model>gameOfLife</model>
 </data>
