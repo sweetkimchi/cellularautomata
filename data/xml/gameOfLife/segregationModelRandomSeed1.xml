@@ -9,5 +9,5 @@
   <randomseed>100</randomseed>
   <template>random_one</template>
   <title>Segregation Model</title>
-  <model>segregation</model>
+  <model>segregationmodel</model>
 </data>

@@ -15,11 +15,6 @@ public class SpreadingOfFireRules extends Rules {
   public SpreadingOfFireRules() {
   }
 
-  @Override
-  protected String decideState(int i, boolean alive) {
-    return "";
-  }
-
   /**
    * judges the state of each cell using the rule of the specific model class
    *

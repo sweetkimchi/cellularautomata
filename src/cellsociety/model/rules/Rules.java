@@ -16,7 +16,6 @@ public abstract class Rules {
   public Rules() {
   }
 
-  protected abstract String decideState(int i, boolean alive);
 
   protected int[][] numberOfAliveNeighbors(State[][] statesOfAllCells, String type) {
     int[][] numberOfNeighbors = new int[statesOfAllCells.length][statesOfAllCells[0].length];

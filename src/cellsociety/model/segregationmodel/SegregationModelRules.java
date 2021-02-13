@@ -1,4 +1,4 @@
-package cellsociety.model.segregationmodel;
+package cellsociety.model.watormodel;
 
 import cellsociety.model.cell.State;
 import cellsociety.model.rules.Rules;
@@ -9,27 +9,18 @@ import java.util.ArrayList;
  */
 public class SegregationModelRules extends Rules {
 
-  private double emptyRatio;
-  private double populationRatio;
-  private ArrayList<String> possibleTypes;
   /**
    * Default constructor
    */
-  public SegregationModelRules(double emptyRatio, double populationRatio) {
-    this.emptyRatio = emptyRatio;
-    this.populationRatio = populationRatio;
-    possibleTypes = new ArrayList<>();
-    possibleTypes.add("empty");
-    possibleTypes.add("shark");
-    possibleTypes.add("fish");
+  public SegregationModelRules() {
   }
 
-  @Override
-  protected String decideState(int i, boolean alive) {
-
-    return "";
-  }
-
+  /**
+   * Judges the state of each cell with the rules defined by the model
+   *
+   * @param statesOfAllCells the current states of each cell
+   * @return the new states of each cell
+   */
   @Override
   public State[][] judgeStateOfEachCell(State[][] statesOfAllCells) {
     return new State[0][];
@@ -47,7 +38,7 @@ public class SegregationModelRules extends Rules {
 
   @Override
   public ArrayList<String> getPossibleTypes() {
-    return possibleTypes;
+    return null;
   }
 
 }

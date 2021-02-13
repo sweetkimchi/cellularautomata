@@ -16,11 +16,6 @@ public class PercolationRules extends Rules {
   }
 
 
-  @Override
-  protected String decideState(int i, boolean alive) {
-    return "";
-  }
-
   /**
    * judges the state of each cell using the rule of the specific model class
    *

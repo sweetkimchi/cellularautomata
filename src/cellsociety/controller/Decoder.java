@@ -11,7 +11,7 @@ public class Decoder {
 
   public static final String DATA_FILE_EXTENSION = "*.xml";
   public final static FileChooser FILE_CHOOSER = makeChooser(DATA_FILE_EXTENSION);
-  public static final String TYPE = "type";
+  public static final String MODEL = "model";
   public static final String TITLE = "title";
   public static final String AUTHOR = "author";
   public static final String DESC = "description";
@@ -20,7 +20,7 @@ public class Decoder {
   public static final String COORDS = "shapeCoords";
   public static final String TEMPLATE = "template";
 
-  private String myType;
+  private String myModel;
   private String myTitle;
   private String myAuthor;
   private String myTemplate;
@@ -40,19 +40,18 @@ public class Decoder {
     File dataFile = FILE_CHOOSER.showOpenDialog(null);
     XMLParser parser = new XMLParser("game");
     Map<String, String> attributes = parser.getAttribute(dataFile);
-    myType = attributes.get(TYPE).toLowerCase();
+    myModel = attributes.get(MODEL).toLowerCase();
     myTitle = attributes.get(TITLE);
     myAuthor = attributes.get(AUTHOR);
     myTemplate = attributes.get(TEMPLATE);
     myRows = Integer.parseInt(attributes.get(NUM_ROWS));
     myCols = Integer.parseInt(attributes.get(NUM_COLS));
-    myCoords = new ArrayList<>(Arrays.asList(attributes.get(COORDS).split("[,]", 0)));
-    System.out.println(myCoords);
+  //  myCoords = new ArrayList<>(Arrays.asList(attributes.get(COORDS).split("[,]", 0)));
 //        for(int i=0; i<attributes.get(COORDS).length(); i++) myCoords.add(Integer.parseInt(attributes.get(COORDS).substring(i,i+1)));
   }
 
-  public String getType() {
-    return myType;
+  public String getModel() {
+    return myModel;
   }
 
   public String getTitle() {

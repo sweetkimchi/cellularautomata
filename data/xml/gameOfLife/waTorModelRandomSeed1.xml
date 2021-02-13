@@ -13,5 +13,5 @@
   <energyfromeating>3</energyfromeating>
   <template>random_one</template>
   <title>WaTor Simulation</title>
-  <model>wator</model>
+  <model>watormodel</model>
 </data>

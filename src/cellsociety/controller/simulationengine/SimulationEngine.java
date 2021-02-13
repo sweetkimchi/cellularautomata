@@ -7,8 +7,8 @@ import cellsociety.model.cell.State;
 import cellsociety.model.gameoflife.GameOfLifeRule;
 import cellsociety.model.percolation.PercolationRules;
 import cellsociety.model.rules.Rules;
-import cellsociety.model.segregationmodel.SegregationModelRules;
 import cellsociety.model.spreadingoffire.SpreadingOfFireRules;
+import cellsociety.model.watormodel.SegregationModelRules;
 import cellsociety.model.watormodel.WaTorModelRules;
 import cellsociety.view.SimulationScreen;
 import java.util.ArrayList;
@@ -59,7 +59,7 @@ public class SimulationEngine extends Simulator {
     row = decoder.getRows();
     col = decoder.getCols();
     initializeGrid();
-    initializeModelConstructors(decoder.getType());
+    initializeModelConstructors(decoder.getModel());
     updateCellState();
     runSimulation();
   }
@@ -75,14 +75,15 @@ public class SimulationEngine extends Simulator {
       rules = new PercolationRules();
     }
     if (game.equals("segregationmodel")) {
-      rules = new SegregationModelRules(emptyRatio, populationRatio);
-      gridManager.buildGridWithRandomSeed(emptyRatio, populationRatio, randomSeed, rules.getPossibleTypes());
+      rules = new SegregationModelRules();
     }
     if (game.equals("spreadingoffire")) {
       rules = new SpreadingOfFireRules();
     }
     if (game.equals("watormodel")) {
-      rules = new WaTorModelRules();
+      rules = new WaTorModelRules(emptyRatio, populationRatio, randomSeed);
+      stateOfAllCells = gridManager.buildGridWithRandomSeed(emptyRatio, populationRatio, randomSeed, rules.getPossibleTypes());
+      gridManager.printGrid(stateOfAllCells);
     }
     //need to be fixed for a better design
   }
