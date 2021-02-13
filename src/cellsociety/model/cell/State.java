@@ -13,6 +13,7 @@ public class State {
   public String type;
   public Paint color;
   public int numberOfMoves;
+  public int energy;
 
   /**
    * Default constructor Initializes the state of each cell according to the data fed
@@ -22,13 +23,23 @@ public class State {
     this.yCoord = yCoord;
     this.type = type;
     numberOfMoves = 0;
+    this.energy = 5;
   }
 
-  public State(int xCoord, int yCoord, String type, String colorString) {
+  public State(int xCoord, int yCoord, String type, String colorString, int numberOfMoves) {
     this.xCoord = xCoord;
     this.yCoord = yCoord;
     this.type = type;
-    numberOfMoves = 0;
+    this.numberOfMoves = numberOfMoves;
+    color = Paint.valueOf(colorString);
+  }
+
+  public State(int xCoord, int yCoord, String type, String colorString, int numberOfMoves, int energy) {
+    this.xCoord = xCoord;
+    this.yCoord = yCoord;
+    this.type = type;
+    this.energy = energy;
+    this.numberOfMoves = numberOfMoves;
     color = Paint.valueOf(colorString);
   }
 
