@@ -61,14 +61,12 @@ public class Decoder {
   public String getAuthor() {
     return myAuthor;
   }
-
   public int getRows() {
     return myRows;
   }
   public int getCols() {
     return myCols;
   }
-
   public String getMyDesc() {
     return myDesc;
   }
