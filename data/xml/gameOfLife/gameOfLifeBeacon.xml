@@ -5,7 +5,8 @@
   <numCols>50</numCols>
   <numRows>50</numRows>
   <shapeCoords>0,0,1,0,0,1,1,1,2,2,3,2,2,3,3,3</shapeCoords>
+  <type>11111111</type>
   <template>beacon</template>
   <title>Game of Life</title>
-  <type>gameOfLife</type>
+  <model>gameOfLife</model>
 </data>
