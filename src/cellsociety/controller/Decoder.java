@@ -17,14 +17,21 @@ public class Decoder {
   public static final String DESC = "description";
   public static final String NUM_ROWS = "numRows";
   public static final String NUM_COLS = "numCols";
+  public static final String COORDS = "shapeCoords";
+  public static final String TEMPLATE = "template";
   public static final String MODEL = "model";
+
+
+
+
+  private Map<String, String> myAttributes;
   private String myModel;
-  private String myType;
   private String myTitle;
   private String myAuthor;
+  private String myTemplate;
   private int myRows;
   private int myCols;
-  private ArrayList<String> myCoords;
+
 
   private static FileChooser makeChooser(String extension) {
     FileChooser result = new FileChooser();
@@ -37,14 +44,22 @@ public class Decoder {
   public void readValuesFromXMLFile() {
     File dataFile = FILE_CHOOSER.showOpenDialog(null);
     XMLParser parser = new XMLParser("game");
-    Map<String, String> attributes = parser.getAttribute(dataFile);
-    myTitle = attributes.get(TITLE);
-    myAuthor = attributes.get(AUTHOR);
-    myModel = attributes.get(MODEL);
-    myRows = Integer.parseInt(attributes.get(NUM_ROWS));
-    myCols = Integer.parseInt(attributes.get(NUM_COLS));
-    System.out.println(myCoords);
+    myAttributes = parser.getAttribute(dataFile);
+    myTitle = myAttributes.get(TITLE);
+    myAuthor = myAttributes.get(AUTHOR);
+    myTemplate = myAttributes.get(TEMPLATE);
+    myRows = Integer.parseInt(myAttributes.get(NUM_ROWS));
+    myCols = Integer.parseInt(myAttributes.get(NUM_COLS));
+    myModel = myAttributes.get(MODEL);
+    //gameoflife initializers
+
+    //waTor initializers
+
+//    System.out.println(myCoords);
 //        for(int i=0; i<attributes.get(COORDS).length(); i++) myCoords.add(Integer.parseInt(attributes.get(COORDS).substring(i,i+1)));
+  }
+  public Map<String, String> getAttributes(){
+    return myAttributes;
   }
 // general parameters
   public String getModel() {
@@ -71,7 +86,17 @@ public class Decoder {
     return myCols;
   }
 
-  public ArrayList<String> getCoords() {
-    return myCoords;
-  }
+
+// gameOfLife getters
+
+
+// waTor getters
+
+
+
+
+
 }
+
+
+
