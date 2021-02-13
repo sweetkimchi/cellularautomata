@@ -1,6 +1,7 @@
 package cellsociety.model.rules;
 
 import cellsociety.model.cell.State;
+import java.util.ArrayList;
 
 /**
  *
@@ -15,7 +16,6 @@ public abstract class Rules {
   public Rules() {
   }
 
-  protected abstract String decideState(int i, boolean alive);
 
   protected int[][] numberOfAliveNeighbors(State[][] statesOfAllCells, String type) {
     int[][] numberOfNeighbors = new int[statesOfAllCells.length][statesOfAllCells[0].length];
@@ -71,5 +71,6 @@ public abstract class Rules {
    */
   public abstract String getStartingPositionCellType();
 
+  public abstract ArrayList<String> getPossibleTypes();
 
 }

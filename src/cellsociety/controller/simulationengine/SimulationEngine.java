@@ -7,8 +7,8 @@ import cellsociety.model.cell.State;
 import cellsociety.model.gameoflife.GameOfLifeRule;
 import cellsociety.model.percolation.PercolationRules;
 import cellsociety.model.rules.Rules;
-import cellsociety.model.segregationmodel.SegregationModelRules;
 import cellsociety.model.spreadingoffire.SpreadingOfFireRules;
+import cellsociety.model.watormodel.SegregationModelRules;
 import cellsociety.model.watormodel.WaTorModelRules;
 import cellsociety.view.SimulationScreen;
 import java.util.ArrayList;
@@ -25,6 +25,9 @@ public class SimulationEngine extends Simulator {
   private State[][] stateOfAllCells;
   private ArrayList<State> template;
   private Decoder decoder;
+  private double populationRatio = 0.4;
+  private double emptyRatio = 0.2;
+  private int randomSeed = 0;
 
   /**
    * Default constructor
@@ -55,9 +58,8 @@ public class SimulationEngine extends Simulator {
   protected void initializeData() {
     row = decoder.getRows();
     col = decoder.getCols();
-    initializeModelConstructors(decoder.getType());
-    constructStartingStateForSimulation(decoder.getCoords());
     initializeGrid();
+    initializeModelConstructors(decoder.getModel());
     updateCellState();
     runSimulation();
   }
@@ -66,6 +68,8 @@ public class SimulationEngine extends Simulator {
 
     if (game.equals("gameoflife")) {
       rules = new GameOfLifeRule();
+      template = constructStartingStateForSimulation(decoder.getCoords());
+      stateOfAllCells = gridManager.buildGridWithTemplate(template, rules.getStartingPositionCellType());
     }
     if (game.equals("percolation")) {
       rules = new PercolationRules();
@@ -77,7 +81,9 @@ public class SimulationEngine extends Simulator {
       rules = new SpreadingOfFireRules();
     }
     if (game.equals("watormodel")) {
-      rules = new WaTorModelRules();
+      rules = new WaTorModelRules(emptyRatio, populationRatio, randomSeed);
+      stateOfAllCells = gridManager.buildGridWithRandomSeed(emptyRatio, populationRatio, randomSeed, rules.getPossibleTypes());
+      gridManager.printGrid(stateOfAllCells);
     }
     //need to be fixed for a better design
   }
@@ -85,8 +91,6 @@ public class SimulationEngine extends Simulator {
 
   protected void initializeGrid() {
     gridManager = new GridManager(row, col);
-    stateOfAllCells = gridManager.buildGrid(template, rules.getStartingPositionCellType());
-    //   initializeCells();
   }
 
   @Override

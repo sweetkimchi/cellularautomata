@@ -2,6 +2,7 @@ package cellsociety.model.percolation;
 
 import cellsociety.model.cell.State;
 import cellsociety.model.rules.Rules;
+import java.util.ArrayList;
 
 /**
  *
@@ -14,11 +15,6 @@ public class PercolationRules extends Rules {
   public PercolationRules() {
   }
 
-
-  @Override
-  protected String decideState(int i, boolean alive) {
-    return "";
-  }
 
   /**
    * judges the state of each cell using the rule of the specific model class
@@ -38,6 +34,11 @@ public class PercolationRules extends Rules {
    */
   @Override
   public String getStartingPositionCellType() {
+    return null;
+  }
+
+  @Override
+  public ArrayList<String> getPossibleTypes() {
     return null;
   }
 

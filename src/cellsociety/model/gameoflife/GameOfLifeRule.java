@@ -2,6 +2,7 @@ package cellsociety.model.gameoflife;
 
 import cellsociety.model.cell.State;
 import cellsociety.model.rules.Rules;
+import java.util.ArrayList;
 
 /**
  *
@@ -38,7 +39,7 @@ public class GameOfLifeRule extends Rules {
     for (int x = 0; x < statesOfAllCells.length; x++) {
       for (int y = 0; y < statesOfAllCells[0].length; y++) {
         statesOfAllCells[x][y].type = decideState(numberOfAliveNeighbors[x][y],
-            statesOfAllCells[x][y].type.equals(ALIVE));
+            statesOfAllCells[x][y].type);
         if (statesOfAllCells[x][y].type.equals(ALIVE)) {
           statesOfAllCells[x][y].setColor(ALIVE_COLOR);
         } else {
@@ -50,8 +51,8 @@ public class GameOfLifeRule extends Rules {
   }
 
 
-  protected String decideState(int numberOfNeighbor, boolean alive) {
-    if (alive) {
+  protected String decideState(int numberOfNeighbor, String type) {
+    if (type.equals(ALIVE)) {
       if (numberOfNeighbor < lowerSurvivalBoundary) {
         return EMPTY;
       } else if(numberOfNeighbor <= upperSurvivalBoundary){
@@ -65,5 +66,10 @@ public class GameOfLifeRule extends Rules {
 
   public String getStartingPositionCellType(){
     return ALIVE;
+  }
+
+  @Override
+  public ArrayList<String> getPossibleTypes() {
+    return null;
   }
 }

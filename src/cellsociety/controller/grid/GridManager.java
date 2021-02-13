@@ -3,6 +3,7 @@ package cellsociety.controller.grid;
 import cellsociety.model.cell.State;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  *
@@ -26,7 +27,7 @@ public class GridManager {
     grid = new ArrayList<>();
   }
 
-  public State[][] buildGrid(ArrayList<State> template, String type) {
+  public State[][] buildGridWithTemplate(ArrayList<State> template, String type) {
     State[][] stateOfCells = new State[row][col];
     for (int r = 0; r < row; r++) {
       for (int c = 0; c < col; c++) {
@@ -48,8 +49,29 @@ public class GridManager {
     }
 
     for (State s : template) {
-      stateOfCells[row / 2 + s.getxCoord() - xSize / 2][col / 2 + s.getyCoord()
-          - ySize / 2].type = type;
+      stateOfCells[s.getxCoord()][s.getyCoord()].type = type;
+    }
+    this.stateOfCells = stateOfCells;
+    return stateOfCells;
+  }
+
+  public State[][] buildGridWithRandomSeed(double emptyRatio, double populationRatio, int seed, ArrayList<String> possibleTypes){
+    Random random = new Random(seed);
+    State[][] stateOfCells = new State[row][col];
+    for (int r = 0; r < row; r++) {
+      for (int c = 0; c < col; c++) {
+        double probability = random.nextDouble();
+        if(probability < emptyRatio){
+          State state = new State(r, c, EMPTY);
+          stateOfCells[r][c] = state;
+        }else if(probability < (1 - emptyRatio) * populationRatio){
+          State state = new State(r, c, possibleTypes.get(1));
+          stateOfCells[r][c] = state;
+        }else{
+          State state = new State(r, c, possibleTypes.get(2));
+          stateOfCells[r][c] = state;
+        }
+      }
     }
     this.stateOfCells = stateOfCells;
     return stateOfCells;
@@ -59,18 +81,21 @@ public class GridManager {
     return stateOfCells;
   }
 
-  public void printGrid() {
+  public void printGrid(State[][] stateOfCells) {
     for (int x = 0; x < row; x++) {
       for (int y = 0; y < col; y++) {
-        if (stateOfCells[x][y].type.equals(ALIVE)) {
-          //           System.out.print(" O ");
-        } else {
-          //            System.out.print(" . ");
+        if (stateOfCells[x][y].type.equals("shark")) {
+                     System.out.print(" S ");
+        } else if(stateOfCells[x][y].type.equals("fish")){
+                      System.out.print(" F ");
+        }
+        else{
+          System.out.print(" E ");
         }
       }
-      //         System.out.println();
+              System.out.println();
     }
-    //     System.out.println();
+        System.out.println();
   }
 
   public void updateGrid(State[][] stateOfCells) {

@@ -4,7 +4,7 @@
   <description></description>
   <numCols>50</numCols>
   <numRows>50</numRows>
-  <shapeCoords>1,0,2,0,0,1,1,2,4,2,2,3,3,3,4,3</shapeCoords>
+  <shapeCoords>21,20,22,20,20,21,21,22,24,22,22,23,23,23,24,23</shapeCoords>
   <template>jiyun</template>
   <title>Game of Life</title>
   <type>gameOfLife</type>
