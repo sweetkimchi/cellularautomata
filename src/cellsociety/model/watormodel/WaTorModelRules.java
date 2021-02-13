@@ -43,31 +43,50 @@ public class WaTorModelRules extends Rules {
   }
 
   private State decideState(State[][] statesOfAllCells, int xCoord, int yCoord, String type) {
-
+    ArrayList<State> emptyCells = new ArrayList<>();
     if(type.equals(SHARK)){
       if(xCoord - 1 >= 0){
         //left cell
         //if fish, move to the new coordinate, destry the fish
         if(statesOfAllCells[xCoord-1][yCoord].type.equals(FISH)){
-          checkIfFishAndMove(statesOfAllCells, xCoord, yCoord, xCoord-1,yCoord);
+          return checkIfFishAndMove(statesOfAllCells, xCoord, yCoord, xCoord-1,yCoord);
+        }else if(statesOfAllCells[xCoord-1][yCoord].type.equals(EMPTY)){
+          emptyCells.add(statesOfAllCells[xCoord-1][yCoord]);
         }
 
       }else if(xCoord >= 0 && yCoord - 1 >= 0){
         //upper cell
         if(statesOfAllCells[xCoord][yCoord-1].type.equals(FISH)){
-          checkIfFishAndMove(statesOfAllCells, xCoord, yCoord, xCoord,yCoord-1);
+          return checkIfFishAndMove(statesOfAllCells, xCoord, yCoord, xCoord,yCoord-1);
+        }else if(statesOfAllCells[xCoord][yCoord-1].type.equals(EMPTY)){
+          emptyCells.add(statesOfAllCells[xCoord][yCoord-1]);
         }
 
       } else if (yCoord + 1 < statesOfAllCells[0].length) {
         //lower cell
         if(statesOfAllCells[xCoord][yCoord + 1].type.equals(FISH)){
-          checkIfFishAndMove(statesOfAllCells, xCoord, yCoord, xCoord,yCoord+1);
+          return checkIfFishAndMove(statesOfAllCells, xCoord, yCoord, xCoord,yCoord+1);
+        }else if(statesOfAllCells[xCoord][yCoord +1].type.equals(EMPTY)){
+          emptyCells.add(statesOfAllCells[xCoord][yCoord+1]);
         }
 
       }else if(xCoord + 1 < statesOfAllCells.length){
         //right cell
         if(statesOfAllCells[xCoord+1][yCoord].type.equals(FISH)){
-          checkIfFishAndMove(statesOfAllCells, xCoord, yCoord, xCoord+1,yCoord);
+          return checkIfFishAndMove(statesOfAllCells, xCoord, yCoord, xCoord+1,yCoord);
+        }else if(statesOfAllCells[xCoord+1][yCoord].type.equals(EMPTY)){
+          emptyCells.add(statesOfAllCells[xCoord+1][yCoord]);
+        }
+        Random random = new Random(randomSeed);
+        if(!emptyCells.isEmpty()){
+          int index = random.nextInt(emptyCells.size());
+          State dummy = emptyCells.get(index);
+          statesOfAllCells[dummy.getxCoord()][dummy.getyCoord()] = statesOfAllCells[xCoord][yCoord];
+          statesOfAllCells[dummy.getxCoord()][dummy.getyCoord()].numberOfMoves--;
+
+          return new State(xCoord,yCoord, EMPTY);
+        }else{
+          return statesOfAllCells[xCoord][yCoord];
         }
 
       }
