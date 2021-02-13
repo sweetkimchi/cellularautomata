@@ -41,7 +41,6 @@ public class Decoder {
     XMLParser parser = new XMLParser("game");
     Map<String, String> attributes = parser.getAttribute(dataFile);
     myDesc = attributes.get(DESC);
-    myModel = attributes.get(MODEL).toLowerCase();
     myTitle = attributes.get(TITLE);
     myAuthor = attributes.get(AUTHOR);
     myRows = Integer.parseInt(attributes.get(NUM_ROWS));
