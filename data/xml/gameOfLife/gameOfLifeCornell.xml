@@ -5,7 +5,8 @@
   <numCols>50</numCols>
   <numRows>50</numRows>
   <shapeCoords>1,0,0,1,1,1,2,1</shapeCoords>
+  <type>1111</type>
   <template>cornell</template>
   <title>Game of Life</title>
-  <type>gameOfLife</type>
+  <model>gameOfLife</model>
 </data>

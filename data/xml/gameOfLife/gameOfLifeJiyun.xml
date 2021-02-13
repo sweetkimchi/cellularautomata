@@ -5,7 +5,8 @@
   <numCols>50</numCols>
   <numRows>50</numRows>
   <shapeCoords>1,0,2,0,0,1,1,2,4,2,2,3,3,3,4,3</shapeCoords>
+  <type>11111111</type>
   <template>jiyun</template>
   <title>Game of Life</title>
-  <type>gameOfLife</type>
+  <model>gameOfLife</model>
 </data>
