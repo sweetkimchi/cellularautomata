@@ -60,13 +60,14 @@ public class SimulationEngine extends Simulator {
     col = decoder.getCols();
     initializeGrid();
     initializeModelConstructors(decoder.getModel());
+
     updateCellState();
     runSimulation();
   }
 
   protected void initializeModelConstructors(String game) {
 
-    if (game.equals("gameoflife")) {
+    if (game.equals("gameOfLife")) {
       rules = new GameOfLifeRule();
       template = constructStartingStateForSimulation(decoder.getGOLDecoder().getMyCoords());
       stateOfAllCells = gridManager.buildGridWithTemplate(template, rules.getStartingPositionCellType());
