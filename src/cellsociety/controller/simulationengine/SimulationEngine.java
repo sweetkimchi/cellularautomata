@@ -59,6 +59,12 @@ public class SimulationEngine extends Simulator {
     row = decoder.getRows();
     col = decoder.getCols();
     initializeModelConstructors(decoder.getModel());
+    if(decoder.getModel().equals("gameOfLife")){
+      constructStartingStateForSimulation(decoder.getGOLDecoder().getMyCoords());
+    }
+    else if(decoder.getModel().equals("wator")){
+      //initialize(decoder.getWaTorDecoder().get + whatever parameters
+    }
     initializeGrid();
     updateCellState();
     runSimulation();
