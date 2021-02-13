@@ -12,6 +12,7 @@ public class SegregationModelRules extends Rules {
    * Default constructor
    */
   public SegregationModelRules() {
+
   }
 
   @Override
