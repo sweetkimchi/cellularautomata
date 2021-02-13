@@ -25,8 +25,8 @@ public class SimulationEngine extends Simulator {
   private State[][] stateOfAllCells;
   private ArrayList<State> template;
   private Decoder decoder;
-  private double populationRatio = 0.9;
-  private double emptyRatio = 0.2;
+  private double populationRatio = 0.3;
+  private double emptyRatio = 0.3;
   private int randomSeed = 0;
 
   /**
@@ -95,10 +95,10 @@ public class SimulationEngine extends Simulator {
 
   @Override
   public void updateCellState() {
+    simulationScreen.update(stateOfAllCells);
     stateOfAllCells = rules.judgeStateOfEachCell(stateOfAllCells);
     gridManager.updateGrid(stateOfAllCells);
     //gridManager.printGrid();
-    simulationScreen.update(stateOfAllCells);
   }
 
   public State[][] getStateOfAllCells() {

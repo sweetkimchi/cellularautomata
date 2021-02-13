@@ -19,10 +19,10 @@ public class WaTorModelRules extends Rules {
   private final String FISH_COLOR = "green";
   private final String SHARK_COLOR = "blue";
   private final String EMPTY_COLOR = "lightgrey";
-  private int ENERGY_FROM_FISH = 4;
+  private int ENERGY_FROM_FISH = 2;
   private Random random;
   private int REPRODUCE_BOUNDARY = 4;
-  private int DEFAULT_ENERGY = 5;
+  private int DEFAULT_ENERGY = 3;
   /**
    * Default constructor
    */
@@ -80,7 +80,6 @@ public class WaTorModelRules extends Rules {
         statesOfAllCells[dummy.getxCoord()][dummy.getyCoord()] = new State(dummy.getxCoord(), dummy.getyCoord(), FISH, FISH_COLOR, 0);
         return new State(xCoord,yCoord,FISH,FISH_COLOR,0);
       }
-
     }
 
     return statesOfAllCells[xCoord][yCoord];
@@ -89,11 +88,11 @@ public class WaTorModelRules extends Rules {
   private State decideSharkState(State[][] statesOfAllCells, int xCoord, int yCoord, String type) {
     ArrayList<State> emptyCells = new ArrayList<>();
     ArrayList<State> fishCells = new ArrayList<>();
+    System.out.println("ENERGY: " + statesOfAllCells[xCoord][yCoord].energy);
 
-//    if(statesOfAllCells[xCoord][yCoord].energy <= 0){
-//      System.out.println("ENERGY: " + statesOfAllCells[xCoord][yCoord].energy);
-//      return new State(xCoord,yCoord, EMPTY, EMPTY_COLOR, 0);
-//    }
+    if(statesOfAllCells[xCoord][yCoord].energy <= 0){
+      return new State(xCoord,yCoord, EMPTY, EMPTY_COLOR, 0);
+    }
     statesOfAllCells[xCoord][yCoord].numberOfMoves++;
     statesOfAllCells[xCoord][yCoord].energy--;
     if(xCoord - 1 >= 0){
@@ -141,7 +140,7 @@ public class WaTorModelRules extends Rules {
 
         setColor(statesOfAllCells[dummy.getxCoord()][dummy.getyCoord()]);
 
-        return new State(xCoord,yCoord, EMPTY, EMPTY_COLOR, 0);
+        return new State(xCoord,yCoord, SHARK, SHARK_COLOR, 0,DEFAULT_ENERGY);
       }else{
         int index = random.nextInt(fishCells.size());
         State dummy = fishCells.get(index);
