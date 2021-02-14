@@ -68,55 +68,43 @@ public class PercolationRules extends Rules {
     int[][] numberOfFireNeighbors = numberOfAliveNeighbors(statesOfAllCells, BLOCK);
     int[][] numberOfTreeNeighbors = numberOfAliveNeighbors(statesOfAllCells, WATER);
     int[][] dissatisfiedNeighbors = numberOfAliveNeighbors(statesOfAllCells, "");
-    int[][] fireNextRound = numberOfAliveNeighbors(statesOfAllCells, "");
-    int[][] emptyNextRound = numberOfAliveNeighbors(statesOfAllCells, "");
+    int[][] waterNextRound = numberOfAliveNeighbors(statesOfAllCells, "");
     for (int x = 0; x < statesOfAllCells.length; x++) {
       for (int y = 0; y < statesOfAllCells[0].length; y++) {
-        if(statesOfAllCells[x][y].type.equals(BLOCK)){
-          if(x - 1 >= 0 && y >= 0 && statesOfAllCells[x-1][y].type.equals(WATER)){
-            double randomNumber = random.nextDouble();
-            if(randomNumber < probsOfFire){
-              fireNextRound[x - 1][y] = 1;
-            }
+        if(statesOfAllCells[x][y].type.equals(WATER)){
+          if(x - 1 >= 0 && y >= 0 && statesOfAllCells[x-1][y].type.equals(EMPTY)){
+              waterNextRound[x - 1][y] = 1;
           }
-          if(x >= 0 && y - 1 >= 0 && statesOfAllCells[x][y-1].type.equals(WATER)){
-            double randomNumber = random.nextDouble();
-            if(randomNumber < probsOfFire){
-              fireNextRound[x][y - 1] = 1;
-            }
+          if(x >= 0 && y - 1 >= 0 && statesOfAllCells[x][y-1].type.equals(EMPTY)){
+
+              waterNextRound[x][y - 1] = 1;
+
           }
-          if(x + 1 < statesOfAllCells.length && y>= 0 && statesOfAllCells[x+1][y].type.equals(WATER)){
-            double randomNumber = random.nextDouble();
-            if(randomNumber < probsOfFire){
-              fireNextRound[x + 1][y] = 1;
-            }
+          if(x + 1 < statesOfAllCells.length && y>= 0 && statesOfAllCells[x+1][y].type.equals(EMPTY)){
+
+              waterNextRound[x + 1][y] = 1;
+
           }
           if(x >= 0 && y +1 < statesOfAllCells[0].length && statesOfAllCells[x][y+1].type.equals(
-              WATER)){
-            double randomNumber = random.nextDouble();
-            if(randomNumber < probsOfFire){
-              fireNextRound[x][y + 1] = 1;
-            }
+              EMPTY)){
+
+              waterNextRound[x][y + 1] = 1;
+
           }
-          emptyNextRound[x][y] = 1;
         }
       }
     }
- //   statesOfAllCells = setToFire(fireNextRound,statesOfAllCells, emptyNextRound);
-    printGrid(fireNextRound);
+    statesOfAllCells = setToFire(waterNextRound,statesOfAllCells);
+    printGrid(waterNextRound);
     return statesOfAllCells;
   }
 
 
-  private State[][] setToFire(int[][] fireNextRound, State[][] statesOfAllCells,  int[][] emptyNextRound){
-    for(int i = 0; i < fireNextRound.length; i++){
-      for(int j = 0; j < fireNextRound[0].length; j++){
-        if(fireNextRound[i][j] == 1){
-          statesOfAllCells[i][j] = new State(i,j, BLOCK);
-          setColor(statesOfAllCells[i][j]);
-        }
-        if(emptyNextRound[i][j] == 1){
-          statesOfAllCells[i][j] = new State(i,j,EMPTY);
+  private State[][] setToFire(int[][] waterNextRound, State[][] statesOfAllCells){
+    for(int i = 0; i < waterNextRound.length; i++){
+      for(int j = 0; j < waterNextRound[0].length; j++){
+        if(waterNextRound[i][j] == 1){
+          statesOfAllCells[i][j] = new State(i,j, WATER);
           setColor(statesOfAllCells[i][j]);
         }
       }
