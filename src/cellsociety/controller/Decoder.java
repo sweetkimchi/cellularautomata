@@ -9,22 +9,22 @@ public class Decoder {
 
   public static final String DATA_FILE_EXTENSION = "*.xml";
   public final static FileChooser FILE_CHOOSER = makeChooser(DATA_FILE_EXTENSION);
+  public static final String MODEL = "model";
   public static final String TITLE = "title";
   public static final String AUTHOR = "author";
   public static final String DESC = "description";
   public static final String NUM_ROWS = "numRows";
   public static final String NUM_COLS = "numCols";
 
-  public static final String MODEL = "model";
   private GOLDecoder golDecoder;
   private WaTorDecoder waTorDecoder;
+  private SegDecoder segDecoder;
   private String myDesc;
   private String myModel;
   private String myTitle;
   private String myAuthor;
   private int myRows;
   private int myCols;
-
 
   private static FileChooser makeChooser(String extension) {
     FileChooser result = new FileChooser();
@@ -33,7 +33,6 @@ public class Decoder {
     result.getExtensionFilters().setAll(new ExtensionFilter("Text Files", extension));
     return result;
   }
-
   public void readValuesFromXMLFile() {
     File dataFile = FILE_CHOOSER.showOpenDialog(null);
     XMLParser parser = new XMLParser("game");
@@ -46,37 +45,36 @@ public class Decoder {
     myModel = attributes.get(MODEL);
     if(myModel.equals("gameOfLife")){golDecoder = new GOLDecoder(attributes);}
     else if(myModel.equals("wator")) {waTorDecoder = new WaTorDecoder(attributes);}
+    else if(myModel.equals("segregationmodel")) {segDecoder = new SegDecoder(attributes);}
   }
-
   public GOLDecoder getGOLDecoder(){
     return golDecoder;
   }
   public WaTorDecoder getWaTorDecoder(){
     return waTorDecoder;
   }
+  public SegDecoder getSegDecoder(){
+    return segDecoder;
+  }
   public String getModel() {
     return myModel;
   }
-
   public String getTitle() {
     return myTitle;
   }
-
   public String getAuthor() {
     return myAuthor;
+  }
+  public String getDesc(){
+    return myDesc;
   }
   public int getRows() {
     return myRows;
   }
-
   public int getCols() {
     return myCols;
   }
-
   public String getMyDesc() {
     return myDesc;
   }
 }
-
-
-

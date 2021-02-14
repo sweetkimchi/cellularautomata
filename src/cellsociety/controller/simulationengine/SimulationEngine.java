@@ -48,7 +48,7 @@ public class SimulationEngine extends Simulator {
     template = new ArrayList<>();
     for (int i = 0; i + 1 < coordinates.size(); i += 2) {
       State state = new State(Integer.parseInt(coordinates.get(i)),
-          Integer.parseInt(coordinates.get(i + 1)), rules.getStartingPositionCellType());
+              Integer.parseInt(coordinates.get(i + 1)), rules.getStartingPositionCellType());
       template.add(state);
     }
     return template;
@@ -80,7 +80,7 @@ public class SimulationEngine extends Simulator {
       rules = new GameOfLifeRule();
       template = constructStartingStateForSimulation(decoder.getGOLDecoder().getMyCoords());
       stateOfAllCells = gridManager
-          .buildGridWithTemplate(template, rules.getStartingPositionCellType());
+              .buildGridWithTemplate(template, rules.getStartingPositionCellType());
     }
     if (game.equals("percolation")) {
       rules = new PercolationRules();
@@ -88,10 +88,10 @@ public class SimulationEngine extends Simulator {
     if (game.equals("segregationmodel")) {
       WaTorDecoder waTorDecoder = decoder.getWaTorDecoder();
       rules = new SegregationModelRules(waTorDecoder.getFSRatio(),
-          waTorDecoder.getSeed(), THRESHHOLD);
+              waTorDecoder.getSeed(), THRESHHOLD);
       stateOfAllCells = gridManager
-          .buildGridWithRandomSeed(waTorDecoder.getEmptyRatio(), waTorDecoder.getFSRatio(),
-              waTorDecoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
+              .buildGridWithRandomSeed(waTorDecoder.getEmptyRatio(), waTorDecoder.getFSRatio(),
+                      waTorDecoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
 
     }
     if (game.equals("spreadingoffire")) {
@@ -101,11 +101,11 @@ public class SimulationEngine extends Simulator {
       //   rules = new WaTorModelRules(emptyRatio, populationRatio, randomSeed, energyFish, reproduceBoundary, sharkEnergy);
       WaTorDecoder waTorDecoder = decoder.getWaTorDecoder();
       rules = new WaTorModelRules(waTorDecoder.getFSRatio(),
-          waTorDecoder.getSeed(), waTorDecoder.getEnergy(), waTorDecoder.getFishRate(),
-          waTorDecoder.getSharkLives());
+              waTorDecoder.getSeed(), waTorDecoder.getEnergy(), waTorDecoder.getFishRate(),
+              waTorDecoder.getSharkLives());
       stateOfAllCells = gridManager
-          .buildGridWithRandomSeed(waTorDecoder.getEmptyRatio(), waTorDecoder.getFSRatio(),
-              waTorDecoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
+              .buildGridWithRandomSeed(waTorDecoder.getEmptyRatio(), waTorDecoder.getFSRatio(),
+                      waTorDecoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
     }
     //need to be fixed for a better design
   }
