@@ -19,6 +19,7 @@ public class Decoder {
   public static final String MODEL = "model";
   private GOLDecoder golDecoder;
   private WaTorDecoder waTorDecoder;
+  private String myDesc;
   private String myModel;
   private String myTitle;
   private String myAuthor;
@@ -36,6 +37,7 @@ public class Decoder {
     File dataFile = FILE_CHOOSER.showOpenDialog(null);
     XMLParser parser = new XMLParser("game");
     Map<String, String> attributes = parser.getAttribute(dataFile);
+    myDesc = attributes.get(DESC);
     myTitle = attributes.get(TITLE);
     myAuthor = attributes.get(AUTHOR);
     myRows = Integer.parseInt(attributes.get(NUM_ROWS));
