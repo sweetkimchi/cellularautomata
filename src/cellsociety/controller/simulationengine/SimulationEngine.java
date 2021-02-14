@@ -31,6 +31,10 @@ public class SimulationEngine extends Simulator {
   private int frameDelay;
   private int sleepTimer = 0;
 
+
+
+  private double THRESHHOLD = 0.5;
+
   /**
    * Default constructor
    */
@@ -83,8 +87,8 @@ public class SimulationEngine extends Simulator {
     }
     if (game.equals("segregationmodel")) {
       WaTorDecoder waTorDecoder = decoder.getWaTorDecoder();
-      rules = new SegregationModelRules(waTorDecoder.getEmptyRatio(), waTorDecoder.getFSRatio(),
-          waTorDecoder.getSeed());
+      rules = new SegregationModelRules(waTorDecoder.getFSRatio(),
+          waTorDecoder.getSeed(), THRESHHOLD);
       stateOfAllCells = gridManager
           .buildGridWithRandomSeed(waTorDecoder.getEmptyRatio(), waTorDecoder.getFSRatio(),
               waTorDecoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
@@ -96,7 +100,7 @@ public class SimulationEngine extends Simulator {
     if (game.equals("wator")) {
       //   rules = new WaTorModelRules(emptyRatio, populationRatio, randomSeed, energyFish, reproduceBoundary, sharkEnergy);
       WaTorDecoder waTorDecoder = decoder.getWaTorDecoder();
-      rules = new WaTorModelRules(waTorDecoder.getEmptyRatio(), waTorDecoder.getFSRatio(),
+      rules = new WaTorModelRules(waTorDecoder.getFSRatio(),
           waTorDecoder.getSeed(), waTorDecoder.getEnergy(), waTorDecoder.getFishRate(),
           waTorDecoder.getSharkLives());
       stateOfAllCells = gridManager

@@ -13,24 +13,21 @@ public class WaTorModelRules extends Rules {
   private final String FISH_COLOR = "green";
   private final String SHARK_COLOR = "blue";
   private final String EMPTY_COLOR = "lightgrey";
-  private double emptyRatio;
-  private double populationRatio;
   private ArrayList<String> possibleTypes;
   private ArrayList<String> possibleColors;
   private String FISH = "fish";
   private String SHARK = "shark";
   private String EMPTY = "empty";
-  private int ENERGY_FROM_FISH = 3;
+  private int ENERGY_FROM_FISH;
   private Random random;
-  private int REPRODUCE_BOUNDARY = 4;
-  private int DEFAULT_ENERGY = 3;
+  private int REPRODUCE_BOUNDARY;
+  private int DEFAULT_ENERGY;
 
   /**
    * Default constructor
    */
-  public WaTorModelRules(double emptyRatio, double populationRatio, long randomSeed, int energyFish, int reproduceBoundary, int sharkEnergy) {
-    this.emptyRatio = emptyRatio;
-    this.populationRatio = populationRatio;
+  public WaTorModelRules(double populationRatio, long randomSeed, int energyFish,
+      int reproduceBoundary, int sharkEnergy) {
     random = new Random(randomSeed);
     possibleTypes = new ArrayList<>();
     possibleColors = new ArrayList<>();
