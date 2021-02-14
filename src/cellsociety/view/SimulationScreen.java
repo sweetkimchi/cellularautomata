@@ -5,6 +5,8 @@ import cellsociety.model.cell.State;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -22,6 +24,10 @@ public class SimulationScreen {
   public ButtonGraphics buttonGraphics;
   public GraphGraphics graphGraphics;
   public GridGraphics gridGraphics;
+
+  private static final double MIN_SPEED = 0.5;
+  private static final double MAX_SPEED = 3;
+  private static final double DEFAULT_SPEED = 1;
   /**
    *
    */
@@ -66,6 +72,7 @@ public class SimulationScreen {
     resetButton.setOnAction(event -> {
       if (simulationEngine.decoderInitialized()) {
         gridGraphics.reset();
+        simulationEngine.stopSimulation();
         simulationEngine.initializeData();
       }
     });
@@ -76,7 +83,15 @@ public class SimulationScreen {
       simulationEngine.initializeData();
     });
 
-    buttonGraphics.addButtonsToPane(startButton,stopButton,stepButton,resetButton,loadNewButton);
+    buttonGraphics.addNodesToPane(startButton,stopButton,stepButton,resetButton,loadNewButton);
+
+    Slider slider = new Slider(MIN_SPEED,MAX_SPEED,DEFAULT_SPEED);
+    Label label = new Label();
+    label.setText("Speed");
+
+    buttonGraphics.addNodesToPane(slider,label);
+
+
   }
 
 

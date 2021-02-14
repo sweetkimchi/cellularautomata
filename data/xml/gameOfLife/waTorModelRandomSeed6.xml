@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<data game="game">
+  <author>Jiyun</author>
+  <description>This is the template in which there are very sparse popultion of fish and shark. It starts out as fish taking over the entire map but sharks quickly destory all fish. All sharks die.</description>
+  <numCols>50</numCols>
+  <numRows>50</numRows>
+  <fishsharkratio>0.1</fishsharkratio>
+  <emptyratio>0.9</emptyratio>
+  <randomseed>17</randomseed>
+  <fishreproduce>5</fishreproduce>
+  <sharkreproduce>5</sharkreproduce>
+  <sharklives>5</sharklives>
+  <energyfromeating>10</energyfromeating>
+  <template>random_one</template>
+  <title>WaTor Simulation</title>
+  <model>wator</model>
+</data>

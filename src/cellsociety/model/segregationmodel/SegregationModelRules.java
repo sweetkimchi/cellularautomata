@@ -41,4 +41,9 @@ public class SegregationModelRules extends Rules {
     return null;
   }
 
+  @Override
+  public ArrayList<String> getPossibleColors() {
+    return null;
+  }
+
 }
