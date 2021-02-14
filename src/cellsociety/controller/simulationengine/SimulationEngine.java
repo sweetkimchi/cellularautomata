@@ -2,6 +2,7 @@ package cellsociety.controller.simulationengine;
 
 import cellsociety.controller.Decoder;
 import cellsociety.controller.FireDecoder;
+import cellsociety.controller.PercDecoder;
 import cellsociety.controller.SegDecoder;
 import cellsociety.controller.WaTorDecoder;
 import cellsociety.controller.grid.GridManager;
@@ -73,9 +74,9 @@ public class SimulationEngine extends Simulator {
     col = decoder.getCols();
     initializeGrid();
 
-    //initializeModelConstructors(decoder.getModel());
+    initializeModelConstructors(decoder.getModel());
 
-    initializeModelConstructors("spreadingoffire");
+  //  initializeModelConstructors("spreadingoffire");
     simulationScreen.update(stateOfAllCells);
     simulationScreen.setDescription(decoder.getMyDesc());
     runSimulation();
@@ -90,7 +91,11 @@ public class SimulationEngine extends Simulator {
               .buildGridWithTemplate(template, rules.getStartingPositionCellType());
     }
     if (game.equals("percolation")) {
-      rules = new PercolationRules();
+      PercDecoder percDecoder = decoder.getPercDecoder();
+      rules = new PercolationRules(percDecoder.getSeed());
+      stateOfAllCells = gridManager
+          .buildGridWithRandomSeed(percDecoder.getBlockRatio(), percDecoder.getWaterToEmptyRatio(),
+              percDecoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
     }
     if (game.equals("segregationmodel")) {
       SegDecoder segDecoder = decoder.getSegDecoder();
