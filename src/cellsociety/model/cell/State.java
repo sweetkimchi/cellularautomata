@@ -68,6 +68,10 @@ public class State {
     color = Paint.valueOf(colorString);
   }
 
+  /**
+   * Sets the color of the state. Used whenever the type is updated.
+   * @param colorName
+   */
   public void setColor(String colorName) {
     color = Paint.valueOf(colorName);
   }

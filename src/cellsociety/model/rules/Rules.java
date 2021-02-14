@@ -71,7 +71,15 @@ public abstract class Rules {
    */
   public abstract String getStartingPositionCellType();
 
+  /**
+   * returns the possible types (e.g. agent x, agent y, empty)
+   * @return arraylist of possible types
+   */
   public abstract ArrayList<String> getPossibleTypes();
 
+  /**
+   * Returns the possible colors for each type
+   * @return arraylist of colors
+   */
   public abstract ArrayList<String> getPossibleColors();
 }

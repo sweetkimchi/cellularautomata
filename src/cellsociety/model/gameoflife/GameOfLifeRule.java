@@ -5,7 +5,11 @@ import cellsociety.model.rules.Rules;
 import java.util.ArrayList;
 
 /**
+ * Purpose: This class contains the rules for the Game of Life model. Rules include the types of the players as well as logic to update each cell.
+ * Assumptions: xml file is correctly formatted and supplies the correct information to the constructor.
+ * Dependencies: Depends on SimulationEngine to declare constructors based on the parameters read from XML files. Depends on GridManager to provide it with the grid to work with.
  *
+ * @author Ji Yun Hyo
  */
 public class GameOfLifeRule extends Rules {
 
@@ -22,7 +26,7 @@ public class GameOfLifeRule extends Rules {
   private final String DEAD_COLOR = "lightgrey";
 
   /**
-   * Default Constructor
+   * Default constructor for GameOfLifeRule
    */
   public GameOfLifeRule() {
     /*
@@ -34,6 +38,13 @@ public class GameOfLifeRule extends Rules {
     upperSurvivalBoundary = 3;
   }
 
+  /**
+   * Purpose: Judges each of the cells according to the logic of the game
+   * Assumptions: statesOfAllCells correctly contains all valid states
+   *
+   * @param statesOfAllCells starting states of all cells
+   * @return the updated states of all cells
+   */
   public State[][] judgeStateOfEachCell(State[][] statesOfAllCells) {
     int[][] numberOfAliveNeighbors = numberOfAliveNeighbors(statesOfAllCells, ALIVE);
     for (int x = 0; x < statesOfAllCells.length; x++) {
@@ -64,15 +75,28 @@ public class GameOfLifeRule extends Rules {
     return "";
   }
 
+  /**
+   * specifies the starting states of the cells according to the simulation rule
+   *
+   * @return type of cells
+   */
   public String getStartingPositionCellType(){
     return ALIVE;
   }
 
+  /**
+   * returns the possible types (e.g. agent x, agent y, empty)
+   * @return arraylist of possible types
+   */
   @Override
   public ArrayList<String> getPossibleTypes() {
     return null;
   }
 
+  /**
+   * Returns the possible colors for each type
+   * @return arraylist of colors
+   */
   @Override
   public ArrayList<String> getPossibleColors() {
     return null;

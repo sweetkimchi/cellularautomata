@@ -8,7 +8,7 @@ import java.util.Random;
 /**
  * Purpose: This class contains the rules for the segregation model. Rules include the types of the players as well as logic to update each cell.
  * Assumptions: xml file is correctly formatted and supplies the correct information to the constructor.
- * Dependencies: Depends on GridManager to provide it with the grid to work with.
+ * Dependencies: Depends on SimulationEngine to declare constructors based on the parameters read from XML files. Depends on GridManager to provide it with the grid to work with.
  *
  * @author Ji Yun Hyo
  */
@@ -148,7 +148,7 @@ public class SegregationModelRules extends Rules {
   }
 
   /**
-   * specifices the starting states of the cells according to the simulation rule
+   * specifies the starting states of the cells according to the simulation rule
    *
    * @return type of cells
    */

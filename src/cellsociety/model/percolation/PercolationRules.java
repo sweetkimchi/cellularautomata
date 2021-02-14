@@ -6,7 +6,11 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
+ * Purpose: This class contains the rules for the percolation model. Rules include the types of the players as well as logic to update each cell.
+ * Assumptions: xml file is correctly formatted and supplies the correct information to the constructor.
+ * Dependencies: Depends on SimulationEngine to declare constructors based on the parameters read from XML files. Depends on GridManager to provide it with the grid to work with.
  *
+ * @author Ji Yun Hyo
  */
 public class PercolationRules extends Rules {
 
@@ -63,7 +67,13 @@ public class PercolationRules extends Rules {
   }
 
 
-
+  /**
+   * Purpose: Judges each of the cells according to the logic of the game
+   * Assumptions: statesOfAllCells correctly contains all valid states
+   *
+   * @param statesOfAllCells starting states of all cells
+   * @return the updated states of all cells
+   */
   public State[][] judgeStateOfEachCell(State[][] statesOfAllCells) {
     int[][] numberOfFireNeighbors = numberOfAliveNeighbors(statesOfAllCells, BLOCK);
     int[][] numberOfTreeNeighbors = numberOfAliveNeighbors(statesOfAllCells, WATER);
