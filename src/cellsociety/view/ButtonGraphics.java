@@ -2,6 +2,7 @@ package cellsociety.view;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
@@ -30,7 +31,7 @@ public class ButtonGraphics {
     return pane;
   }
 
-  public void addButtonsToPane(Button... button) {
+  public void addNodesToPane(Node... button) {
     pane.getChildren().addAll(button);
   }
 
