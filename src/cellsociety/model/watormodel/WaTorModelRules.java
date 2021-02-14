@@ -43,7 +43,6 @@ public class WaTorModelRules extends Rules {
     possibleColors.add(EMPTY_COLOR);
     possibleColors.add(SHARK_COLOR);
     possibleColors.add(FISH_COLOR);
-
   }
 
 
@@ -105,8 +104,6 @@ public class WaTorModelRules extends Rules {
 
     //each time lose one energy
     //each time gain one move
-
-   // System.out.println("ENERGY: " + statesOfAllCells[xCoord][yCoord].energy);
 
     if (xCoord - 1 >= 0) {
       //left cell
