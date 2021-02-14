@@ -1,7 +1,6 @@
 package cellsociety.controller.simulationengine;
 
 import cellsociety.controller.Decoder;
-import cellsociety.controller.FireDecoder;
 import cellsociety.controller.SegDecoder;
 import cellsociety.controller.WaTorDecoder;
 import cellsociety.controller.grid.GridManager;
@@ -16,7 +15,6 @@ import cellsociety.model.watormodel.WaTorModelRules;
 import cellsociety.view.SimulationScreen;
 import java.util.ArrayList;
 import javafx.animation.AnimationTimer;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class SimulationEngine extends Simulator {
@@ -74,9 +72,9 @@ public class SimulationEngine extends Simulator {
     col = decoder.getCols();
     initializeGrid();
 
-    initializeModelConstructors(decoder.getModel());
+    //initializeModelConstructors(decoder.getModel());
 
-   // initializeModelConstructors("spreadingoffire");
+    initializeModelConstructors("spreadingoffire");
     simulationScreen.update(stateOfAllCells);
     simulationScreen.setDescription(decoder.getMyDesc());
     runSimulation();
@@ -86,7 +84,7 @@ public class SimulationEngine extends Simulator {
 
     if (game.equals("gameOfLife")) {
       rules = new GameOfLifeRule();
-      template = constructStartingStateForSimulation(decoder.getGOLDecoder().getCoords());
+      template = constructStartingStateForSimulation(decoder.getGOLDecoder().getMyCoords());
       stateOfAllCells = gridManager
               .buildGridWithTemplate(template, rules.getStartingPositionCellType());
     }
@@ -95,20 +93,19 @@ public class SimulationEngine extends Simulator {
     }
     if (game.equals("segregationmodel")) {
       SegDecoder segDecoder = decoder.getSegDecoder();
-      rules = new SegregationModelRules(segDecoder.getPopRatio(),
-              segDecoder.getRandSeed(), segDecoder.getSatThresh());
+      rules = new SegregationModelRules(segDecoder.getMyPopRatio(),
+              segDecoder.getMyRandSeed(), segDecoder.getMySatThresh());
       stateOfAllCells = gridManager
-              .buildGridWithRandomSeed(segDecoder.getEmptyRatio(), segDecoder.getPopRatio(),
-                      segDecoder.getRandSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
+              .buildGridWithRandomSeed(0.4, segDecoder.getMyPopRatio(),
+                      segDecoder.getMyRandSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
 
     }
     if (game.equals("spreadingoffire")) {
-      FireDecoder fireDecoder = decoder.getFireDecoder();
-      rules = new SpreadingOfFireRules(fireDecoder.getTreeRatio(), fireDecoder.getSeed(), fireDecoder.getProb());
+      rules = new SpreadingOfFireRules(popRatio, randseed, probsOfFire);
       ArrayList<String> dummy = new ArrayList<>();
       stateOfAllCells = gridManager
-          .buildGridWithRandomSeed(fireDecoder.getEmptyRatio(), fireDecoder.getTreeRatio(),
-              fireDecoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
+          .buildGridWithRandomSeed(0.1, popRatio,
+              randseed, rules.getPossibleTypes(), rules.getPossibleColors());
     }
     if (game.equals("wator")) {
       //   rules = new WaTorModelRules(emptyRatio, populationRatio, randomSeed, energyFish, reproduceBoundary, sharkEnergy);
