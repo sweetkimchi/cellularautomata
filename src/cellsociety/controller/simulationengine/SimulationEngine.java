@@ -91,7 +91,7 @@ public class SimulationEngine extends Simulator {
       rules = new SegregationModelRules(segDecoder.getMyPopRatio(),
               segDecoder.getMyRandSeed(), segDecoder.getMySatThresh());
       stateOfAllCells = gridManager
-              .buildGridWithRandomSeed(0.2, segDecoder.getMyPopRatio(),
+              .buildGridWithRandomSeed(0.4, segDecoder.getMyPopRatio(),
                       segDecoder.getMyRandSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
 
     }
