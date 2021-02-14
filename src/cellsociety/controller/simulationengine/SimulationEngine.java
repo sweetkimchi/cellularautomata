@@ -88,11 +88,11 @@ public class SimulationEngine extends Simulator {
     }
     if (game.equals("segregationmodel")) {
       SegDecoder segDecoder = decoder.getSegDecoder();
-      rules = new SegregationModelRules(segDecoder.getMyPopRatio(),
-              segDecoder.getMyRandSeed(), segDecoder.getMySatThresh());
+      rules = new SegregationModelRules(segDecoder.getPopRatio(),
+              segDecoder.getRandSeed(), segDecoder.getSatThresh());
       stateOfAllCells = gridManager
-              .buildGridWithRandomSeed(0.4, segDecoder.getMyPopRatio(),
-                      segDecoder.getMyRandSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
+              .buildGridWithRandomSeed(0.4, segDecoder.getPopRatio(),
+                      segDecoder.getRandSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
 
     }
     if (game.equals("spreadingoffire")) {
