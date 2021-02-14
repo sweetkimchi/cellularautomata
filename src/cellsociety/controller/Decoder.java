@@ -9,13 +9,13 @@ public class Decoder {
 
   public static final String DATA_FILE_EXTENSION = "*.xml";
   public final static FileChooser FILE_CHOOSER = makeChooser(DATA_FILE_EXTENSION);
+  public static final String MODEL = "model";
   public static final String TITLE = "title";
   public static final String AUTHOR = "author";
   public static final String DESC = "description";
   public static final String NUM_ROWS = "numRows";
   public static final String NUM_COLS = "numCols";
 
-  public static final String MODEL = "model";
   private GOLDecoder golDecoder;
   private WaTorDecoder waTorDecoder;
   private SegDecoder segDecoder;
