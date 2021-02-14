@@ -1,6 +1,7 @@
 package cellsociety.controller.simulationengine;
 
 import cellsociety.controller.Decoder;
+import cellsociety.controller.WaTorDecoder;
 import cellsociety.controller.grid.GridManager;
 import cellsociety.controller.grid.Simulator;
 import cellsociety.model.cell.State;
@@ -26,9 +27,6 @@ public class SimulationEngine extends Simulator {
   private ArrayList<State> template;
   private Decoder decoder;
   private AnimationTimer animation;
-  private double populationRatio = 0.3;
-  private double emptyRatio = 0.3;
-  private int randomSeed = 0;
 
   /**
    * Default constructor
@@ -64,6 +62,7 @@ public class SimulationEngine extends Simulator {
     col = decoder.getCols();
     initializeGrid();
     initializeModelConstructors(decoder.getModel());
+    simulationScreen.update(stateOfAllCells);
     updateCellState();
     runSimulation();
   }
@@ -84,9 +83,11 @@ public class SimulationEngine extends Simulator {
     if (game.equals("spreadingoffire")) {
       rules = new SpreadingOfFireRules();
     }
-    if (game.equals("watormodel")) {
-      rules = new WaTorModelRules(emptyRatio, populationRatio, randomSeed);
-      stateOfAllCells = gridManager.buildGridWithRandomSeed(emptyRatio, populationRatio, randomSeed, rules.getPossibleTypes());
+    if (game.equals("wator")) {
+   //   rules = new WaTorModelRules(emptyRatio, populationRatio, randomSeed, energyFish, reproduceBoundary, sharkEnergy);
+      WaTorDecoder waTorDecoder = decoder.getWaTorDecoder();
+      rules = new WaTorModelRules(waTorDecoder.getEmptyRatio(), waTorDecoder.getFSRatio(), waTorDecoder.getSeed(), waTorDecoder.getEnergy(),waTorDecoder.getFishRate(), waTorDecoder.getSharkLives());
+      stateOfAllCells = gridManager.buildGridWithRandomSeed(waTorDecoder.getEmptyRatio(), waTorDecoder.getFSRatio(), waTorDecoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
       gridManager.printGrid(stateOfAllCells);
     }
     //need to be fixed for a better design
@@ -99,8 +100,10 @@ public class SimulationEngine extends Simulator {
 
   @Override
   public void updateCellState() {
+
     simulationScreen.update(stateOfAllCells);
     stateOfAllCells = rules.judgeStateOfEachCell(stateOfAllCells);
+
     gridManager.updateGrid(stateOfAllCells);
     //gridManager.printGrid();
   }

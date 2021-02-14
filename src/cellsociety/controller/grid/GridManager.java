@@ -55,20 +55,23 @@ public class GridManager {
     return stateOfCells;
   }
 
-  public State[][] buildGridWithRandomSeed(double emptyRatio, double populationRatio, int seed, ArrayList<String> possibleTypes){
+  public State[][] buildGridWithRandomSeed(double emptyRatio, double populationRatio, int seed, ArrayList<String> possibleTypes, ArrayList<String> possibleColors){
+    System.out.println("FEAWFEW" + emptyRatio);
+    System.out.println("????" + (emptyRatio + (1-emptyRatio) * populationRatio));
     Random random = new Random(seed);
     State[][] stateOfCells = new State[row][col];
     for (int r = 0; r < row; r++) {
       for (int c = 0; c < col; c++) {
         double probability = random.nextDouble();
+  //      System.out.println(probability);
         if(probability < emptyRatio){
-          State state = new State(r, c, EMPTY);
+          State state = new State(r, c, possibleTypes.get(0), possibleColors.get(0), 0);
           stateOfCells[r][c] = state;
-        }else if(probability < emptyRatio + (1-emptyRatio)*populationRatio){
-          State state = new State(r, c, possibleTypes.get(1));
+        }else if(probability < emptyRatio + (1-emptyRatio) * populationRatio){
+          State state = new State(r, c, possibleTypes.get(1), possibleColors.get(1), 0);
           stateOfCells[r][c] = state;
         }else{
-          State state = new State(r, c, possibleTypes.get(2));
+          State state = new State(r, c, possibleTypes.get(2), possibleColors.get(2), 0);
           stateOfCells[r][c] = state;
         }
       }
