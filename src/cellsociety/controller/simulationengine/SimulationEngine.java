@@ -33,8 +33,10 @@ public class SimulationEngine extends Simulator {
   private int sleepTimer = 0;
 
 
+  private double probsOfFire = 0.5;
+  private double popRatio = 0.9;
+  private int randseed = 1414;
 
-  private double THRESHHOLD = 0.5;
 
   /**
    * Default constructor
@@ -69,7 +71,10 @@ public class SimulationEngine extends Simulator {
     row = decoder.getRows();
     col = decoder.getCols();
     initializeGrid();
-    initializeModelConstructors(decoder.getModel());
+
+    //initializeModelConstructors(decoder.getModel());
+
+    initializeModelConstructors("spreadingoffire");
     simulationScreen.update(stateOfAllCells);
     simulationScreen.setDescription(decoder.getMyDesc());
     runSimulation();
@@ -79,7 +84,7 @@ public class SimulationEngine extends Simulator {
 
     if (game.equals("gameOfLife")) {
       rules = new GameOfLifeRule();
-      template = constructStartingStateForSimulation(decoder.getGOLDecoder().getCoords());
+      template = constructStartingStateForSimulation(decoder.getGOLDecoder().getMyCoords());
       stateOfAllCells = gridManager
               .buildGridWithTemplate(template, rules.getStartingPositionCellType());
     }
@@ -96,7 +101,11 @@ public class SimulationEngine extends Simulator {
 
     }
     if (game.equals("spreadingoffire")) {
-      rules = new SpreadingOfFireRules();
+      rules = new SpreadingOfFireRules(popRatio, randseed, probsOfFire);
+      ArrayList<String> dummy = new ArrayList<>();
+      stateOfAllCells = gridManager
+          .buildGridWithRandomSeed(0.1, popRatio,
+              randseed, rules.getPossibleTypes(), rules.getPossibleColors());
     }
     if (game.equals("wator")) {
       //   rules = new WaTorModelRules(emptyRatio, populationRatio, randomSeed, energyFish, reproduceBoundary, sharkEnergy);
