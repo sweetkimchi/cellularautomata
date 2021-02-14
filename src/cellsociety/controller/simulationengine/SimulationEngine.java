@@ -74,8 +74,8 @@ public class SimulationEngine extends Simulator {
 
     initializeModelConstructors(decoder.getModel());
 
-    //  initializeModelConstructors("spreadingoffire");
-    simulationScreen.update(stateOfAllCells);
+  //  initializeModelConstructors("spreadingoffire");
+    simulationScreen.update(stateOfAllCells, decoder.getModel());
     simulationScreen.setDescription(decoder.getMyDesc());
     runSimulation();
   }
@@ -134,7 +134,7 @@ public class SimulationEngine extends Simulator {
   public void updateCellState() {
     stateOfAllCells = rules.judgeStateOfEachCell(stateOfAllCells);
     gridManager.updateGrid(stateOfAllCells);
-    simulationScreen.update(stateOfAllCells);
+    simulationScreen.update(stateOfAllCells, decoder.getModel());
   }
 
   public State[][] getStateOfAllCells() {
@@ -154,7 +154,7 @@ public class SimulationEngine extends Simulator {
         sleepTimer = 0;
       }
     };
-    simulationScreen.update(stateOfAllCells);
+    simulationScreen.update(stateOfAllCells,decoder.getModel());
   }
 
   public void startSimulation() {
