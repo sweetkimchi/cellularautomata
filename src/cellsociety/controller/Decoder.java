@@ -16,7 +16,6 @@ public class Decoder {
   public static final String NUM_ROWS = "numRows";
   public static final String NUM_COLS = "numCols";
 
-  public static final String MODEL = "model";
   private GOLDecoder golDecoder;
   private WaTorDecoder waTorDecoder;
   private String myDesc;
