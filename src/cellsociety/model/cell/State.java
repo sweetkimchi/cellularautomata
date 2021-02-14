@@ -4,7 +4,10 @@ package cellsociety.model.cell;
 import javafx.scene.paint.Paint;
 
 /**
+ * Purpose: stores all information about the state of a cell
+ * Assumptions:
  *
+ * @author Ji Yun Hyo
  */
 public class State {
 
@@ -17,7 +20,10 @@ public class State {
   private int ENERGY = 10;
 
   /**
-   * Default constructor Initializes the state of each cell according to the data fed
+   * Basic constructor
+   * @param xCoord xCoord associated with the state
+   * @param yCoord yCoord associated with the state
+   * @param type the type of the player
    */
   public State(int xCoord, int yCoord, String type) {
     this.xCoord = xCoord;
@@ -27,6 +33,14 @@ public class State {
     this.energy = ENERGY;
   }
 
+  /**
+   * Constructor with more variations other than number of moves
+   * @param xCoord xCoord associated with the state
+   * @param yCoord yCoord associated with the state
+   * @param type the type of the player (e.g. agent x, agent y)
+   * @param colorString color of the state
+   * @param numberOfMoves the current, cumulative number of moves
+   */
   public State(int xCoord, int yCoord, String type, String colorString, int numberOfMoves) {
     this.xCoord = xCoord;
     this.yCoord = yCoord;
@@ -36,6 +50,15 @@ public class State {
     color = Paint.valueOf(colorString);
   }
 
+  /**
+   * Constructor with more variations other than number of moves
+   * @param xCoord xCoord associated with the state
+   * @param yCoord yCoord associated with the state
+   * @param type the type of the player (e.g. agent x, agent y)
+   * @param colorString color of the state
+   * @param numberOfMoves the current, cumulative number of moves
+   * @param energy the current energy
+   */
   public State(int xCoord, int yCoord, String type, String colorString, int numberOfMoves, int energy) {
     this.xCoord = xCoord;
     this.yCoord = yCoord;
@@ -49,14 +72,16 @@ public class State {
     color = Paint.valueOf(colorName);
   }
 
-  public void checkAliveAndColor() {
-
-  }
-
+  /**
+   * @return xCoord associated with the state
+   */
   public int getxCoord() {
     return xCoord;
   }
 
+  /**
+   * @return yCoord associated with the sates
+   */
   public int getyCoord() {
     return yCoord;
   }

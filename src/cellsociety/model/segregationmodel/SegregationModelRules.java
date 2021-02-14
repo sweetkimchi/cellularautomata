@@ -6,7 +6,11 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
+ * Purpose: This class contains the rules for the segregation model. Rules include the types of the players as well as logic to update each cell.
+ * Assumptions: xml file is correctly formatted and supplies the correct information to the constructor.
+ * Dependencies: Depends on GridManager to provide it with the grid to work with.
  *
+ * @author Ji Yun Hyo
  */
 public class SegregationModelRules extends Rules {
 
@@ -25,7 +29,7 @@ public class SegregationModelRules extends Rules {
   /**
    * Default constructor
    */
-  public SegregationModelRules(double populationRatio, long randomSeed, double THRESHHOLD) {
+  public SegregationModelRules(long randomSeed, double THRESHHOLD) {
     random = new Random(randomSeed);
     possibleTypes = new ArrayList<>();
     possibleColors = new ArrayList<>();
@@ -69,8 +73,13 @@ public class SegregationModelRules extends Rules {
     System.out.println();
   }
 
-
-
+  /**
+   * Purpose: Judges each of the cells according to the logic of the game
+   * Assumptions: statesOfAllCells correctly contains all valid states
+   *
+   * @param statesOfAllCells starting states of all cells
+   * @return the updated states of all cells
+   */
   public State[][] judgeStateOfEachCell(State[][] statesOfAllCells) {
     int[][] numberOfAGENTXNeighbors = numberOfAliveNeighbors(statesOfAllCells, AGENTX);
     int[][] numberOfAGENTYNeighbors = numberOfAliveNeighbors(statesOfAllCells, AGENTY);
@@ -148,11 +157,19 @@ public class SegregationModelRules extends Rules {
     return null;
   }
 
+  /**
+   * returns the possible types (e.g. agent x, agent y, empty)
+   * @return arraylist of possible types
+   */
   @Override
   public ArrayList<String> getPossibleTypes() {
     return possibleTypes;
   }
 
+  /**
+   * Returns the possible colors for each type
+   * @return arraylist of colors
+   */
   @Override
   public ArrayList<String> getPossibleColors() {
     return possibleColors;

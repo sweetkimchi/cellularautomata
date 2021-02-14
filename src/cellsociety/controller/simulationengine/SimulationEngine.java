@@ -96,8 +96,8 @@ public class SimulationEngine{
     }
     if (game.equals("segregationmodel")) {
       SegDecoder segDecoder = decoder.getSegDecoder();
-      rules = new SegregationModelRules(segDecoder.getPopRatio(),
-              segDecoder.getRandSeed(), segDecoder.getSatThresh());
+      rules = new SegregationModelRules(
+          segDecoder.getRandSeed(), segDecoder.getSatThresh());
       stateOfAllCells = gridManager
               .buildGridWithRandomSeed(segDecoder.getEmptyRatio(), segDecoder.getPopRatio(),
                       segDecoder.getRandSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
