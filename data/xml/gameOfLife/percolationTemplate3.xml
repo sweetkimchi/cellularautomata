@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<data game="game">
+  <author>Jiyun</author>
+  <description></description>
+  <numCols>50</numCols>
+  <numRows>50</numRows>
+  <watertoemptyratio>0.2</watertoemptyratio>
+  <blockratio>0.9</blockratio>
+  <randomseed>321</randomseed>
+  <template>random_one</template>
+  <title>Percolation</title>
+  <model>percolation</model>
+</data>
