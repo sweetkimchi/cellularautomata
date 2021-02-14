@@ -14,7 +14,7 @@ import javafx.scene.layout.VBox;
  */
 public class SidePanel {
 
-  private static final double MAX_WIDTH = 170;
+  private static final double MAX_WIDTH = 220;
 
   private VBox pane;
   private Label desc;
@@ -26,9 +26,6 @@ public class SidePanel {
     pane = new VBox();
 
     pane.setPadding(new Insets(5, 5, 5, 5));
-    //pane.setVgap(4);
-    //pane.setHgap(4);
-    //pane.setPrefWrapLength(MAX_WIDTH);
 
     pane.setAlignment(Pos.CENTER_LEFT);
   }
@@ -47,10 +44,13 @@ public class SidePanel {
     addNodesToPane(desc);
   }
 
-  public void removeDescription() {
-    if (desc != null) {
-      pane.getChildren().remove(desc);
-    }
+  public String removeDescription() {
+    if (desc == null) return "";
+
+    pane.getChildren().remove(desc);
+    String ret = desc.getText();
+    desc = null;
+    return ret;
   }
 
 }

@@ -45,8 +45,6 @@ public class SimulationEngine extends Simulator {
    */
   public SimulationEngine() {
     simulationScreen = new SimulationScreen(new Stage(), this);
-    //initializeDecoder();
-    //initializeData();
   }
 
   private ArrayList<State> constructStartingStateForSimulation(ArrayList<String> coordinates) {
@@ -134,11 +132,8 @@ public class SimulationEngine extends Simulator {
 
   @Override
   public void updateCellState() {
-
-    gridManager.printGrid(stateOfAllCells);
     stateOfAllCells = rules.judgeStateOfEachCell(stateOfAllCells);
     gridManager.updateGrid(stateOfAllCells);
-    //gridManager.printGrid();
     simulationScreen.update(stateOfAllCells);
   }
 

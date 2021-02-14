@@ -53,7 +53,7 @@ public class SimulationScreen {
     initialize();
   }
 
-  public void initialize() {
+  private void initialize() {
     BorderPane root = new BorderPane();
     gridGraphics = new GridGraphics();
     sidePanel = new SidePanel();
@@ -81,15 +81,19 @@ public class SimulationScreen {
     Button resetButton = makeButton("ResetCommand", event -> {
       if (simulationEngine.decoderInitialized()) {
         gridGraphics.reset();
+        sidePanel.removeDescription();
         simulationEngine.stopSimulation();
         simulationEngine.initializeData();
       }
     });
     Button loadNewButton = makeButton("LoadNewCommand", event -> {
       simulationEngine.stopSimulation();
-      sidePanel.removeDescription();
+      String desc = sidePanel.removeDescription();
       simulationEngine.initializeDecoder();
-      simulationEngine.initializeData();
+      if (simulationEngine.decoderInitialized()) {
+        simulationEngine.initializeData();
+      }
+      else sidePanel.setDescription(desc);
     });
 
     sidePanel.addNodesToPane(startButton,stopButton,stepButton,resetButton,loadNewButton);
