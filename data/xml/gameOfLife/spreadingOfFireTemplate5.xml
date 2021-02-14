@@ -6,10 +6,10 @@
   <numRows>50</numRows>
   <shapeCoords>21,20,20,21,21,21,22,21</shapeCoords>
   <template>basicfire</template>
-  <probsOfCatch>0.3</probsOfCatch>
-  <randomseed>100</randomseed>
+  <probsOfCatch>0.5</probsOfCatch>
+  <randomseed>14</randomseed>
   <emptyratio>0.1</emptyratio>
-  <treeratio>0.8</treeratio>
+  <treeratio>0.99</treeratio>
   <title>Spreading of Fire</title>
   <model>spreadingoffire</model>
 </data>
