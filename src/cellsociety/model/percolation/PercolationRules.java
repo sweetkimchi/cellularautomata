@@ -42,4 +42,9 @@ public class PercolationRules extends Rules {
     return null;
   }
 
+  @Override
+  public ArrayList<String> getPossibleColors() {
+    return null;
+  }
+
 }

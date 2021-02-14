@@ -41,5 +41,10 @@ public class SpreadingOfFireRules extends Rules {
     return null;
   }
 
+  @Override
+  public ArrayList<String> getPossibleColors() {
+    return null;
+  }
+
 
 }

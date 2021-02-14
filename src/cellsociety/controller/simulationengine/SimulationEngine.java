@@ -1,6 +1,7 @@
 package cellsociety.controller.simulationengine;
 
 import cellsociety.controller.Decoder;
+import cellsociety.controller.WaTorDecoder;
 import cellsociety.controller.grid.GridManager;
 import cellsociety.controller.grid.Simulator;
 import cellsociety.model.cell.State;
@@ -25,16 +26,7 @@ public class SimulationEngine extends Simulator {
   private State[][] stateOfAllCells;
   private ArrayList<State> template;
   private Decoder decoder;
-<<<<<<< HEAD
   private AnimationTimer animation;
-  private double populationRatio = 0.3;
-  private double emptyRatio = 0.3;
-  private int randomSeed = 0;
-=======
-  private double populationRatio = 0.1;
-  private double emptyRatio = 0.4;
-  private int randomSeed = 100;
->>>>>>> ef6c79ba1476e7bed7b9e8761cfbd87f30db6146
 
   /**
    * Default constructor
@@ -91,9 +83,11 @@ public class SimulationEngine extends Simulator {
     if (game.equals("spreadingoffire")) {
       rules = new SpreadingOfFireRules();
     }
-    if (game.equals("watormodel")) {
-      rules = new WaTorModelRules(emptyRatio, populationRatio, randomSeed);
-      stateOfAllCells = gridManager.buildGridWithRandomSeed(emptyRatio, populationRatio, randomSeed, rules.getPossibleTypes());
+    if (game.equals("wator")) {
+   //   rules = new WaTorModelRules(emptyRatio, populationRatio, randomSeed, energyFish, reproduceBoundary, sharkEnergy);
+      WaTorDecoder waTorDecoder = decoder.getWaTorDecoder();
+      rules = new WaTorModelRules(waTorDecoder.getEmptyRatio(), waTorDecoder.getFSRatio(), waTorDecoder.getSeed(), waTorDecoder.getEnergy(),waTorDecoder.getFishRate(), waTorDecoder.getSharkLives());
+      stateOfAllCells = gridManager.buildGridWithRandomSeed(waTorDecoder.getEmptyRatio(), waTorDecoder.getFSRatio(), waTorDecoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
       gridManager.printGrid(stateOfAllCells);
     }
     //need to be fixed for a better design
