@@ -11,7 +11,6 @@ import javafx.stage.FileChooser.ExtensionFilter;
  * @author Shaw Phillips
  */
 public class Decoder {
-
   public static final String DATA_FILE_EXTENSION = "*.xml";
   public final static FileChooser FILE_CHOOSER = makeChooser(DATA_FILE_EXTENSION);
   public static final String TITLE = "title";
@@ -41,7 +40,7 @@ public class Decoder {
     return result;
   }
   /**
-   *  Open window to choose XML file, initialize universal parameters, and determine the model
+   *  Open window to choose XML file, initialize parser, parse universal values, and determine the model
    */
   public void readValuesFromXMLFile() {
     File dataFile = FILE_CHOOSER.showOpenDialog(null);
@@ -90,24 +89,39 @@ public class Decoder {
   public PercDecoder getPercDecoder(){
     return percDecoder;
   }
+  /**
+   * @return model name
+   */
   public String getModel() {
     return myModel;
   }
+  /**
+   * @return title
+   */
   public String getTitle() {
     return myTitle;
   }
+  /**
+   * @return author
+   */
   public String getAuthor() {
     return myAuthor;
   }
-  public String getDesc(){
-    return myDesc;
-  }
+  /**
+   * @return number of rows
+   */
   public int getRows() {
     return myRows;
   }
+  /**
+   * @return number of columns
+   */
   public int getCols() {
     return myCols;
   }
+  /**
+   * @return description
+   */
   public String getMyDesc() {
     return myDesc;
   }
