@@ -41,7 +41,7 @@ public class SegregationModelRules extends Rules {
     System.out.println(type);
     for (int x = 0; x < statesOfAllCells.length; x++) {
       for (int y = 0; y < statesOfAllCells[0].length; y++) {
-        if(statesOfAllCells[x][y].type.equals(EMPTY)){
+        if(statesOfAllCells[x][y].type.equals(EMPTY) && emptyNeighbors[x][y] == 1){
           statesOfAllCells[x][y] = new State(x,y,type);
           setColor(statesOfAllCells[x][y]);
           return;
