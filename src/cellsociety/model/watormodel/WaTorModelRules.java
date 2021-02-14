@@ -102,8 +102,6 @@ public class WaTorModelRules extends Rules {
 
     //each time lose one energy
     //each time gain one move
-    statesOfAllCells[xCoord][yCoord].numberOfMoves += 1;
-    statesOfAllCells[xCoord][yCoord].energy -= 1;
 
     System.out.println("ENERGY: " + statesOfAllCells[xCoord][yCoord].energy);
 
@@ -146,24 +144,26 @@ public class WaTorModelRules extends Rules {
     //check if there are any adjacent fish cells
     if (!fishCells.isEmpty()) {
       if (statesOfAllCells[xCoord][yCoord].numberOfMoves > REPRODUCE_BOUNDARY) {
+        //if ready to reproduce, then reproduce after eating fish
         int index = random.nextInt(fishCells.size());
         State dummy = fishCells.get(index);
         statesOfAllCells[dummy.getxCoord()][dummy.getyCoord()] = new State(dummy.getxCoord(),
-            dummy.getyCoord(), SHARK, SHARK_COLOR, 0, DEFAULT_ENERGY);
+            dummy.getyCoord(), SHARK, SHARK_COLOR, 0, statesOfAllCells[xCoord][yCoord].energy + ENERGY_FROM_FISH - 1);
 
         setColor(statesOfAllCells[dummy.getxCoord()][dummy.getyCoord()]);
 
         return new State(xCoord, yCoord, SHARK, SHARK_COLOR, 0, DEFAULT_ENERGY);
       } else {
+        //move to a fish but don't reproduce
         int index = random.nextInt(fishCells.size());
         State dummy = fishCells.get(index);
         statesOfAllCells[dummy.getxCoord()][dummy.getyCoord()] = new State(dummy.getxCoord(),
-            dummy.getyCoord(), SHARK, SHARK_COLOR, statesOfAllCells[xCoord][yCoord].numberOfMoves,
-            statesOfAllCells[xCoord][yCoord].energy + ENERGY_FROM_FISH);
+            dummy.getyCoord(), SHARK, SHARK_COLOR, statesOfAllCells[xCoord][yCoord].numberOfMoves + 1,
+            statesOfAllCells[xCoord][yCoord].energy + ENERGY_FROM_FISH - 1);
 
         setColor(statesOfAllCells[dummy.getxCoord()][dummy.getyCoord()]);
 
-        return new State(xCoord, yCoord, EMPTY, EMPTY_COLOR, 0);
+        return new State(xCoord, yCoord, EMPTY, EMPTY_COLOR, 0, 0);
       }
     }
 
@@ -171,16 +171,18 @@ public class WaTorModelRules extends Rules {
 
     //if the shark is not dead, but nowhere to move just return
     if (emptyCells.isEmpty()) {
-      return statesOfAllCells[xCoord][yCoord];
+      return new State(xCoord, yCoord, EMPTY, EMPTY_COLOR, statesOfAllCells[xCoord][yCoord].numberOfMoves,
+          statesOfAllCells[xCoord][yCoord].energy - 1);
     } else {
       //if the shark is not dead and there is a room to move
       int index = random.nextInt(emptyCells.size());
       State dummy = emptyCells.get(index);
       statesOfAllCells[dummy.getxCoord()][dummy.getyCoord()] = new State(dummy.getxCoord(),
-          dummy.getyCoord(), SHARK, SHARK_COLOR, statesOfAllCells[xCoord][yCoord].numberOfMoves);
+          dummy.getyCoord(), SHARK, SHARK_COLOR, statesOfAllCells[xCoord][yCoord].numberOfMoves + 1, statesOfAllCells[xCoord][yCoord].energy - 1);
       setColor(statesOfAllCells[dummy.getxCoord()][dummy.getyCoord()]);
 
-      return new State(xCoord, yCoord, EMPTY, EMPTY_COLOR, 0);
+      return new State(xCoord, yCoord, EMPTY, EMPTY_COLOR, 0,
+          0);
     }
   }
 
@@ -191,7 +193,7 @@ public class WaTorModelRules extends Rules {
     for (int x = 0; x < statesOfAllCells.length; x++) {
       for (int y = 0; y < statesOfAllCells[0].length; y++) {
         if (statesOfAllCells[x][y].type.equals(FISH)) {
-    //      statesOfAllCells[x][y] = decideFishState(statesOfAllCells, x, y,statesOfAllCells[x][y].type);
+          statesOfAllCells[x][y] = decideFishState(statesOfAllCells, x, y,statesOfAllCells[x][y].type);
         } else if (statesOfAllCells[x][y].type.equals(SHARK)) {
           statesOfAllCells[x][y] = decideSharkState(statesOfAllCells, x, y,
               statesOfAllCells[x][y].type);

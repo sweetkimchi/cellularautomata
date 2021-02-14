@@ -64,6 +64,7 @@ public class SimulationEngine extends Simulator {
     col = decoder.getCols();
     initializeGrid();
     initializeModelConstructors(decoder.getModel());
+    simulationScreen.update(stateOfAllCells);
     updateCellState();
     runSimulation();
   }
@@ -99,8 +100,10 @@ public class SimulationEngine extends Simulator {
 
   @Override
   public void updateCellState() {
+
     simulationScreen.update(stateOfAllCells);
     stateOfAllCells = rules.judgeStateOfEachCell(stateOfAllCells);
+
     gridManager.updateGrid(stateOfAllCells);
     //gridManager.printGrid();
   }
