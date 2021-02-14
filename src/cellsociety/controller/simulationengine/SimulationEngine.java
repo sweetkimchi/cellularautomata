@@ -79,7 +79,7 @@ public class SimulationEngine extends Simulator {
 
     if (game.equals("gameOfLife")) {
       rules = new GameOfLifeRule();
-      template = constructStartingStateForSimulation(decoder.getGOLDecoder().getMyCoords());
+      template = constructStartingStateForSimulation(decoder.getGOLDecoder().getCoords());
       stateOfAllCells = gridManager
               .buildGridWithTemplate(template, rules.getStartingPositionCellType());;
       updateCellState();
@@ -89,11 +89,11 @@ public class SimulationEngine extends Simulator {
     }
     if (game.equals("segregationmodel")) {
       SegDecoder segDecoder = decoder.getSegDecoder();
-      rules = new SegregationModelRules(segDecoder.getMyPopRatio(),
-              segDecoder.getMyRandSeed(), segDecoder.getMySatThresh());
+      rules = new SegregationModelRules(segDecoder.getPopRatio(),
+              segDecoder.getRandSeed(), segDecoder.getSatThresh());
       stateOfAllCells = gridManager
-              .buildGridWithRandomSeed(0.4, segDecoder.getMyPopRatio(),
-                      segDecoder.getMyRandSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
+              .buildGridWithRandomSeed(0.4, segDecoder.getPopRatio(),
+                      segDecoder.getRandSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
 
     }
     if (game.equals("spreadingoffire")) {

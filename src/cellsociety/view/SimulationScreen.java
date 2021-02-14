@@ -2,6 +2,9 @@ package cellsociety.view;
 
 import cellsociety.controller.simulationengine.SimulationEngine;
 import cellsociety.model.cell.State;
+import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -15,9 +18,13 @@ import javafx.stage.Stage;
  */
 public class SimulationScreen {
 
+  private static final String language = "English";
+  public static final String DEFAULT_RESOURCE_PACKAGE = "cellsociety.view.resources.";
+  public static final String DEFAULT_RESOURCE_FOLDER = "/" + DEFAULT_RESOURCE_PACKAGE.replace(".", "/");
+  private ResourceBundle resources;
+
   public static final int WINDOW_WIDTH = 800;
   public static final int WINDOW_HEIGHT = 600;
-  private static final String WINDOW_TITLE = "Cell Society Simulation";
   private final Group sceneNodes;
   private final Stage stage;
   public CellGraphics cellGraphics;
@@ -41,6 +48,7 @@ public class SimulationScreen {
     this.stage = stage;
     simulationEngine = engine;
     sceneNodes = new Group();
+    resources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + language);
     initialize();
   }
 
@@ -52,7 +60,7 @@ public class SimulationScreen {
     root.setRight(gridGraphics.getGridPane());
     root.setLeft(sidePanel.getPane());
 
-    stage.setTitle(WINDOW_TITLE);
+    stage.setTitle(resources.getString("SimulationTitle"));
     scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
     stage.setScene(scene);
     stage.show();
@@ -60,26 +68,21 @@ public class SimulationScreen {
   }
   private void createButtons() {
     // Add buttons
-    Button startButton = new Button("Start");
-    startButton.setOnAction(event -> simulationEngine.startSimulation());
-    Button stopButton = new Button("Stop");
-    stopButton.setOnAction(event -> simulationEngine.stopSimulation());
-    Button stepButton = new Button("Step");
-    stepButton.setOnAction(event -> {
+    Button startButton = makeButton("StartCommand", event -> simulationEngine.startSimulation());
+    Button stopButton = makeButton("StopCommand",event -> simulationEngine.stopSimulation());
+    Button stepButton = makeButton("StepCommand",event -> {
       if (simulationEngine.decoderInitialized()) {
         simulationEngine.updateCellState();
       }
     });
-    Button resetButton = new Button("Reset");
-    resetButton.setOnAction(event -> {
+    Button resetButton = makeButton("ResetCommand", event -> {
       if (simulationEngine.decoderInitialized()) {
         gridGraphics.reset();
         simulationEngine.stopSimulation();
         simulationEngine.initializeData();
       }
     });
-    Button loadNewButton = new Button("Load New");
-    loadNewButton.setOnAction(event -> {
+    Button loadNewButton = makeButton("LoadNewCommand", event -> {
       simulationEngine.stopSimulation();
       sidePanel.removeDescription();
       simulationEngine.initializeDecoder();
@@ -89,12 +92,19 @@ public class SimulationScreen {
     sidePanel.addNodesToPane(startButton,stopButton,stepButton,resetButton,loadNewButton);
 
     // Add slider
-    slider = new Slider(MIN_SPEED,MAX_SPEED,DEFAULT_SPEED);
     Label label = new Label();
-    label.setText("Speed");
+    label.setText(resources.getString("SpeedLabel"));
+    slider = new Slider(MIN_SPEED,MAX_SPEED,DEFAULT_SPEED);
 
     sidePanel.addNodesToPane(label,slider);
 
+  }
+
+  private Button makeButton(String property, EventHandler<ActionEvent> handler) {
+    Button button = new Button();
+    button.setText(resources.getString(property));
+    button.setOnAction(handler);
+    return button;
   }
 
   public void setDescription(String description) {
