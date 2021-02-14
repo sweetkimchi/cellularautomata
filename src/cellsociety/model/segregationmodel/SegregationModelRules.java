@@ -13,23 +13,18 @@ public class SegregationModelRules extends Rules {
   private final String AGENTX_COLOR = "red";
   private final String AGENTY_COLOR = "blue";
   private final String EMPTY_COLOR = "lightgrey";
-  private double emptyRatio;
-  private double populationRatio;
   private ArrayList<String> possibleTypes;
   private ArrayList<String> possibleColors;
   private String AGENTX = "agentx";
   private String AGENTY = "agenty";
   private String EMPTY = "empty";
-  private double THRESHHOLD = 0.3;
-  private Random random;
+  private double THRESHHOLD;
 
   /**
    * Default constructor
    */
-  public SegregationModelRules(double emptyRatio, double populationRatio, long randomSeed) {
-    this.emptyRatio = emptyRatio;
-    this.populationRatio = populationRatio;
-    random = new Random(randomSeed);
+  public SegregationModelRules(double populationRatio, long randomSeed, double THRESHHOLD) {
+    Random random = new Random(randomSeed);
     possibleTypes = new ArrayList<>();
     possibleColors = new ArrayList<>();
     possibleTypes.add(EMPTY);
@@ -38,6 +33,7 @@ public class SegregationModelRules extends Rules {
     possibleColors.add(EMPTY_COLOR);
     possibleColors.add(AGENTY_COLOR);
     possibleColors.add(AGENTX_COLOR);
+    this.THRESHHOLD = THRESHHOLD;
   }
 
   private void decideState(State[][] statesOfAllCells, String type, int[][] emptyNeighbors) {
