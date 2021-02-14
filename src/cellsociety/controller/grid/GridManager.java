@@ -87,10 +87,10 @@ public class GridManager {
   public void printGrid(State[][] stateOfCells) {
     for (int x = 0; x < row; x++) {
       for (int y = 0; y < col; y++) {
-        if (stateOfCells[x][y].type.equals("shark")) {
-                     System.out.print(" S ");
-        } else if(stateOfCells[x][y].type.equals("fish")){
-                      System.out.print(" F ");
+        if (stateOfCells[y][x].type.equals("agentx")) {
+                     System.out.print(" X ");
+        } else if(stateOfCells[y][x].type.equals("agenty")){
+                      System.out.print(" Y ");
         }
         else{
           System.out.print(" E ");

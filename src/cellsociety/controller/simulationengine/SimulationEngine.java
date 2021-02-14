@@ -51,6 +51,7 @@ public class SimulationEngine extends Simulator {
     decoder = new Decoder();
     decoder.readValuesFromXMLFile();
   }
+
   public boolean decoderInitialized() {
     return (decoder != null);
   }
@@ -72,23 +73,33 @@ public class SimulationEngine extends Simulator {
     if (game.equals("gameOfLife")) {
       rules = new GameOfLifeRule();
       template = constructStartingStateForSimulation(decoder.getGOLDecoder().getMyCoords());
-      stateOfAllCells = gridManager.buildGridWithTemplate(template, rules.getStartingPositionCellType());
+      stateOfAllCells = gridManager
+          .buildGridWithTemplate(template, rules.getStartingPositionCellType());
     }
     if (game.equals("percolation")) {
       rules = new PercolationRules();
     }
-    if (game.equals("segregationmodel")) {
-      rules = new SegregationModelRules();
+    if (game.equals("wator")) {
+      WaTorDecoder waTorDecoder = decoder.getWaTorDecoder();
+      rules = new SegregationModelRules(waTorDecoder.getEmptyRatio(), waTorDecoder.getFSRatio(),
+          waTorDecoder.getSeed());
+      stateOfAllCells = gridManager
+          .buildGridWithRandomSeed(waTorDecoder.getEmptyRatio(), waTorDecoder.getFSRatio(),
+              waTorDecoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
+
     }
     if (game.equals("spreadingoffire")) {
       rules = new SpreadingOfFireRules();
     }
-    if (game.equals("wator")) {
-   //   rules = new WaTorModelRules(emptyRatio, populationRatio, randomSeed, energyFish, reproduceBoundary, sharkEnergy);
+    if (game.equals("wator1")) {
+      //   rules = new WaTorModelRules(emptyRatio, populationRatio, randomSeed, energyFish, reproduceBoundary, sharkEnergy);
       WaTorDecoder waTorDecoder = decoder.getWaTorDecoder();
-      rules = new WaTorModelRules(waTorDecoder.getEmptyRatio(), waTorDecoder.getFSRatio(), waTorDecoder.getSeed(), waTorDecoder.getEnergy(),waTorDecoder.getFishRate(), waTorDecoder.getSharkLives());
-      stateOfAllCells = gridManager.buildGridWithRandomSeed(waTorDecoder.getEmptyRatio(), waTorDecoder.getFSRatio(), waTorDecoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
-      gridManager.printGrid(stateOfAllCells);
+      rules = new WaTorModelRules(waTorDecoder.getEmptyRatio(), waTorDecoder.getFSRatio(),
+          waTorDecoder.getSeed(), waTorDecoder.getEnergy(), waTorDecoder.getFishRate(),
+          waTorDecoder.getSharkLives());
+      stateOfAllCells = gridManager
+          .buildGridWithRandomSeed(waTorDecoder.getEmptyRatio(), waTorDecoder.getFSRatio(),
+              waTorDecoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
     }
     //need to be fixed for a better design
   }
@@ -101,8 +112,8 @@ public class SimulationEngine extends Simulator {
   @Override
   public void updateCellState() {
 
+    gridManager.printGrid(stateOfAllCells);
     stateOfAllCells = rules.judgeStateOfEachCell(stateOfAllCells);
-
     gridManager.updateGrid(stateOfAllCells);
     //gridManager.printGrid();
     simulationScreen.update(stateOfAllCells);
@@ -118,15 +129,18 @@ public class SimulationEngine extends Simulator {
       @Override
       public void handle(long now) {
         updateCellState();
+
       }
     };
     simulationScreen.update(stateOfAllCells);
   }
+
   public void startSimulation() {
     if (animation != null) {
       animation.start();
     }
   }
+
   public void stopSimulation() {
     if (animation != null) {
       animation.stop();
