@@ -1,6 +1,7 @@
 package cellsociety.controller.simulationengine;
 
 import cellsociety.controller.Decoder;
+import cellsociety.controller.SegDecoder;
 import cellsociety.controller.WaTorDecoder;
 import cellsociety.controller.grid.GridManager;
 import cellsociety.controller.grid.Simulator;
@@ -86,12 +87,12 @@ public class SimulationEngine extends Simulator {
       rules = new PercolationRules();
     }
     if (game.equals("segregationmodel")) {
-      WaTorDecoder waTorDecoder = decoder.getWaTorDecoder();
-      rules = new SegregationModelRules(waTorDecoder.getFSRatio(),
-              waTorDecoder.getSeed(), THRESHHOLD);
+      SegDecoder segDecoder = decoder.getSegDecoder();
+      rules = new SegregationModelRules(segDecoder.getMyPopRatio(),
+              segDecoder.getMyRandSeed(), segDecoder.getMySatThresh());
       stateOfAllCells = gridManager
-              .buildGridWithRandomSeed(waTorDecoder.getEmptyRatio(), waTorDecoder.getFSRatio(),
-                      waTorDecoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
+              .buildGridWithRandomSeed(0.2, segDecoder.getMyPopRatio(),
+                      segDecoder.getMyRandSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
 
     }
     if (game.equals("spreadingoffire")) {

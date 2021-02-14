@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<data game="game">
+  <author>Jiyun</author>
+  <description></description>
+  <numCols>50</numCols>
+  <numRows>50</numRows>
+  <shapeCoords>21,20,20,21,21,21,22,21</shapeCoords>
+  <template>basicfire</template>
+  <probsOfCatch>0.3</probsOfCatch>
+  <randomseed>100</randomseed>
+  <title>Spreading of Fire</title>
+  <model>spreadingoffire</model>
+</data>

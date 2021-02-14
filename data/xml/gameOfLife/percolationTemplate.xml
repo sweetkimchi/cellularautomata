@@ -4,11 +4,10 @@
   <description></description>
   <numCols>50</numCols>
   <numRows>50</numRows>
-  <populationratio>0.5</populationratio>
-  <emptyratio>0.3</emptyratio>
-  <satisfactionthreshhold>0.4</satisfactionthreshhold>
+  <watertoemptyratio>0.5</watertoemptyratio>
+  <blockratio>0.3</blockratio>
   <randomseed>100</randomseed>
   <template>random_one</template>
-  <title>Segregation Model</title>
-  <model>segregationmodel</model>
+  <title>Percolation</title>
+  <model>percolation</model>
 </data>
