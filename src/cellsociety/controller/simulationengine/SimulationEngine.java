@@ -25,10 +25,16 @@ public class SimulationEngine extends Simulator {
   private State[][] stateOfAllCells;
   private ArrayList<State> template;
   private Decoder decoder;
+<<<<<<< HEAD
   private AnimationTimer animation;
   private double populationRatio = 0.3;
   private double emptyRatio = 0.3;
   private int randomSeed = 0;
+=======
+  private double populationRatio = 0.1;
+  private double emptyRatio = 0.4;
+  private int randomSeed = 100;
+>>>>>>> ef6c79ba1476e7bed7b9e8761cfbd87f30db6146
 
   /**
    * Default constructor
