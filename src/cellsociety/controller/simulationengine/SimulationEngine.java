@@ -81,7 +81,8 @@ public class SimulationEngine extends Simulator {
       rules = new GameOfLifeRule();
       template = constructStartingStateForSimulation(decoder.getGOLDecoder().getCoords());
       stateOfAllCells = gridManager
-              .buildGridWithTemplate(template, rules.getStartingPositionCellType());
+              .buildGridWithTemplate(template, rules.getStartingPositionCellType());;
+      updateCellState();
     }
     if (game.equals("percolation")) {
       rules = new PercolationRules();
