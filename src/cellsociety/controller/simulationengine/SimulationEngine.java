@@ -57,10 +57,6 @@ public class SimulationEngine extends Simulator {
   public boolean decoderInitialized() {
     return (decoder != null);
   }
-  public String getDescription() {
-    return decoder.getMyDesc();
-  }
-
 
   @Override
   public void initializeData() {
@@ -69,6 +65,7 @@ public class SimulationEngine extends Simulator {
     initializeGrid();
     initializeModelConstructors(decoder.getModel());
     simulationScreen.update(stateOfAllCells);
+    simulationScreen.setDescription(decoder.getMyDesc());
     runSimulation();
   }
 

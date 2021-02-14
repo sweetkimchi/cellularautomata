@@ -95,10 +95,11 @@ public class SimulationScreen {
 
     buttonGraphics.addNodesToPane(slider,label);
 
-    // Add description
-    //Text text = new Text(simulationEngine.getDescription());
-    //buttonGraphics.addNodesToPane(text);
+  }
 
+  public void setDescription(String description) {
+    Text text = new Text(description);
+    buttonGraphics.addNodesToPane(text);
   }
 
 
