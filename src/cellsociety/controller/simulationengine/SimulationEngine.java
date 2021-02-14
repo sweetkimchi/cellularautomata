@@ -117,8 +117,8 @@ public class SimulationEngine{
     if (game.equals("wator")) {
       //   rules = new WaTorModelRules(emptyRatio, populationRatio, randomSeed, energyFish, reproduceBoundary, sharkEnergy);
       WaTorDecoder waTorDecoder = decoder.getWaTorDecoder();
-      rules = new WaTorModelRules(waTorDecoder.getFSRatio(),
-              waTorDecoder.getSeed(), waTorDecoder.getEnergy(), waTorDecoder.getFishRate(),
+      rules = new WaTorModelRules(
+          waTorDecoder.getSeed(), waTorDecoder.getEnergy(), waTorDecoder.getFishRate(),
               waTorDecoder.getSharkLives());
       stateOfAllCells = gridManager
               .buildGridWithRandomSeed(waTorDecoder.getEmptyRatio(), waTorDecoder.getFSRatio(),
