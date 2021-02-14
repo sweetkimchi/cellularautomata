@@ -18,6 +18,7 @@ public class Decoder {
 
   private GOLDecoder golDecoder;
   private WaTorDecoder waTorDecoder;
+  private SegDecoder segDecoder;
   private String myDesc;
   private String myModel;
   private String myTitle;
@@ -44,12 +45,16 @@ public class Decoder {
     myModel = attributes.get(MODEL);
     if(myModel.equals("gameOfLife")){golDecoder = new GOLDecoder(attributes);}
     else if(myModel.equals("wator")) {waTorDecoder = new WaTorDecoder(attributes);}
+    else if(myModel.equals("segregationmodel")) {segDecoder = new SegDecoder(attributes);}
   }
   public GOLDecoder getGOLDecoder(){
     return golDecoder;
   }
   public WaTorDecoder getWaTorDecoder(){
     return waTorDecoder;
+  }
+  public SegDecoder getSegDecoder(){
+    return segDecoder;
   }
   public String getModel() {
     return myModel;
