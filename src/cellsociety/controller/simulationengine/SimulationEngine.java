@@ -30,6 +30,9 @@ public class SimulationEngine extends Simulator {
   private double emptyRatio = 0.3;
   private int randomSeed = 0;
 
+  private int frameDelay;
+  private int sleepTimer = 0;
+
   /**
    * Default constructor
    */
@@ -56,6 +59,9 @@ public class SimulationEngine extends Simulator {
   public boolean decoderInitialized() {
     return (decoder != null);
   }
+  public String getDescription() {
+    return decoder.getMyDesc();
+  }
 
 
   @Override
@@ -65,7 +71,6 @@ public class SimulationEngine extends Simulator {
     initializeGrid();
     initializeModelConstructors(decoder.getModel());
     simulationScreen.update(stateOfAllCells);
-    //updateCellState();
     runSimulation();
   }
 
@@ -117,7 +122,12 @@ public class SimulationEngine extends Simulator {
     animation = new AnimationTimer() {
       @Override
       public void handle(long now) {
+        if (sleepTimer < frameDelay) {
+          sleepTimer++;
+          return;
+        }
         updateCellState();
+        sleepTimer = 0;
       }
     };
     simulationScreen.update(stateOfAllCells);
@@ -130,6 +140,11 @@ public class SimulationEngine extends Simulator {
   public void stopSimulation() {
     if (animation != null) {
       animation.stop();
+    }
+  }
+  public void setSimulationSpeed(int s) {
+    if (frameDelay >= 0) {
+      frameDelay = 60 - s;
     }
   }
 

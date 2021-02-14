@@ -72,6 +72,10 @@ public class Decoder {
   public int getCols() {
     return myCols;
   }
+
+  public String getMyDesc() {
+    return myDesc;
+  }
 }
 
 
