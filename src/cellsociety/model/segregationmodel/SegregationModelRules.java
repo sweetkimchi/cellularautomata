@@ -19,12 +19,14 @@ public class SegregationModelRules extends Rules {
   private String AGENTY = "agenty";
   private String EMPTY = "empty";
   private double THRESHHOLD;
+  private Random random;
+  private int DELAY = 10000;
 
   /**
    * Default constructor
    */
   public SegregationModelRules(double populationRatio, long randomSeed, double THRESHHOLD) {
-    Random random = new Random(randomSeed);
+    random = new Random(randomSeed);
     possibleTypes = new ArrayList<>();
     possibleColors = new ArrayList<>();
     possibleTypes.add(EMPTY);
@@ -37,16 +39,21 @@ public class SegregationModelRules extends Rules {
   }
 
   private void decideState(State[][] statesOfAllCells, String type, int[][] emptyNeighbors) {
-
-    System.out.println(type);
-    for (int x = 0; x < statesOfAllCells.length; x++) {
-      for (int y = 0; y < statesOfAllCells[0].length; y++) {
-        if(statesOfAllCells[x][y].type.equals(EMPTY) && emptyNeighbors[x][y] == 1){
+    int counter = 0;
+    while(true){
+        int x = random.nextInt(statesOfAllCells.length);
+        int y = random.nextInt(statesOfAllCells[0].length);
+        if(statesOfAllCells[x][y].type.equals(EMPTY) && emptyNeighbors[x][y] == 1 && counter < DELAY){
           statesOfAllCells[x][y] = new State(x,y,type);
           setColor(statesOfAllCells[x][y]);
           return;
         }
-      }
+        else if(statesOfAllCells[x][y].type.equals(EMPTY) && counter >= DELAY){
+          statesOfAllCells[x][y] = new State(x,y,type);
+          setColor(statesOfAllCells[x][y]);
+          return;
+        }
+        counter++;
     }
 
   }
@@ -98,7 +105,7 @@ public class SegregationModelRules extends Rules {
       }
     }
     statesOfAllCells = relocateDissatisfiedNeighbors(dissatisfiedNeighbors,statesOfAllCells,emptyNeighbors);
-    printGrid(dissatisfiedNeighbors);
+ //   printGrid(dissatisfiedNeighbors);
     return statesOfAllCells;
   }
 

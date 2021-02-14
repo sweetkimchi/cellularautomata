@@ -56,8 +56,8 @@ public class GridManager {
   }
 
   public State[][] buildGridWithRandomSeed(double emptyRatio, double populationRatio, int seed, ArrayList<String> possibleTypes, ArrayList<String> possibleColors){
-    System.out.println("FEAWFEW" + emptyRatio);
-    System.out.println("????" + (emptyRatio + (1-emptyRatio) * populationRatio));
+//    System.out.println("FEAWFEW" + emptyRatio);
+//    System.out.println("????" + (emptyRatio + (1-emptyRatio) * populationRatio));
     Random random = new Random(seed);
     State[][] stateOfCells = new State[row][col];
     for (int r = 0; r < row; r++) {

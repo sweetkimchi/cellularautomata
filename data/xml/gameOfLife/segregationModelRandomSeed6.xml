@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <data game="game">
   <author>Jiyun</author>
-  <description></description>
+  <description>It can be seen that the higher the satisfaction threshhold, the more the agents tend to clumb together.</description>
   <numCols>50</numCols>
   <numRows>50</numRows>
   <populationratio>0.5</populationratio>
-  <emptyratio>0.9</emptyratio>
-  <satisfactionthreshhold>0.8</satisfactionthreshhold>
+  <emptyratio>0.3</emptyratio>
+  <satisfactionthreshhold>0.5</satisfactionthreshhold>
   <randomseed>100</randomseed>
   <template>random_one</template>
   <title>Segregation Model</title>

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <data game="game">
   <author>Jiyun</author>
-  <description></description>
+  <description>The dissatisfied ones quickly find a random place that ends up being a happy place.</description>
   <numCols>50</numCols>
   <numRows>50</numRows>
   <populationratio>0.5</populationratio>
-  <emptyratio>0</emptyratio>
-  <satisfactionthreshhold>0.2</satisfactionthreshhold>
+  <emptyratio>0.3</emptyratio>
+  <satisfactionthreshhold>0.3</satisfactionthreshhold>
   <randomseed>100</randomseed>
   <template>random_one</template>
   <title>Segregation Model</title>
