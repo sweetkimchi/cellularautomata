@@ -22,6 +22,7 @@ public class SimulationScreen {
   public static final String DEFAULT_RESOURCE_PACKAGE = "cellsociety.view.resources.";
   public static final String DEFAULT_RESOURCE_FOLDER = "/" + DEFAULT_RESOURCE_PACKAGE.replace(".", "/");
   private ResourceBundle resources;
+  public static final String STYLESHEET = "default.css";
 
   public static final int WINDOW_WIDTH = 800;
   public static final int WINDOW_HEIGHT = 600;
@@ -62,6 +63,8 @@ public class SimulationScreen {
 
     stage.setTitle(resources.getString("SimulationTitle"));
     scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
+    scene.getStylesheets().add(getClass().getResource(DEFAULT_RESOURCE_FOLDER + STYLESHEET).toExternalForm());
+
     stage.setScene(scene);
     stage.show();
 
