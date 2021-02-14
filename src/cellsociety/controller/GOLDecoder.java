@@ -20,7 +20,7 @@ public class GOLDecoder extends Decoder{
     public String getTemplate() {
         return myTemplateName;
     }
-    public ArrayList<String> getMyCoords(){
+    public ArrayList<String> getCoords(){
         return myCoords;
     }
 }
