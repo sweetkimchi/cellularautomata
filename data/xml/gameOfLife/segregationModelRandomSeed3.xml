@@ -5,7 +5,7 @@
   <numCols>50</numCols>
   <numRows>50</numRows>
   <populationratio>0.8</populationratio>
-  <emptyratio>0.1</emptyratio>
+  <emptyratio>0</emptyratio>
   <satisfactionthreshhold>0.2</satisfactionthreshhold>
   <randomseed>14</randomseed>
   <template>random_three</template>
