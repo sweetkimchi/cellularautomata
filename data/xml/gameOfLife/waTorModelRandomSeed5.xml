@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <data game="game">
   <author>Jiyun</author>
-  <description></description>
+  <description>Indefinite pattern of swarms of fish with sharks following.</description>
   <numCols>50</numCols>
   <numRows>50</numRows>
   <fishsharkratio>0.1</fishsharkratio>
