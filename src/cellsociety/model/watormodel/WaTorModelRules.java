@@ -20,10 +20,17 @@ public class WaTorModelRules extends Rules {
   private String FISH = "fish";
   private String SHARK = "shark";
   private String EMPTY = "empty";
+<<<<<<< HEAD
+  private int ENERGY_FROM_FISH = 40;
+  private Random random;
+  private int REPRODUCE_BOUNDARY = 20;
+  private int DEFAULT_ENERGY = 10;
+=======
   private int ENERGY_FROM_FISH = 3;
   private Random random;
   private int REPRODUCE_BOUNDARY = 4;
   private int DEFAULT_ENERGY = 3;
+>>>>>>> 2c51ddfd962fbbaa5be325dd1d937698b0365fc3
 
   /**
    * Default constructor
@@ -44,6 +51,14 @@ public class WaTorModelRules extends Rules {
     possibleColors.add(SHARK_COLOR);
     possibleColors.add(FISH_COLOR);
 
+<<<<<<< HEAD
+  private State checkIfFishAndMove(State[][] statesOfAllCells, int xCoord, int yCoord, int newX,
+      int newY) {
+    statesOfAllCells[newX][newY] = statesOfAllCells[xCoord][yCoord];
+    statesOfAllCells[newX][newY].numberOfMoves += ENERGY_FROM_FISH;
+    return new State(xCoord, yCoord, EMPTY);
+=======
+>>>>>>> 2c51ddfd962fbbaa5be325dd1d937698b0365fc3
   }
 
 
@@ -106,7 +121,11 @@ public class WaTorModelRules extends Rules {
     //each time lose one energy
     //each time gain one move
 
+<<<<<<< HEAD
+    System.out.println("ENERGY: " + statesOfAllCells[xCoord][yCoord].energy);
+=======
    // System.out.println("ENERGY: " + statesOfAllCells[xCoord][yCoord].energy);
+>>>>>>> 2c51ddfd962fbbaa5be325dd1d937698b0365fc3
 
     if (xCoord - 1 >= 0) {
       //left cell
