@@ -43,6 +43,9 @@ public class WaTorDecoder extends Decoder{
     public int getSharkRate(){
         return sharkRate;
     }
+    public int getSharkLives(){
+        return sharkLives;
+    }
     public int getEnergy(){
         return energy;
     }
