@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<data game="game">
+  <author>Jiyun</author>
+  <description></description>
+  <numCols>50</numCols>
+  <numRows>50</numRows>
+  <populationratio>0.3</populationratio>
+  <emptyratio>0.1</emptyratio>
+  <satisfactionthreshhold>0.7</satisfactionthreshhold>
+  <randomseed>12</randomseed>
+  <template>random_two</template>
+  <title>Segregation Model</title>
+  <model>segregationmodel</model>
+</data>
