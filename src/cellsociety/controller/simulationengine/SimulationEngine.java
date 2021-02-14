@@ -79,7 +79,7 @@ public class SimulationEngine extends Simulator {
 
     if (game.equals("gameOfLife")) {
       rules = new GameOfLifeRule();
-      template = constructStartingStateForSimulation(decoder.getGOLDecoder().getMyCoords());
+      template = constructStartingStateForSimulation(decoder.getGOLDecoder().getCoords());
       stateOfAllCells = gridManager
               .buildGridWithTemplate(template, rules.getStartingPositionCellType());
     }
