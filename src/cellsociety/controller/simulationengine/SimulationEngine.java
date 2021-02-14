@@ -6,7 +6,6 @@ import cellsociety.controller.PercDecoder;
 import cellsociety.controller.SegDecoder;
 import cellsociety.controller.WaTorDecoder;
 import cellsociety.controller.grid.GridManager;
-import cellsociety.controller.grid.Simulator;
 import cellsociety.model.cell.State;
 import cellsociety.model.gameoflife.GameOfLifeRule;
 import cellsociety.model.percolation.PercolationRules;
@@ -19,7 +18,7 @@ import java.util.ArrayList;
 import javafx.animation.AnimationTimer;
 import javafx.stage.Stage;
 
-public class SimulationEngine extends Simulator {
+public class SimulationEngine{
 
   private final SimulationScreen simulationScreen;
   private int row;
@@ -66,7 +65,6 @@ public class SimulationEngine extends Simulator {
     return (decoder != null);
   }
 
-  @Override
   public void initializeData() {
     row = decoder.getRows();
     col = decoder.getCols();
@@ -130,7 +128,6 @@ public class SimulationEngine extends Simulator {
     gridManager = new GridManager(row, col);
   }
 
-  @Override
   public void updateCellState() {
     stateOfAllCells = rules.judgeStateOfEachCell(stateOfAllCells);
     gridManager.updateGrid(stateOfAllCells);

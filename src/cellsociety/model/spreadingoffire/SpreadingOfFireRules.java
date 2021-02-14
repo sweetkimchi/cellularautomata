@@ -100,7 +100,6 @@ public class SpreadingOfFireRules extends Rules {
       }
     }
     statesOfAllCells = setToFire(fireNextRound,statesOfAllCells, emptyNextRound);
-    printGrid(fireNextRound);
     return statesOfAllCells;
   }
 
