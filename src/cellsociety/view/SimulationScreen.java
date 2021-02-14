@@ -8,7 +8,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
@@ -22,7 +21,7 @@ public class SimulationScreen {
   private final Group sceneNodes;
   private final Stage stage;
   public CellGraphics cellGraphics;
-  public ButtonGraphics buttonGraphics;
+  public SidePanel sidePanel;
   public GraphGraphics graphGraphics;
   public GridGraphics gridGraphics;
   private Slider slider;
@@ -48,10 +47,10 @@ public class SimulationScreen {
   public void initialize() {
     BorderPane root = new BorderPane();
     gridGraphics = new GridGraphics();
-    buttonGraphics = new ButtonGraphics();
+    sidePanel = new SidePanel();
     createButtons();
     root.setRight(gridGraphics.getGridPane());
-    root.setLeft(buttonGraphics.getPane());
+    root.setLeft(sidePanel.getPane());
 
     stage.setTitle(WINDOW_TITLE);
     scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -82,25 +81,26 @@ public class SimulationScreen {
     Button loadNewButton = new Button("Load New");
     loadNewButton.setOnAction(event -> {
       simulationEngine.stopSimulation();
+      sidePanel.removeDescription();
       simulationEngine.initializeDecoder();
       simulationEngine.initializeData();
     });
 
-    buttonGraphics.addNodesToPane(startButton,stopButton,stepButton,resetButton,loadNewButton);
+    sidePanel.addNodesToPane(startButton,stopButton,stepButton,resetButton,loadNewButton);
 
     // Add slider
     slider = new Slider(MIN_SPEED,MAX_SPEED,DEFAULT_SPEED);
     Label label = new Label();
     label.setText("Speed");
 
-    buttonGraphics.addNodesToPane(slider,label);
+    sidePanel.addNodesToPane(label,slider);
 
   }
 
   public void setDescription(String description) {
-    Text text = new Text(description);
-    buttonGraphics.addNodesToPane(text);
+    sidePanel.setDescription(description);
   }
+
 
 
   public void update(State[][] states) {
