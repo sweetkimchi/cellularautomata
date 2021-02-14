@@ -13,31 +13,21 @@ public class WaTorModelRules extends Rules {
   private final String FISH_COLOR = "green";
   private final String SHARK_COLOR = "blue";
   private final String EMPTY_COLOR = "lightgrey";
-  private double emptyRatio;
-  private double populationRatio;
   private ArrayList<String> possibleTypes;
   private ArrayList<String> possibleColors;
   private String FISH = "fish";
   private String SHARK = "shark";
   private String EMPTY = "empty";
-<<<<<<< HEAD
-  private int ENERGY_FROM_FISH = 40;
+  private int ENERGY_FROM_FISH;
   private Random random;
-  private int REPRODUCE_BOUNDARY = 20;
-  private int DEFAULT_ENERGY = 10;
-=======
-  private int ENERGY_FROM_FISH = 3;
-  private Random random;
-  private int REPRODUCE_BOUNDARY = 4;
-  private int DEFAULT_ENERGY = 3;
->>>>>>> 2c51ddfd962fbbaa5be325dd1d937698b0365fc3
+  private int REPRODUCE_BOUNDARY;
+  private int DEFAULT_ENERGY;
 
   /**
    * Default constructor
    */
-  public WaTorModelRules(double emptyRatio, double populationRatio, long randomSeed, int energyFish, int reproduceBoundary, int sharkEnergy) {
-    this.emptyRatio = emptyRatio;
-    this.populationRatio = populationRatio;
+  public WaTorModelRules(double populationRatio, long randomSeed, int energyFish,
+      int reproduceBoundary, int sharkEnergy) {
     random = new Random(randomSeed);
     possibleTypes = new ArrayList<>();
     possibleColors = new ArrayList<>();
@@ -50,15 +40,6 @@ public class WaTorModelRules extends Rules {
     possibleColors.add(EMPTY_COLOR);
     possibleColors.add(SHARK_COLOR);
     possibleColors.add(FISH_COLOR);
-
-<<<<<<< HEAD
-  private State checkIfFishAndMove(State[][] statesOfAllCells, int xCoord, int yCoord, int newX,
-      int newY) {
-    statesOfAllCells[newX][newY] = statesOfAllCells[xCoord][yCoord];
-    statesOfAllCells[newX][newY].numberOfMoves += ENERGY_FROM_FISH;
-    return new State(xCoord, yCoord, EMPTY);
-=======
->>>>>>> 2c51ddfd962fbbaa5be325dd1d937698b0365fc3
   }
 
 
@@ -120,12 +101,6 @@ public class WaTorModelRules extends Rules {
 
     //each time lose one energy
     //each time gain one move
-
-<<<<<<< HEAD
-    System.out.println("ENERGY: " + statesOfAllCells[xCoord][yCoord].energy);
-=======
-   // System.out.println("ENERGY: " + statesOfAllCells[xCoord][yCoord].energy);
->>>>>>> 2c51ddfd962fbbaa5be325dd1d937698b0365fc3
 
     if (xCoord - 1 >= 0) {
       //left cell

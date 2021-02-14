@@ -21,13 +21,14 @@ public class SimulationScreen {
   private final Group sceneNodes;
   private final Stage stage;
   public CellGraphics cellGraphics;
-  public ButtonGraphics buttonGraphics;
+  public SidePanel sidePanel;
   public GraphGraphics graphGraphics;
   public GridGraphics gridGraphics;
+  private Slider slider;
 
-  private static final double MIN_SPEED = 0.5;
-  private static final double MAX_SPEED = 3;
-  private static final double DEFAULT_SPEED = 1;
+  private static final double MIN_SPEED = 0;
+  private static final double MAX_SPEED = 60;
+  private static final double DEFAULT_SPEED = 30;
   /**
    *
    */
@@ -46,10 +47,10 @@ public class SimulationScreen {
   public void initialize() {
     BorderPane root = new BorderPane();
     gridGraphics = new GridGraphics();
-    buttonGraphics = new ButtonGraphics();
+    sidePanel = new SidePanel();
     createButtons();
     root.setRight(gridGraphics.getGridPane());
-    root.setLeft(buttonGraphics.getPane());
+    root.setLeft(sidePanel.getPane());
 
     stage.setTitle(WINDOW_TITLE);
     scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -58,6 +59,7 @@ public class SimulationScreen {
 
   }
   private void createButtons() {
+    // Add buttons
     Button startButton = new Button("Start");
     startButton.setOnAction(event -> simulationEngine.startSimulation());
     Button stopButton = new Button("Stop");
@@ -79,23 +81,30 @@ public class SimulationScreen {
     Button loadNewButton = new Button("Load New");
     loadNewButton.setOnAction(event -> {
       simulationEngine.stopSimulation();
+      sidePanel.removeDescription();
       simulationEngine.initializeDecoder();
       simulationEngine.initializeData();
     });
 
-    buttonGraphics.addNodesToPane(startButton,stopButton,stepButton,resetButton,loadNewButton);
+    sidePanel.addNodesToPane(startButton,stopButton,stepButton,resetButton,loadNewButton);
 
-    Slider slider = new Slider(MIN_SPEED,MAX_SPEED,DEFAULT_SPEED);
+    // Add slider
+    slider = new Slider(MIN_SPEED,MAX_SPEED,DEFAULT_SPEED);
     Label label = new Label();
     label.setText("Speed");
 
-    buttonGraphics.addNodesToPane(slider,label);
-
+    sidePanel.addNodesToPane(label,slider);
 
   }
+
+  public void setDescription(String description) {
+    sidePanel.setDescription(description);
+  }
+
 
 
   public void update(State[][] states) {
     gridGraphics.update(states);
+    simulationEngine.setSimulationSpeed((int)slider.getValue());
   }
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <data game="game">
   <author>Jiyun</author>
-  <description></description>
+  <description>All fish are quickly eaten up by sharks. Sharks die off.</description>
   <numCols>60</numCols>
   <numRows>60</numRows>
   <fishsharkratio>0.3</fishsharkratio>
