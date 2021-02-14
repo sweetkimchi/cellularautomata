@@ -81,7 +81,7 @@ public class SimulationEngine extends Simulator {
     if (game.equals("percolation")) {
       rules = new PercolationRules();
     }
-    if (game.equals("wator")) {
+    if (game.equals("segregationmodel")) {
       WaTorDecoder waTorDecoder = decoder.getWaTorDecoder();
       rules = new SegregationModelRules(waTorDecoder.getEmptyRatio(), waTorDecoder.getFSRatio(),
           waTorDecoder.getSeed());
@@ -93,7 +93,7 @@ public class SimulationEngine extends Simulator {
     if (game.equals("spreadingoffire")) {
       rules = new SpreadingOfFireRules();
     }
-    if (game.equals("wator1")) {
+    if (game.equals("wator")) {
       //   rules = new WaTorModelRules(emptyRatio, populationRatio, randomSeed, energyFish, reproduceBoundary, sharkEnergy);
       WaTorDecoder waTorDecoder = decoder.getWaTorDecoder();
       rules = new WaTorModelRules(waTorDecoder.getEmptyRatio(), waTorDecoder.getFSRatio(),
