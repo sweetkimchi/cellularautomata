@@ -20,6 +20,7 @@ public class Decoder {
   private WaTorDecoder waTorDecoder;
   private SegDecoder segDecoder;
   private FireDecoder fireDecoder;
+  private PercDecoder percDecoder;
   private String myDesc;
   private String myModel;
   private String myTitle;
@@ -48,6 +49,7 @@ public class Decoder {
     else if(myModel.equals("wator")) {waTorDecoder = new WaTorDecoder(attributes);}
     else if(myModel.equals("segregationmodel")) {segDecoder = new SegDecoder(attributes);}
     else if(myModel.equals("spreadingoffire")) {fireDecoder = new FireDecoder(attributes);}
+    else if(myModel.equals("percolation")) {percDecoder = new PercDecoder(attributes);}
   }
   public GOLDecoder getGOLDecoder(){
     return golDecoder;
@@ -60,6 +62,9 @@ public class Decoder {
   }
   public FireDecoder getFireDecoder(){
     return fireDecoder;
+  }
+  public PercDecoder getPercDecoder(){
+    return percDecoder;
   }
   public String getModel() {
     return myModel;
