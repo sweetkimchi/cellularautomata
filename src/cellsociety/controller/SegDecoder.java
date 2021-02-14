@@ -9,6 +9,8 @@ public class SegDecoder extends Decoder{
     public static final String RAND_SEED = "randomseed";
     public static final String TEMP = "template";
 
+
+
     private float myPopRatio;
     private float myEmptyRatio;
     private float mySatThresh;
