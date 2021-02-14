@@ -120,8 +120,8 @@ public class SimulationScreen {
 
 
 
-  public void update(State[][] states) {
-    gridGraphics.update(states);
+  public void update(State[][] states, String model) {
+    gridGraphics.update(states, model);
     simulationEngine.setSimulationSpeed((int)slider.getValue());
   }
 }

@@ -42,12 +42,15 @@ public class GridGraphics {
     return gridPane;
   }
 
-  public void update(State[][] states) {
+  public void update(State[][] states, String model) {
     gridPane.getChildren().clear();
     for (int r = 0; r < states.length; r++) {
       for (int c = 0; c < states[0].length; c++) {
-        gridPane.add(new Rectangle(GRID_SIZE/states.length, GRID_SIZE/states.length,
-                                    states[r][c].color), r, c);
+        Rectangle rect = new Rectangle();
+        rect.setWidth(GRID_SIZE/states.length);
+        rect.setHeight(GRID_SIZE/states[0].length);
+        rect.getStyleClass().add(model + "-" + states[r][c].type);
+        gridPane.add(rect, r, c);
       }
     }
   }
