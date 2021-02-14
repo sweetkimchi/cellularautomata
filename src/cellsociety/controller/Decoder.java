@@ -5,6 +5,11 @@ import java.util.Map;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 
+/**
+ * This class handles XML file selection and initialization of parameters.
+ *
+ * @author Shaw Phillips
+ */
 public class Decoder {
 
   public static final String DATA_FILE_EXTENSION = "*.xml";
@@ -35,6 +40,9 @@ public class Decoder {
     result.getExtensionFilters().setAll(new ExtensionFilter("Text Files", extension));
     return result;
   }
+  /**
+   *  Open window to choose XML file, initialize universal parameters, and determine the model
+   */
   public void readValuesFromXMLFile() {
     File dataFile = FILE_CHOOSER.showOpenDialog(null);
     XMLParser parser = new XMLParser("game");
@@ -51,18 +59,34 @@ public class Decoder {
     else if(myModel.equals("spreadingoffire")) {fireDecoder = new FireDecoder(attributes);}
     else if(myModel.equals("percolation")) {percDecoder = new PercDecoder(attributes);}
   }
+
+  /**
+   * @return Decoder for Game of Life
+   */
   public GOLDecoder getGOLDecoder(){
     return golDecoder;
   }
+  /**
+   * @return Decoder for Wa-Tor
+   */
   public WaTorDecoder getWaTorDecoder(){
     return waTorDecoder;
   }
+  /**
+   * @return Decoder for Segregation
+   */
   public SegDecoder getSegDecoder(){
     return segDecoder;
   }
+  /**
+   * @return Decoder for Fire
+   */
   public FireDecoder getFireDecoder(){
     return fireDecoder;
   }
+  /**
+   * @return Decoder for Percolation
+   */
   public PercDecoder getPercDecoder(){
     return percDecoder;
   }
