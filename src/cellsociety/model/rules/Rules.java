@@ -73,4 +73,5 @@ public abstract class Rules {
 
   public abstract ArrayList<String> getPossibleTypes();
 
+  public abstract ArrayList<String> getPossibleColors();
 }

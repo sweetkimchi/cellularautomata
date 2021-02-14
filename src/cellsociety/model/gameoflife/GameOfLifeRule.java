@@ -72,4 +72,9 @@ public class GameOfLifeRule extends Rules {
   public ArrayList<String> getPossibleTypes() {
     return null;
   }
+
+  @Override
+  public ArrayList<String> getPossibleColors() {
+    return null;
+  }
 }
