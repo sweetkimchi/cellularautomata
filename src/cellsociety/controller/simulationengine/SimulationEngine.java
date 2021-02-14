@@ -74,7 +74,7 @@ public class SimulationEngine extends Simulator {
 
     initializeModelConstructors(decoder.getModel());
 
-  //  initializeModelConstructors("spreadingoffire");
+    //  initializeModelConstructors("spreadingoffire");
     simulationScreen.update(stateOfAllCells);
     simulationScreen.setDescription(decoder.getMyDesc());
     runSimulation();
@@ -93,8 +93,8 @@ public class SimulationEngine extends Simulator {
       PercDecoder percDecoder = decoder.getPercDecoder();
       rules = new PercolationRules(percDecoder.getSeed());
       stateOfAllCells = gridManager
-          .buildGridWithRandomSeed(percDecoder.getBlockRatio(), percDecoder.getWaterToEmptyRatio(),
-              percDecoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
+              .buildGridWithRandomSeed(percDecoder.getBlockRatio(), percDecoder.getWaterToEmptyRatio(),
+                      percDecoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
     }
     if (game.equals("segregationmodel")) {
       SegDecoder segDecoder = decoder.getSegDecoder();
@@ -109,8 +109,8 @@ public class SimulationEngine extends Simulator {
       FireDecoder fireDecoder = decoder.getFireDecoder();
       rules = new SpreadingOfFireRules(fireDecoder.getEmptyRatio(), fireDecoder.getSeed(), fireDecoder.getProb());
       stateOfAllCells = gridManager
-          .buildGridWithRandomSeed(fireDecoder.getEmptyRatio() ,fireDecoder.getTreeRatio(),
-              fireDecoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
+              .buildGridWithRandomSeed(fireDecoder.getEmptyRatio() ,fireDecoder.getTreeRatio(),
+                      fireDecoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
     }
     if (game.equals("wator")) {
       //   rules = new WaTorModelRules(emptyRatio, populationRatio, randomSeed, energyFish, reproduceBoundary, sharkEnergy);
