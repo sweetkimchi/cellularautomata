@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
@@ -24,10 +25,11 @@ public class SimulationScreen {
   public ButtonGraphics buttonGraphics;
   public GraphGraphics graphGraphics;
   public GridGraphics gridGraphics;
+  private Slider slider;
 
-  private static final double MIN_SPEED = 0.5;
-  private static final double MAX_SPEED = 3;
-  private static final double DEFAULT_SPEED = 1;
+  private static final double MIN_SPEED = 0;
+  private static final double MAX_SPEED = 60;
+  private static final double DEFAULT_SPEED = 30;
   /**
    *
    */
@@ -58,6 +60,7 @@ public class SimulationScreen {
 
   }
   private void createButtons() {
+    // Add buttons
     Button startButton = new Button("Start");
     startButton.setOnAction(event -> simulationEngine.startSimulation());
     Button stopButton = new Button("Stop");
@@ -85,17 +88,22 @@ public class SimulationScreen {
 
     buttonGraphics.addNodesToPane(startButton,stopButton,stepButton,resetButton,loadNewButton);
 
-    Slider slider = new Slider(MIN_SPEED,MAX_SPEED,DEFAULT_SPEED);
+    // Add slider
+    slider = new Slider(MIN_SPEED,MAX_SPEED,DEFAULT_SPEED);
     Label label = new Label();
     label.setText("Speed");
 
     buttonGraphics.addNodesToPane(slider,label);
 
+    // Add description
+    //Text text = new Text(simulationEngine.getDescription());
+    //buttonGraphics.addNodesToPane(text);
 
   }
 
 
   public void update(State[][] states) {
     gridGraphics.update(states);
+    simulationEngine.setSimulationSpeed((int)slider.getValue());
   }
 }
