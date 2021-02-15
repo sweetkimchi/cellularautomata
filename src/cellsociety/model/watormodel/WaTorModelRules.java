@@ -197,8 +197,8 @@ public class WaTorModelRules extends Rules {
   }
 
   /**
-   * Purpose: Judges each of the cells according to the logic of the game
-   * Assumptions: statesOfAllCells correctly contains all valid states
+   * Purpose: Judges each of the cells according to the logic of the game Assumptions:
+   * statesOfAllCells correctly contains all valid states
    *
    * @param statesOfAllCells starting states of all cells
    * @return the updated states of all cells

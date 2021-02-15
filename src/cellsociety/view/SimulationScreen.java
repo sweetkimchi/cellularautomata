@@ -18,32 +18,31 @@ import javafx.stage.Stage;
  */
 public class SimulationScreen {
 
-  private static final String language = "English";
   public static final String DEFAULT_RESOURCE_PACKAGE = "cellsociety.view.resources.";
-  public static final String DEFAULT_RESOURCE_FOLDER = "/" + DEFAULT_RESOURCE_PACKAGE.replace(".", "/");
-  private ResourceBundle resources;
+  public static final String DEFAULT_RESOURCE_FOLDER =
+      "/" + DEFAULT_RESOURCE_PACKAGE.replace(".", "/");
   public static final String STYLESHEET = "default.css";
-
   public static final int WINDOW_WIDTH = 800;
   public static final int WINDOW_HEIGHT = 600;
+  private static final String language = "English";
+  private static final double MIN_SPEED = 0;
+  private static final double MAX_SPEED = 60;
+  private static final double DEFAULT_SPEED = 30;
   private final Group sceneNodes;
   private final Stage stage;
   public CellGraphics cellGraphics;
   public SidePanel sidePanel;
   public GraphGraphics graphGraphics;
   public GridGraphics gridGraphics;
-  private Slider slider;
-
-  private static final double MIN_SPEED = 0;
-  private static final double MAX_SPEED = 60;
-  private static final double DEFAULT_SPEED = 30;
   /**
    *
    */
   public SliderGraphics sliderGraphics;
+  private final ResourceBundle resources;
+  private Slider slider;
   private Scene scene;
 
-  private SimulationEngine simulationEngine;
+  private final SimulationEngine simulationEngine;
 
   public SimulationScreen(Stage stage, SimulationEngine engine) {
     this.stage = stage;
@@ -63,17 +62,19 @@ public class SimulationScreen {
 
     stage.setTitle(resources.getString("SimulationTitle"));
     scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
-    scene.getStylesheets().add(getClass().getResource(DEFAULT_RESOURCE_FOLDER + STYLESHEET).toExternalForm());
+    scene.getStylesheets()
+        .add(getClass().getResource(DEFAULT_RESOURCE_FOLDER + STYLESHEET).toExternalForm());
 
     stage.setScene(scene);
     stage.show();
 
   }
+
   private void createButtons() {
     // Add buttons
     Button startButton = makeButton("StartCommand", event -> simulationEngine.startSimulation());
-    Button stopButton = makeButton("StopCommand",event -> simulationEngine.stopSimulation());
-    Button stepButton = makeButton("StepCommand",event -> {
+    Button stopButton = makeButton("StopCommand", event -> simulationEngine.stopSimulation());
+    Button stepButton = makeButton("StepCommand", event -> {
       if (simulationEngine.decoderInitialized()) {
         simulationEngine.updateCellState();
       }
@@ -92,18 +93,19 @@ public class SimulationScreen {
       simulationEngine.initializeDecoder();
       if (simulationEngine.decoderInitialized()) {
         simulationEngine.initializeData();
+      } else {
+        sidePanel.setDescription(desc);
       }
-      else sidePanel.setDescription(desc);
     });
 
-    sidePanel.addNodesToPane(startButton,stopButton,stepButton,resetButton,loadNewButton);
+    sidePanel.addNodesToPane(startButton, stopButton, stepButton, resetButton, loadNewButton);
 
     // Add slider
     Label label = new Label();
     label.setText(resources.getString("SpeedLabel"));
-    slider = new Slider(MIN_SPEED,MAX_SPEED,DEFAULT_SPEED);
+    slider = new Slider(MIN_SPEED, MAX_SPEED, DEFAULT_SPEED);
 
-    sidePanel.addNodesToPane(label,slider);
+    sidePanel.addNodesToPane(label, slider);
 
   }
 
@@ -119,9 +121,8 @@ public class SimulationScreen {
   }
 
 
-
   public void update(State[][] states, String model) {
     gridGraphics.update(states, model);
-    simulationEngine.setSimulationSpeed((int)slider.getValue());
+    simulationEngine.setSimulationSpeed((int) slider.getValue());
   }
 }

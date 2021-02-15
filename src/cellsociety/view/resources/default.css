@@ -8,6 +8,7 @@
 .gameOfLife-alive {
   -fx-fill: black;
 }
+
 .gameOfLife- { /* empty cell */
   -fx-fill: lightgrey;
 }
@@ -15,9 +16,11 @@
 .percolation-block {
   -fx-fill: black;
 }
+
 .percolation-water {
   -fx-fill: blue;
 }
+
 .percolation-empty {
   -fx-fill: lightgrey;
 }
@@ -25,9 +28,11 @@
 .segregationmodel-agentx {
   -fx-fill: red;
 }
+
 .segregationmodel-agenty {
   -fx-fill: blue;
 }
+
 .segregationmodel-empty {
   -fx-fill: lightgrey;
 }
@@ -35,9 +40,11 @@
 .spreadingoffire-fire {
   -fx-fill: brown;
 }
+
 .spreadingoffire-tree {
   -fx-fill: green;
 }
+
 .spreadingoffire-empty {
   -fx-fill: yellow;
 }
@@ -45,9 +52,11 @@
 .wator-fish {
   -fx-fill: green;
 }
+
 .wator-shark {
   -fx-fill: blue;
 }
+
 .wator-empty {
   -fx-fill: lightgrey;
 }

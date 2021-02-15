@@ -5,9 +5,11 @@ import cellsociety.model.rules.Rules;
 import java.util.ArrayList;
 
 /**
- * Purpose: This class contains the rules for the Game of Life model. Rules include the types of the players as well as logic to update each cell.
- * Assumptions: xml file is correctly formatted and supplies the correct information to the constructor.
- * Dependencies: Depends on SimulationEngine to declare constructors based on the parameters read from XML files. Depends on GridManager to provide it with the grid to work with.
+ * Purpose: This class contains the rules for the Game of Life model. Rules include the types of the
+ * players as well as logic to update each cell. Assumptions: xml file is correctly formatted and
+ * supplies the correct information to the constructor. Dependencies: Depends on SimulationEngine to
+ * declare constructors based on the parameters read from XML files. Depends on GridManager to
+ * provide it with the grid to work with.
  *
  * @author Ji Yun Hyo
  */
@@ -39,8 +41,8 @@ public class GameOfLifeRule extends Rules {
   }
 
   /**
-   * Purpose: Judges each of the cells according to the logic of the game
-   * Assumptions: statesOfAllCells correctly contains all valid states
+   * Purpose: Judges each of the cells according to the logic of the game Assumptions:
+   * statesOfAllCells correctly contains all valid states
    *
    * @param statesOfAllCells starting states of all cells
    * @return the updated states of all cells
@@ -66,10 +68,10 @@ public class GameOfLifeRule extends Rules {
     if (type.equals(ALIVE)) {
       if (numberOfNeighbor < lowerSurvivalBoundary) {
         return EMPTY;
-      } else if(numberOfNeighbor <= upperSurvivalBoundary){
+      } else if (numberOfNeighbor <= upperSurvivalBoundary) {
         return ALIVE;
       }
-    } else if(numberOfNeighbor == 3){
+    } else if (numberOfNeighbor == 3) {
       return ALIVE;
     }
     return "";
@@ -80,12 +82,13 @@ public class GameOfLifeRule extends Rules {
    *
    * @return type of cells
    */
-  public String getStartingPositionCellType(){
+  public String getStartingPositionCellType() {
     return ALIVE;
   }
 
   /**
    * returns the possible types (e.g. agent x, agent y, empty)
+   *
    * @return arraylist of possible types
    */
   @Override
@@ -95,6 +98,7 @@ public class GameOfLifeRule extends Rules {
 
   /**
    * Returns the possible colors for each type
+   *
    * @return arraylist of colors
    */
   @Override
