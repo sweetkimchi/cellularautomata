@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <data game="game">
   <author>Jiyun</author>
-  <description></description>
+  <description>All fish are quickly eaten by adjacent sharks. Sharks die off of hunger. It shows that if two species were to continuously survive, some social distancing may be needed.</description>
   <numCols>50</numCols>
   <numRows>50</numRows>
   <fishsharkratio>0.5</fishsharkratio>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <data game="game">
   <author>Jiyun</author>
-  <description>This is the template in which there are very sparse population of fish and shark. It starts out as fish taking over the entire map but sharks quickly destroy all fish. All sharks die.</description>
+  <description>The fish and shark quickly seem to decrease in population, only to reproduce rapidly. Pattern goes on indefinitely.</description>
   <numCols>50</numCols>
   <numRows>50</numRows>
   <fishsharkratio>0.1</fishsharkratio>
