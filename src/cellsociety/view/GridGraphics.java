@@ -27,7 +27,7 @@ public class GridGraphics {
   private void initialize() {
     gridPane = new GridPane();
 
-    gridPane.setMaxSize(GRID_SIZE,GRID_SIZE);
+    gridPane.setMaxSize(GRID_SIZE, GRID_SIZE);
 
     gridPane.setPadding(new Insets(GRID_BUFFER, GRID_BUFFER, GRID_BUFFER, GRID_BUFFER));
 
@@ -47,8 +47,8 @@ public class GridGraphics {
     for (int r = 0; r < states.length; r++) {
       for (int c = 0; c < states[0].length; c++) {
         Rectangle rect = new Rectangle();
-        rect.setWidth(GRID_SIZE/states.length);
-        rect.setHeight(GRID_SIZE/states[0].length);
+        rect.setWidth(GRID_SIZE / states.length);
+        rect.setHeight(GRID_SIZE / states[0].length);
         rect.getStyleClass().add(model + "-" + states[r][c].type);
         gridPane.add(rect, r, c);
       }

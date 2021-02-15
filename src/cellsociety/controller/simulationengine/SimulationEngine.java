@@ -18,6 +18,10 @@ import java.util.ArrayList;
 import javafx.animation.AnimationTimer;
 import javafx.stage.Stage;
 
+/**
+ * Controls the simulation. Acts as the middle-ground between GridManager, Decoder, Models, and the View component. Depends on other parts of MVC working correctly. SimulationEngine makes sure that different components do not have to interact with each other directly. Each component handles its own thing without having to know too much about what the other components are doing.
+ * @author Ji Yun Hyo
+ */
 public class SimulationEngine{
 
   private final SimulationScreen simulationScreen;
@@ -29,14 +33,8 @@ public class SimulationEngine{
   private ArrayList<State> template;
   private Decoder decoder;
   private AnimationTimer animation;
-
   private int frameDelay;
   private int sleepTimer = 0;
-
-
-  private double probsOfFire = 0.5;
-  private double popRatio = 0.9;
-  private int randseed = 1414;
 
 
   /**
@@ -56,23 +54,29 @@ public class SimulationEngine{
     return template;
   }
 
+  /**
+   * Initializes the decoder so that it can go fetch data from the correct XML file for whichever component needs it
+   */
   public void initializeDecoder() {
     decoder = new Decoder();
     decoder.readValuesFromXMLFile();
   }
 
+  /**
+   * @return whether decoder is initialized or not
+   */
   public boolean decoderInitialized() {
     return (decoder != null);
   }
 
+  /**
+   * initializes all relevant data of the model
+   */
   public void initializeData() {
     row = decoder.getRows();
     col = decoder.getCols();
     initializeGrid();
-
     initializeModelConstructors(decoder.getModel());
-
-  //  initializeModelConstructors("spreadingoffire");
     simulationScreen.update(stateOfAllCells, decoder.getModel());
     simulationScreen.setDescription(decoder.getMyDesc());
     runSimulation();
@@ -96,8 +100,8 @@ public class SimulationEngine{
     }
     if (game.equals("segregationmodel")) {
       SegDecoder segDecoder = decoder.getSegDecoder();
-      rules = new SegregationModelRules(segDecoder.getPopRatio(),
-              segDecoder.getRandSeed(), segDecoder.getSatThresh());
+      rules = new SegregationModelRules(
+          segDecoder.getRandSeed(), segDecoder.getSatThresh());
       stateOfAllCells = gridManager
               .buildGridWithRandomSeed(segDecoder.getEmptyRatio(), segDecoder.getPopRatio(),
                       segDecoder.getRandSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
@@ -105,7 +109,7 @@ public class SimulationEngine{
     }
     if (game.equals("spreadingoffire")) {
       FireDecoder fireDecoder = decoder.getFireDecoder();
-      rules = new SpreadingOfFireRules(fireDecoder.getEmptyRatio(), fireDecoder.getSeed(), fireDecoder.getProb());
+      rules = new SpreadingOfFireRules(fireDecoder.getSeed(), fireDecoder.getProb());
       stateOfAllCells = gridManager
               .buildGridWithRandomSeed(fireDecoder.getEmptyRatio() ,fireDecoder.getTreeRatio(),
                       fireDecoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
@@ -113,8 +117,8 @@ public class SimulationEngine{
     if (game.equals("wator")) {
       //   rules = new WaTorModelRules(emptyRatio, populationRatio, randomSeed, energyFish, reproduceBoundary, sharkEnergy);
       WaTorDecoder waTorDecoder = decoder.getWaTorDecoder();
-      rules = new WaTorModelRules(waTorDecoder.getFSRatio(),
-              waTorDecoder.getSeed(), waTorDecoder.getEnergy(), waTorDecoder.getFishRate(),
+      rules = new WaTorModelRules(
+          waTorDecoder.getSeed(), waTorDecoder.getEnergy(), waTorDecoder.getFishRate(),
               waTorDecoder.getSharkLives());
       stateOfAllCells = gridManager
               .buildGridWithRandomSeed(waTorDecoder.getEmptyRatio(), waTorDecoder.getFSRatio(),
@@ -128,16 +132,14 @@ public class SimulationEngine{
     gridManager = new GridManager(row, col);
   }
 
+  /**
+   * Updates the state of each cell according to logic of the model
+   */
   public void updateCellState() {
     stateOfAllCells = rules.judgeStateOfEachCell(stateOfAllCells);
     gridManager.updateGrid(stateOfAllCells);
     simulationScreen.update(stateOfAllCells, decoder.getModel());
   }
-
-  public State[][] getStateOfAllCells() {
-    return stateOfAllCells;
-  }
-
 
   private void runSimulation() {
     animation = new AnimationTimer() {
@@ -154,27 +156,32 @@ public class SimulationEngine{
     simulationScreen.update(stateOfAllCells,decoder.getModel());
   }
 
+  /**
+   * Allows interactive button to start the simulation in View Component
+   */
   public void startSimulation() {
     if (animation != null) {
       animation.start();
     }
   }
 
+  /**
+   * Allows interactive button to stop the simulation in View component
+   */
   public void stopSimulation() {
     if (animation != null) {
       animation.stop();
     }
   }
+
+  /**
+   * Allows interactive slider to adjust the speed of simulation
+   * @param s speed of the simulation
+   */
   public void setSimulationSpeed(int s) {
     if (frameDelay >= 0) {
       frameDelay = 60 - s;
     }
   }
-
-
-  private int getNumberOfNeighbors(State[][] stateOfAllCells, int numberOfSides) {
-    return 0;
-  }
-
 
 }

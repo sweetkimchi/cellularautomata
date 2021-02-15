@@ -6,20 +6,26 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
+ * Purpose: This class contains the rules for the percolation model. Rules include the types of the
+ * players as well as logic to update each cell. Assumptions: xml file is correctly formatted and
+ * supplies the correct information to the constructor. Dependencies: Depends on SimulationEngine to
+ * declare constructors based on the parameters read from XML files. Depends on GridManager to
+ * provide it with the grid to work with.
  *
+ * @author Ji Yun Hyo
  */
 public class PercolationRules extends Rules {
 
   private final String BLOCK_COLOR = "black";
   private final String WATER_COLOR = "blue";
   private final String EMPTY_COLOR = "lightgrey";
-  private ArrayList<String> possibleTypes;
-  private ArrayList<String> possibleColors;
-  private String BLOCK = "block";
-  private String WATER = "water";
-  private String EMPTY = "empty";
+  private final ArrayList<String> possibleTypes;
+  private final ArrayList<String> possibleColors;
+  private final String BLOCK = "block";
+  private final String WATER = "water";
+  private final String EMPTY = "empty";
   private double probsOfFire;
-  private Random random;
+  private final Random random;
 
   /**
    * Default constructor
@@ -41,8 +47,8 @@ public class PercolationRules extends Rules {
     System.out.println(type);
     for (int x = 0; x < statesOfAllCells.length; x++) {
       for (int y = 0; y < statesOfAllCells[0].length; y++) {
-        if(statesOfAllCells[x][y].type.equals(EMPTY) && emptyNeighbors[x][y] == 1){
-          statesOfAllCells[x][y] = new State(x,y,type);
+        if (statesOfAllCells[x][y].type.equals(EMPTY) && emptyNeighbors[x][y] == 1) {
+          statesOfAllCells[x][y] = new State(x, y, type);
           setColor(statesOfAllCells[x][y]);
           return;
         }
@@ -63,7 +69,13 @@ public class PercolationRules extends Rules {
   }
 
 
-
+  /**
+   * Purpose: Judges each of the cells according to the logic of the game Assumptions:
+   * statesOfAllCells correctly contains all valid states
+   *
+   * @param statesOfAllCells starting states of all cells
+   * @return the updated states of all cells
+   */
   public State[][] judgeStateOfEachCell(State[][] statesOfAllCells) {
     int[][] numberOfFireNeighbors = numberOfAliveNeighbors(statesOfAllCells, BLOCK);
     int[][] numberOfTreeNeighbors = numberOfAliveNeighbors(statesOfAllCells, WATER);
@@ -71,40 +83,42 @@ public class PercolationRules extends Rules {
     int[][] waterNextRound = numberOfAliveNeighbors(statesOfAllCells, "");
     for (int x = 0; x < statesOfAllCells.length; x++) {
       for (int y = 0; y < statesOfAllCells[0].length; y++) {
-        if(statesOfAllCells[x][y].type.equals(WATER)){
-          if(x - 1 >= 0 && y >= 0 && statesOfAllCells[x-1][y].type.equals(EMPTY)){
-              waterNextRound[x - 1][y] = 1;
+        if (statesOfAllCells[x][y].type.equals(WATER)) {
+          if (x - 1 >= 0 && y >= 0 && statesOfAllCells[x - 1][y].type.equals(EMPTY)) {
+            waterNextRound[x - 1][y] = 1;
           }
-          if(x >= 0 && y - 1 >= 0 && statesOfAllCells[x][y-1].type.equals(EMPTY)){
+          if (x >= 0 && y - 1 >= 0 && statesOfAllCells[x][y - 1].type.equals(EMPTY)) {
 
-              waterNextRound[x][y - 1] = 1;
-
-          }
-          if(x + 1 < statesOfAllCells.length && y>= 0 && statesOfAllCells[x+1][y].type.equals(EMPTY)){
-
-              waterNextRound[x + 1][y] = 1;
+            waterNextRound[x][y - 1] = 1;
 
           }
-          if(x >= 0 && y +1 < statesOfAllCells[0].length && statesOfAllCells[x][y+1].type.equals(
-              EMPTY)){
+          if (x + 1 < statesOfAllCells.length && y >= 0 && statesOfAllCells[x + 1][y].type
+              .equals(EMPTY)) {
 
-              waterNextRound[x][y + 1] = 1;
+            waterNextRound[x + 1][y] = 1;
+
+          }
+          if (x >= 0 && y + 1 < statesOfAllCells[0].length && statesOfAllCells[x][y + 1].type
+              .equals(
+                  EMPTY)) {
+
+            waterNextRound[x][y + 1] = 1;
 
           }
         }
       }
     }
-    statesOfAllCells = setToFire(waterNextRound,statesOfAllCells);
+    statesOfAllCells = setToFire(waterNextRound, statesOfAllCells);
     printGrid(waterNextRound);
     return statesOfAllCells;
   }
 
 
-  private State[][] setToFire(int[][] waterNextRound, State[][] statesOfAllCells){
-    for(int i = 0; i < waterNextRound.length; i++){
-      for(int j = 0; j < waterNextRound[0].length; j++){
-        if(waterNextRound[i][j] == 1){
-          statesOfAllCells[i][j] = new State(i,j, WATER);
+  private State[][] setToFire(int[][] waterNextRound, State[][] statesOfAllCells) {
+    for (int i = 0; i < waterNextRound.length; i++) {
+      for (int j = 0; j < waterNextRound[0].length; j++) {
+        if (waterNextRound[i][j] == 1) {
+          statesOfAllCells[i][j] = new State(i, j, WATER);
           setColor(statesOfAllCells[i][j]);
         }
       }

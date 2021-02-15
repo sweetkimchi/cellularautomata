@@ -3,10 +3,7 @@ package cellsociety.view;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
 /**
@@ -16,7 +13,7 @@ public class SidePanel {
 
   private static final double MAX_WIDTH = 220;
 
-  private VBox pane;
+  private final VBox pane;
   private Label desc;
 
   /**
@@ -29,6 +26,7 @@ public class SidePanel {
 
     pane.setAlignment(Pos.CENTER_LEFT);
   }
+
   public Node getPane() {
     return pane;
   }
@@ -45,7 +43,9 @@ public class SidePanel {
   }
 
   public String removeDescription() {
-    if (desc == null) return "";
+    if (desc == null) {
+      return "";
+    }
 
     pane.getChildren().remove(desc);
     String ret = desc.getText();

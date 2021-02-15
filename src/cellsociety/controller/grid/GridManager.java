@@ -6,7 +6,8 @@ import java.util.List;
 import java.util.Random;
 
 /**
- *
+ * Builds and manages the grid for all models. Depends on the simulation engine to initiate the process. Depends on the models to supply the correct parameters. Assumes that all parameters are correct.
+ * @author Ji Yun Hyo
  */
 public class GridManager {
 
@@ -18,6 +19,7 @@ public class GridManager {
   private final String ALIVE = "alive";
 
   /**
+   * Basic constructor
    * @param row
    * @param col
    */
@@ -27,6 +29,12 @@ public class GridManager {
     grid = new ArrayList<>();
   }
 
+  /**
+   * Builds the initial stage with specific coordinates that are supplied to the GridManager
+   * @param template coordinates of starting states
+   * @param type type of player occupying the starting states
+   * @return updated grid that contains the starting states of the model
+   */
   public State[][] buildGridWithTemplate(ArrayList<State> template, String type) {
     State[][] stateOfCells = new State[row][col];
     for (int r = 0; r < row; r++) {
@@ -55,6 +63,15 @@ public class GridManager {
     return stateOfCells;
   }
 
+  /**
+   * Builds the starting states for models that require adjustments based on the parameters.
+   * @param emptyRatio ratio of empty cells to occupied cells
+   * @param populationRatio ratio between different types of players
+   * @param seed random seed to reproduce results
+   * @param possibleTypes names of all players of a model
+   * @param possibleColors colors of all types
+   * @return the starting states of all cells
+   */
   public State[][] buildGridWithRandomSeed(double emptyRatio, double populationRatio, int seed, ArrayList<String> possibleTypes, ArrayList<String> possibleColors){
 //    System.out.println("FEAWFEW" + emptyRatio);
 //    System.out.println("????" + (emptyRatio + (1-emptyRatio) * populationRatio));
@@ -80,34 +97,12 @@ public class GridManager {
     return stateOfCells;
   }
 
-  public State[][] getStateOfCells() {
-    return stateOfCells;
-  }
-
-  public void printGrid(State[][] stateOfCells) {
-    for (int x = 0; x < row; x++) {
-      for (int y = 0; y < col; y++) {
-        if (stateOfCells[y][x].type.equals("agentx")) {
-                     System.out.print(" X ");
-        } else if(stateOfCells[y][x].type.equals("agenty")){
-                      System.out.print(" Y ");
-        }
-        else{
-          System.out.print(" E ");
-        }
-      }
-              System.out.println();
-    }
-        System.out.println();
-  }
-
+  /**
+   * Stores the grid for future use. It is not really used but GridManager does want to keep a record of the current state of all cells.
+   * @param stateOfCells the updated cells
+   */
   public void updateGrid(State[][] stateOfCells) {
     this.stateOfCells = stateOfCells;
-  }
-
-
-  public List<List<State>> getGrid() {
-    return grid;
   }
 
 
