@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <data game="game">
-  <author>John Conway</author>
+  <author>Stephen A. Silver</author>
   <description>Glider gun produces gliders that head towards bottom right.</description>
   <numCols>50</numCols>
   <numRows>50</numRows>
