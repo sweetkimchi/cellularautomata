@@ -62,8 +62,8 @@ public class SimulationScreen {
     gridGraphics = new GridGraphics();
     sidePanel = new SidePanel();
     addSidePanelControls();
-    root.setRight(gridGraphics.getGridPane());
-    root.setLeft(sidePanel.getPane());
+    root.setRight(gridGraphics.getNode());
+    root.setLeft(sidePanel.getNode());
 
     stage.setTitle(resources.getString("SimulationTitle"));
     scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -76,42 +76,50 @@ public class SimulationScreen {
   }
 
   private void addSidePanelControls() {
-    // Add buttons
     Button startButton = makeButton("StartCommand", event -> simulationEngine.startSimulation());
     Button stopButton = makeButton("StopCommand", event -> simulationEngine.stopSimulation());
-    Button stepButton = makeButton("StepCommand", event -> {
-      if (simulationEngine.decoderInitialized()) {
-        simulationEngine.updateCellState();
-      }
-    });
-    Button resetButton = makeButton("ResetCommand", event -> {
-      if (simulationEngine.decoderInitialized()) {
-        gridGraphics.reset();
-        sidePanel.removeDescription();
-        simulationEngine.stopSimulation();
-        simulationEngine.initializeData();
-      }
-    });
-    Button loadNewButton = makeButton("LoadNewCommand", event -> {
-      simulationEngine.stopSimulation();
-      String desc = sidePanel.removeDescription();
-      simulationEngine.initializeDecoder();
-      if (simulationEngine.decoderInitialized()) {
-        simulationEngine.initializeData();
-      } else {
-        sidePanel.setDescription(desc);
-      }
-    });
+    Button stepButton = makeButton("StepCommand", event -> stepSimulation());
+    Button resetButton = makeButton("ResetCommand", event -> resetSimulation());
+    Button loadNewButton = makeButton("LoadNewCommand", event -> loadNewFile());
 
     sidePanel.addNodesToPane(startButton, stopButton, stepButton, resetButton, loadNewButton);
 
-    // Add slider
+    addSpeedSlider();
+
+  }
+
+  private void stepSimulation() {
+    if (simulationEngine.decoderInitialized()) {
+      simulationEngine.updateCellState();
+    }
+  }
+
+  private void resetSimulation() {
+    if (simulationEngine.decoderInitialized()) {
+      gridGraphics.reset();
+      sidePanel.removeDescription();
+      simulationEngine.stopSimulation();
+      simulationEngine.initializeData();
+    }
+  }
+
+  private void loadNewFile() {
+    simulationEngine.stopSimulation();
+    String desc = sidePanel.removeDescription();
+    simulationEngine.initializeDecoder();
+    if (simulationEngine.decoderInitialized()) {
+      simulationEngine.initializeData();
+    } else {
+      sidePanel.setDescription(desc);
+    }
+  }
+
+  private void addSpeedSlider() {
     Label label = new Label();
     label.setText(resources.getString("SpeedLabel"));
     slider = new Slider(MIN_SPEED, MAX_SPEED, DEFAULT_SPEED);
 
     sidePanel.addNodesToPane(label, slider);
-
   }
 
   private Button makeButton(String property, EventHandler<ActionEvent> handler) {
@@ -121,16 +129,28 @@ public class SimulationScreen {
     return button;
   }
 
+  /**
+   * Sets the description of the current model to the screen. Calls the side panel to do this.
+   * @param description text to be displayed
+   */
   public void setDescription(String description) {
     sidePanel.setDescription(description);
   }
 
-
+  /**
+   * Updates the screen by calling on the grid to update. Also updates the simulation speed
+   * with the current value on the slider.
+   * @param states 2-D array of states for updating the grid
+   * @param model String for model name
+   */
   public void update(State[][] states, String model) {
     gridGraphics.update(states, model);
     simulationEngine.setSimulationSpeed((int) slider.getValue());
   }
 
+  /**
+   * Checks if the window size has changed, and updates the grid if it has.
+   */
   public void checkWindowSizeChanged() {
     if (scene.getHeight() != prevWindowHeight || scene.getWidth() != prevWindowWidth) {
       gridGraphics.resizeGrid(Math.min(scene.getWidth()-sidePanel.MAX_WIDTH,scene.getHeight()));
