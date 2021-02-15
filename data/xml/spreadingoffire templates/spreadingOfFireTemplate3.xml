@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <data game="game">
   <author>Jiyun</author>
-  <description></description>
+  <description>Trees are sparsely populated. Simulates fire in areas with low tree population density. </description>
   <numCols>50</numCols>
   <numRows>50</numRows>
   <shapeCoords>21,20,20,21,21,21,22,21</shapeCoords>
