@@ -14,7 +14,10 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 /**
+ * Manages and displays the main user interface. It contains a grid and a side panel of controls.
+ * These controls (buttons and a slider) affect how the simulation looks and runs.
  *
+ * @author Harrison Huang
  */
 public class SimulationScreen {
 
@@ -37,14 +40,18 @@ public class SimulationScreen {
   private static final double MIN_SPEED = 0;
   private static final double MAX_SPEED = 60;
   private static final double DEFAULT_SPEED = 30;
-  /**
-   *
-   */
+
   public SliderGraphics sliderGraphics;
   private Scene scene;
 
   private SimulationEngine simulationEngine;
 
+  /**
+   * Constructor for the SimulationScreen. To be called by the SimulationEngine.
+   * It displays the window and creates the side panel of controls.
+   * @param stage Stage on which the window is started
+   * @param engine the SimulationEngine running this screen
+   */
   public SimulationScreen(Stage stage, SimulationEngine engine) {
     this.stage = stage;
     simulationEngine = engine;
@@ -57,7 +64,7 @@ public class SimulationScreen {
     BorderPane root = new BorderPane();
     gridGraphics = new GridGraphics();
     sidePanel = new SidePanel();
-    createButtons();
+    addSidePanelControls();
     root.setRight(gridGraphics.getGridPane());
     root.setLeft(sidePanel.getPane());
 
@@ -69,7 +76,7 @@ public class SimulationScreen {
     stage.show();
 
   }
-  private void createButtons() {
+  private void addSidePanelControls() {
     // Add buttons
     Button startButton = makeButton("StartCommand", event -> simulationEngine.startSimulation());
     Button stopButton = makeButton("StopCommand",event -> simulationEngine.stopSimulation());
@@ -117,7 +124,6 @@ public class SimulationScreen {
   public void setDescription(String description) {
     sidePanel.setDescription(description);
   }
-
 
 
   public void update(State[][] states, String model) {
