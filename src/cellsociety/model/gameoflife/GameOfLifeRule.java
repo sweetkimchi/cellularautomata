@@ -60,7 +60,7 @@ public class GameOfLifeRule extends Rules {
         }
       }
     }
-   // printGrid(statesOfAllCells);
+    //printGrid(statesOfAllCells);
     return statesOfAllCells;
   }
 

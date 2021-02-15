@@ -11,7 +11,7 @@ import javafx.scene.layout.VBox;
  */
 public class SidePanel {
 
-  private static final double MAX_WIDTH = 220;
+  public static final double MAX_WIDTH = 220;
 
   private final VBox pane;
   private Label desc;

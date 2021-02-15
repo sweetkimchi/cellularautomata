@@ -19,8 +19,14 @@ import javafx.animation.AnimationTimer;
 import javafx.stage.Stage;
 
 /**
- * Controls the simulation. Acts as the middle-ground between GridManager, Decoder, Models, and the View component. Depends on other parts of MVC working correctly. SimulationEngine makes sure that different components do not have to interact with each other directly. Each component handles its own thing without having to know too much about what the other components are doing.
+ * Controls the simulation. Acts as the middle-ground between GridManager, Decoder, Models, and
+ * the View component. Depends on other parts of MVC working correctly. SimulationEngine makes sure
+ * that different components do not have to interact with each other directly. Each component
+ * handles its own thing without having to know too much about what the other components are doing.
+ * The SimulationEngine acts to run the simulation, interacting with the SimulationScreen to
+ * perform functions.
  * @author Ji Yun Hyo
+ * @author Harrison Huang
  */
 public class SimulationEngine{
 
@@ -145,6 +151,7 @@ public class SimulationEngine{
     animation = new AnimationTimer() {
       @Override
       public void handle(long now) {
+        simulationScreen.checkWindowSizeChanged();
         if (sleepTimer < frameDelay) {
           sleepTimer++;
           return;
