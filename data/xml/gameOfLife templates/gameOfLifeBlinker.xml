@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <data game="game">
   <author>John Conway</author>
-  <description></description>
+  <description>Blinks back and forth</description>
   <numCols>50</numCols>
   <numRows>50</numRows>
   <shapeCoords>25,25,25,26,25,27</shapeCoords>

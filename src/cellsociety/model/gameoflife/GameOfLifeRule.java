@@ -60,9 +60,24 @@ public class GameOfLifeRule extends Rules {
         }
       }
     }
+    printGrid(statesOfAllCells);
     return statesOfAllCells;
   }
 
+  private void printGrid(State[][] stateOfCells) {
+    for (int x = 0; x < stateOfCells.length; x++) {
+      for (int y = 0; y < stateOfCells[0].length; y++) {
+        if(stateOfCells[x][y].type.equals(ALIVE)){
+          System.out.print(" O ");
+        }else{
+          System.out.print(" X ");
+        }
+
+      }
+      System.out.println();
+    }
+    System.out.println();
+  }
 
   protected String decideState(int numberOfNeighbor, String type) {
     if (type.equals(ALIVE)) {

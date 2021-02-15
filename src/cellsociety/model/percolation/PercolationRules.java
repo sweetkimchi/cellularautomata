@@ -109,7 +109,7 @@ public class PercolationRules extends Rules {
       }
     }
     statesOfAllCells = setToFire(waterNextRound, statesOfAllCells);
-    printGrid(waterNextRound);
+  //  printGrid(waterNextRound);
     return statesOfAllCells;
   }
 

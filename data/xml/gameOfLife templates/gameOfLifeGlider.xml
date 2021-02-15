@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <data game="game">
   <author>John Conway</author>
-  <description></description>
+  <description>Glides towards the bottom right corner.</description>
   <numCols>50</numCols>
   <numRows>50</numRows>
   <shapeCoords>21,20,22,21,20,22,21,22,22,22</shapeCoords>

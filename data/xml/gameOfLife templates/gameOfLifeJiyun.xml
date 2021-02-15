@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <data game="game">
   <author>Ji Yun Hyo</author>
-  <description></description>
+  <description>Pattern I came up with for fun.</description>
   <numCols>50</numCols>
   <numRows>50</numRows>
   <shapeCoords>21,20,22,20,20,21,21,22,24,22,22,23,23,23,24,23</shapeCoords>
