@@ -9,7 +9,7 @@
   -fx-fill: black;
 }
 
-.gameOfLife- { /* empty cell */
+.gameOfLife-empty { /* empty cell */
   -fx-fill: lightgrey;
 }
 
