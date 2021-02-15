@@ -7,34 +7,49 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
 /**
+ * The SidePanel is used as a place to put nodes (buttons and sliders) and a description at the
+ * bottom.
  *
+ * @aythor Harrison Huang
  */
 public class SidePanel {
 
   public static final double MAX_WIDTH = 220;
 
-  private final VBox pane;
+  private final VBox panel;
   private Label desc;
 
   /**
-   * Default constructor
+   * Constructs the panel on which to put the controls and description.
    */
   public SidePanel() {
-    pane = new VBox();
+    panel = new VBox();
 
-    pane.setPadding(new Insets(5, 5, 5, 5));
+    panel.setPadding(new Insets(5, 5, 5, 5));
 
-    pane.setAlignment(Pos.CENTER_LEFT);
+    panel.setAlignment(Pos.CENTER_LEFT);
   }
 
-  public Node getPane() {
-    return pane;
+  /**
+   * Returns the node for the panel.
+   * @return Node object
+   */
+  public Node getNode() {
+    return panel;
   }
 
-  public void addNodesToPane(Node... button) {
-    pane.getChildren().addAll(button);
+  /**
+   * Adds one or multiple nodes to the pane.
+   * @param nodes singular or multiple nodes
+   */
+  public void addNodesToPane(Node... nodes) {
+    panel.getChildren().addAll(nodes);
   }
 
+  /**
+   * Adds a description of text to the bottom of the pane.
+   * @param description String for the description
+   */
   public void setDescription(String description) {
     desc = new Label(description);
     desc.setWrapText(true);
@@ -42,12 +57,15 @@ public class SidePanel {
     addNodesToPane(desc);
   }
 
+  /**
+   * Removes the description if it exists. Returns the removed description.
+   * @return String of removed description
+   */
   public String removeDescription() {
     if (desc == null) {
       return "";
     }
-
-    pane.getChildren().remove(desc);
+    panel.getChildren().remove(desc);
     String ret = desc.getText();
     desc = null;
     return ret;
