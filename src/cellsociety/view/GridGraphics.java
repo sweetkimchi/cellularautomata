@@ -39,13 +39,6 @@ public class GridGraphics {
 
     gridPane.setAlignment(Pos.CENTER_RIGHT);
 
-    EventHandler<MouseEvent> eventHandler = new EventHandler() {
-      @Override
-      public void handle(Event event) {
-
-      }
-    };
-
   }
 
   public GridPane getGridPane() {
