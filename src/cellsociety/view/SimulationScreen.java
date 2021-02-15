@@ -25,22 +25,18 @@ public class SimulationScreen {
   public static final String DEFAULT_RESOURCE_FOLDER =
       "/" + DEFAULT_RESOURCE_PACKAGE.replace(".", "/");
   public static final String STYLESHEET = "default.css";
-  public static final int WINDOW_WIDTH = 800;
-  public static final int WINDOW_HEIGHT = 600;
+  public static final double WINDOW_WIDTH = 800;
+  public static final double WINDOW_HEIGHT = 600;
+  private double prevWindowWidth = WINDOW_WIDTH;
+  private double prevWindowHeight = WINDOW_HEIGHT;
   private static final String language = "English";
   private static final double MIN_SPEED = 0;
   private static final double MAX_SPEED = 60;
   private static final double DEFAULT_SPEED = 30;
   private final Group sceneNodes;
   private final Stage stage;
-  public CellGraphics cellGraphics;
   public SidePanel sidePanel;
-  public GraphGraphics graphGraphics;
   public GridGraphics gridGraphics;
-  /**
-   *
-   */
-  public SliderGraphics sliderGraphics;
   private final ResourceBundle resources;
   private Slider slider;
   private Scene scene;
@@ -133,5 +129,11 @@ public class SimulationScreen {
   public void update(State[][] states, String model) {
     gridGraphics.update(states, model);
     simulationEngine.setSimulationSpeed((int) slider.getValue());
+  }
+
+  public void checkWindowSizeChanged() {
+    if (scene.getHeight() != prevWindowHeight || scene.getWidth() != prevWindowWidth) {
+      gridGraphics.resizeGrid(Math.min(scene.getWidth()-sidePanel.MAX_WIDTH,scene.getHeight()));
+    }
   }
 }
