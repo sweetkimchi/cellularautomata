@@ -87,7 +87,10 @@ efficient than what we had initially imagined. As of the basic implementation, a
 components (MVC) are working together by informing each other of its states but do not specifically
 have to know the inner-workings of each class in order to cooperate. One simplification for the 
 resource property file is that the language (English) is currently stored as a private static final 
-String rather than by being determined by an input to the main class.
+String rather than by being determined by an input to the main class. Another simplification is 
+that the current method of updating the Grid is by clearing all the Rectangles and re-adding
+them all one-by-one, while it would be better in the future to instead simply change the color of
+each of these Rectangles.
 
 Interesting data files: (Jiyun) I manually tested out the templates and have selected the ones that
 produce interesting results. I think all the templates are worth your time to checkout. I tried to "
