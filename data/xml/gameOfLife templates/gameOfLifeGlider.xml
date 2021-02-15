@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <data game="game">
-  <author>John Conway</author>
+  <author>Richard K. Guy</author>
   <description>Glides towards the bottom right corner.</description>
   <numCols>50</numCols>
   <numRows>50</numRows>
