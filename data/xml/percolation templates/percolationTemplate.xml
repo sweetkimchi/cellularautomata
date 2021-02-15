@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <data game="game">
   <author>Jiyun</author>
-  <description></description>
+  <description>Shows water spreading across the coordinates.</description>
   <numCols>50</numCols>
   <numRows>50</numRows>
   <watertoemptyratio>0.5</watertoemptyratio>

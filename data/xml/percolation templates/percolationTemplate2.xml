@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <data game="game">
   <author>Jiyun</author>
-  <description></description>
+  <description>Simulates water spreading in tight spaces such as caves.</description>
   <numCols>50</numCols>
   <numRows>50</numRows>
-  <watertoemptyratio>0.2</watertoemptyratio>
-  <blockratio>0.7</blockratio>
+  <watertoemptyratio>0.01</watertoemptyratio>
+  <blockratio>0.4</blockratio>
   <randomseed>100</randomseed>
   <template>random_one</template>
   <title>Percolation</title>
