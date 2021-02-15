@@ -89,7 +89,7 @@ public class GameOfLifeRule extends Rules {
     } else if (numberOfNeighbor == 3) {
       return ALIVE;
     }
-    return "";
+    return EMPTY;
   }
 
   /**
