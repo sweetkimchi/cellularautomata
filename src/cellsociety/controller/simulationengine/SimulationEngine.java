@@ -142,10 +142,12 @@ public class SimulationEngine{
    * Updates the state of each cell according to logic of the model
    */
   public void updateCellState() {
-    stateOfAllCells = rules.judgeStateOfEachCell(stateOfAllCells);
+    rules.judgeStateOfEachCell(stateOfAllCells);
     gridManager.updateGrid(stateOfAllCells);
     simulationScreen.update(stateOfAllCells, decoder.getModel());
   }
+
+
 
   private void runSimulation() {
     animation = new AnimationTimer() {

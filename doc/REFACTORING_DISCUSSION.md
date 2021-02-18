@@ -1,7 +1,10 @@
 ## Refactoring Lab Discussion
 ### Team
+cellsociety team 01
 ### Names
-
+Ji Yun Hyo - jh160<br>
+Shaw Phillips - sp422 <br>
+Harrison Huang - hlh38
 
 ### Issues in Current Code
 
@@ -48,15 +51,22 @@
 ### Refactoring Plan
 
 * What are the code's biggest issues?
+  Encapsulation and duplication of code, especially for the judgeStateOfEachCell method. We also have
+  a few public instance variables.
 
 * Which issues are easy to fix and which are hard?
+  Easy to fix: public instance variables
+  Hard to fix: encapsulation and duplication of code
 
 * What are good ways to implement the changes "in place"?
-
+  Change public to private for instance variables. Make set and get methods to set and get the public instance variable.
+  Try to refactor the judgeStateOfEachCell into Rules abstract class.
 
 ### Refactoring Work
 
 * Issue chosen: Fix and Alternatives
-
+  Delete duplicate Decoder classes and condence methods into super-class.
 
 * Issue chosen: Fix and Alternatives
+  Instead of passing around the entire grid, pass around a grid of colors (for view component to display) and pass in a integer array
+  of numberOfNeighbors to the rules class to determine/update the states.
