@@ -12,10 +12,10 @@ public class State {
 
   private final int xCoord;
   private final int yCoord;
-  public String type;
-  public Paint color;
-  public int numberOfMoves;
-  public int energy;
+  private String type;
+  private Paint color;
+  private int numberOfMoves;
+  private int energy;
   private final int ENERGY = 10;
 
   /**
@@ -92,6 +92,22 @@ public class State {
    */
   public int getyCoord() {
     return yCoord;
+  }
+
+  public String getType(){
+    return type;
+  }
+
+  public int getEnergy(){
+    return energy;
+  }
+
+  public int getNumberOfMoves(){
+    return numberOfMoves;
+  }
+
+  public void setType(String type){
+    this.type = type;
   }
 
 }

@@ -49,12 +49,12 @@ public class SegregationModelRules extends Rules {
     while (true) {
       int x = random.nextInt(statesOfAllCells.length);
       int y = random.nextInt(statesOfAllCells[0].length);
-      if (statesOfAllCells[x][y].type.equals(EMPTY) && emptyNeighbors[x][y] == 1
+      if (statesOfAllCells[x][y].getType().equals(EMPTY) && emptyNeighbors[x][y] == 1
           && counter < DELAY) {
         statesOfAllCells[x][y] = new State(x, y, type);
         setColor(statesOfAllCells[x][y]);
         return;
-      } else if (statesOfAllCells[x][y].type.equals(EMPTY) && counter >= DELAY) {
+      } else if (statesOfAllCells[x][y].getType().equals(EMPTY) && counter >= DELAY) {
         statesOfAllCells[x][y] = new State(x, y, type);
         setColor(statesOfAllCells[x][y]);
         return;
@@ -95,13 +95,13 @@ public class SegregationModelRules extends Rules {
         double total = agentYNeighbor + agentXNeighbor;
         double ratio = 0;
 
-        if (statesOfAllCells[x][y].type.equals(AGENTY) && total != 0) {
+        if (statesOfAllCells[x][y].getType().equals(AGENTY) && total != 0) {
           ratio = ((double) agentYNeighbor) / total;
           if (ratio < THRESHHOLD) {
             dissatisfiedNeighbors[x][y] = 1;
           }
         }
-        if (statesOfAllCells[x][y].type.equals(AGENTX) && total != 0) {
+        if (statesOfAllCells[x][y].getType().equals(AGENTX) && total != 0) {
           //    System.out.println(ratio);
           ratio = ((double) agentXNeighbor) / total;
           if (ratio < THRESHHOLD) {
@@ -109,7 +109,7 @@ public class SegregationModelRules extends Rules {
             dissatisfiedNeighbors[x][y] = 2;
           }
         }
-        if (statesOfAllCells[x][y].type.equals(EMPTY)) {
+        if (statesOfAllCells[x][y].getType().equals(EMPTY)) {
           emptyNeighbors[x][y] = 1;
         }
 
@@ -142,9 +142,9 @@ public class SegregationModelRules extends Rules {
   }
 
   private void setColor(State state) {
-    if (state.type.equals(AGENTX)) {
+    if (state.getType().equals(AGENTX)) {
       state.setColor(AGENTX_COLOR);
-    } else if (state.type.equals(AGENTY)) {
+    } else if (state.getType().equals(AGENTY)) {
       state.setColor(AGENTY_COLOR);
     } else {
       state.setColor(EMPTY_COLOR);

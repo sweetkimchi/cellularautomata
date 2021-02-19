@@ -32,32 +32,32 @@ public abstract class Rules {
     for (int x = 0; x < statesOfAllCells.length; x++) {
       for (int y = 0; y < statesOfAllCells[0].length; y++) {
         int numberOfNeighbor = 0;
-        if (x - 1 >= 0 && y - 1 >= 0 && statesOfAllCells[x - 1][y - 1].type.equals(type)) {
+        if (x - 1 >= 0 && y - 1 >= 0 && statesOfAllCells[x - 1][y - 1].getType().equals(type)) {
           numberOfNeighbor++;
         }
-        if (x - 1 >= 0 && y >= 0 && statesOfAllCells[x - 1][y].type.equals(type)) {
+        if (x - 1 >= 0 && y >= 0 && statesOfAllCells[x - 1][y].getType().equals(type)) {
           numberOfNeighbor++;
         }
         if (x - 1 >= 0 && y + 1 < statesOfAllCells[0].length && statesOfAllCells[x - 1][y
-            + 1].type.equals(type)) {
+            + 1].getType().equals(type)) {
           numberOfNeighbor++;
         }
-        if (y - 1 >= 0 && statesOfAllCells[x][y - 1].type.equals(type)) {
+        if (y - 1 >= 0 && statesOfAllCells[x][y - 1].getType().equals(type)) {
           numberOfNeighbor++;
         }
-        if (y + 1 < statesOfAllCells[0].length && statesOfAllCells[x][y + 1].type.equals(type)) {
+        if (y + 1 < statesOfAllCells[0].length && statesOfAllCells[x][y + 1].getType().equals(type)) {
           numberOfNeighbor++;
         }
-        if (x + 1 < statesOfAllCells.length && y - 1 >= 0 && statesOfAllCells[x + 1][y - 1].type
+        if (x + 1 < statesOfAllCells.length && y - 1 >= 0 && statesOfAllCells[x + 1][y - 1].getType()
             .equals(type)) {
           numberOfNeighbor++;
         }
-        if (x + 1 < statesOfAllCells.length && y >= 0 && statesOfAllCells[x + 1][y].type
+        if (x + 1 < statesOfAllCells.length && y >= 0 && statesOfAllCells[x + 1][y].getType()
             .equals(type)) {
           numberOfNeighbor++;
         }
         if (x + 1 < statesOfAllCells.length && y + 1 < statesOfAllCells[0].length
-            && statesOfAllCells[x + 1][y + 1].type.equals(type)) {
+            && statesOfAllCells[x + 1][y + 1].getType().equals(type)) {
           numberOfNeighbor++;
         }
         //     System.out.print(" " + numberOfNeighbor + " ");
