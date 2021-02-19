@@ -31,7 +31,7 @@ public class WaTorModelRules extends Rules {
   private final int DEFAULT_ENERGY;
 
   /**
-   * WaTor Model Constructor that inializes the model
+   * WaTor Model Constructor that initializes the model
    *
    * @param randomSeed        random seed to reproduce the results
    * @param energyFish        energy of the fish
