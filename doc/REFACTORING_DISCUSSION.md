@@ -2,7 +2,7 @@
 ### Team
 cellsociety team 01
 ### Names
-Ji Yun Hyo - jh160<br>
+Ji Yun Hyo - jh160 <br>
 Shaw Phillips - sp422 <br>
 Harrison Huang - hlh38
 
