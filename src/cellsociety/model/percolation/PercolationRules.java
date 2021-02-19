@@ -47,7 +47,7 @@ public class PercolationRules extends Rules {
     System.out.println(type);
     for (int x = 0; x < statesOfAllCells.length; x++) {
       for (int y = 0; y < statesOfAllCells[0].length; y++) {
-        if (statesOfAllCells[x][y].type.equals(EMPTY) && emptyNeighbors[x][y] == 1) {
+        if (statesOfAllCells[x][y].getType().equals(EMPTY) && emptyNeighbors[x][y] == 1) {
           statesOfAllCells[x][y] = new State(x, y, type);
           setColor(statesOfAllCells[x][y]);
           return;
@@ -83,22 +83,22 @@ public class PercolationRules extends Rules {
     int[][] waterNextRound = numberOfAliveNeighbors(statesOfAllCells, "");
     for (int x = 0; x < statesOfAllCells.length; x++) {
       for (int y = 0; y < statesOfAllCells[0].length; y++) {
-        if (statesOfAllCells[x][y].type.equals(WATER)) {
-          if (x - 1 >= 0 && y >= 0 && statesOfAllCells[x - 1][y].type.equals(EMPTY)) {
+        if (statesOfAllCells[x][y].getType().equals(WATER)) {
+          if (x - 1 >= 0 && y >= 0 && statesOfAllCells[x - 1][y].getType().equals(EMPTY)) {
             waterNextRound[x - 1][y] = 1;
           }
-          if (x >= 0 && y - 1 >= 0 && statesOfAllCells[x][y - 1].type.equals(EMPTY)) {
+          if (x >= 0 && y - 1 >= 0 && statesOfAllCells[x][y - 1].getType().equals(EMPTY)) {
 
             waterNextRound[x][y - 1] = 1;
 
           }
-          if (x + 1 < statesOfAllCells.length && y >= 0 && statesOfAllCells[x + 1][y].type
+          if (x + 1 < statesOfAllCells.length && y >= 0 && statesOfAllCells[x + 1][y].getType()
               .equals(EMPTY)) {
 
             waterNextRound[x + 1][y] = 1;
 
           }
-          if (x >= 0 && y + 1 < statesOfAllCells[0].length && statesOfAllCells[x][y + 1].type
+          if (x >= 0 && y + 1 < statesOfAllCells[0].length && statesOfAllCells[x][y + 1].getType()
               .equals(
                   EMPTY)) {
 
@@ -127,9 +127,9 @@ public class PercolationRules extends Rules {
   }
 
   private void setColor(State state) {
-    if (state.type.equals(BLOCK)) {
+    if (state.getType().equals(BLOCK)) {
       state.setColor(BLOCK_COLOR);
-    } else if (state.type.equals(WATER)) {
+    } else if (state.getType().equals(WATER)) {
       state.setColor(WATER_COLOR);
     } else {
       state.setColor(EMPTY_COLOR);

@@ -51,9 +51,9 @@ public class GameOfLifeRule extends Rules {
     int[][] numberOfAliveNeighbors = numberOfAliveNeighbors(statesOfAllCells, ALIVE);
     for (int x = 0; x < statesOfAllCells.length; x++) {
       for (int y = 0; y < statesOfAllCells[0].length; y++) {
-        statesOfAllCells[x][y].type = decideState(numberOfAliveNeighbors[x][y],
-            statesOfAllCells[x][y].type);
-        if (statesOfAllCells[x][y].type.equals(ALIVE)) {
+        statesOfAllCells[x][y].setType(decideState(numberOfAliveNeighbors[x][y],
+            statesOfAllCells[x][y].getType()));
+        if (statesOfAllCells[x][y].getType().equals(ALIVE)) {
           statesOfAllCells[x][y].setColor(ALIVE_COLOR);
         } else {
           statesOfAllCells[x][y].setColor(DEAD_COLOR);
@@ -67,7 +67,7 @@ public class GameOfLifeRule extends Rules {
   private void printGrid(State[][] stateOfCells) {
     for (int x = 0; x < stateOfCells.length; x++) {
       for (int y = 0; y < stateOfCells[0].length; y++) {
-        if(stateOfCells[x][y].type.equals(ALIVE)){
+        if(stateOfCells[x][y].getType().equals(ALIVE)){
           System.out.print(" O ");
         }else{
           System.out.print(" X ");

@@ -57,7 +57,7 @@ public class GridManager {
     }
 
     for (State s : template) {
-      stateOfCells[s.getxCoord()][s.getyCoord()].type = type;
+      stateOfCells[s.getxCoord()][s.getyCoord()].setType(type);
     }
     this.stateOfCells = stateOfCells;
     return stateOfCells;

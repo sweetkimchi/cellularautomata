@@ -62,7 +62,7 @@ public class GridGraphics {
         Rectangle rect = new Rectangle();
         rect.setWidth(gridSize / states.length);
         rect.setHeight(gridSize / states[0].length);
-        rect.getStyleClass().add(model + "-" + states[r][c].type);
+        rect.getStyleClass().add(model + "-" + states[r][c].getType());
         gridPane.add(rect, r, c);
       }
     }

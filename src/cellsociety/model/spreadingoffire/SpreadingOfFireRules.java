@@ -51,7 +51,7 @@ public class SpreadingOfFireRules extends Rules {
     System.out.println(type);
     for (int x = 0; x < statesOfAllCells.length; x++) {
       for (int y = 0; y < statesOfAllCells[0].length; y++) {
-        if (statesOfAllCells[x][y].type.equals(EMPTY) && emptyNeighbors[x][y] == 1) {
+        if (statesOfAllCells[x][y].getType().equals(EMPTY) && emptyNeighbors[x][y] == 1) {
           statesOfAllCells[x][y] = new State(x, y, type);
           setColor(statesOfAllCells[x][y]);
           return;
@@ -88,27 +88,27 @@ public class SpreadingOfFireRules extends Rules {
     int[][] emptyNextRound = numberOfAliveNeighbors(statesOfAllCells, "");
     for (int x = 0; x < statesOfAllCells.length; x++) {
       for (int y = 0; y < statesOfAllCells[0].length; y++) {
-        if (statesOfAllCells[x][y].type.equals(FIRE)) {
-          if (x - 1 >= 0 && y >= 0 && statesOfAllCells[x - 1][y].type.equals(TREE)) {
+        if (statesOfAllCells[x][y].getType().equals(FIRE)) {
+          if (x - 1 >= 0 && y >= 0 && statesOfAllCells[x - 1][y].getType().equals(TREE)) {
             double randomNumber = random.nextDouble();
             if (randomNumber < probsOfFire) {
               fireNextRound[x - 1][y] = 1;
             }
           }
-          if (x >= 0 && y - 1 >= 0 && statesOfAllCells[x][y - 1].type.equals(TREE)) {
+          if (x >= 0 && y - 1 >= 0 && statesOfAllCells[x][y - 1].getType().equals(TREE)) {
             double randomNumber = random.nextDouble();
             if (randomNumber < probsOfFire) {
               fireNextRound[x][y - 1] = 1;
             }
           }
-          if (x + 1 < statesOfAllCells.length && y >= 0 && statesOfAllCells[x + 1][y].type
+          if (x + 1 < statesOfAllCells.length && y >= 0 && statesOfAllCells[x + 1][y].getType()
               .equals(TREE)) {
             double randomNumber = random.nextDouble();
             if (randomNumber < probsOfFire) {
               fireNextRound[x + 1][y] = 1;
             }
           }
-          if (x >= 0 && y + 1 < statesOfAllCells[0].length && statesOfAllCells[x][y + 1].type
+          if (x >= 0 && y + 1 < statesOfAllCells[0].length && statesOfAllCells[x][y + 1].getType()
               .equals(TREE)) {
             double randomNumber = random.nextDouble();
             if (randomNumber < probsOfFire) {
@@ -142,9 +142,9 @@ public class SpreadingOfFireRules extends Rules {
   }
 
   private void setColor(State state) {
-    if (state.type.equals(FIRE)) {
+    if (state.getType().equals(FIRE)) {
       state.setColor(FIRE_COLOR);
-    } else if (state.type.equals(TREE)) {
+    } else if (state.getType().equals(TREE)) {
       state.setColor(TREE_COLOR);
     } else {
       state.setColor(EMPTY_COLOR);
