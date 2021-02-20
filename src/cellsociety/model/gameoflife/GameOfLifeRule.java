@@ -1,7 +1,6 @@
 package cellsociety.model.gameoflife;
 
 import cellsociety.controller.grid.GridManager;
-import cellsociety.model.cell.State;
 import cellsociety.model.rules.Rules;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,47 +49,6 @@ public class GameOfLifeRule extends Rules {
     possibleTypes.add(ALIVE);
   }
 
-  /**
-   * judges the state of each cell using the rule of the specific model class
-   *
-   * @param statesOfAllCells             starting states of all cells
-   * @param numberOfNeighborsForEachType
-   * @return updated states of all cells
-   */
-  @Override
-  public State[][] judgeStateOfEachCell(State[][] statesOfAllCells,
-      List<int[][]> numberOfNeighborsForEachType) {
-    int[][] numberOfAliveNeighbors = numberOfAliveNeighbors(statesOfAllCells, ALIVE);
-    for (int x = 0; x < statesOfAllCells.length; x++) {
-      for (int y = 0; y < statesOfAllCells[0].length; y++) {
-        statesOfAllCells[x][y].setType(determineWhetherAliveOrDead(numberOfAliveNeighbors[x][y],
-            statesOfAllCells[x][y].getType()));
-        if (statesOfAllCells[x][y].getType().equals(ALIVE)) {
-          statesOfAllCells[x][y].setColor(ALIVE_COLOR);
-        } else {
-          statesOfAllCells[x][y].setColor(DEAD_COLOR);
-        }
-      }
-    }
-    //printGrid(statesOfAllCells);
-    return statesOfAllCells;
-  }
-
-  private void printGrid(State[][] stateOfCells) {
-    for (int x = 0; x < stateOfCells.length; x++) {
-      for (int y = 0; y < stateOfCells[0].length; y++) {
-        if(stateOfCells[x][y].getType().equals(ALIVE)){
-          System.out.print(" O ");
-        }else{
-          System.out.print(" X ");
-        }
-
-      }
-      System.out.println();
-    }
-    System.out.println();
-  }
-
   protected String determineWhetherAliveOrDead(int numberOfNeighbor, String type) {
     if (type.equals(ALIVE)) {
       if (numberOfNeighbor < lowerSurvivalBoundary) {
@@ -136,12 +94,13 @@ public class GameOfLifeRule extends Rules {
   @Override
   public void decideState(List<Integer> neighborsOfEachTypeAtCoordinate, List<int[][]> nextStates,
       int x, int y, GridManager gridManager) {
-    gridManager.getStateAtCoordinate(x,y).setType(determineWhetherAliveOrDead(neighborsOfEachTypeAtCoordinate.get(1),
-        gridManager.getTypeAtCoordinate(x,y)));
-    if (gridManager.getTypeAtCoordinate(x,y).equals(ALIVE)) {
-      gridManager.getStateAtCoordinate(x,y).setColor(ALIVE_COLOR);
+    gridManager.getStateAtCoordinate(x, y)
+        .setType(determineWhetherAliveOrDead(neighborsOfEachTypeAtCoordinate.get(1),
+            gridManager.getTypeAtCoordinate(x, y)));
+    if (gridManager.getTypeAtCoordinate(x, y).equals(ALIVE)) {
+      gridManager.getStateAtCoordinate(x, y).setColor(ALIVE_COLOR);
     } else {
-      gridManager.getStateAtCoordinate(x,y).setColor(DEAD_COLOR);
+      gridManager.getStateAtCoordinate(x, y).setColor(DEAD_COLOR);
     }
   }
 }

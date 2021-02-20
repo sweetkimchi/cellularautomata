@@ -48,6 +48,7 @@ Harrison Huang - hlh38
         model) {
 
 -Code duplication <br>
+
 1. public class SegDecoder extends Decoder <br>
 2. public SegDecoder(Map<String, String> attributes)<br>
 3. public float getPopRatio()<br>
@@ -55,7 +56,7 @@ Harrison Huang - hlh38
 5. public float getSatThresh()<br>
 6. public int getRandSeed()<br>
 7. public String getTemp()<br><br>
-and 5 more methods will have to be added here for the new simulations added this week<br>
+   and 5 more methods will have to be added here for the new simulations added this week<br>
 8. public class Decoder {<br>
 9. public void readValuesFromXMLFile()<br>
 10. public GOLDecoder getGOLDecoder()<br>

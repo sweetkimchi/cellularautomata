@@ -55,14 +55,6 @@ public abstract class Rules {
   }
 
   /**
-   * judges the state of each cell using the rule of the specific model class
-   *
-   * @param statesOfAllCells starting states of all cells
-   * @return updated states of all cells
-   */
-  public abstract State[][] judgeStateOfEachCell(State[][] statesOfAllCells, List<int[][]> numberOfNeighborsForEachType);
-
-  /**
    * specifies the starting states of the cells according to the simulation rule
    *
    * @return type of cells
@@ -83,5 +75,6 @@ public abstract class Rules {
    */
   public abstract ArrayList<String> getPossibleColors();
 
-  public abstract void decideState(List<Integer> neighborsOfEachTypeAtCoordinate, List<int[][]> nextStates, int x, int y, GridManager gridManager);
+  public abstract void decideState(List<Integer> neighborsOfEachTypeAtCoordinate,
+      List<int[][]> nextStates, int x, int y, GridManager gridManager);
 }

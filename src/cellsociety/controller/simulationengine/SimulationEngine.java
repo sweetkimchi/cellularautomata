@@ -149,13 +149,6 @@ public class SimulationEngine{
     simulationScreen.update(gridManager.getGrid(),decoder.getModel());
   }
 
-  private void badExampleOfEncapsulation() {
-    rules.judgeStateOfEachCell(stateOfAllCells ,gridManager.getNumberOfNeighborsForEachType(rules.getPossibleTypes()));
-    gridManager.updateGrid(stateOfAllCells);
-    simulationScreen.update(stateOfAllCells, decoder.getModel());
-  }
-
-
   private void runSimulation() {
     animation = new AnimationTimer() {
       @Override
