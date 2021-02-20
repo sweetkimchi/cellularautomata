@@ -2,10 +2,10 @@
 <data game="game">
   <author>Richard K. Guy</author>
   <description>Glides towards the bottom right corner.</description>
+  <model>gameOfLife</model>
   <numCols>50</numCols>
   <numRows>50</numRows>
   <shapeCoords>21,20,22,21,20,22,21,22,22,22</shapeCoords>
   <template>glider</template>
   <title>Game of Life</title>
-  <model>gameOfLife</model>
 </data>

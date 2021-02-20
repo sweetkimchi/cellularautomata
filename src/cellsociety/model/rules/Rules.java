@@ -9,6 +9,7 @@ import java.util.ArrayList;
  * @author Ji Yun Hyo
  */
 public abstract class Rules {
+
   /**
    * Default constructor
    */
@@ -35,40 +36,20 @@ public abstract class Rules {
     return numberOfNeighbors;
   }
 
-  private void checkEightSidesForNumberOfNeighbors(State[][] statesOfAllCells, String type, int[][] numberOfNeighbors, int x,
+  private void checkEightSidesForNumberOfNeighbors(State[][] statesOfAllCells, String type,
+      int[][] numberOfNeighbors, int x,
       int y) {
     int numberOfNeighbor = 0;
-    if (x - 1 >= 0 && y - 1 >= 0 && statesOfAllCells[x - 1][y - 1].getType().equals(type)) {
-      numberOfNeighbor++;
+    for (int xCoord = x - 1; xCoord <= x + 1; xCoord++) {
+      for (int yCoord = y - 1; yCoord <= y + 1; yCoord++) {
+        if (xCoord >= 0 && yCoord >= 0 && xCoord < statesOfAllCells.length
+            && yCoord < statesOfAllCells[0].length && statesOfAllCells[xCoord][yCoord].getType()
+            .equals(type) && !(xCoord == x && yCoord == y)) {
+          numberOfNeighbor++;
+        }
+      }
     }
-    if (x - 1 >= 0 && y >= 0 && statesOfAllCells[x - 1][y].getType().equals(type)) {
-      numberOfNeighbor++;
-    }
-    if (x - 1 >= 0 && y + 1 < statesOfAllCells[0].length && statesOfAllCells[x - 1][y
-        + 1].getType().equals(type)) {
-      numberOfNeighbor++;
-    }
-    if (y - 1 >= 0 && statesOfAllCells[x][y - 1].getType().equals(type)) {
-      numberOfNeighbor++;
-    }
-    if (y + 1 < statesOfAllCells[0].length && statesOfAllCells[x][y + 1].getType().equals(type)) {
-      numberOfNeighbor++;
-    }
-    if (x + 1 < statesOfAllCells.length && y - 1 >= 0 && statesOfAllCells[x + 1][y - 1].getType()
-        .equals(type)) {
-      numberOfNeighbor++;
-    }
-    if (x + 1 < statesOfAllCells.length && y >= 0 && statesOfAllCells[x + 1][y].getType()
-        .equals(type)) {
-      numberOfNeighbor++;
-    }
-    if (x + 1 < statesOfAllCells.length && y + 1 < statesOfAllCells[0].length
-        && statesOfAllCells[x + 1][y + 1].getType().equals(type)) {
-      numberOfNeighbor++;
-    }
-    //     System.out.print(" " + numberOfNeighbor + " ");
     numberOfNeighbors[x][y] = numberOfNeighbor;
-    //    statesOfAllCells[x][y].alive = decideState(numberOfNeighbor);
   }
 
   /**

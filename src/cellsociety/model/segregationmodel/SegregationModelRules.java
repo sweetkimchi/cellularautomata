@@ -91,7 +91,6 @@ public class SegregationModelRules extends Rules {
     int[][] dissatisfiedNeighbors = numberOfAliveNeighbors(statesOfAllCells, "");
     int[][] emptyNeighbors = numberOfAliveNeighbors(statesOfAllCells, "");
 
-
     //loop through each one
     for (int x = 0; x < statesOfAllCells.length; x++) {
       for (int y = 0; y < statesOfAllCells[0].length; y++) {

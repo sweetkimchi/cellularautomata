@@ -12,11 +12,11 @@ public class State {
 
   private final int xCoord;
   private final int yCoord;
+  private final int ENERGY = 10;
   private String type;
   private Paint color;
   private int numberOfMoves;
   private int energy;
-  private final int ENERGY = 10;
 
   /**
    * Basic constructor
@@ -94,20 +94,20 @@ public class State {
     return yCoord;
   }
 
-  public String getType(){
+  public String getType() {
     return type;
   }
 
-  public int getEnergy(){
+  public void setType(String type) {
+    this.type = type;
+  }
+
+  public int getEnergy() {
     return energy;
   }
 
-  public int getNumberOfMoves(){
+  public int getNumberOfMoves() {
     return numberOfMoves;
-  }
-
-  public void setType(String type){
-    this.type = type;
   }
 
 }

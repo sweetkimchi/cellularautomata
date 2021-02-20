@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <data game="game">
   <author>Jiyun</author>
-  <description>The agents first want to relocate to a random empty cell. However, when there are no other empty cells to travel to, they start switching places with other dissatisfied agents. This results in agents' clustering together to form big groups.</description>
+  <description>The agents first want to relocate to a random empty cell. However, when there are no
+    other empty cells to travel to, they start switching places with other dissatisfied agents. This
+    results in agents' clustering together to form big groups.
+  </description>
+  <emptyratio>0.1</emptyratio>
+  <model>segregationmodel</model>
   <numCols>50</numCols>
   <numRows>50</numRows>
   <populationratio>0.5</populationratio>
-  <emptyratio>0.1</emptyratio>
-  <satisfactionthreshhold>0.6</satisfactionthreshhold>
   <randomseed>100</randomseed>
+  <satisfactionthreshhold>0.6</satisfactionthreshhold>
   <template>random_one</template>
   <title>Segregation Model</title>
-  <model>segregationmodel</model>
 </data>

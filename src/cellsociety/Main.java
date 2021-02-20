@@ -6,6 +6,7 @@ import javafx.stage.Stage;
 
 /**
  * launches the model by calling the simulation engine
+ *
  * @author Ji Yun Hyo
  */
 public class Main extends Application {
@@ -13,6 +14,7 @@ public class Main extends Application {
 
   /**
    * main method
+   *
    * @param args
    */
   public static void main(String[] args) {
@@ -22,6 +24,7 @@ public class Main extends Application {
 
   /**
    * Starts the simulation
+   *
    * @param stage Stage object required for animation
    */
   @Override

@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <data game="game">
   <author>Jiyun</author>
-  <description>The red agents are constantly relocating to random locations looking for a satisfactory location. Everyone ends up being satisfied.</description>
+  <description>The red agents are constantly relocating to random locations looking for a
+    satisfactory location. Everyone ends up being satisfied.
+  </description>
+  <emptyratio>0.3</emptyratio>
+  <model>segregationmodel</model>
   <numCols>50</numCols>
   <numRows>50</numRows>
   <populationratio>0.8</populationratio>
-  <emptyratio>0.3</emptyratio>
-  <satisfactionthreshhold>0.2</satisfactionthreshhold>
   <randomseed>14</randomseed>
+  <satisfactionthreshhold>0.2</satisfactionthreshhold>
   <template>random_three</template>
   <title>Segregation Model</title>
-  <model>segregationmodel</model>
 </data>

@@ -24,8 +24,8 @@ public class PercolationRules extends Rules {
   private final String BLOCK = "block";
   private final String WATER = "water";
   private final String EMPTY = "empty";
-  private double probsOfFire;
   private final Random random;
+  private double probsOfFire;
 
   /**
    * Default constructor
@@ -109,7 +109,7 @@ public class PercolationRules extends Rules {
       }
     }
     statesOfAllCells = setToFire(waterNextRound, statesOfAllCells);
-  //  printGrid(waterNextRound);
+    //  printGrid(waterNextRound);
     return statesOfAllCells;
   }
 

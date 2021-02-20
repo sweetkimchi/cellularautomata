@@ -2,10 +2,10 @@
 <data game="game">
   <author>JokeySmurf at en</author>
   <description>Existing template named "Beacon."</description>
+  <model>gameOfLife</model>
   <numCols>50</numCols>
   <numRows>50</numRows>
   <shapeCoords>25,25,26,25,25,26,26,26,27,27,28,27,27,28,28,28</shapeCoords>
   <template>beacon</template>
   <title>Game of Life</title>
-  <model>gameOfLife</model>
 </data>

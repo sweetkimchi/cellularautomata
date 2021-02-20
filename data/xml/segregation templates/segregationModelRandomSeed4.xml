@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <data game="game">
   <author>Jiyun</author>
-  <description>Because the satisfaction threshhold is 0.9 (which means everyone is unhappy), all these agents constantly look for a new place in this very small world. They end up constantly oscillating between two complementary states.</description>
+  <description>Because the satisfaction threshhold is 0.9 (which means everyone is unhappy), all
+    these agents constantly look for a new place in this very small world. They end up constantly
+    oscillating between two complementary states.
+  </description>
+  <emptyratio>0.5</emptyratio>
+  <model>segregationmodel</model>
   <numCols>50</numCols>
   <numRows>50</numRows>
   <populationratio>0.5</populationratio>
-  <emptyratio>0.5</emptyratio>
-  <satisfactionthreshhold>0.9</satisfactionthreshhold>
   <randomseed>100</randomseed>
+  <satisfactionthreshhold>0.9</satisfactionthreshhold>
   <template>random_four</template>
   <title>Segregation Model</title>
-  <model>segregationmodel</model>
 </data>
