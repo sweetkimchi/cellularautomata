@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <data game="game">
   <author>Jiyun</author>
-  <description>Very wet environment. Even when there are a lot of trees next to the fires, the fire does not spread. </description>
+  <description>Very wet environment. Even when there are a lot of trees next to the fires, the fire
+    does not spread.
+  </description>
+  <emptyratio>0</emptyratio>
+  <model>spreadingoffire</model>
   <numCols>50</numCols>
   <numRows>50</numRows>
-  <shapeCoords>21,20,20,21,21,21,22,21</shapeCoords>
-  <template>crazyfire</template>
   <probsOfCatch>0.2</probsOfCatch>
   <randomseed>14</randomseed>
-  <emptyratio>0</emptyratio>
-  <treeratio>0.99</treeratio>
+  <shapeCoords>21,20,20,21,21,21,22,21</shapeCoords>
+  <template>crazyfire</template>
   <title>Spreading of Fire</title>
-  <model>spreadingoffire</model>
+  <treeratio>0.99</treeratio>
 </data>

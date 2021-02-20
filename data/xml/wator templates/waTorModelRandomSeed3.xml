@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <data game="game">
   <author>Jiyun</author>
-  <description>Fish disappear very quickly and almost go extinct (leaving two fish at its lowest) versus a lot of sharks. However, it goes on indefinitely afterwards with fish population rapidly recovering.</description>
+  <description>Fish disappear very quickly and almost go extinct (leaving two fish at its lowest)
+    versus a lot of sharks. However, it goes on indefinitely afterwards with fish population rapidly
+    recovering.
+  </description>
+  <emptyratio>0.2</emptyratio>
+  <energyfromeating>3</energyfromeating>
+  <fishreproduce>2</fishreproduce>
+  <fishsharkratio>0.2</fishsharkratio>
+  <model>wator</model>
   <numCols>50</numCols>
   <numRows>50</numRows>
-  <fishsharkratio>0.2</fishsharkratio>
-  <emptyratio>0.2</emptyratio>
   <randomseed>3</randomseed>
-  <fishreproduce>2</fishreproduce>
-  <sharkreproduce>2</sharkreproduce>
   <sharklives>3</sharklives>
-  <energyfromeating>3</energyfromeating>
+  <sharkreproduce>2</sharkreproduce>
   <template>random_one</template>
   <title>WaTor Simulation</title>
-  <model>wator</model>
 </data>

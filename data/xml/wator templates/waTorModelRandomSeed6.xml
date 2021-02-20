@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <data game="game">
   <author>Jiyun</author>
-  <description>The fish and shark quickly seem to decrease in population, only to reproduce rapidly. Pattern goes on indefinitely.</description>
+  <description>The fish and shark quickly seem to decrease in population, only to reproduce rapidly.
+    Pattern goes on indefinitely.
+  </description>
+  <emptyratio>0.3</emptyratio>
+  <energyfromeating>3</energyfromeating>
+  <fishreproduce>4</fishreproduce>
+  <fishsharkratio>0.1</fishsharkratio>
+  <model>wator</model>
   <numCols>50</numCols>
   <numRows>50</numRows>
-  <fishsharkratio>0.1</fishsharkratio>
-  <emptyratio>0.3</emptyratio>
   <randomseed>0</randomseed>
-  <fishreproduce>4</fishreproduce>
-  <sharkreproduce>4</sharkreproduce>
   <sharklives>3</sharklives>
-  <energyfromeating>3</energyfromeating>
+  <sharkreproduce>4</sharkreproduce>
   <template>random_one</template>
   <title>WaTor Simulation</title>
-  <model>wator</model>
 </data>

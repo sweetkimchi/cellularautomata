@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <data game="game">
   <author>Jiyun</author>
-  <description>All fish are quickly eaten by adjacent sharks. Sharks die off of hunger. It shows that if two species were to continuously survive, some social distancing may be needed.</description>
+  <description>All fish are quickly eaten by adjacent sharks. Sharks die off of hunger. It shows
+    that if two species were to continuously survive, some social distancing may be needed.
+  </description>
+  <emptyratio>0</emptyratio>
+  <energyfromeating>3</energyfromeating>
+  <fishreproduce>2</fishreproduce>
+  <fishsharkratio>0.5</fishsharkratio>
+  <model>wator</model>
   <numCols>50</numCols>
   <numRows>50</numRows>
-  <fishsharkratio>0.5</fishsharkratio>
-  <emptyratio>0</emptyratio>
   <randomseed>3</randomseed>
-  <fishreproduce>2</fishreproduce>
-  <sharkreproduce>2</sharkreproduce>
   <sharklives>3</sharklives>
-  <energyfromeating>3</energyfromeating>
+  <sharkreproduce>2</sharkreproduce>
   <template>random_one</template>
   <title>WaTor Simulation</title>
-  <model>wator</model>
 </data>

@@ -2,10 +2,10 @@
 <data game="game">
   <author>John Conway</author>
   <description>Blinks back and forth</description>
+  <model>gameOfLife</model>
   <numCols>50</numCols>
   <numRows>50</numRows>
   <shapeCoords>25,25,25,26,25,27</shapeCoords>
   <template>blinker</template>
   <title>Game of Life</title>
-  <model>gameOfLife</model>
 </data>

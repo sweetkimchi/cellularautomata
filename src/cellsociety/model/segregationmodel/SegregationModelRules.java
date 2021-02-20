@@ -83,13 +83,18 @@ public class SegregationModelRules extends Rules {
    * @return the updated states of all cells
    */
   public State[][] judgeStateOfEachCell(State[][] statesOfAllCells) {
+    //find the number of neighbors for each type, also specify sides
     int[][] numberOfAGENTXNeighbors = numberOfAliveNeighbors(statesOfAllCells, AGENTX);
     int[][] numberOfAGENTYNeighbors = numberOfAliveNeighbors(statesOfAllCells, AGENTY);
 
+    //declare empty arrays
     int[][] dissatisfiedNeighbors = numberOfAliveNeighbors(statesOfAllCells, "");
     int[][] emptyNeighbors = numberOfAliveNeighbors(statesOfAllCells, "");
+
+    //loop through each one
     for (int x = 0; x < statesOfAllCells.length; x++) {
       for (int y = 0; y < statesOfAllCells[0].length; y++) {
+        //apply the rule
         int agentXNeighbor = numberOfAGENTXNeighbors[x][y];
         int agentYNeighbor = numberOfAGENTYNeighbors[x][y];
         double total = agentYNeighbor + agentXNeighbor;

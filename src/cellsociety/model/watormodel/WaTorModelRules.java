@@ -62,7 +62,8 @@ public class WaTorModelRules extends Rules {
       emptyCells.add(statesOfAllCells[xCoord - 1][yCoord]);
 
     }
-    if (xCoord >= 0 && yCoord - 1 >= 0 && statesOfAllCells[xCoord][yCoord - 1].getType().equals(EMPTY)) {
+    if (xCoord >= 0 && yCoord - 1 >= 0 && statesOfAllCells[xCoord][yCoord - 1].getType()
+        .equals(EMPTY)) {
       //upper cell
       emptyCells.add(statesOfAllCells[xCoord][yCoord - 1]);
     }
@@ -151,7 +152,8 @@ public class WaTorModelRules extends Rules {
       int index = random.nextInt(emptyCells.size());
       State dummy = emptyCells.get(index);
       statesOfAllCells[dummy.getxCoord()][dummy.getyCoord()] = new State(dummy.getxCoord(),
-          dummy.getyCoord(), SHARK, SHARK_COLOR, statesOfAllCells[xCoord][yCoord].getNumberOfMoves() + 1,
+          dummy.getyCoord(), SHARK, SHARK_COLOR,
+          statesOfAllCells[xCoord][yCoord].getNumberOfMoves() + 1,
           statesOfAllCells[xCoord][yCoord].getEnergy() - 1);
       setColor(statesOfAllCells[dummy.getxCoord()][dummy.getyCoord()]);
 
@@ -178,7 +180,8 @@ public class WaTorModelRules extends Rules {
       int index = random.nextInt(fishCells.size());
       State dummy = fishCells.get(index);
       statesOfAllCells[dummy.getxCoord()][dummy.getyCoord()] = new State(dummy.getxCoord(),
-          dummy.getyCoord(), SHARK, SHARK_COLOR, statesOfAllCells[xCoord][yCoord].getNumberOfMoves() + 1,
+          dummy.getyCoord(), SHARK, SHARK_COLOR,
+          statesOfAllCells[xCoord][yCoord].getNumberOfMoves() + 1,
           statesOfAllCells[xCoord][yCoord].getEnergy() + ENERGY_FROM_FISH - 1);
 
       setColor(statesOfAllCells[dummy.getxCoord()][dummy.getyCoord()]);
@@ -234,7 +237,7 @@ public class WaTorModelRules extends Rules {
   }
 
   /**
-   * specifices the starting states of the cells according to the simulation rule
+   * specifies the starting states of the cells according to the simulation rule
    *
    * @return type of cells
    */

@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <data game="game">
   <author>Jiyun</author>
-  <description>However, if the environment is too dry, even trees that have unpopulated areas in between will get burned down.</description>
+  <description>However, if the environment is too dry, even trees that have unpopulated areas in
+    between will get burned down.
+  </description>
+  <emptyratio>0.2</emptyratio>
+  <model>spreadingoffire</model>
   <numCols>50</numCols>
   <numRows>50</numRows>
-  <shapeCoords>21,20,20,21,21,21,22,21</shapeCoords>
-  <template>crazyfire</template>
   <probsOfCatch>0.8</probsOfCatch>
   <randomseed>4</randomseed>
-  <emptyratio>0.2</emptyratio>
-  <treeratio>0.99</treeratio>
+  <shapeCoords>21,20,20,21,21,21,22,21</shapeCoords>
+  <template>crazyfire</template>
   <title>Spreading of Fire</title>
-  <model>spreadingoffire</model>
+  <treeratio>0.99</treeratio>
 </data>
