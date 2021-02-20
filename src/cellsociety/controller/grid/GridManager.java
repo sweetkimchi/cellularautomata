@@ -6,10 +6,7 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * Builds and manages the grid for all models. Depends on the simulation engine to initiate the
- * process. Depends on the models to supply the correct parameters. Assumes that all parameters are
- * correct.
- *
+ * Builds and manages the grid for all models. Depends on the simulation engine to initiate the process. Depends on the models to supply the correct parameters. Assumes that all parameters are correct.
  * @author Ji Yun Hyo
  */
 public class GridManager {
@@ -17,13 +14,12 @@ public class GridManager {
   private final int row;
   private final int col;
   private final List<List<State>> grid;
+  private State[][] stateOfCells;
   private final String EMPTY = "empty";
   private final String ALIVE = "alive";
-  private State[][] stateOfCells;
 
   /**
    * Basic constructor
-   *
    * @param row
    * @param col
    */
@@ -35,9 +31,8 @@ public class GridManager {
 
   /**
    * Builds the initial stage with specific coordinates that are supplied to the GridManager
-   *
    * @param template coordinates of starting states
-   * @param type     type of player occupying the starting states
+   * @param type type of player occupying the starting states
    * @return updated grid that contains the starting states of the model
    */
   public State[][] buildGridWithTemplate(ArrayList<State> template, String type) {
@@ -70,16 +65,14 @@ public class GridManager {
 
   /**
    * Builds the starting states for models that require adjustments based on the parameters.
-   *
-   * @param emptyRatio      ratio of empty cells to occupied cells
+   * @param emptyRatio ratio of empty cells to occupied cells
    * @param populationRatio ratio between different types of players
-   * @param seed            random seed to reproduce results
-   * @param possibleTypes   names of all players of a model
-   * @param possibleColors  colors of all types
+   * @param seed random seed to reproduce results
+   * @param possibleTypes names of all players of a model
+   * @param possibleColors colors of all types
    * @return the starting states of all cells
    */
-  public State[][] buildGridWithRandomSeed(double emptyRatio, double populationRatio, int seed,
-      ArrayList<String> possibleTypes, ArrayList<String> possibleColors) {
+  public State[][] buildGridWithRandomSeed(double emptyRatio, double populationRatio, int seed, ArrayList<String> possibleTypes, ArrayList<String> possibleColors){
 //    System.out.println("FEAWFEW" + emptyRatio);
 //    System.out.println("????" + (emptyRatio + (1-emptyRatio) * populationRatio));
     Random random = new Random(seed);
@@ -87,14 +80,14 @@ public class GridManager {
     for (int r = 0; r < row; r++) {
       for (int c = 0; c < col; c++) {
         double probability = random.nextDouble();
-        //      System.out.println(probability);
-        if (probability < emptyRatio) {
+  //      System.out.println(probability);
+        if(probability < emptyRatio){
           State state = new State(r, c, possibleTypes.get(0), possibleColors.get(0), 0);
           stateOfCells[r][c] = state;
-        } else if (probability < emptyRatio + (1 - emptyRatio) * populationRatio) {
+        }else if(probability < emptyRatio + (1-emptyRatio) * populationRatio){
           State state = new State(r, c, possibleTypes.get(1), possibleColors.get(1), 0);
           stateOfCells[r][c] = state;
-        } else {
+        }else{
           State state = new State(r, c, possibleTypes.get(2), possibleColors.get(2), 0);
           stateOfCells[r][c] = state;
         }
@@ -105,9 +98,7 @@ public class GridManager {
   }
 
   /**
-   * Stores the grid for future use. It is not really used but GridManager does want to keep a
-   * record of the current state of all cells.
-   *
+   * Stores the grid for future use. It is not really used but GridManager does want to keep a record of the current state of all cells.
    * @param stateOfCells the updated cells
    */
   public void updateGrid(State[][] stateOfCells) {
@@ -115,4 +106,39 @@ public class GridManager {
   }
 
 
+  public List<int[][]> getNumberOfNeighborsForEachType(ArrayList<String> possibleTypes) {
+    ArrayList<int[][]> numberOfNeighborsForEachType = new ArrayList<>();
+    for(String type: possibleTypes){
+      numberOfNeighborsForEachType.add(numberOfAliveNeighbors(stateOfCells, type));
+    }
+    return numberOfNeighborsForEachType;
+  }
+
+  private int[][] numberOfAliveNeighbors(State[][] statesOfAllCells, String type) {
+    int[][] numberOfNeighbors = new int[statesOfAllCells.length][statesOfAllCells[0].length];
+    for (int x = 0; x < statesOfAllCells.length; x++) {
+      for (int y = 0; y < statesOfAllCells[0].length; y++) {
+        checkEightSidesForNumberOfNeighbors(statesOfAllCells, type, numberOfNeighbors, x, y);
+      }
+      // System.out.println();
+    }
+    //  System.out.println();
+    return numberOfNeighbors;
+  }
+
+  private void checkEightSidesForNumberOfNeighbors(State[][] statesOfAllCells, String type,
+      int[][] numberOfNeighbors, int x,
+      int y) {
+    int numberOfNeighbor = 0;
+    for (int xCoord = x - 1; xCoord <= x + 1; xCoord++) {
+      for (int yCoord = y - 1; yCoord <= y + 1; yCoord++) {
+        if (xCoord >= 0 && yCoord >= 0 && xCoord < statesOfAllCells.length
+            && yCoord < statesOfAllCells[0].length && statesOfAllCells[xCoord][yCoord].getType()
+            .equals(type) && !(xCoord == x && yCoord == y)) {
+          numberOfNeighbor++;
+        }
+      }
+    }
+    numberOfNeighbors[x][y] = numberOfNeighbor;
+  }
 }

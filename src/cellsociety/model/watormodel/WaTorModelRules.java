@@ -3,6 +3,7 @@ package cellsociety.model.watormodel;
 import cellsociety.model.cell.State;
 import cellsociety.model.rules.Rules;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 
@@ -62,8 +63,7 @@ public class WaTorModelRules extends Rules {
       emptyCells.add(statesOfAllCells[xCoord - 1][yCoord]);
 
     }
-    if (xCoord >= 0 && yCoord - 1 >= 0 && statesOfAllCells[xCoord][yCoord - 1].getType()
-        .equals(EMPTY)) {
+    if (xCoord >= 0 && yCoord - 1 >= 0 && statesOfAllCells[xCoord][yCoord - 1].getType().equals(EMPTY)) {
       //upper cell
       emptyCells.add(statesOfAllCells[xCoord][yCoord - 1]);
     }
@@ -152,8 +152,7 @@ public class WaTorModelRules extends Rules {
       int index = random.nextInt(emptyCells.size());
       State dummy = emptyCells.get(index);
       statesOfAllCells[dummy.getxCoord()][dummy.getyCoord()] = new State(dummy.getxCoord(),
-          dummy.getyCoord(), SHARK, SHARK_COLOR,
-          statesOfAllCells[xCoord][yCoord].getNumberOfMoves() + 1,
+          dummy.getyCoord(), SHARK, SHARK_COLOR, statesOfAllCells[xCoord][yCoord].getNumberOfMoves() + 1,
           statesOfAllCells[xCoord][yCoord].getEnergy() - 1);
       setColor(statesOfAllCells[dummy.getxCoord()][dummy.getyCoord()]);
 
@@ -180,8 +179,7 @@ public class WaTorModelRules extends Rules {
       int index = random.nextInt(fishCells.size());
       State dummy = fishCells.get(index);
       statesOfAllCells[dummy.getxCoord()][dummy.getyCoord()] = new State(dummy.getxCoord(),
-          dummy.getyCoord(), SHARK, SHARK_COLOR,
-          statesOfAllCells[xCoord][yCoord].getNumberOfMoves() + 1,
+          dummy.getyCoord(), SHARK, SHARK_COLOR, statesOfAllCells[xCoord][yCoord].getNumberOfMoves() + 1,
           statesOfAllCells[xCoord][yCoord].getEnergy() + ENERGY_FROM_FISH - 1);
 
       setColor(statesOfAllCells[dummy.getxCoord()][dummy.getyCoord()]);
@@ -199,14 +197,26 @@ public class WaTorModelRules extends Rules {
     }
   }
 
+  private void setColor(State state) {
+    if (state.getType().equals(FISH)) {
+      state.setColor(FISH_COLOR);
+    } else if (state.getType().equals(SHARK)) {
+      state.setColor(SHARK_COLOR);
+    } else {
+      state.setColor(EMPTY_COLOR);
+    }
+  }
+
   /**
-   * Purpose: Judges each of the cells according to the logic of the game Assumptions:
-   * statesOfAllCells correctly contains all valid states
+   * judges the state of each cell using the rule of the specific model class
    *
-   * @param statesOfAllCells starting states of all cells
-   * @return the updated states of all cells
+   * @param statesOfAllCells             starting states of all cells
+   * @param numberOfNeighborsForEachType
+   * @return updated states of all cells
    */
-  public State[][] judgeStateOfEachCell(State[][] statesOfAllCells) {
+  @Override
+  public State[][] judgeStateOfEachCell(State[][] statesOfAllCells,
+      List<int[][]> numberOfNeighborsForEachType) {
     int[][] numberOfFishNeighbors = numberOfAliveNeighbors(statesOfAllCells, FISH);
     int[][] numberOfSharkNeighbors = numberOfAliveNeighbors(statesOfAllCells, SHARK);
     int[][] numberOfEmptyNeighbors = numberOfAliveNeighbors(statesOfAllCells, EMPTY);
@@ -224,16 +234,6 @@ public class WaTorModelRules extends Rules {
       }
     }
     return statesOfAllCells;
-  }
-
-  private void setColor(State state) {
-    if (state.getType().equals(FISH)) {
-      state.setColor(FISH_COLOR);
-    } else if (state.getType().equals(SHARK)) {
-      state.setColor(SHARK_COLOR);
-    } else {
-      state.setColor(EMPTY_COLOR);
-    }
   }
 
   /**

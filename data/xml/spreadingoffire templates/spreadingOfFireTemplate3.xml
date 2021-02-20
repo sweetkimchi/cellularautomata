@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <data game="game">
   <author>Jiyun</author>
-  <description>Trees are sparsely populated. Simulates fire in areas with low tree population
-    density.
-  </description>
-  <emptyratio>0.5</emptyratio>
-  <model>spreadingoffire</model>
+  <description>Trees are sparsely populated. Simulates fire in areas with low tree population density. </description>
   <numCols>50</numCols>
   <numRows>50</numRows>
-  <probsOfCatch>0.3</probsOfCatch>
-  <randomseed>140</randomseed>
   <shapeCoords>21,20,20,21,21,21,22,21</shapeCoords>
   <template>basicfire</template>
-  <title>Spreading of Fire</title>
+  <probsOfCatch>0.3</probsOfCatch>
+  <randomseed>140</randomseed>
+  <emptyratio>0.5</emptyratio>
   <treeratio>0.5</treeratio>
+  <title>Spreading of Fire</title>
+  <model>spreadingoffire</model>
 </data>

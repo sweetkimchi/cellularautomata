@@ -3,6 +3,7 @@ package cellsociety.model.gameoflife;
 import cellsociety.model.cell.State;
 import cellsociety.model.rules.Rules;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Purpose: This class contains the rules for the Game of Life model. Rules include the types of the
@@ -41,13 +42,15 @@ public class GameOfLifeRule extends Rules {
   }
 
   /**
-   * Purpose: Judges each of the cells according to the logic of the game Assumptions:
-   * statesOfAllCells correctly contains all valid states
+   * judges the state of each cell using the rule of the specific model class
    *
-   * @param statesOfAllCells starting states of all cells
-   * @return the updated states of all cells
+   * @param statesOfAllCells             starting states of all cells
+   * @param numberOfNeighborsForEachType
+   * @return updated states of all cells
    */
-  public State[][] judgeStateOfEachCell(State[][] statesOfAllCells) {
+  @Override
+  public State[][] judgeStateOfEachCell(State[][] statesOfAllCells,
+      List<int[][]> numberOfNeighborsForEachType) {
     int[][] numberOfAliveNeighbors = numberOfAliveNeighbors(statesOfAllCells, ALIVE);
     for (int x = 0; x < statesOfAllCells.length; x++) {
       for (int y = 0; y < statesOfAllCells[0].length; y++) {
@@ -67,9 +70,9 @@ public class GameOfLifeRule extends Rules {
   private void printGrid(State[][] stateOfCells) {
     for (int x = 0; x < stateOfCells.length; x++) {
       for (int y = 0; y < stateOfCells[0].length; y++) {
-        if (stateOfCells[x][y].getType().equals(ALIVE)) {
+        if(stateOfCells[x][y].getType().equals(ALIVE)){
           System.out.print(" O ");
-        } else {
+        }else{
           System.out.print(" X ");
         }
 

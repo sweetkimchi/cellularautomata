@@ -27,26 +27,26 @@ public class SimulationScreen {
   public static final String STYLESHEET = "default.css";
   public static final double WINDOW_WIDTH = 800;
   public static final double WINDOW_HEIGHT = 600;
+  private double prevWindowWidth = WINDOW_WIDTH;
+  private double prevWindowHeight = WINDOW_HEIGHT;
   private static final String language = "English";
   private static final double MIN_SPEED = 0;
   private static final double MAX_SPEED = 60;
   private static final double DEFAULT_SPEED = 30;
   private final Group sceneNodes;
   private final Stage stage;
-  private final ResourceBundle resources;
-  private final SimulationEngine simulationEngine;
   public SidePanel sidePanel;
   public GridGraphics gridGraphics;
-  private double prevWindowWidth = WINDOW_WIDTH;
-  private double prevWindowHeight = WINDOW_HEIGHT;
+  private final ResourceBundle resources;
   private Slider slider;
   private Scene scene;
 
+  private final SimulationEngine simulationEngine;
+
   /**
-   * Constructor for the SimulationScreen. To be called by the SimulationEngine. It displays the
-   * window and creates the side panel of controls.
-   *
-   * @param stage  Stage on which the window is started
+   * Constructor for the SimulationScreen. To be called by the SimulationEngine.
+   * It displays the window and creates the side panel of controls.
+   * @param stage Stage on which the window is started
    * @param engine the SimulationEngine running this screen
    */
   public SimulationScreen(Stage stage, SimulationEngine engine) {
@@ -131,7 +131,6 @@ public class SimulationScreen {
 
   /**
    * Sets the description of the current model to the screen. Calls the side panel to do this.
-   *
    * @param description text to be displayed
    */
   public void setDescription(String description) {
@@ -139,11 +138,10 @@ public class SimulationScreen {
   }
 
   /**
-   * Updates the screen by calling on the grid to update. Also updates the simulation speed with the
-   * current value on the slider.
-   *
+   * Updates the screen by calling on the grid to update. Also updates the simulation speed
+   * with the current value on the slider.
    * @param states 2-D array of states for updating the grid
-   * @param model  String for model name
+   * @param model String for model name
    */
   public void update(State[][] states, String model) {
     gridGraphics.update(states, model);
@@ -155,7 +153,7 @@ public class SimulationScreen {
    */
   public void checkWindowSizeChanged() {
     if (scene.getHeight() != prevWindowHeight || scene.getWidth() != prevWindowWidth) {
-      gridGraphics.resizeGrid(Math.min(scene.getWidth() - sidePanel.MAX_WIDTH, scene.getHeight()));
+      gridGraphics.resizeGrid(Math.min(scene.getWidth()-sidePanel.MAX_WIDTH,scene.getHeight()));
     }
   }
 }

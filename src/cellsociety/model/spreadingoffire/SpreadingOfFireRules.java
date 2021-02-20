@@ -3,6 +3,7 @@ package cellsociety.model.spreadingoffire;
 import cellsociety.model.cell.State;
 import cellsociety.model.rules.Rules;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -73,14 +74,44 @@ public class SpreadingOfFireRules extends Rules {
   }
 
 
+
+  private State[][] setToFire(int[][] fireNextRound, State[][] statesOfAllCells,
+      int[][] emptyNextRound) {
+    for (int i = 0; i < fireNextRound.length; i++) {
+      for (int j = 0; j < fireNextRound[0].length; j++) {
+        if (fireNextRound[i][j] == 1) {
+          statesOfAllCells[i][j] = new State(i, j, FIRE);
+          setColor(statesOfAllCells[i][j]);
+        }
+        if (emptyNextRound[i][j] == 1) {
+          statesOfAllCells[i][j] = new State(i, j, EMPTY);
+          setColor(statesOfAllCells[i][j]);
+        }
+      }
+    }
+    return statesOfAllCells;
+  }
+
+  private void setColor(State state) {
+    if (state.getType().equals(FIRE)) {
+      state.setColor(FIRE_COLOR);
+    } else if (state.getType().equals(TREE)) {
+      state.setColor(TREE_COLOR);
+    } else {
+      state.setColor(EMPTY_COLOR);
+    }
+  }
+
   /**
-   * Purpose: Judges each of the cells according to the logic of the game Assumptions:
-   * statesOfAllCells correctly contains all valid states
+   * judges the state of each cell using the rule of the specific model class
    *
-   * @param statesOfAllCells starting states of all cells
-   * @return the updated states of all cells
+   * @param statesOfAllCells             starting states of all cells
+   * @param numberOfNeighborsForEachType
+   * @return updated states of all cells
    */
-  public State[][] judgeStateOfEachCell(State[][] statesOfAllCells) {
+  @Override
+  public State[][] judgeStateOfEachCell(State[][] statesOfAllCells,
+      List<int[][]> numberOfNeighborsForEachType) {
     int[][] numberOfFireNeighbors = numberOfAliveNeighbors(statesOfAllCells, FIRE);
     int[][] numberOfTreeNeighbors = numberOfAliveNeighbors(statesOfAllCells, TREE);
     int[][] dissatisfiedNeighbors = numberOfAliveNeighbors(statesOfAllCells, "");
@@ -121,34 +152,6 @@ public class SpreadingOfFireRules extends Rules {
     }
     statesOfAllCells = setToFire(fireNextRound, statesOfAllCells, emptyNextRound);
     return statesOfAllCells;
-  }
-
-
-  private State[][] setToFire(int[][] fireNextRound, State[][] statesOfAllCells,
-      int[][] emptyNextRound) {
-    for (int i = 0; i < fireNextRound.length; i++) {
-      for (int j = 0; j < fireNextRound[0].length; j++) {
-        if (fireNextRound[i][j] == 1) {
-          statesOfAllCells[i][j] = new State(i, j, FIRE);
-          setColor(statesOfAllCells[i][j]);
-        }
-        if (emptyNextRound[i][j] == 1) {
-          statesOfAllCells[i][j] = new State(i, j, EMPTY);
-          setColor(statesOfAllCells[i][j]);
-        }
-      }
-    }
-    return statesOfAllCells;
-  }
-
-  private void setColor(State state) {
-    if (state.getType().equals(FIRE)) {
-      state.setColor(FIRE_COLOR);
-    } else if (state.getType().equals(TREE)) {
-      state.setColor(TREE_COLOR);
-    } else {
-      state.setColor(EMPTY_COLOR);
-    }
   }
 
   /**

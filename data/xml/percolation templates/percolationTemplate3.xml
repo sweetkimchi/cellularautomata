@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <data game="game">
   <author>Jiyun</author>
-  <blockratio>0.7</blockratio>
-  <description>Water flowing through different channels which ends up flooding the entire area.
-  </description>
-  <model>percolation</model>
+  <description>Water flowing through different channels which ends up flooding the entire area.</description>
   <numCols>50</numCols>
   <numRows>50</numRows>
+  <watertoemptyratio>0.01</watertoemptyratio>
+  <blockratio>0.7</blockratio>
   <randomseed>321</randomseed>
   <template>random_one</template>
   <title>Percolation</title>
-  <watertoemptyratio>0.01</watertoemptyratio>
+  <model>percolation</model>
 </data>
