@@ -178,7 +178,35 @@ public class SpreadingOfFireRules extends Rules {
   @Override
   public void decideState(List<Integer> neighborsOfEachTypeAtCoordinate, List<int[][]> nextStates,
       int x, int y, GridManager gridManager) {
-
+    if (gridManager.getTypeAtCoordinate(x,y).equals(FIRE)) {
+      if (x - 1 >= 0 && y >= 0 && gridManager.getTypeAtCoordinate(x-1,y).equals(TREE)) {
+        double randomNumber = random.nextDouble();
+        if (randomNumber < probsOfFire) {
+          nextStates.get(2)[x - 1][y] = 1;
+        }
+      }
+      if (x >= 0 && y - 1 >= 0 && gridManager.getTypeAtCoordinate(x,y-1).equals(TREE)) {
+        double randomNumber = random.nextDouble();
+        if (randomNumber < probsOfFire) {
+          nextStates.get(2)[x][y - 1] = 1;
+        }
+      }
+      if (x + 1 < gridManager.getRow() && y >= 0 && gridManager.getTypeAtCoordinate(x+1,y)
+          .equals(TREE)) {
+        double randomNumber = random.nextDouble();
+        if (randomNumber < probsOfFire) {
+          nextStates.get(2)[x + 1][y] = 1;
+        }
+      }
+      if (x >= 0 && y + 1 < gridManager.getColumn() && gridManager.getTypeAtCoordinate(x,y+1)
+          .equals(TREE)) {
+        double randomNumber = random.nextDouble();
+        if (randomNumber < probsOfFire) {
+          nextStates.get(2)[x][y + 1] = 1;
+        }
+      }
+      nextStates.get(0)[x][y] = 1;
+    }
   }
 
 
