@@ -1,5 +1,6 @@
 package cellsociety.model.percolation;
 
+import cellsociety.controller.grid.GridManager;
 import cellsociety.model.cell.State;
 import cellsociety.model.rules.Rules;
 import java.util.ArrayList;
@@ -43,31 +44,31 @@ public class PercolationRules extends Rules {
     possibleColors.add(BLOCK_COLOR);
   }
 
-  private void decideState(State[][] statesOfAllCells, String type, int[][] emptyNeighbors) {
+//  private void decideState(State[][] statesOfAllCells, String type, int[][] emptyNeighbors) {
+//
+//    System.out.println(type);
+//    for (int x = 0; x < statesOfAllCells.length; x++) {
+//      for (int y = 0; y < statesOfAllCells[0].length; y++) {
+//        if (statesOfAllCells[x][y].getType().equals(EMPTY) && emptyNeighbors[x][y] == 1) {
+//          statesOfAllCells[x][y] = new State(x, y, type);
+//          setColor(statesOfAllCells[x][y]);
+//          return;
+//        }
+//      }
+//    }
+//
+//  }
 
-    System.out.println(type);
-    for (int x = 0; x < statesOfAllCells.length; x++) {
-      for (int y = 0; y < statesOfAllCells[0].length; y++) {
-        if (statesOfAllCells[x][y].getType().equals(EMPTY) && emptyNeighbors[x][y] == 1) {
-          statesOfAllCells[x][y] = new State(x, y, type);
-          setColor(statesOfAllCells[x][y]);
-          return;
-        }
-      }
-    }
 
-  }
-
-
-  private void printGrid(int[][] stateOfCells) {
-    for (int x = 0; x < stateOfCells.length; x++) {
-      for (int y = 0; y < stateOfCells[0].length; y++) {
-        System.out.print(" " + stateOfCells[y][x] + " ");
-      }
-      System.out.println();
-    }
-    System.out.println();
-  }
+//  private void printGrid(int[][] stateOfCells) {
+//    for (int x = 0; x < stateOfCells.length; x++) {
+//      for (int y = 0; y < stateOfCells[0].length; y++) {
+//        System.out.print(" " + stateOfCells[y][x] + " ");
+//      }
+//      System.out.println();
+//    }
+//    System.out.println();
+//  }
 
 
   private State[][] setToFire(int[][] waterNextRound, State[][] statesOfAllCells) {
@@ -156,6 +157,31 @@ public class PercolationRules extends Rules {
   @Override
   public ArrayList<String> getPossibleColors() {
     return possibleColors;
+  }
+
+  @Override
+  public void decideState(List<Integer> neighborsOfEachTypeAtCoordinate, List<int[][]> nextStates,
+      int x, int y, GridManager gridManager) {
+    if (gridManager.getTypeAtCoordinate(x,y).equals(WATER)) {
+      if (x - 1 >= 0 && y >= 0 && gridManager.getTypeAtCoordinate(x-1,y).equals(EMPTY)) {
+        nextStates.get(1)[x-1][y] = 1;
+      }
+      if (x >= 0 && y - 1 >= 0 && gridManager.getTypeAtCoordinate(x,y-1).equals(EMPTY)) {
+
+        nextStates.get(1)[x][y - 1] = 1;
+
+      }
+      if (x + 1 < gridManager.getRow() && y >= 0 && gridManager.getTypeAtCoordinate(x+1,y).equals(EMPTY)) {
+
+        nextStates.get(1)[x + 1][y] = 1;
+
+      }
+      if (x >= 0 && y + 1 < gridManager.getColumn() && gridManager.getTypeAtCoordinate(x,y+1).equals(EMPTY)) {
+
+        nextStates.get(1)[x][y + 1] = 1;
+
+      }
+    }
   }
 
 

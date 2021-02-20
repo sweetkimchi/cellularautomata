@@ -1,5 +1,6 @@
 package cellsociety.model.gameoflife;
 
+import cellsociety.controller.grid.GridManager;
 import cellsociety.model.cell.State;
 import cellsociety.model.rules.Rules;
 import java.util.ArrayList;
@@ -27,6 +28,8 @@ public class GameOfLifeRule extends Rules {
   private final String EMPTY = "empty";
   private final String ALIVE_COLOR = "black";
   private final String DEAD_COLOR = "lightgrey";
+  private final ArrayList<String> possibleTypes;
+  private ArrayList<String> possibleColors;
 
   /**
    * Default constructor for GameOfLifeRule
@@ -39,6 +42,12 @@ public class GameOfLifeRule extends Rules {
      */
     lowerSurvivalBoundary = 2;
     upperSurvivalBoundary = 3;
+    possibleTypes = new ArrayList<>();
+    possibleColors = new ArrayList<>();
+    possibleColors.add(DEAD_COLOR);
+    possibleColors.add(ALIVE_COLOR);
+    possibleTypes.add(EMPTY);
+    possibleTypes.add(ALIVE);
   }
 
   /**
@@ -111,7 +120,7 @@ public class GameOfLifeRule extends Rules {
    */
   @Override
   public ArrayList<String> getPossibleTypes() {
-    return null;
+    return possibleTypes;
   }
 
   /**
@@ -121,6 +130,12 @@ public class GameOfLifeRule extends Rules {
    */
   @Override
   public ArrayList<String> getPossibleColors() {
-    return null;
+    return possibleColors;
+  }
+
+  @Override
+  public void decideState(List<Integer> neighborsOfEachTypeAtCoordinate, List<int[][]> nextStates,
+      int x, int y, GridManager gridManager) {
+
   }
 }

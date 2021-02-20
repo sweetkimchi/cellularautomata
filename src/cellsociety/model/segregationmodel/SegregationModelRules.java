@@ -1,5 +1,6 @@
 package cellsociety.model.watormodel;
 
+import cellsociety.controller.grid.GridManager;
 import cellsociety.model.cell.State;
 import cellsociety.model.rules.Rules;
 import java.util.ArrayList;
@@ -45,7 +46,7 @@ public class SegregationModelRules extends Rules {
     this.THRESHHOLD = THRESHHOLD;
   }
 
-  private void decideState(State[][] statesOfAllCells, String type, int[][] emptyNeighbors) {
+  private void randomlyAssignAgentsToNewPlaces(State[][] statesOfAllCells, String type, int[][] emptyNeighbors) {
     int counter = 0;
     while (true) {
       int x = random.nextInt(statesOfAllCells.length);
@@ -82,12 +83,12 @@ public class SegregationModelRules extends Rules {
     for (int i = 0; i < dissatisfiedNeighbors.length; i++) {
       for (int j = 0; j < dissatisfiedNeighbors[0].length; j++) {
         if (dissatisfiedNeighbors[i][j] == 1) {
-          decideState(statesOfAllCells, AGENTY, emptyNeighbors);
+          randomlyAssignAgentsToNewPlaces(statesOfAllCells, AGENTY, emptyNeighbors);
           statesOfAllCells[i][j] = new State(i, j, EMPTY);
           setColor(statesOfAllCells[i][j]);
         }
         if (dissatisfiedNeighbors[i][j] == 2) {
-          decideState(statesOfAllCells, AGENTX, emptyNeighbors);
+          randomlyAssignAgentsToNewPlaces(statesOfAllCells, AGENTX, emptyNeighbors);
           statesOfAllCells[i][j] = new State(i, j, EMPTY);
           setColor(statesOfAllCells[i][j]);
         }
@@ -187,6 +188,83 @@ public class SegregationModelRules extends Rules {
   @Override
   public ArrayList<String> getPossibleColors() {
     return possibleColors;
+  }
+
+  @Override
+  public void decideState(List<Integer> neighborsOfEachTypeAtCoordinate, List<int[][]> nextStates,
+      int x, int y, GridManager gridManager) {
+
+    int agentXNeighbor = neighborsOfEachTypeAtCoordinate.get(2);
+    int agentYNeighbor = neighborsOfEachTypeAtCoordinate.get(1);
+    double total = agentYNeighbor + agentXNeighbor;
+    double ratio = 0;
+
+    if (gridManager.getTypeAtCoordinate(x,y).equals(AGENTY) && total != 0) {
+      ratio = ((double) agentYNeighbor) / total;
+      if (ratio < THRESHHOLD) {
+
+        nextStates.get(1)[x][y] = 1;
+      }
+    }
+    if (gridManager.getTypeAtCoordinate(x,y).equals(AGENTX) && total != 0) {
+      //    System.out.println(ratio);
+      ratio = ((double) agentXNeighbor) / total;
+      if (ratio < THRESHHOLD) {
+        nextStates.get(2)[x][y] = 1;
+      }
+    }
+    if (gridManager.getTypeAtCoordinate(x,y).equals(EMPTY)) {
+      nextStates.get(0)[x][y] = 1;
+    }
+
+    relocateDissatisfiedNeighbors(nextStates, gridManager);
+    removeEmptyCells(nextStates);
+  }
+
+  private void removeEmptyCells(List<int[][]> nextStates) {
+    for(int[][] empty: nextStates){
+      for(int i = 0; i < empty.length; i++){
+        for(int j = 0; j < empty[0].length; j++){
+          empty[i][j] = 0;
+        }
+    }
+
+    }
+  }
+
+  private void relocateDissatisfiedNeighbors(List<int[][]> nextStates, GridManager gridManager) {
+    for(int index = 1; index < nextStates.size(); index++){
+      for (int i = 0; i < nextStates.get(index).length; i++) {
+        for (int j = 0; j < nextStates.get(index)[0].length; j++) {
+          if (nextStates.get(index)[i][j] == 1) {
+            randomlyAssignAgentsToNewPlaces(gridManager, getPossibleTypes().get(index), nextStates.get(0));
+            gridManager.setStateAtCoordinate(i,j,  new State(i, j, EMPTY));
+            setColor(gridManager.getStateAtCoordinate(i,j));
+            nextStates.get(index)[i][j] = 0;
+          }
+        }
+      }
+    }
+  }
+
+  private void randomlyAssignAgentsToNewPlaces(GridManager gridManager, String type, int[][] emptyNeighbors) {
+    int counter = 0;
+    while (true) {
+      int x = random.nextInt(gridManager.getRow());
+      int y = random.nextInt(gridManager.getColumn());
+      if (gridManager.getTypeAtCoordinate(x,y).equals(EMPTY) && emptyNeighbors[x][y] == 1
+          && counter < DELAY) {
+        gridManager.setStateAtCoordinate(x,y, new State(x, y, type));
+        setColor(gridManager.getStateAtCoordinate(x,y));
+        return;
+      } else if (gridManager.getTypeAtCoordinate(x,y).equals(EMPTY) && counter >= DELAY) {
+        gridManager.setStateAtCoordinate(x,y, new State(x, y, type));
+        setColor(gridManager.getStateAtCoordinate(x,y));
+        return;
+      }
+      counter++;
+    }
+
   }
 
 }
