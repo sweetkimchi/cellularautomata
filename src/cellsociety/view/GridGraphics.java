@@ -4,7 +4,10 @@ import cellsociety.model.cell.State;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 
 /**
@@ -20,7 +23,11 @@ public class GridGraphics {
   private static final double GRID_GAP_SIZE = .5;
   private double gridSize = SimulationScreen.WINDOW_HEIGHT - NUM_BUFFERS * GRID_BUFFER;
 
-  private GridPane gridPane;
+  // square = 1, triangle = 2, hexagon = 3
+  private static final int GRID_SHAPE = 2;
+
+  private AnchorPane gridPane;
+  private State[][] currentStates;
 
   /**
    * Initializes the GridPane for the class.
@@ -30,14 +37,14 @@ public class GridGraphics {
   }
 
   private void initialize() {
-    gridPane = new GridPane();
+    gridPane = new AnchorPane();
 
     gridPane.setPadding(new Insets(GRID_BUFFER, GRID_BUFFER, GRID_BUFFER, GRID_BUFFER));
 
-    gridPane.setVgap(GRID_GAP_SIZE);
-    gridPane.setHgap(GRID_GAP_SIZE);
+    //gridPane.setVgap(GRID_GAP_SIZE);
+    //gridPane.setHgap(GRID_GAP_SIZE);
 
-    gridPane.setAlignment(Pos.CENTER_RIGHT);
+    //gridPane.setAlignment(Pos.CENTER_RIGHT);
 
   }
 
@@ -58,14 +65,34 @@ public class GridGraphics {
    * @param model  name of model
    */
   public void update(State[][] states, String model) {
+    currentStates = states;
     gridPane.getChildren().clear();
     for (int r = 0; r < states.length; r++) {
       for (int c = 0; c < states[0].length; c++) {
-        Rectangle rect = new Rectangle();
-        rect.setWidth(gridSize / states.length);
-        rect.setHeight(gridSize / states[0].length);
-        rect.getStyleClass().add(model + "-" + states[r][c].getType());
-        gridPane.add(rect, r, c);
+        if (GRID_SHAPE == 1) {
+          Rectangle rect = new Rectangle();
+          double sideLength = gridSize / states.length;
+          rect.setWidth(sideLength);
+          rect.setHeight(sideLength);
+          rect.getStyleClass().add(model + "-" + states[r][c].getType());
+          rect.setX(GRID_BUFFER + c*(sideLength+GRID_GAP_SIZE));
+          rect.setY(GRID_BUFFER + r*(sideLength+GRID_GAP_SIZE));
+          gridPane.getChildren().add(rect);
+        }
+        else if (GRID_SHAPE == 2) { // triangle
+          double sideLength = gridSize / states.length / (Math.sqrt(3)/2);
+          Polygon polygon = new TriangleCell(c*sideLength/2,r*sideLength*Math.sqrt(3)/2,
+              sideLength,(r+c)%2==0);
+          polygon.setStroke(Paint.valueOf("black"));
+          polygon.setStrokeWidth(.5);
+          polygon.getStyleClass().add(model + "-" + states[r][c].getType());
+          gridPane.getChildren().add(polygon);
+        }
+        else if (GRID_SHAPE == 3) { // hexagon
+
+        }
+        else break;
+
       }
     }
   }

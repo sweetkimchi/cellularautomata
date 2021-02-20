@@ -35,8 +35,8 @@ public class SimulationScreen {
   private static final double DEFAULT_SPEED = 30;
   private final Group sceneNodes;
   private final Stage stage;
-  public SidePanel sidePanel;
-  public GridGraphics gridGraphics;
+  private SidePanel sidePanel;
+  private GridGraphics gridGraphics;
   private final ResourceBundle resources;
   private Slider slider;
   private Scene scene;
