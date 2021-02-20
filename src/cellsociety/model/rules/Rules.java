@@ -9,10 +9,6 @@ import java.util.ArrayList;
  * @author Ji Yun Hyo
  */
 public abstract class Rules {
-
-  private String ALIVE_COLOR;
-  private String DEAD_COLOR;
-
   /**
    * Default constructor
    */
