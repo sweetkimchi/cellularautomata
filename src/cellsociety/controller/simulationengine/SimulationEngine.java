@@ -19,16 +19,17 @@ import javafx.animation.AnimationTimer;
 import javafx.stage.Stage;
 
 /**
- * Controls the simulation. Acts as the middle-ground between GridManager, Decoder, Models, and
- * the View component. Depends on other parts of MVC working correctly. SimulationEngine makes sure
- * that different components do not have to interact with each other directly. Each component
- * handles its own thing without having to know too much about what the other components are doing.
- * The SimulationEngine acts to run the simulation, interacting with the SimulationScreen to
- * perform functions.
+ * Controls the simulation. Acts as the middle-ground between GridManager, Decoder, Models, and the
+ * View component. Depends on other parts of MVC working correctly. SimulationEngine makes sure that
+ * different components do not have to interact with each other directly. Each component handles its
+ * own thing without having to know too much about what the other components are doing. The
+ * SimulationEngine acts to run the simulation, interacting with the SimulationScreen to perform
+ * functions.
+ *
  * @author Ji Yun Hyo
  * @author Harrison Huang
  */
-public class SimulationEngine{
+public class SimulationEngine {
 
   private final SimulationScreen simulationScreen;
   private GridManager gridManager;
@@ -52,14 +53,15 @@ public class SimulationEngine{
     template = new ArrayList<>();
     for (int i = 0; i + 1 < coordinates.size(); i += 2) {
       State state = new State(Integer.parseInt(coordinates.get(i)),
-              Integer.parseInt(coordinates.get(i + 1)), rules.getStartingPositionCellType());
+          Integer.parseInt(coordinates.get(i + 1)), rules.getStartingPositionCellType());
       template.add(state);
     }
     return template;
   }
 
   /**
-   * Initializes the decoder so that it can go fetch data from the correct XML file for whichever component needs it
+   * Initializes the decoder so that it can go fetch data from the correct XML file for whichever
+   * component needs it
    */
   public void initializeDecoder() {
     decoder = new Decoder();
@@ -90,41 +92,41 @@ public class SimulationEngine{
       rules = new GameOfLifeRule();
       template = constructStartingStateForSimulation(decoder.getGOLDecoder().getCoords());
       stateOfAllCells = gridManager
-              .buildGridWithTemplate(template, rules.getStartingPositionCellType());;
+          .buildGridWithTemplate(template, rules.getStartingPositionCellType());
       updateCellState();
     }
     if (game.equals("percolation")) {
       PercDecoder percDecoder = decoder.getPercDecoder();
       rules = new PercolationRules(percDecoder.getSeed());
       stateOfAllCells = gridManager
-              .buildGridWithRandomSeed(percDecoder.getBlockRatio(), percDecoder.getWaterToEmptyRatio(),
-                      percDecoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
+          .buildGridWithRandomSeed(percDecoder.getBlockRatio(), percDecoder.getWaterToEmptyRatio(),
+              percDecoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
     }
     if (game.equals("segregationmodel")) {
       SegDecoder segDecoder = decoder.getSegDecoder();
       rules = new SegregationModelRules(
           segDecoder.getRandSeed(), segDecoder.getSatThresh());
       stateOfAllCells = gridManager
-              .buildGridWithRandomSeed(segDecoder.getEmptyRatio(), segDecoder.getPopRatio(),
-                      segDecoder.getRandSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
+          .buildGridWithRandomSeed(segDecoder.getEmptyRatio(), segDecoder.getPopRatio(),
+              segDecoder.getRandSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
 
     }
     if (game.equals("spreadingoffire")) {
       FireDecoder fireDecoder = decoder.getFireDecoder();
       rules = new SpreadingOfFireRules(fireDecoder.getSeed(), fireDecoder.getProb());
       stateOfAllCells = gridManager
-              .buildGridWithRandomSeed(fireDecoder.getEmptyRatio() ,fireDecoder.getTreeRatio(),
-                      fireDecoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
+          .buildGridWithRandomSeed(fireDecoder.getEmptyRatio(), fireDecoder.getTreeRatio(),
+              fireDecoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
     }
     if (game.equals("wator")) {
       //   rules = new WaTorModelRules(emptyRatio, populationRatio, randomSeed, energyFish, reproduceBoundary, sharkEnergy);
       WaTorDecoder waTorDecoder = decoder.getWaTorDecoder();
       rules = new WaTorModelRules(
           waTorDecoder.getSeed(), waTorDecoder.getEnergy(), waTorDecoder.getFishRate(),
-              waTorDecoder.getSharkLives());
+          waTorDecoder.getSharkLives());
       stateOfAllCells = gridManager
-              .buildGridWithRandomSeed(waTorDecoder.getEmptyRatio(), waTorDecoder.getFSRatio(),
-                      waTorDecoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
+          .buildGridWithRandomSeed(waTorDecoder.getEmptyRatio(), waTorDecoder.getFSRatio(),
+              waTorDecoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
     }
     //need to be fixed for a better design
   }
@@ -138,23 +140,11 @@ public class SimulationEngine{
    * Updates the state of each cell according to logic of the model
    */
   public void updateCellState() {
-    badExampleOfEncapsulation();
-   // goodExampleOfEncapsulation();
-  }
-
-  private void goodExampleOfEncapsulation() {
     gridManager.judgeStateOfEachCell(rules);
     //THIS IS A BAD EXAMPLE THAT NEEDS TO BE FIXED
     // I WILL PASS IN THE GRID OF COLORS OR MAYBE GRID OF TYPES
-    simulationScreen.update(gridManager.getGrid(),decoder.getModel());
+    simulationScreen.update(gridManager.getGrid(), decoder.getModel());
   }
-
-  private void badExampleOfEncapsulation() {
-    rules.judgeStateOfEachCell(stateOfAllCells ,gridManager.getNumberOfNeighborsForEachType(rules.getPossibleTypes()));
-    gridManager.updateGrid(stateOfAllCells);
-    simulationScreen.update(stateOfAllCells, decoder.getModel());
-  }
-
 
   private void runSimulation() {
     animation = new AnimationTimer() {
@@ -169,7 +159,7 @@ public class SimulationEngine{
         sleepTimer = 0;
       }
     };
-    simulationScreen.update(gridManager.getGrid(),decoder.getModel());
+    simulationScreen.update(gridManager.getGrid(), decoder.getModel());
   }
 
   /**
@@ -192,6 +182,7 @@ public class SimulationEngine{
 
   /**
    * Allows interactive slider to adjust the speed of simulation
+   *
    * @param s speed of the simulation
    */
   public void setSimulationSpeed(int s) {

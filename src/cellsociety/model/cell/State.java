@@ -1,8 +1,6 @@
 package cellsociety.model.cell;
 
 
-import javafx.scene.paint.Paint;
-
 /**
  * Purpose: stores all information about the state of a cell Assumptions:
  *
@@ -12,11 +10,11 @@ public class State {
 
   private final int xCoord;
   private final int yCoord;
+  private final int ENERGY = 10;
   private String type;
-  private Paint color;
+  private String color;
   private int numberOfMoves;
   private int energy;
-  private final int ENERGY = 10;
 
   /**
    * Basic constructor
@@ -48,7 +46,7 @@ public class State {
     this.type = type;
     this.numberOfMoves = numberOfMoves;
     this.energy = ENERGY;
-    color = Paint.valueOf(colorString);
+    color = colorString;
   }
 
   /**
@@ -68,16 +66,7 @@ public class State {
     this.type = type;
     this.energy = energy;
     this.numberOfMoves = numberOfMoves;
-    color = Paint.valueOf(colorString);
-  }
-
-  /**
-   * Sets the color of the state. Used whenever the type is updated.
-   *
-   * @param colorName
-   */
-  public void setColor(String colorName) {
-    color = Paint.valueOf(colorName);
+    color = colorString;
   }
 
   /**
@@ -94,20 +83,32 @@ public class State {
     return yCoord;
   }
 
-  public String getType(){
+  public String getType() {
     return type;
   }
 
-  public int getEnergy(){
-    return energy;
-  }
-
-  public int getNumberOfMoves(){
-    return numberOfMoves;
-  }
-
-  public void setType(String type){
+  public void setType(String type) {
     this.type = type;
   }
 
+  public int getEnergy() {
+    return energy;
+  }
+
+  public int getNumberOfMoves() {
+    return numberOfMoves;
+  }
+
+  public String getColor() {
+    return color;
+  }
+
+  /**
+   * Sets the color of the state. Used whenever the type is updated.
+   *
+   * @param colorName
+   */
+  public void setColor(String colorName) {
+    color = colorName;
+  }
 }
