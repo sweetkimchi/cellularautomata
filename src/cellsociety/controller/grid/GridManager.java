@@ -162,14 +162,14 @@ public class GridManager {
     for(int x = 0; x < row; x++){
       for(int y = 0; y < col; y++){
         List<Integer> neighborsOfEachTypeAtCoordinate = new ArrayList<>();
-        System.out.print(" " + stateOfCells[x][y].getType() + " ");
+  //      System.out.print(" " + stateOfCells[x][y].getType() + " ");
 
         for(int index = 0; index < numberOfNeighborsForEachType.size(); index++){
           neighborsOfEachTypeAtCoordinate.add(numberOfNeighborsForEachType.get(index)[x][y]);
         }
         rules.decideState(neighborsOfEachTypeAtCoordinate, nextStates, x, y, this);
       }
-      System.out.println();
+ //     System.out.println();
     }
     updateStatesForAllCells(nextStates, rules.getPossibleTypes(), rules.getPossibleColors());
   }
@@ -212,10 +212,10 @@ public class GridManager {
   }
 
   public State getStateAtCoordinate(int x, int y) {
-    return stateOfCells[x][y];
+    return this.stateOfCells[x][y];
   }
 
   public void setStateAtCoordinate(int x, int y, State state) {
-    stateOfCells[x][y] = state;
+    this.stateOfCells[x][y] = state;
   }
 }

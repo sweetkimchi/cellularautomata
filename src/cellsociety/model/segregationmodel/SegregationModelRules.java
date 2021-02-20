@@ -218,6 +218,18 @@ public class SegregationModelRules extends Rules {
     }
 
     relocateDissatisfiedNeighbors(nextStates, gridManager);
+    removeEmptyCells(nextStates);
+  }
+
+  private void removeEmptyCells(List<int[][]> nextStates) {
+    for(int[][] empty: nextStates){
+      for(int i = 0; i < empty.length; i++){
+        for(int j = 0; j < empty[0].length; j++){
+          empty[i][j] = 0;
+        }
+    }
+
+    }
   }
 
   private void relocateDissatisfiedNeighbors(List<int[][]> nextStates, GridManager gridManager) {
@@ -228,6 +240,7 @@ public class SegregationModelRules extends Rules {
             randomlyAssignAgentsToNewPlaces(gridManager, getPossibleTypes().get(index), nextStates.get(0));
             gridManager.setStateAtCoordinate(i,j,  new State(i, j, EMPTY));
             setColor(gridManager.getStateAtCoordinate(i,j));
+            nextStates.get(index)[i][j] = 0;
           }
         }
       }

@@ -138,8 +138,8 @@ public class SimulationEngine{
    * Updates the state of each cell according to logic of the model
    */
   public void updateCellState() {
-   // badExampleOfEncapsulation();
-    goodExampleOfEncapsulation();
+    badExampleOfEncapsulation();
+   // goodExampleOfEncapsulation();
   }
 
   private void goodExampleOfEncapsulation() {
