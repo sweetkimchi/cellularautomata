@@ -11,6 +11,7 @@ import javafx.stage.FileChooser.ExtensionFilter;
  * @author Shaw Phillips
  */
 public class Decoder {
+
   public static final String DATA_FILE_EXTENSION = "*.xml";
   public final static FileChooser FILE_CHOOSER = makeChooser(DATA_FILE_EXTENSION);
   public static final String TITLE = "title";
@@ -39,8 +40,10 @@ public class Decoder {
     result.getExtensionFilters().setAll(new ExtensionFilter("Text Files", extension));
     return result;
   }
+
   /**
-   *  Open window to choose XML file, initialize parser, parse universal values, and determine the model
+   * Open window to choose XML file, initialize parser, parse universal values, and determine the
+   * model
    */
   public void readValuesFromXMLFile() {
     File dataFile = FILE_CHOOSER.showOpenDialog(null);
@@ -52,73 +55,89 @@ public class Decoder {
     myRows = Integer.parseInt(attributes.get(NUM_ROWS));
     myCols = Integer.parseInt(attributes.get(NUM_COLS));
     myModel = attributes.get(MODEL);
-    if(myModel.equals("gameOfLife")){golDecoder = new GOLDecoder(attributes);}
-    else if(myModel.equals("wator")) {waTorDecoder = new WaTorDecoder(attributes);}
-    else if(myModel.equals("segregationmodel")) {segDecoder = new SegDecoder(attributes);}
-    else if(myModel.equals("spreadingoffire")) {fireDecoder = new FireDecoder(attributes);}
-    else if(myModel.equals("percolation")) {percDecoder = new PercDecoder(attributes);}
+    if (myModel.equals("gameOfLife")) {
+      golDecoder = new GOLDecoder(attributes);
+    } else if (myModel.equals("wator")) {
+      waTorDecoder = new WaTorDecoder(attributes);
+    } else if (myModel.equals("segregationmodel")) {
+      segDecoder = new SegDecoder(attributes);
+    } else if (myModel.equals("spreadingoffire")) {
+      fireDecoder = new FireDecoder(attributes);
+    } else if (myModel.equals("percolation")) {
+      percDecoder = new PercDecoder(attributes);
+    }
   }
 
   /**
    * @return Decoder for Game of Life
    */
-  public GOLDecoder getGOLDecoder(){
+  public GOLDecoder getGOLDecoder() {
     return golDecoder;
   }
+
   /**
    * @return Decoder for Wa-Tor
    */
-  public WaTorDecoder getWaTorDecoder(){
+  public WaTorDecoder getWaTorDecoder() {
     return waTorDecoder;
   }
+
   /**
    * @return Decoder for Segregation
    */
-  public SegDecoder getSegDecoder(){
+  public SegDecoder getSegDecoder() {
     return segDecoder;
   }
+
   /**
    * @return Decoder for Fire
    */
-  public FireDecoder getFireDecoder(){
+  public FireDecoder getFireDecoder() {
     return fireDecoder;
   }
+
   /**
    * @return Decoder for Percolation
    */
-  public PercDecoder getPercDecoder(){
+  public PercDecoder getPercDecoder() {
     return percDecoder;
   }
+
   /**
    * @return model name
    */
   public String getModel() {
     return myModel;
   }
+
   /**
    * @return title
    */
   public String getTitle() {
     return myTitle;
   }
+
   /**
    * @return author
    */
   public String getAuthor() {
     return myAuthor;
   }
+
   /**
    * @return number of rows
    */
   public int getRows() {
     return myRows;
   }
+
   /**
    * @return number of columns
    */
   public int getCols() {
     return myCols;
   }
+
   /**
    * @return description
    */
