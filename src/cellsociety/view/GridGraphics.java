@@ -74,10 +74,10 @@ public class GridGraphics {
         if (GRID_SHAPE == 1) {
           node = makeSquare(r, c);
         }
-        else if (GRID_SHAPE == 2) { // triangle
+        else if (GRID_SHAPE == 2) {
           node = makeTriangle(r, c);
         }
-        else if (GRID_SHAPE == 3) { // hexagon
+        else if (GRID_SHAPE == 3) {
           node = makeHexagon(r, c);
         }
         else break;
@@ -100,27 +100,23 @@ public class GridGraphics {
 
   private Node makeTriangle(int r, int c) {
     double sideLength = gridSize / (currentStates.length * TRIANGLE_RATIO);
-    Node node = new TriangleCell(GRID_BUFFER + c *sideLength/2,
+    return new TriangleCell(GRID_BUFFER + c * sideLength/2,
         GRID_BUFFER + r * sideLength * TRIANGLE_RATIO,
-        sideLength,(r + c)%2==0);
-    return node;
+        sideLength,(r + c) % 2 == 0);
   }
 
   private Node makeHexagon(int r, int c) {
     double hexagonWidth = gridSize / (currentStates.length + HEXAGON_OFFSET_CORRECTION);
     double sideLength = hexagonWidth / 2 / TRIANGLE_RATIO;
     double hexagonHeight = (3.0/2) * sideLength;
-
-    Node node;
-    if (r %2 == 0) {
-      node = new HexagonCell(GRID_BUFFER + c * hexagonWidth,
+    if (r % 2 == 0) {
+      return new HexagonCell(GRID_BUFFER + c * hexagonWidth,
           GRID_BUFFER + r * hexagonHeight, sideLength);
     }
     else {
-      node = new HexagonCell(GRID_BUFFER + (c +HEXAGON_OFFSET_CORRECTION) * hexagonWidth,
+      return new HexagonCell(GRID_BUFFER + (c +HEXAGON_OFFSET_CORRECTION) * hexagonWidth,
           GRID_BUFFER + r * hexagonHeight, sideLength);
     }
-    return node;
   }
 
   /**
