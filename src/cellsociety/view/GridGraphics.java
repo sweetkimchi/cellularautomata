@@ -16,13 +16,14 @@ public class GridGraphics {
 
   private static final double GRID_BUFFER = 15;
   private static final double NUM_BUFFERS = 4;
-  private static final double GRID_GAP_SIZE = .5;
+  private static final double GRID_GAP_SIZE = 0.5;
   private double gridSize;
 
   // square = 1, triangle = 2, hexagon = 3
-  private static final int GRID_SHAPE = 1;
+  private static final int GRID_SHAPE = 3;
 
   private static final double TRIANGLE_RATIO = Math.sqrt(3)/2;
+  private static final double HEXAGON_OFFSET_CORRECTION = 0.5;
 
   private AnchorPane paneForGrid;
   private State[][] currentStates;
@@ -69,31 +70,57 @@ public class GridGraphics {
     reset();
     for (int r = 0; r < currentStates.length; r++) {
       for (int c = 0; c < currentStates[0].length; c++) {
+        Node node;
         if (GRID_SHAPE == 1) {
-          Rectangle rect = new Rectangle();
-          double sideLength = gridSize / (currentStates.length+GRID_GAP_SIZE);
-          rect.setWidth(sideLength);
-          rect.setHeight(sideLength);
-          rect.getStyleClass().add(currentModel + "-" + currentStates[r][c].getType());
-          rect.setX(GRID_BUFFER + c*(sideLength+GRID_GAP_SIZE));
-          rect.setY(GRID_BUFFER + r*(sideLength+GRID_GAP_SIZE));
-          paneForGrid.getChildren().add(rect);
+          node = makeSquare(r, c);
         }
         else if (GRID_SHAPE == 2) { // triangle
-          double sideLength = gridSize / (currentStates.length * TRIANGLE_RATIO);
-          Polygon polygon = new TriangleCell(GRID_BUFFER + c*sideLength/2,
-              GRID_BUFFER+r*sideLength*TRIANGLE_RATIO,
-              sideLength,(r+c)%2==0);
-          polygon.getStyleClass().add(currentModel + "-" + currentStates[r][c].getType());
-          paneForGrid.getChildren().add(polygon);
+          node = makeTriangle(r, c);
         }
         else if (GRID_SHAPE == 3) { // hexagon
-
+          node = makeHexagon(r, c);
         }
         else break;
+        node.getStyleClass().add(currentModel + "-" + currentStates[r][c].getType());
+        paneForGrid.getChildren().add(node);
 
       }
     }
+  }
+
+  private Node makeSquare(int r, int c) {
+    Rectangle rect = new Rectangle();
+    double sideLength = gridSize / (currentStates.length+GRID_GAP_SIZE);
+    rect.setWidth(sideLength);
+    rect.setHeight(sideLength);
+    rect.setX(GRID_BUFFER + c *(sideLength+GRID_GAP_SIZE));
+    rect.setY(GRID_BUFFER + r *(sideLength+GRID_GAP_SIZE));
+    return rect;
+  }
+
+  private Node makeTriangle(int r, int c) {
+    double sideLength = gridSize / (currentStates.length * TRIANGLE_RATIO);
+    Node node = new TriangleCell(GRID_BUFFER + c *sideLength/2,
+        GRID_BUFFER + r * sideLength * TRIANGLE_RATIO,
+        sideLength,(r + c)%2==0);
+    return node;
+  }
+
+  private Node makeHexagon(int r, int c) {
+    double hexagonWidth = gridSize / (currentStates.length + HEXAGON_OFFSET_CORRECTION);
+    double sideLength = hexagonWidth / 2 / TRIANGLE_RATIO;
+    double hexagonHeight = (3.0/2) * sideLength;
+
+    Node node;
+    if (r %2 == 0) {
+      node = new HexagonCell(GRID_BUFFER + c * hexagonWidth,
+          GRID_BUFFER + r * hexagonHeight, sideLength);
+    }
+    else {
+      node = new HexagonCell(GRID_BUFFER + (c +HEXAGON_OFFSET_CORRECTION) * hexagonWidth,
+          GRID_BUFFER + r * hexagonHeight, sideLength);
+    }
+    return node;
   }
 
   /**
