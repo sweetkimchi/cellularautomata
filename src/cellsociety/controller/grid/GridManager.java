@@ -218,6 +218,7 @@ public class GridManager {
     return col;
   }
 
+  //This is a method that needs to go
   public State[][] getGrid() {
     return stateOfCells;
   }

@@ -35,6 +35,11 @@ public class SegregationModelRules extends Rules {
    */
   public SegregationModelRules(long randomSeed, double THRESHHOLD) {
     random = new Random(randomSeed);
+    initializeColorsAndTypes();
+    this.THRESHHOLD = THRESHHOLD;
+  }
+
+  private void initializeColorsAndTypes() {
     possibleTypes = new ArrayList<>();
     possibleColors = new ArrayList<>();
     possibleTypes.add(EMPTY);
@@ -43,7 +48,6 @@ public class SegregationModelRules extends Rules {
     possibleColors.add(EMPTY_COLOR);
     possibleColors.add(AGENTY_COLOR);
     possibleColors.add(AGENTX_COLOR);
-    this.THRESHHOLD = THRESHHOLD;
   }
 
 
