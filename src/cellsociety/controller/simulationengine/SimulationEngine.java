@@ -159,6 +159,7 @@ public class SimulationEngine{
       }
     };
     simulationScreen.update(stateOfAllCells,decoder.getModel());
+    simulationScreen.checkWindowSizeChanged();
   }
 
   /**

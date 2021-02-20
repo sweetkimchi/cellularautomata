@@ -5,6 +5,10 @@
   -fx-background: rgb(204, 204, 255);
 }
 
+#side-panel {
+  -fx-background-color: rgb(224, 176, 255);
+}
+
 .gameOfLife-alive {
   -fx-fill: black;
 }

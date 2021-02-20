@@ -27,8 +27,8 @@ public class SimulationScreen {
   public static final String STYLESHEET = "default.css";
   public static final double WINDOW_WIDTH = 800;
   public static final double WINDOW_HEIGHT = 600;
-  private double prevWindowWidth = WINDOW_WIDTH;
-  private double prevWindowHeight = WINDOW_HEIGHT;
+  private double prevWindowWidth = 0;
+  private double prevWindowHeight = 0;
   private static final String language = "English";
   private static final double MIN_SPEED = 0;
   private static final double MAX_SPEED = 60;
@@ -62,7 +62,7 @@ public class SimulationScreen {
     gridGraphics = new GridGraphics();
     sidePanel = new SidePanel();
     addSidePanelControls();
-    root.setRight(gridGraphics.getNode());
+    root.setCenter(gridGraphics.getNode());
     root.setLeft(sidePanel.getNode());
 
     stage.setTitle(resources.getString("SimulationTitle"));
@@ -153,7 +153,7 @@ public class SimulationScreen {
    */
   public void checkWindowSizeChanged() {
     if (scene.getHeight() != prevWindowHeight || scene.getWidth() != prevWindowWidth) {
-      gridGraphics.resizeGrid(Math.min(scene.getWidth()-sidePanel.MAX_WIDTH,scene.getHeight()));
+      gridGraphics.resizeGrid(scene.getWidth()-sidePanel.getWidth(),scene.getHeight());
     }
   }
 }

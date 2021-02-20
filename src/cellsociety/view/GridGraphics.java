@@ -1,12 +1,8 @@
 package cellsociety.view;
 
 import cellsociety.model.cell.State;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 
@@ -18,16 +14,19 @@ import javafx.scene.shape.Rectangle;
  */
 public class GridGraphics {
 
-  private static final double GRID_BUFFER = 10;
-  private static final double NUM_BUFFERS = 10;
+  private static final double GRID_BUFFER = 30;
+  private static final double NUM_BUFFERS = 2;
   private static final double GRID_GAP_SIZE = .5;
-  private double gridSize = SimulationScreen.WINDOW_HEIGHT - NUM_BUFFERS * GRID_BUFFER;
+  private double gridSize;
 
   // square = 1, triangle = 2, hexagon = 3
-  private static final int GRID_SHAPE = 2;
+  private static final int GRID_SHAPE = 1;
 
-  private AnchorPane gridPane;
+  private static final double TRIANGLE_RATIO = Math.sqrt(3)/2;
+
+  private AnchorPane paneForGrid;
   private State[][] currentStates;
+  private String currentModel;
 
   /**
    * Initializes the GridPane for the class.
@@ -37,15 +36,8 @@ public class GridGraphics {
   }
 
   private void initialize() {
-    gridPane = new AnchorPane();
-
-    gridPane.setPadding(new Insets(GRID_BUFFER, GRID_BUFFER, GRID_BUFFER, GRID_BUFFER));
-
-    //gridPane.setVgap(GRID_GAP_SIZE);
-    //gridPane.setHgap(GRID_GAP_SIZE);
-
-    //gridPane.setAlignment(Pos.CENTER_RIGHT);
-
+    paneForGrid = new AnchorPane();
+    resizeGrid(SimulationScreen.WINDOW_HEIGHT,SimulationScreen.WINDOW_HEIGHT);
   }
 
   /**
@@ -54,7 +46,7 @@ public class GridGraphics {
    * @return Node object for the GridPane
    */
   public Node getNode() {
-    return gridPane;
+    return paneForGrid;
   }
 
   /**
@@ -65,28 +57,35 @@ public class GridGraphics {
    * @param model  name of model
    */
   public void update(State[][] states, String model) {
-    currentStates = states;
-    gridPane.getChildren().clear();
-    for (int r = 0; r < states.length; r++) {
-      for (int c = 0; c < states[0].length; c++) {
+    if (states != null && model != null) {
+      currentStates = states;
+      currentModel = model;
+    }
+    updateStates();
+  }
+
+  private void updateStates() {
+    if (currentStates==null || currentModel==null) return;
+    reset();
+    for (int r = 0; r < currentStates.length; r++) {
+      for (int c = 0; c < currentStates[0].length; c++) {
         if (GRID_SHAPE == 1) {
           Rectangle rect = new Rectangle();
-          double sideLength = gridSize / states.length;
+          double sideLength = gridSize / (currentStates.length+GRID_GAP_SIZE);
           rect.setWidth(sideLength);
           rect.setHeight(sideLength);
-          rect.getStyleClass().add(model + "-" + states[r][c].getType());
+          rect.getStyleClass().add(currentModel + "-" + currentStates[r][c].getType());
           rect.setX(GRID_BUFFER + c*(sideLength+GRID_GAP_SIZE));
           rect.setY(GRID_BUFFER + r*(sideLength+GRID_GAP_SIZE));
-          gridPane.getChildren().add(rect);
+          paneForGrid.getChildren().add(rect);
         }
         else if (GRID_SHAPE == 2) { // triangle
-          double sideLength = gridSize / states.length / (Math.sqrt(3)/2);
-          Polygon polygon = new TriangleCell(c*sideLength/2,r*sideLength*Math.sqrt(3)/2,
+          double sideLength = gridSize / (currentStates.length * TRIANGLE_RATIO);
+          Polygon polygon = new TriangleCell(GRID_BUFFER + c*sideLength/2,
+              GRID_BUFFER+r*sideLength*TRIANGLE_RATIO,
               sideLength,(r+c)%2==0);
-          polygon.setStroke(Paint.valueOf("black"));
-          polygon.setStrokeWidth(.5);
-          polygon.getStyleClass().add(model + "-" + states[r][c].getType());
-          gridPane.getChildren().add(polygon);
+          polygon.getStyleClass().add(currentModel + "-" + currentStates[r][c].getType());
+          paneForGrid.getChildren().add(polygon);
         }
         else if (GRID_SHAPE == 3) { // hexagon
 
@@ -101,26 +100,25 @@ public class GridGraphics {
    * Clears the whole grid.
    */
   public void reset() {
-    gridPane.getChildren().clear();
+    paneForGrid.getChildren().clear();
   }
 
   /**
-   * Resizes the grid to the specified size.
+   * Resizes the grid to the specified size (width and height).
    *
-   * @param size double for the new size of the grid
+   * @param width double for the new width of the grid
+   * @param height double for the new height of the grid
    */
-  public void resizeGrid(double size) {
-    gridSize = calculateGridSize(size);
-    int totalNum = (int) Math.sqrt(gridPane.getChildren().size());
-    for (Node node : gridPane.getChildren()) {
-      Rectangle rectangle = (Rectangle) node;
-      rectangle.setWidth(gridSize / totalNum);
-      rectangle.setHeight(gridSize / totalNum);
+  public void resizeGrid(double width, double height) {
+    if (width/height > paneForGrid.getMaxWidth()/ paneForGrid.getMaxHeight()) {
+      gridSize = calculateGridSize(height);
     }
+    else gridSize = calculateGridSize(width);
+    updateStates();
   }
 
-  private double calculateGridSize(double windowHeight) {
-    return windowHeight - NUM_BUFFERS * GRID_BUFFER;
+  private double calculateGridSize(double size) {
+    return size - NUM_BUFFERS * GRID_BUFFER;
   }
 
 }
