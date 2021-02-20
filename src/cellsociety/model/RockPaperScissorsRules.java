@@ -78,5 +78,8 @@ public class RockPaperScissorsRules extends Rules {
   public void decideState(List<Integer> neighborsOfEachTypeAtCoordinate, List<int[][]> nextStates,
       int x, int y, GridManager gridManager) {
 
+    if(gridManager.getTypeAtCoordinate(x,y).equals(ROCK)){
+
+    }
   }
 }

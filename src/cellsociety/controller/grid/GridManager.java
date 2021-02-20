@@ -99,8 +99,6 @@ public class GridManager {
           State state = new State(r, c, possibleTypes.get(2), possibleColors.get(2), 0);
           stateOfCells[r][c] = state;
         }
-
-
       }
     }
     this.stateOfCells = stateOfCells;
