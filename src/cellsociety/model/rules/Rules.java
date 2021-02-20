@@ -84,7 +84,7 @@ public abstract class Rules {
   public abstract State[][] judgeStateOfEachCell(State[][] statesOfAllCells);
 
   /**
-   * specifices the starting states of the cells according to the simulation rule
+   * specifies the starting states of the cells according to the simulation rule
    *
    * @return type of cells
    */

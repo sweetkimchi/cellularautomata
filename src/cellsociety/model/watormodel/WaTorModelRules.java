@@ -234,7 +234,7 @@ public class WaTorModelRules extends Rules {
   }
 
   /**
-   * specifices the starting states of the cells according to the simulation rule
+   * specifies the starting states of the cells according to the simulation rule
    *
    * @return type of cells
    */
