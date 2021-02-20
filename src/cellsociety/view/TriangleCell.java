@@ -3,12 +3,22 @@ package cellsociety.view;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Polygon;
 
+/**
+ *
+ */
 public class TriangleCell extends Polygon {
 
   private static final double TRIANGLE_RATIO = Math.sqrt(3)/2;
   private static final String STROKE_COLOR = "black";
   private static final double STROKE_WIDTH = .5;
 
+  /**
+   *
+   * @param x
+   * @param y
+   * @param sideLength
+   * @param pointsUp
+   */
   public TriangleCell(double x, double y, double sideLength, boolean pointsUp) {
     super();
     double halfSide = sideLength/2;
