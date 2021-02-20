@@ -37,8 +37,8 @@ public class SimulationScreen {
   private final SimulationEngine simulationEngine;
   public SidePanel sidePanel;
   public GridGraphics gridGraphics;
-  private double prevWindowWidth = WINDOW_WIDTH;
-  private double prevWindowHeight = WINDOW_HEIGHT;
+  private double prevWindowWidth = 0;
+  private double prevWindowHeight = 0;
   private Slider slider;
   private Scene scene;
 
@@ -62,7 +62,7 @@ public class SimulationScreen {
     gridGraphics = new GridGraphics();
     sidePanel = new SidePanel();
     addSidePanelControls();
-    root.setRight(gridGraphics.getNode());
+    root.setCenter(gridGraphics.getNode());
     root.setLeft(sidePanel.getNode());
 
     stage.setTitle(resources.getString("SimulationTitle"));
@@ -109,6 +109,7 @@ public class SimulationScreen {
     simulationEngine.initializeDecoder();
     if (simulationEngine.decoderInitialized()) {
       simulationEngine.initializeData();
+      checkWindowSizeChanged();
     } else {
       sidePanel.setDescription(desc);
     }
@@ -148,6 +149,7 @@ public class SimulationScreen {
   public void update(State[][] states, String model) {
     gridGraphics.update(states, model);
     simulationEngine.setSimulationSpeed((int) slider.getValue());
+    checkWindowSizeChanged();
   }
 
   /**
@@ -155,7 +157,7 @@ public class SimulationScreen {
    */
   public void checkWindowSizeChanged() {
     if (scene.getHeight() != prevWindowHeight || scene.getWidth() != prevWindowWidth) {
-      gridGraphics.resizeGrid(Math.min(scene.getWidth() - sidePanel.MAX_WIDTH, scene.getHeight()));
+      gridGraphics.resizeGrid(scene.getWidth()-sidePanel.MAX_WIDTH, scene.getHeight());
     }
   }
 }

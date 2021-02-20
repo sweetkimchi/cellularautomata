@@ -15,6 +15,7 @@ import javafx.scene.layout.VBox;
 public class SidePanel {
 
   public static final double MAX_WIDTH = 220;
+  private static final String NODE_ID = "side-panel";
 
   private final VBox panel;
   private Label desc;
@@ -28,6 +29,7 @@ public class SidePanel {
     panel.setPadding(new Insets(5, 5, 5, 5));
 
     panel.setAlignment(Pos.CENTER_LEFT);
+    panel.setId(NODE_ID);
   }
 
   /**
@@ -73,6 +75,10 @@ public class SidePanel {
     String ret = desc.getText();
     desc = null;
     return ret;
+  }
+
+  public double getWidth() {
+    return panel.getWidth();
   }
 
 }
