@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <data game="game">
   <author>Jiyun</author>
-  <blockratio>0.4</blockratio>
   <description>Formation of smaller water bodies such as ponds.</description>
-  <model>percolation</model>
   <numCols>50</numCols>
   <numRows>50</numRows>
+  <watertoemptyratio>0.01</watertoemptyratio>
+  <blockratio>0.4</blockratio>
   <randomseed>2</randomseed>
   <template>random_one</template>
   <title>Percolation</title>
-  <watertoemptyratio>0.01</watertoemptyratio>
+  <model>percolation</model>
 </data>

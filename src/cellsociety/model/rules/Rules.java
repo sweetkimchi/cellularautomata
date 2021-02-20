@@ -2,6 +2,7 @@ package cellsociety.model.rules;
 
 import cellsociety.model.cell.State;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Abstract class to provide the most basic tools for implementing rules
@@ -58,7 +59,7 @@ public abstract class Rules {
    * @param statesOfAllCells starting states of all cells
    * @return updated states of all cells
    */
-  public abstract State[][] judgeStateOfEachCell(State[][] statesOfAllCells);
+  public abstract State[][] judgeStateOfEachCell(State[][] statesOfAllCells, List<int[][]> numberOfNeighborsForEachType);
 
   /**
    * specifies the starting states of the cells according to the simulation rule

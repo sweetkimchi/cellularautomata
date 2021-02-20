@@ -3,6 +3,7 @@ package cellsociety.model.watormodel;
 import cellsociety.model.cell.State;
 import cellsociety.model.rules.Rules;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -75,21 +76,53 @@ public class SegregationModelRules extends Rules {
     System.out.println();
   }
 
+
+  private State[][] relocateDissatisfiedNeighbors(int[][] dissatisfiedNeighbors,
+      State[][] statesOfAllCells, int[][] emptyNeighbors) {
+    for (int i = 0; i < dissatisfiedNeighbors.length; i++) {
+      for (int j = 0; j < dissatisfiedNeighbors[0].length; j++) {
+        if (dissatisfiedNeighbors[i][j] == 1) {
+          decideState(statesOfAllCells, AGENTY, emptyNeighbors);
+          statesOfAllCells[i][j] = new State(i, j, EMPTY);
+          setColor(statesOfAllCells[i][j]);
+        }
+        if (dissatisfiedNeighbors[i][j] == 2) {
+          decideState(statesOfAllCells, AGENTX, emptyNeighbors);
+          statesOfAllCells[i][j] = new State(i, j, EMPTY);
+          setColor(statesOfAllCells[i][j]);
+        }
+      }
+    }
+    return statesOfAllCells;
+  }
+
+  private void setColor(State state) {
+    if (state.getType().equals(AGENTX)) {
+      state.setColor(AGENTX_COLOR);
+    } else if (state.getType().equals(AGENTY)) {
+      state.setColor(AGENTY_COLOR);
+    } else {
+      state.setColor(EMPTY_COLOR);
+    }
+  }
+
   /**
-   * Purpose: Judges each of the cells according to the logic of the game Assumptions:
-   * statesOfAllCells correctly contains all valid states
+   * judges the state of each cell using the rule of the specific model class
    *
-   * @param statesOfAllCells starting states of all cells
-   * @return the updated states of all cells
+   * @param statesOfAllCells             starting states of all cells
+   * @param numberOfNeighborsForEachType
+   * @return updated states of all cells
    */
-  public State[][] judgeStateOfEachCell(State[][] statesOfAllCells) {
-    //find the number of neighbors for each type, also specify sides
+  @Override
+  public State[][] judgeStateOfEachCell(State[][] statesOfAllCells,
+      List<int[][]> numberOfNeighborsForEachType) {
     int[][] numberOfAGENTXNeighbors = numberOfAliveNeighbors(statesOfAllCells, AGENTX);
     int[][] numberOfAGENTYNeighbors = numberOfAliveNeighbors(statesOfAllCells, AGENTY);
 
     //declare empty arrays
     int[][] dissatisfiedNeighbors = numberOfAliveNeighbors(statesOfAllCells, "");
     int[][] emptyNeighbors = numberOfAliveNeighbors(statesOfAllCells, "");
+
 
     //loop through each one
     for (int x = 0; x < statesOfAllCells.length; x++) {
@@ -124,36 +157,6 @@ public class SegregationModelRules extends Rules {
         emptyNeighbors);
     //   printGrid(dissatisfiedNeighbors);
     return statesOfAllCells;
-  }
-
-
-  private State[][] relocateDissatisfiedNeighbors(int[][] dissatisfiedNeighbors,
-      State[][] statesOfAllCells, int[][] emptyNeighbors) {
-    for (int i = 0; i < dissatisfiedNeighbors.length; i++) {
-      for (int j = 0; j < dissatisfiedNeighbors[0].length; j++) {
-        if (dissatisfiedNeighbors[i][j] == 1) {
-          decideState(statesOfAllCells, AGENTY, emptyNeighbors);
-          statesOfAllCells[i][j] = new State(i, j, EMPTY);
-          setColor(statesOfAllCells[i][j]);
-        }
-        if (dissatisfiedNeighbors[i][j] == 2) {
-          decideState(statesOfAllCells, AGENTX, emptyNeighbors);
-          statesOfAllCells[i][j] = new State(i, j, EMPTY);
-          setColor(statesOfAllCells[i][j]);
-        }
-      }
-    }
-    return statesOfAllCells;
-  }
-
-  private void setColor(State state) {
-    if (state.getType().equals(AGENTX)) {
-      state.setColor(AGENTX_COLOR);
-    } else if (state.getType().equals(AGENTY)) {
-      state.setColor(AGENTY_COLOR);
-    } else {
-      state.setColor(EMPTY_COLOR);
-    }
   }
 
   /**

@@ -32,7 +32,6 @@ public class SidePanel {
 
   /**
    * Returns the node for the panel.
-   *
    * @return Node object
    */
   public Node getNode() {
@@ -41,7 +40,6 @@ public class SidePanel {
 
   /**
    * Adds one or multiple nodes to the pane.
-   *
    * @param nodes singular or multiple nodes
    */
   public void addNodesToPane(Node... nodes) {
@@ -50,7 +48,6 @@ public class SidePanel {
 
   /**
    * Adds a description of text to the bottom of the pane.
-   *
    * @param description String for the description
    */
   public void setDescription(String description) {
@@ -62,7 +59,6 @@ public class SidePanel {
 
   /**
    * Removes the description if it exists. Returns the removed description.
-   *
    * @return String of removed description
    */
   public String removeDescription() {

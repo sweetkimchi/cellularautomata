@@ -2,10 +2,10 @@
 <data game="game">
   <author>Cornell</author>
   <description>Existing template named Cornell.</description>
-  <model>gameOfLife</model>
   <numCols>50</numCols>
   <numRows>50</numRows>
   <shapeCoords>21,20,20,21,21,21,22,21</shapeCoords>
   <template>cornell</template>
   <title>Game of Life</title>
+  <model>gameOfLife</model>
 </data>

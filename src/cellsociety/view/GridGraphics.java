@@ -8,8 +8,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Rectangle;
 
 /**
- * Creates and updates the grid which displays the cellular automata simulation. It can be updated
- * for new states, grabbing colors from the CSS file, and it can be resized.
+ * Creates and updates the grid which displays the cellular automata simulation. It can be
+ * updated for new states, grabbing colors from the CSS file, and it can be resized.
  *
  * @author Harrison Huang
  */
@@ -43,7 +43,6 @@ public class GridGraphics {
 
   /**
    * Getter method for the Node for the GridPane.
-   *
    * @return Node object for the GridPane
    */
   public Node getNode() {
@@ -51,11 +50,10 @@ public class GridGraphics {
   }
 
   /**
-   * Updates the state of the grid with the input of a 2-D array of states and the name of the model
-   * in order to determine color, as predetermined by the CSS file.
-   *
+   * Updates the state of the grid with the input of a 2-D array of states and the name of the
+   * model in order to determine color, as predetermined by the CSS file.
    * @param states 2-D array of states
-   * @param model  name of model
+   * @param model name of model
    */
   public void update(State[][] states, String model) {
     gridPane.getChildren().clear();
@@ -79,16 +77,15 @@ public class GridGraphics {
 
   /**
    * Resizes the grid to the specified size.
-   *
    * @param size double for the new size of the grid
    */
   public void resizeGrid(double size) {
     gridSize = calculateGridSize(size);
-    int totalNum = (int) Math.sqrt(gridPane.getChildren().size());
+    int totalNum = (int)Math.sqrt(gridPane.getChildren().size());
     for (Node node : gridPane.getChildren()) {
       Rectangle rectangle = (Rectangle) node;
-      rectangle.setWidth(gridSize / totalNum);
-      rectangle.setHeight(gridSize / totalNum);
+      rectangle.setWidth(gridSize/totalNum);
+      rectangle.setHeight(gridSize/totalNum);
     }
   }
 

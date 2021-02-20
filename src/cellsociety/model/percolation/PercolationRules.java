@@ -3,6 +3,7 @@ package cellsociety.model.percolation;
 import cellsociety.model.cell.State;
 import cellsociety.model.rules.Rules;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -24,8 +25,8 @@ public class PercolationRules extends Rules {
   private final String BLOCK = "block";
   private final String WATER = "water";
   private final String EMPTY = "empty";
-  private final Random random;
   private double probsOfFire;
+  private final Random random;
 
   /**
    * Default constructor
@@ -69,14 +70,38 @@ public class PercolationRules extends Rules {
   }
 
 
+  private State[][] setToFire(int[][] waterNextRound, State[][] statesOfAllCells) {
+    for (int i = 0; i < waterNextRound.length; i++) {
+      for (int j = 0; j < waterNextRound[0].length; j++) {
+        if (waterNextRound[i][j] == 1) {
+          statesOfAllCells[i][j] = new State(i, j, WATER);
+          setColor(statesOfAllCells[i][j]);
+        }
+      }
+    }
+    return statesOfAllCells;
+  }
+
+  private void setColor(State state) {
+    if (state.getType().equals(BLOCK)) {
+      state.setColor(BLOCK_COLOR);
+    } else if (state.getType().equals(WATER)) {
+      state.setColor(WATER_COLOR);
+    } else {
+      state.setColor(EMPTY_COLOR);
+    }
+  }
+
   /**
-   * Purpose: Judges each of the cells according to the logic of the game Assumptions:
-   * statesOfAllCells correctly contains all valid states
+   * judges the state of each cell using the rule of the specific model class
    *
-   * @param statesOfAllCells starting states of all cells
-   * @return the updated states of all cells
+   * @param statesOfAllCells             starting states of all cells
+   * @param numberOfNeighborsForEachType
+   * @return updated states of all cells
    */
-  public State[][] judgeStateOfEachCell(State[][] statesOfAllCells) {
+  @Override
+  public State[][] judgeStateOfEachCell(State[][] statesOfAllCells,
+      List<int[][]> numberOfNeighborsForEachType) {
     int[][] numberOfFireNeighbors = numberOfAliveNeighbors(statesOfAllCells, BLOCK);
     int[][] numberOfTreeNeighbors = numberOfAliveNeighbors(statesOfAllCells, WATER);
     int[][] dissatisfiedNeighbors = numberOfAliveNeighbors(statesOfAllCells, "");
@@ -111,29 +136,6 @@ public class PercolationRules extends Rules {
     statesOfAllCells = setToFire(waterNextRound, statesOfAllCells);
     //  printGrid(waterNextRound);
     return statesOfAllCells;
-  }
-
-
-  private State[][] setToFire(int[][] waterNextRound, State[][] statesOfAllCells) {
-    for (int i = 0; i < waterNextRound.length; i++) {
-      for (int j = 0; j < waterNextRound[0].length; j++) {
-        if (waterNextRound[i][j] == 1) {
-          statesOfAllCells[i][j] = new State(i, j, WATER);
-          setColor(statesOfAllCells[i][j]);
-        }
-      }
-    }
-    return statesOfAllCells;
-  }
-
-  private void setColor(State state) {
-    if (state.getType().equals(BLOCK)) {
-      state.setColor(BLOCK_COLOR);
-    } else if (state.getType().equals(WATER)) {
-      state.setColor(WATER_COLOR);
-    } else {
-      state.setColor(EMPTY_COLOR);
-    }
   }
 
   /**

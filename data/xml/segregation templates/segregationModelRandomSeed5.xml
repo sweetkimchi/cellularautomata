@@ -2,13 +2,13 @@
 <data game="game">
   <author>Jiyun</author>
   <description>Most are content with where they are and don't move.</description>
-  <emptyratio>0.3</emptyratio>
-  <model>segregationmodel</model>
   <numCols>50</numCols>
   <numRows>50</numRows>
   <populationratio>0.5</populationratio>
-  <randomseed>100</randomseed>
+  <emptyratio>0.3</emptyratio>
   <satisfactionthreshhold>0.2</satisfactionthreshhold>
+  <randomseed>100</randomseed>
   <template>random_one</template>
   <title>Segregation Model</title>
+  <model>segregationmodel</model>
 </data>
