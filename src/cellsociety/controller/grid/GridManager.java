@@ -93,6 +93,7 @@ public class GridManager {
           stateOfCells[r][c] = state;
         }
 
+
       }
     }
     this.stateOfCells = stateOfCells;
@@ -144,18 +145,31 @@ public class GridManager {
     numberOfNeighbors[x][y] = numberOfNeighbor;
   }
 
+  private void printGrid(State[][] stateOfCells) {
+    for (int x = 0; x < stateOfCells.length; x++) {
+      for (int y = 0; y < stateOfCells[0].length; y++) {
+        System.out.print(" " + stateOfCells[y][x].getType() + " ");
+      }
+      System.out.println();
+    }
+    System.out.println();
+  }
+
   public void judgeStateOfEachCell(Rules rules) {
     List<int[][]> numberOfNeighborsForEachType = getNumberOfNeighborsForEachType(rules.getPossibleTypes());
     List<int[][]> nextStates = nextStatesOfCells(numberOfNeighborsForEachType);
+
     for(int x = 0; x < row; x++){
       for(int y = 0; y < col; y++){
         List<Integer> neighborsOfEachTypeAtCoordinate = new ArrayList<>();
+        System.out.print(" " + stateOfCells[x][y].getType() + " ");
+
         for(int index = 0; index < numberOfNeighborsForEachType.size(); index++){
           neighborsOfEachTypeAtCoordinate.add(numberOfNeighborsForEachType.get(index)[x][y]);
         }
-        System.out.println(stateOfCells[x][y].getType());
         rules.decideState(neighborsOfEachTypeAtCoordinate, nextStates, x, y, this);
       }
+      System.out.println();
     }
     updateStatesForAllCells(nextStates, rules.getPossibleTypes(), rules.getPossibleColors());
   }
