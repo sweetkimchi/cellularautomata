@@ -14,8 +14,8 @@ import javafx.scene.shape.Rectangle;
  */
 public class GridGraphics {
 
-  private static final double GRID_BUFFER = 30;
-  private static final double NUM_BUFFERS = 2;
+  private static final double GRID_BUFFER = 15;
+  private static final double NUM_BUFFERS = 4;
   private static final double GRID_GAP_SIZE = .5;
   private double gridSize;
 
@@ -37,7 +37,7 @@ public class GridGraphics {
 
   private void initialize() {
     paneForGrid = new AnchorPane();
-    resizeGrid(SimulationScreen.WINDOW_HEIGHT,SimulationScreen.WINDOW_HEIGHT);
+    gridSize = calculateGridSize(SimulationScreen.WINDOW_WIDTH);
   }
 
   /**

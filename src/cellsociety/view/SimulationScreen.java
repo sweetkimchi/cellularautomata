@@ -109,6 +109,7 @@ public class SimulationScreen {
     simulationEngine.initializeDecoder();
     if (simulationEngine.decoderInitialized()) {
       simulationEngine.initializeData();
+      checkWindowSizeChanged();
     } else {
       sidePanel.setDescription(desc);
     }
@@ -146,6 +147,7 @@ public class SimulationScreen {
   public void update(State[][] states, String model) {
     gridGraphics.update(states, model);
     simulationEngine.setSimulationSpeed((int) slider.getValue());
+    checkWindowSizeChanged();
   }
 
   /**
@@ -153,7 +155,7 @@ public class SimulationScreen {
    */
   public void checkWindowSizeChanged() {
     if (scene.getHeight() != prevWindowHeight || scene.getWidth() != prevWindowWidth) {
-      gridGraphics.resizeGrid(scene.getWidth()-sidePanel.getWidth(),scene.getHeight());
+      gridGraphics.resizeGrid(scene.getWidth()-sidePanel.MAX_WIDTH, scene.getHeight());
     }
   }
 }
