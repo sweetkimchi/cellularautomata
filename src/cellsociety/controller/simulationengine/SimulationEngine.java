@@ -79,7 +79,7 @@ public class SimulationEngine{
   public void initializeData() {
     initializeGrid();
     initializeModelConstructors(decoder.getModel());
-    simulationScreen.update(stateOfAllCells, decoder.getModel());
+    simulationScreen.update(gridManager.getGrid(), decoder.getModel());
     simulationScreen.setDescription(decoder.getMyDesc());
     runSimulation();
   }
@@ -138,11 +138,22 @@ public class SimulationEngine{
    * Updates the state of each cell according to logic of the model
    */
   public void updateCellState() {
+   // badExampleOfEncapsulation();
+    goodExampleOfEncapsulation();
+  }
+
+  private void goodExampleOfEncapsulation() {
+    gridManager.judgeStateOfEachCell(rules);
+    //THIS IS A BAD EXAMPLE THAT NEEDS TO BE FIXED
+    // I WILL PASS IN THE GRID OF COLORS OR MAYBE GRID OF TYPES
+    simulationScreen.update(gridManager.getGrid(),decoder.getModel());
+  }
+
+  private void badExampleOfEncapsulation() {
     rules.judgeStateOfEachCell(stateOfAllCells ,gridManager.getNumberOfNeighborsForEachType(rules.getPossibleTypes()));
     gridManager.updateGrid(stateOfAllCells);
     simulationScreen.update(stateOfAllCells, decoder.getModel());
   }
-
 
 
   private void runSimulation() {
@@ -158,7 +169,7 @@ public class SimulationEngine{
         sleepTimer = 0;
       }
     };
-    simulationScreen.update(stateOfAllCells,decoder.getModel());
+    simulationScreen.update(gridManager.getGrid(),decoder.getModel());
   }
 
   /**

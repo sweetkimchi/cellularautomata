@@ -1,6 +1,7 @@
 package cellsociety.controller.grid;
 
 import cellsociety.model.cell.State;
+import cellsociety.model.rules.Rules;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -91,6 +92,7 @@ public class GridManager {
           State state = new State(r, c, possibleTypes.get(2), possibleColors.get(2), 0);
           stateOfCells[r][c] = state;
         }
+
       }
     }
     this.stateOfCells = stateOfCells;
@@ -140,5 +142,66 @@ public class GridManager {
       }
     }
     numberOfNeighbors[x][y] = numberOfNeighbor;
+  }
+
+  public void judgeStateOfEachCell(Rules rules) {
+    List<int[][]> numberOfNeighborsForEachType = getNumberOfNeighborsForEachType(rules.getPossibleTypes());
+    List<int[][]> nextStates = nextStatesOfCells(numberOfNeighborsForEachType);
+    for(int x = 0; x < row; x++){
+      for(int y = 0; y < col; y++){
+        List<Integer> neighborsOfEachTypeAtCoordinate = new ArrayList<>();
+        for(int index = 0; index < numberOfNeighborsForEachType.size(); index++){
+          neighborsOfEachTypeAtCoordinate.add(numberOfNeighborsForEachType.get(index)[x][y]);
+        }
+        System.out.println(stateOfCells[x][y].getType());
+        rules.decideState(neighborsOfEachTypeAtCoordinate, nextStates, x, y, this);
+      }
+    }
+    updateStatesForAllCells(nextStates, rules.getPossibleTypes(), rules.getPossibleColors());
+  }
+
+  private void updateStatesForAllCells(List<int[][]> nextStates,
+      ArrayList<String> possibleTypes, ArrayList<String> possibleColors) {
+    for(int index = 0; index < nextStates.size(); index++) {
+      for (int r = 0; r < row; r++) {
+        for (int c = 0; c < col; c++) {
+          if (nextStates.get(index)[r][c] == 1) {
+            stateOfCells[r][c] = new State(r, c, possibleTypes.get(index), possibleColors.get(index), 0);
+          }
+        }
+      }
+    }
+  }
+
+  private List<int[][]> nextStatesOfCells(List<int[][]> numberOfNeighborsForEachType) {
+    List<int[][]> nextStatesForEachType = new ArrayList<>();
+    for(int[][] types : numberOfNeighborsForEachType){
+      nextStatesForEachType.add(numberOfAliveNeighbors(stateOfCells, ""));
+    }
+    return nextStatesForEachType;
+  }
+
+  public String getTypeAtCoordinate(int x, int y) {
+    return stateOfCells[x][y].getType();
+  }
+
+  public int getRow() {
+    return row;
+  }
+
+  public int getColumn() {
+    return col;
+  }
+
+  public State[][] getGrid(){
+    return stateOfCells;
+  }
+
+  public State getStateAtCoordinate(int x, int y) {
+    return stateOfCells[x][y];
+  }
+
+  public void setStateAtCoordinate(int x, int y, State state) {
+    stateOfCells[x][y] = state;
   }
 }

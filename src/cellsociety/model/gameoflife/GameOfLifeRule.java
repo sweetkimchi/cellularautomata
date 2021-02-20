@@ -1,5 +1,6 @@
 package cellsociety.model.gameoflife;
 
+import cellsociety.controller.grid.GridManager;
 import cellsociety.model.cell.State;
 import cellsociety.model.rules.Rules;
 import java.util.ArrayList;
@@ -122,5 +123,11 @@ public class GameOfLifeRule extends Rules {
   @Override
   public ArrayList<String> getPossibleColors() {
     return null;
+  }
+
+  @Override
+  public void decideState(List<Integer> neighborsOfEachTypeAtCoordinate, List<int[][]> nextStates,
+      int x, int y, GridManager gridManager) {
+
   }
 }
