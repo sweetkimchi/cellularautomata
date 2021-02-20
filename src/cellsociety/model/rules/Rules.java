@@ -27,47 +27,52 @@ public abstract class Rules {
    * @param type             type of state looking for
    * @return integer array with number of neighbors that were equal to 'type'
    */
-  protected int[][] numberOfAliveNeighbors(State[][] statesOfAllCells, String type) {
+  public int[][] numberOfAliveNeighbors(State[][] statesOfAllCells, String type) {
     int[][] numberOfNeighbors = new int[statesOfAllCells.length][statesOfAllCells[0].length];
     for (int x = 0; x < statesOfAllCells.length; x++) {
       for (int y = 0; y < statesOfAllCells[0].length; y++) {
-        int numberOfNeighbor = 0;
-        if (x - 1 >= 0 && y - 1 >= 0 && statesOfAllCells[x - 1][y - 1].getType().equals(type)) {
-          numberOfNeighbor++;
-        }
-        if (x - 1 >= 0 && y >= 0 && statesOfAllCells[x - 1][y].getType().equals(type)) {
-          numberOfNeighbor++;
-        }
-        if (x - 1 >= 0 && y + 1 < statesOfAllCells[0].length && statesOfAllCells[x - 1][y
-            + 1].getType().equals(type)) {
-          numberOfNeighbor++;
-        }
-        if (y - 1 >= 0 && statesOfAllCells[x][y - 1].getType().equals(type)) {
-          numberOfNeighbor++;
-        }
-        if (y + 1 < statesOfAllCells[0].length && statesOfAllCells[x][y + 1].getType().equals(type)) {
-          numberOfNeighbor++;
-        }
-        if (x + 1 < statesOfAllCells.length && y - 1 >= 0 && statesOfAllCells[x + 1][y - 1].getType()
-            .equals(type)) {
-          numberOfNeighbor++;
-        }
-        if (x + 1 < statesOfAllCells.length && y >= 0 && statesOfAllCells[x + 1][y].getType()
-            .equals(type)) {
-          numberOfNeighbor++;
-        }
-        if (x + 1 < statesOfAllCells.length && y + 1 < statesOfAllCells[0].length
-            && statesOfAllCells[x + 1][y + 1].getType().equals(type)) {
-          numberOfNeighbor++;
-        }
-        //     System.out.print(" " + numberOfNeighbor + " ");
-        numberOfNeighbors[x][y] = numberOfNeighbor;
-        //    statesOfAllCells[x][y].alive = decideState(numberOfNeighbor);
+        checkEightSidesForNumberOfNeighbors(statesOfAllCells, type, numberOfNeighbors, x, y);
       }
       // System.out.println();
     }
     //  System.out.println();
     return numberOfNeighbors;
+  }
+
+  private void checkEightSidesForNumberOfNeighbors(State[][] statesOfAllCells, String type, int[][] numberOfNeighbors, int x,
+      int y) {
+    int numberOfNeighbor = 0;
+    if (x - 1 >= 0 && y - 1 >= 0 && statesOfAllCells[x - 1][y - 1].getType().equals(type)) {
+      numberOfNeighbor++;
+    }
+    if (x - 1 >= 0 && y >= 0 && statesOfAllCells[x - 1][y].getType().equals(type)) {
+      numberOfNeighbor++;
+    }
+    if (x - 1 >= 0 && y + 1 < statesOfAllCells[0].length && statesOfAllCells[x - 1][y
+        + 1].getType().equals(type)) {
+      numberOfNeighbor++;
+    }
+    if (y - 1 >= 0 && statesOfAllCells[x][y - 1].getType().equals(type)) {
+      numberOfNeighbor++;
+    }
+    if (y + 1 < statesOfAllCells[0].length && statesOfAllCells[x][y + 1].getType().equals(type)) {
+      numberOfNeighbor++;
+    }
+    if (x + 1 < statesOfAllCells.length && y - 1 >= 0 && statesOfAllCells[x + 1][y - 1].getType()
+        .equals(type)) {
+      numberOfNeighbor++;
+    }
+    if (x + 1 < statesOfAllCells.length && y >= 0 && statesOfAllCells[x + 1][y].getType()
+        .equals(type)) {
+      numberOfNeighbor++;
+    }
+    if (x + 1 < statesOfAllCells.length && y + 1 < statesOfAllCells[0].length
+        && statesOfAllCells[x + 1][y + 1].getType().equals(type)) {
+      numberOfNeighbor++;
+    }
+    //     System.out.print(" " + numberOfNeighbor + " ");
+    numberOfNeighbors[x][y] = numberOfNeighbor;
+    //    statesOfAllCells[x][y].alive = decideState(numberOfNeighbor);
   }
 
   /**
