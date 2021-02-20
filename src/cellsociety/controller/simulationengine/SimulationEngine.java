@@ -6,6 +6,7 @@ import cellsociety.controller.PercDecoder;
 import cellsociety.controller.SegDecoder;
 import cellsociety.controller.WaTorDecoder;
 import cellsociety.controller.grid.GridManager;
+import cellsociety.model.RockPaperScissorsRules;
 import cellsociety.model.cell.State;
 import cellsociety.model.gameoflife.GameOfLifeRule;
 import cellsociety.model.percolation.PercolationRules;
@@ -124,6 +125,16 @@ public class SimulationEngine {
       rules = new WaTorModelRules(
           waTorDecoder.getSeed(), waTorDecoder.getEnergy(), waTorDecoder.getFishRate(),
           waTorDecoder.getSharkLives());
+      stateOfAllCells = gridManager
+          .buildGridWithRandomSeed(waTorDecoder.getEmptyRatio(), waTorDecoder.getFSRatio(),
+              waTorDecoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
+    }
+    if (game.equals("rockpaperscissors")) {
+      //   rules = new WaTorModelRules(emptyRatio, populationRatio, randomSeed, energyFish, reproduceBoundary, sharkEnergy);
+      WaTorDecoder waTorDecoder = decoder.getWaTorDecoder();
+      int threshold = 3;
+      long randomSeed = 10;
+      rules = new RockPaperScissorsRules(threshold, randomSeed);
       stateOfAllCells = gridManager
           .buildGridWithRandomSeed(waTorDecoder.getEmptyRatio(), waTorDecoder.getFSRatio(),
               waTorDecoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
