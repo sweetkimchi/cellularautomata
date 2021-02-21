@@ -11,9 +11,10 @@
     <numberofsides>4</numberofsides>
     <nestcolor>green</nestcolor>
     <antcolor>red</antcolor>
-    <hormonecolor>blue</hormonecolor>
+    <phermonecolor>blue</phermonecolor>
     <foodcolor>lightgrey</foodcolor>
     <emptycolor>black</emptycolor>
+    <weakphermonecolor>skyblue</weakphermonecolor>
     <template>generic</template>
     <title>Foraging Ants</title>
     <model>foragingants</model>

@@ -86,8 +86,9 @@ public class Decoder {
   private String deadColor;
   private String nestColor;
   private String antColor;
-  private String hormoneColor;
+  private String phermoneColor;
   private String foodColor;
+  private String weakPhermoneColor;
   private int seed;
   private int fishRate;
   private int sharkRate;
@@ -262,9 +263,10 @@ public class Decoder {
     numberOfSides = Integer.parseInt(attributes.getOrDefault("numberofsides", "4"));
     nestColor = attributes.get("nestcolor").equals("") ? "green" : attributes.get("nestcolor");
     antColor = attributes.get("antcolor").equals("") ? "red" : attributes.get("antcolor");
-    hormoneColor = attributes.get("hormonecolor").equals("") ? "blue" : attributes.get("hormonecolor");
+    phermoneColor = attributes.get("phermonecolor").equals("") ? "blue" : attributes.get("phermonecolor");
     foodColor = attributes.get("foodcolor").equals("") ? "lightgrey" : attributes.get("foodcolor");
     emptyColor = attributes.get(EMPTY_COLOR).equals("") ? "black" : attributes.get(EMPTY_COLOR);
+    weakPhermoneColor = attributes.get("weakphermonecolor").equals("") ? "skyblue" : attributes.get("weakphermonecolor");
   }
   private void initializeLangton(Map<String, String> attributes){
     //ratio1 = Float.parseFloat(attributes.getOrDefault("ratio1", "defaultratio1");
@@ -320,7 +322,8 @@ public class Decoder {
   public String getDeadColor(){return deadColor;}
   public String getNestColor(){return nestColor;}
   public String getAntColor(){return antColor;}
-  public String getHormoneColor(){return hormoneColor;}
+  public String getPhermoneColor(){return phermoneColor;}
+  public String getWeakPhermoneColor(){return weakPhermoneColor;}
   public String getFoodColor(){return foodColor;}
   public int getNumberOfSides(){return numberOfSides;}
   public String getShape(){return shape;}

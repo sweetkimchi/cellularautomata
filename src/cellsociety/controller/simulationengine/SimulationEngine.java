@@ -87,6 +87,7 @@ public class SimulationEngine {
     initializeGrid();
     initializeModelConstructors(decoder.getModel());
     gridManager.setNumberOfSides(decoder.getNumberOfSides());
+    simulationScreen.setGridShape(decoder.getShape());
     simulationScreen.update(gridManager, decoder.getModel());
     simulationScreen.setDescription(decoder.getMyDesc());
     runSimulation();
@@ -140,7 +141,7 @@ public class SimulationEngine {
       //   rules = new WaTorModelRules(emptyRatio, populationRatio, randomSeed, energyFish, reproduceBoundary, sharkEnergy);
       int numberOfsides = 4;
 
-      rules = new ForagingAntsRules(decoder.getNumberOfAnts(), decoder.getSeed(), decoder.getNumberOfSides(), decoder.getNestColor(), decoder.getAntColor(), decoder.getHormoneColor(), decoder.getFoodColor(), decoder.getEmptyColor());
+      rules = new ForagingAntsRules(decoder.getNumberOfAnts(), decoder.getSeed(), decoder.getNumberOfSides(), decoder.getNestColor(), decoder.getAntColor(), decoder.getPhermoneColor(), decoder.getFoodColor(), decoder.getEmptyColor(), decoder.getWeakPhermoneColor());
       ForagingAntGridManager foragingAntGridManager = new ForagingAntGridManager(decoder.getRows(), decoder.getCols());
       gridManager
           .buildAntGridWithTemplate(decoder.getCoordinates(), rules.getPossibleTypes(), rules.getPossibleColors(), decoder.getRadius(), decoder.getNumberOfSides());
