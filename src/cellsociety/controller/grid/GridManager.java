@@ -21,8 +21,9 @@ public class GridManager {
   private final int row;
   private final int col;
   private State[][] stateOfCells;
-  private int numberOfSides = 8;
+  private int numberOfSides = 6;
   private Map<String,Integer> summary;
+  private ArrayList<String> coordinates;
 
   /**
    * Basic constructor
@@ -248,9 +249,11 @@ public class GridManager {
           neighborsOfEachTypeAtCoordinate.add(numberOfNeighborsForEachType.get(index)[x][y]);
         }
         rules.decideState(neighborsOfEachTypeAtCoordinate, nextStates, x, y, this);
+
       }
       //     System.out.println();
     }
+
     updateStatesForAllCells(nextStates, rules.getPossibleTypes(), rules.getPossibleColors());
   }
 
@@ -329,10 +332,14 @@ public class GridManager {
   public void buildAntGridWithTemplate(ArrayList<String> coordinates,
       ArrayList<String> possibleTypes, ArrayList<String> possibleColors,
       int radius, int numberOfSides) {
+    this.coordinates = coordinates;
     ForagingAntGridManager foragingAntGridManager = new ForagingAntGridManager(row, col);
     this.stateOfCells = foragingAntGridManager.buildAntGridWithTemplateHelper(coordinates, possibleTypes, possibleColors, radius);
     this.numberOfSides = numberOfSides;
   }
-  public void setNumberOfSides(int numSides){numberOfSides = numSides;}
+
+  public ArrayList<String> getCoordinates(){
+    return coordinates;
+  }
 }
 

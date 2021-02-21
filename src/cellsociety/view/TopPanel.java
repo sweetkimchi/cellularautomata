@@ -39,4 +39,13 @@ public class TopPanel {
   public Node getNode() {
     return panel;
   }
+
+  /**
+   * Returns the height of the panel.
+   *
+   * @return double for height
+   */
+  public double getHeight() {
+    return panel.getHeight();
+  }
 }
