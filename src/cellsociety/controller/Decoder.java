@@ -43,9 +43,27 @@ public class Decoder {
   public static final String ROCK_RATIO = "rockratio";
   public static final String SCISSORS_RATIO = "scissorsratio";
   public static final String THRESHOLD = "threshhold";
-  public static final List<String> MODEL_TYPES = List.of("spreadingoffire", "segregationmodel", "percolation", "wator", "gameOfLife","rockpaperscissors");
+  public static final List<String> MODEL_TYPES = List.of("spreadingoffire", "segregationmodel", "percolation", "wator", "gameOfLife", "rockpaperscissors", "foragingants", "langton", "sugarscape");
   public static final String GOLDefaultShape = "25,25,25,26,25,27";
   public static final String FireDefaultShape = "21,20,20,21,21,21,22,21";
+  public static final String SHAPE = "shape";
+  public static final String SIDES = "numberofsides";
+  public static final String COLOR = "color";
+  //             Sample Text Names               //
+  public static final String RATIO1 = "ratio1";
+  public static final String RATIO2 = "ratio2";
+  public static final String RATIO3 = "ratio3";
+  public static final String RATIO4 = "ratio4";
+  public static final String INTEGER1 = "integer1";
+  public static final String INTEGER2 = "integer2";
+  public static final String INTEGER3 = "integer3";
+  public static final String INTEGER4 = "integer4";
+  public static final String STRING1 = "string1";
+  public static final String STRING2 = "string2";
+
+  private String shape;
+  private String color;
+  private int numberOfSides;
   private ArrayList<String> coordinates;
   private String template;
   private int seed;
@@ -64,6 +82,17 @@ public class Decoder {
   private float rockRatio;
   private float scissorsRatio;
   private int threshold;
+  // Sample Ratios, Strings, and Integers //
+  private float ratio1;
+  private float ratio2;
+  private float ratio3;
+  private float ratio4;
+  private int integer1;
+  private int integer2;
+  private int integer3;
+  private int integer4;
+  private String string1;
+  private String string2;
   private String description;
   private String model;
   private String title;
@@ -92,6 +121,10 @@ public class Decoder {
       numRows = Integer.parseInt(attributes.get(NUM_ROWS));
       numColumns = Integer.parseInt(attributes.get(NUM_COLS));
       model = attributes.get(MODEL);
+      //           Shape, numSides, and Color                //
+      //shape = attributes.get(SHAPE);
+      //numberOfSides = Integer.parseInt(attributes.get(SIDES));
+      //color = attributes.get(COLOR);
     }
     catch(Exception e){
       Alert alert = new Alert(Alert.AlertType.ERROR, "Invalid Parameter(s)");
@@ -112,6 +145,9 @@ public class Decoder {
       case "spreadingoffire" -> initializeFire(attributes);
       case "percolation" -> initializePercolation(attributes);
       case "rockpaperscissors" -> initializeRPS(attributes);
+      case "foragingants" -> initializeForagingAnts(attributes);
+      case "langton" -> initializeLangton(attributes);
+      case "sugarscape" -> initializeSugarScape(attributes);
     }
   }
   private void saveConfig(Map<String, String> config) throws FileNotFoundException {
@@ -177,6 +213,30 @@ public class Decoder {
     emptyRatio = Float.parseFloat(attributes.getOrDefault(EMPTY_RATIO, "0"));
     threshold = Integer.parseInt(attributes.getOrDefault(THRESHOLD, "3"));
   }
+  private void initializeForagingAnts(Map<String, String> attributes){
+    //ratio1 = Float.parseFloat(attributes.getOrDefault("ratio1", "defaultratio1");
+    //ratio2 = Float.parseFloat(attributes.getOrDefault("ratio2", "defaultratio2);
+    //integer1 = Integer.parseInt(attributes.getOrDefault("integer1", "defaultinteger1");
+    //integer2 = Integer.parseInt(attributes.getOrDefault("integer2", :defaultinteger2");
+    //string1 = attributes.get("string1");
+    //string2 = attributes.get("string2");
+  }
+  private void initializeLangton(Map<String, String> attributes){
+    //ratio1 = Float.parseFloat(attributes.getOrDefault("ratio1", "defaultratio1");
+    //ratio2 = Float.parseFloat(attributes.getOrDefault("ratio2", "defaultratio2);
+    //integer1 = Integer.parseInt(attributes.getOrDefault("integer1", "defaultinteger1");
+    //integer2 = Integer.parseInt(attributes.getOrDefault("integer2", :defaultinteger2");
+    //string1 = attributes.get("string1");
+    //string2 = attributes.get("string2");
+  }
+  private void initializeSugarScape(Map<String, String> attributes){
+    //ratio1 = Float.parseFloat(attributes.getOrDefault("ratio1", "defaultratio1");
+    //ratio2 = Float.parseFloat(attributes.getOrDefault("ratio2", "defaultratio2);
+    //integer1 = Integer.parseInt(attributes.getOrDefault("integer1", "defaultinteger1");
+    //integer2 = Integer.parseInt(attributes.getOrDefault("integer2", :defaultinteger2");
+    //string1 = attributes.get("string1");
+    //string2 = attributes.get("string2");
+  }
   public ArrayList<String> getCoordinates(){ return coordinates;}
   public int getSeed() {return seed;}
   public float getBlockRatio(){return blockRatio;}
@@ -193,6 +253,18 @@ public class Decoder {
   public float getRockRatio(){return rockRatio;}
   public float getScissorsRatio(){return scissorsRatio;}
   public int getThreshold(){return threshold;}
+  //            generic getters           //
+  //public float getRatio1(){return ratio1;}
+  //public float getRatio2(){return ratio2;}
+  //public float getRatio3(){return ratio3;}
+  //public float getRatio4(){return ratio4;}
+  //public int getInteger1(){return integer1;}
+  //public int getInteger2(){return integer2;}
+  //public int getInteger3(){return integer3;}
+  //public int getInteger4(){return integer4;}
+  //public int getString1(){return string1;}
+  //public int getString1(){return string1;}
+
   /**
    * @return model name
    */

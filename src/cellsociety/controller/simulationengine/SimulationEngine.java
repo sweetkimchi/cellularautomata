@@ -170,7 +170,10 @@ public class SimulationEngine {
       animation.start();
     }
   }
+  public void saveSimulation(){
+    stopSimulation();
 
+  }
   /**
    * Allows interactive button to stop the simulation in View component
    */
