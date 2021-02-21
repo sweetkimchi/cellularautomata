@@ -328,14 +328,26 @@ public class GridManager {
   public void buildAntGridWithTemplate(ArrayList<String> coordinates, ArrayList<String> possibleTypes, ArrayList<String> possibleColors, int radius) {
     State[][] stateOfCells = new State[row][col];
 
-    int counter = 0;
-    for(int index = 0; index < coordinates.size(); index+=2){
-      for(int x = Integer.parseInt(coordinates.get(index)) - radius; x < Integer.parseInt(coordinates.get(index)) + radius; x++){
-        for(int y = Integer.parseInt(coordinates.get(index)) - radius; x < Integer.parseInt(coordinates.get(index)) + radius; x++){
-          stateOfCells[x][y] = new State(x,y,possibleTypes.get(counter), possibleColors.get(counter),0);
+    for (int r = 0; r < row; r++) {
+      for (int c = 0; c < col; c++) {
+        State state = new State(r, c, possibleTypes.get(possibleTypes.size()-1), possibleColors.get(possibleTypes.size()-1), 0);
+        stateOfCells[r][c] = state;
+      }
+    }
+
+   //build nest
+      for(int x = Integer.parseInt(coordinates.get(0)) - radius; x < Integer.parseInt(coordinates.get(0)) + radius; x++){
+        for(int y = Integer.parseInt(coordinates.get(1)) - radius; y < Integer.parseInt(coordinates.get(1)) + radius; y++){
+          stateOfCells[x][y] = new State(x,y,possibleTypes.get(0), possibleColors.get(0),0);
         }
       }
-      counter++;
+
+    for(int index = 2; index < coordinates.size(); index+=2) {
+      for(int x = Integer.parseInt(coordinates.get(index)) - radius; x < Integer.parseInt(coordinates.get(index)) + radius; x++){
+        for(int y = Integer.parseInt(coordinates.get(index)) - radius; y < Integer.parseInt(coordinates.get(index)) + radius; y++){
+          stateOfCells[x][y] = new State(x,y,possibleTypes.get(1), possibleColors.get(1),5);
+        }
+      }
     }
 
     this.stateOfCells = stateOfCells;

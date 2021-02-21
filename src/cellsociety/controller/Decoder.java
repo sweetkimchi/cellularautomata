@@ -100,6 +100,7 @@ public class Decoder {
   private String author;
   private int numRows;
   private int numColumns;
+  private int numberOfAnts;
 
   private static FileChooser makeChooser(String extension) {
     FileChooser result = new FileChooser();
@@ -217,8 +218,8 @@ public class Decoder {
   private void initializeForagingAnts(Map<String, String> attributes){
     coordinates = new ArrayList<>(Arrays.asList(attributes.getOrDefault(COORDINATES, GOLDefaultShape).split("[,]", 0)));
     //ratio2 = Float.parseFloat(attributes.getOrDefault("ratio2", "defaultratio2);
-    radius = Integer.parseInt(attributes.getOrDefault("diameter", "10"));
-    //integer2 = Integer.parseInt(attributes.getOrDefault("integer2", :defaultinteger2");
+    radius = Integer.parseInt(attributes.getOrDefault("radius", "5"));
+    numberOfAnts = Integer.parseInt(attributes.getOrDefault("numberofants", "50");
     //string1 = attributes.get("string1");
     //string2 = attributes.get("string2");
   }
@@ -260,7 +261,7 @@ public class Decoder {
   //public float getRatio3(){return ratio3;}
   //public float getRatio4(){return ratio4;}
   public int getRadius(){return radius;}
-  //public int getInteger2(){return integer2;}
+  public int getNumberOfAnts(){return numberOfAnts;}
   //public int getInteger3(){return integer3;}
   //public int getInteger4(){return integer4;}
   //public int getString1(){return string1;}

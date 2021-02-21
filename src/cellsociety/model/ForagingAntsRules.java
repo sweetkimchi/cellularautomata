@@ -19,8 +19,10 @@ public class ForagingAntsRules extends Rules {
   private String NEST = "nest";
   private String HORMONE = "hormone";
   private String EMPTY = "empty";
+  private int numberOfAnts;
   
-  public ForagingAntsRules(){
+  public ForagingAntsRules(int numberOfAnts){
+    this.numberOfAnts = numberOfAnts;
     initializeColorsAndTypes();
   }
 

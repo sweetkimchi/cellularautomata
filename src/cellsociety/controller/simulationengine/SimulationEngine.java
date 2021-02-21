@@ -129,7 +129,7 @@ public class SimulationEngine {
     }
     if (game.equals("foragingants")) {
       //   rules = new WaTorModelRules(emptyRatio, populationRatio, randomSeed, energyFish, reproduceBoundary, sharkEnergy);
-      rules = new ForagingAntsRules();
+      rules = new ForagingAntsRules(decoder.getNumberOfAnts());
       gridManager
           .buildAntGridWithTemplate(decoder.getCoordinates(), rules.getPossibleTypes(), rules.getPossibleColors(), decoder.getRadius());
     }
