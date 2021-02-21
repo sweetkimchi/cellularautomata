@@ -44,7 +44,6 @@ public class Decoder {
   public static final String ROCK_RATIO = "rockratio";
   public static final String SCISSORS_RATIO = "scissorsratio";
   public static final String THRESHOLD = "threshhold";
-  public static final List<String> MODEL_TYPES = List.of("spreadingoffire", "navigatingsugarscape", "segregationmodel", "percolation", "wator", "gameOfLife", "rockpaperscissors", "foragingants", "langton", "sugarscape");
   public static final String GOLDefaultShape = "25,25,25,26,25,27";
   public static final String FireDefaultShape = "21,20,20,21,21,21,22,21";
   public static final String BLOCK_COLOR = "blockcolor";
@@ -52,24 +51,10 @@ public class Decoder {
   public static final String WATER_COLOR = "watercolor";
   public static final String SHAPE = "shape";
   public static final String SIDES = "numberofsides";
-  public static final String COLOR = "color";
-  //             Sample Text Names               //
-  public static final String RATIO1 = "ratio1";
-  public static final String RATIO2 = "ratio2";
-  public static final String RATIO3 = "ratio3";
-  public static final String RATIO4 = "ratio4";
-  public static final String INTEGER1 = "integer1";
-  public static final String INTEGER2 = "integer2";
-  public static final String INTEGER3 = "integer3";
-  public static final String INTEGER4 = "integer4";
-  public static final String STRING1 = "string1";
-  public static final String STRING2 = "string2";
+  public static final List<String> MODEL_TYPES = List.of("spreadingoffire", "navigatingsugarscape", "segregationmodel", "percolation", "wator", "gameOfLife", "rockpaperscissors", "foragingants", "langton", "sugarscape");
 
-  private int radius;
-  private String shape;
-  private int numberOfSides;
   private ArrayList<String> coordinates;
-  private String template;
+  private String shape;
   private String blockColor;
   private String emptyColor;
   private String waterColor;
@@ -89,11 +74,13 @@ public class Decoder {
   private String phermoneColor;
   private String foodColor;
   private String weakPhermoneColor;
-  private int seed;
-  private int fishRate;
-  private int sharkRate;
-  private int sharkLives;
-  private int energy;
+  private String fullSugarColor;
+  private String lowSugarColor;
+  private String agentColor;
+  private String description;
+  private String model;
+  private String title;
+  private String author;
   private float fishSharkRatio;
   private float emptyRatio;
   private float waterToEmptyRatio;
@@ -104,25 +91,22 @@ public class Decoder {
   private float probsOfCatch;
   private float rockRatio;
   private float scissorsRatio;
-  private int threshold;
-  // Sample Ratios, Strings, and Integers //
   private float patchRatio;
   private float moveBias;
-  private float ratio3;
-  private float ratio4;
+  private int numberOfSides;
+  private int seed;
+  private int fishRate;
+  private int sharkRate;
+  private int sharkLives;
+  private int energy;
+  private int threshold;
   private int phermoneAmount;
   private int numAgents;
   private int maxSugar;
   private int growBackSugar;
   private int metabolism;
   private int vision;
-  private String fullSugarColor;
-  private String lowSugarColor;
-  private String agentColor;
-  private String description;
-  private String model;
-  private String title;
-  private String author;
+  private int radius;
   private int numRows;
   private int numColumns;
   private int numberOfAnts;
@@ -148,7 +132,7 @@ public class Decoder {
       numRows = Integer.parseInt(attributes.get(NUM_ROWS));
       numColumns = Integer.parseInt(attributes.get(NUM_COLS));
       model = attributes.get(MODEL);
-      shape = attributes.get("shape");
+      shape = attributes.get(SHAPE);
       numberOfSides = Integer.parseInt(attributes.get(SIDES));
     }
     catch(Exception e){
@@ -188,6 +172,7 @@ public class Decoder {
   private void createConfigFile(File file, Map<String, String> attributes) throws FileNotFoundException {
     PrintWriter writer = new PrintWriter(file);
     writer.println(HEAD);
+    writer.println("<buildfromtemplate>1</buildfromtemplate>");
     for(String s : attributes.keySet()){
       if(attributes.get(s) == null) continue;
       writer.print("<" + s + ">");
@@ -199,7 +184,6 @@ public class Decoder {
   }
   private void initializeGOL(Map<String, String> attributes){
     coordinates = new ArrayList<>(Arrays.asList(attributes.getOrDefault(COORDINATES, GOLDefaultShape).split("[,]", 0)));
-    template = attributes.get(TEMPLATE);
     aliveColor = attributes.get("alivecolor").equals("") ? "black" : attributes.get("alivecolor");
     deadColor = attributes.get("deadcolor").equals("") ? "lightgrey" : attributes.get("deadcolor");
   }
@@ -219,7 +203,6 @@ public class Decoder {
     waterToEmptyRatio = Float.parseFloat(attributes.getOrDefault(WATER_EMPTY_RATIO, ".01"));
     blockRatio = Float.parseFloat(attributes.getOrDefault(BLOCK_RATIO, "0.5"));
     seed = Integer.parseInt(attributes.getOrDefault(SEED, "100"));
-    template = attributes.getOrDefault(TEMPLATE, "random_one");
     blockColor = attributes.get(BLOCK_COLOR).equals("") ? "black" : attributes.get(BLOCK_COLOR);
     emptyColor = attributes.get(EMPTY_COLOR).equals("") ? "lightgrey" : attributes.get(EMPTY_COLOR);
     waterColor = attributes.get(WATER_COLOR).equals("") ? "blue" : attributes.get(WATER_COLOR);
@@ -229,14 +212,12 @@ public class Decoder {
     emptyRatio = Float.parseFloat(attributes.getOrDefault(EMPTY_RATIO, "0.1"));
     satisfactionThreshold = Float.parseFloat(attributes.getOrDefault(SATISFACTION_THRESHOLD, "0.6"));
     seed = Integer.parseInt(attributes.getOrDefault(SEED, "100"));
-    template = attributes.getOrDefault(TEMPLATE, "random_one");
     emptyColor = attributes.get(EMPTY_COLOR).equals("") ? "lightgrey" : attributes.get(EMPTY_COLOR);
     colorX = attributes.get("agentxcolor").equals("") ? "red" : attributes.get("agentxcolor");
     colorY = attributes.get("agentycolor").equals("") ? "blue" : attributes.get("agentycolor");
   }
   private void initializeFire(Map<String, String> attributes){
     coordinates = new ArrayList<>(Arrays.asList(attributes.getOrDefault(COORDINATES, FireDefaultShape).split("[,]", 0)));
-    template = attributes.getOrDefault(TEMPLATE, "basicfire");
     probsOfCatch = Float.parseFloat(attributes.getOrDefault(PROB_OF_CATCH, "0.3"));
     seed = Integer.parseInt(attributes.getOrDefault(SEED, "100"));
     emptyRatio = Float.parseFloat(attributes.getOrDefault(EMPTY_RATIO, "0.1"));
