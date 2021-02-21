@@ -9,6 +9,7 @@ public class SugarScapeGridManager extends GridManager {
 
   private int row;
   private int col;
+  private State[][] stateOfCells;
   /**
    * Basic constructor
    *
@@ -21,7 +22,8 @@ public class SugarScapeGridManager extends GridManager {
     this.col = col;
   }
 
-  public void makeSugarScapeGridWithRandomSeed(double emptyRatio, double patchRatio, int randomSeed, ArrayList<String> possibleTypes, ArrayList<String> possibleColors) {
+  public void makeSugarScapeGridWithRandomSeed(double emptyRatio, double patchRatio, int numberOfAgents, int sugarMetabolism, int vision,
+      int randomSeed, ArrayList<String> possibleTypes, ArrayList<String> possibleColors) {
     Random random = new Random(randomSeed);
     State[][] stateOfCells = new State[row][col];
     for (int x = 0; x < row; x++) {
@@ -31,12 +33,11 @@ public class SugarScapeGridManager extends GridManager {
         if (probability < emptyRatio) {
           State state = new State(x, y, possibleTypes.get(0), possibleColors.get(0), 0);
           stateOfCells[x][y] = state;
-        } else if (probability < emptyRatio + (1 - emptyRatio) * populationRatio) {
+        } else if (probability < emptyRatio + (1 - emptyRatio) * patchRatio) {
           State state = new State(x, y, possibleTypes.get(1), possibleColors.get(1), 0);
           stateOfCells[x][y] = state;
         } else {
-          int index = random.nextInt(possibleTypes.size() - 2) + 2;
-          State state = new State(x, y, possibleTypes.get(index), possibleColors.get(index), 0);
+          AgentState state = new AgentState(x, y, possibleTypes.get(3), possibleColors.get(3), 0, sugarMetabolism, vision);
           stateOfCells[x][y] = state;
         }
       }

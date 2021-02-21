@@ -2,7 +2,8 @@ package cellsociety.controller.simulationengine;
 
 import cellsociety.controller.Decoder;
 import cellsociety.controller.grid.GridManager;
-import cellsociety.model.ForagingAntsRules;
+import cellsociety.model.foragingants.ForagingAntGridManager;
+import cellsociety.model.foragingants.ForagingAntsRules;
 import cellsociety.model.RockPaperScissorsRules;
 import cellsociety.model.cell.State;
 import cellsociety.model.gameoflife.GameOfLifeRule;
@@ -135,6 +136,7 @@ public class SimulationEngine {
     if (game.equals("foragingants")) {
       //   rules = new WaTorModelRules(emptyRatio, populationRatio, randomSeed, energyFish, reproduceBoundary, sharkEnergy);
       rules = new ForagingAntsRules(decoder.getNumberOfAnts());
+      ForagingAntGridManager foragingAntGridManager = new ForagingAntGridManager(decoder.getRows(), decoder.getCols());
       gridManager
           .buildAntGridWithTemplate(decoder.getCoordinates(), rules.getPossibleTypes(), rules.getPossibleColors(), decoder.getRadius());
     }
@@ -150,11 +152,12 @@ public class SimulationEngine {
       double emptyRatio = 0;
       double patchRatio = 0.7;
 
+
       SugarScapeGridManager sugarScapeGridManager = new SugarScapeGridManager(decoder.getRows(), decoder.getCols());
 
       rules = new NavigatingSugarScapeRules(numberOfAgents, maximumSugar, growBacksugar, sugarMetabolism, vision);
       sugarScapeGridManager
-          .makeSugarScapeGridWithRandomSeed(emptyRatio, patchRatio,
+          .makeSugarScapeGridWithRandomSeed(emptyRatio, patchRatio, numberOfAgents, sugarMetabolism, vision,
               randomSeed, rules.getPossibleTypes(), rules.getPossibleColors());
     }
     //need to be fixed for a better design

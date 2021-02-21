@@ -11,16 +11,26 @@ public class AgentState extends State {
   private String type;
 
   /**
+   * Constructor with more variations other than number of moves
+   *
+   * @param xCoord        xCoord associated with the state
+   * @param yCoord        yCoord associated with the state
+   * @param type          the type of the player (e.g. agent x, agent y)
+   * @param colorString   color of the state
+   * @param numberOfMoves the current, cumulative number of moves
+   */
+  public AgentState(int xCoord, int yCoord, String type, String colorString, int numberOfMoves, int sugarMetabolism, int vision) {
+    super(xCoord, yCoord, type, colorString, numberOfMoves);
+    this.sugarMetabolism = sugarMetabolism;
+    this.vision = vision;
+  }
+
+  /**
    * Basic constructor
    *
    * @param xCoord xCoord associated with the state
    * @param yCoord yCoord associated with the state
    * @param type   the type of the player
    */
-  public AgentState(int xCoord, int yCoord, String type, int sugarMetabolism, int vision) {
-    super(xCoord, yCoord, type);
-    this.type = type;
-    this.vision = vision;
-    this.sugarMetabolism = sugarMetabolism;
-  }
+
 }

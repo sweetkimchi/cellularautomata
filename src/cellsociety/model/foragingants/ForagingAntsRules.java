@@ -1,6 +1,7 @@
-package cellsociety.model;
+package cellsociety.model.foragingants;
 
 import cellsociety.controller.grid.GridManager;
+import cellsociety.model.cell.State;
 import cellsociety.model.rules.Rules;
 import java.util.ArrayList;
 import java.util.List;
@@ -80,12 +81,15 @@ public class ForagingAntsRules extends Rules {
         numberOfAnts--;
       }
 
-    if(gridManager.getTypeAtCoordinate(x,y).equals(EMPTY) && neighborsOfEachTypeAtCoordinate.get(2) > 0){
-      nextStates.get(2)[x][y] = 1;
+    if(gridManager.getTypeAtCoordinate(x,y).equals(ANT){
+      gridManager.setStateAtCoordinate(x,y, decideAntState(gridManager, x, y, nextStates));
     }
 
       if(gridManager.getTypeAtCoordinate(x,y).equals(ANT) && neighborsOfEachTypeAtCoordinate.get(4) > 0){
         nextStates.get(4)[x][y] = 1;
       }
+  }
+
+  private AntState decideAntState(GridManager gridManager, int x, int y, List<int[][]> nextStates) {
   }
 }

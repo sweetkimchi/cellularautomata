@@ -24,7 +24,6 @@ public class NavigatingSugarScapeRules extends Rules {
 
   public NavigatingSugarScapeRules(int numberOfAgents, int maximumSugar, int growBackSugar, int sugarMetabolism, int vision){
     initializeColorsAndTypes();
-    initializeAgents(numberOfAgents);
     initializePatches();
   }
 
@@ -32,9 +31,7 @@ public class NavigatingSugarScapeRules extends Rules {
   }
 
   private void initializeAgents(int numberOfAgents) {
-    for(int i = 0; i < numberOfAgents; i++){
-      agents.add(new AgentState());
-    }
+
   }
 
   private void initializeColorsAndTypes() {
