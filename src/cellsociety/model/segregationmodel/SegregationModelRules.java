@@ -1,4 +1,4 @@
-package cellsociety.model.watormodel;
+package cellsociety.model.segregationmodel;
 
 import cellsociety.controller.grid.GridManager;
 import cellsociety.model.cell.State;
