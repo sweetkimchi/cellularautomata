@@ -21,6 +21,7 @@ public class GridManager {
   private final String EMPTY = "empty";
   private final String ALIVE = "alive";
   private State[][] stateOfCells;
+  private int numberOfSides = 6;
 
   /**
    * Basic constructor
@@ -32,6 +33,7 @@ public class GridManager {
     this.row = row;
     this.col = col;
     grid = new ArrayList<>();
+
   }
 
   /**
@@ -116,19 +118,19 @@ public class GridManager {
   }
 
 
-  public List<int[][]> getNumberOfNeighborsForEachType(ArrayList<String> possibleTypes) {
+  public List<int[][]> getNumberOfNeighborsForEachType(ArrayList<String> possibleTypes, int numberOfSides) {
     ArrayList<int[][]> numberOfNeighborsForEachType = new ArrayList<>();
     for (String type : possibleTypes) {
-      numberOfNeighborsForEachType.add(numberOfAliveNeighbors(stateOfCells, type));
+      numberOfNeighborsForEachType.add(numberOfAliveNeighbors(stateOfCells, type, numberOfSides));
     }
     return numberOfNeighborsForEachType;
   }
 
-  private int[][] numberOfAliveNeighbors(State[][] statesOfAllCells, String type) {
+  private int[][] numberOfAliveNeighbors(State[][] statesOfAllCells, String type, int numberOfSides) {
     int[][] numberOfNeighbors = new int[statesOfAllCells.length][statesOfAllCells[0].length];
     for (int x = 0; x < statesOfAllCells.length; x++) {
       for (int y = 0; y < statesOfAllCells[0].length; y++) {
-        checkEightSidesForNumberOfNeighbors(statesOfAllCells, type, numberOfNeighbors, x, y);
+        checkEightSidesForNumberOfNeighbors(statesOfAllCells, type, numberOfNeighbors, x, y, numberOfSides);
       }
       // System.out.println();
     }
@@ -138,18 +140,37 @@ public class GridManager {
 
   private void checkEightSidesForNumberOfNeighbors(State[][] statesOfAllCells, String type,
       int[][] numberOfNeighbors, int x,
-      int y) {
+      int y, int numberOfSides) {
     int numberOfNeighbor = 0;
     for (int xCoord = x - 1; xCoord <= x + 1; xCoord++) {
       for (int yCoord = y - 1; yCoord <= y + 1; yCoord++) {
-        if (xCoord >= 0 && yCoord >= 0 && xCoord < statesOfAllCells.length
-            && yCoord < statesOfAllCells[0].length && statesOfAllCells[xCoord][yCoord].getType()
-            .equals(type) && !(xCoord == x && yCoord == y)) {
-          numberOfNeighbor++;
+        if (checkNumberOfSidesToSeeWhetherToIncludeThisCell(statesOfAllCells, type, x, y, numberOfSides, xCoord, yCoord)) {
+            numberOfNeighbor++;
         }
       }
     }
     numberOfNeighbors[x][y] = numberOfNeighbor;
+  }
+
+  private boolean checkNumberOfSidesToSeeWhetherToIncludeThisCell(State[][] statesOfAllCells, String type, int x, int y,
+      int numberOfSides, int xCoord, int yCoord) {
+    boolean count = true;
+    if(xCoord >= 0 && yCoord >= 0 && xCoord < statesOfAllCells.length
+        && yCoord < statesOfAllCells[0].length && statesOfAllCells[xCoord][yCoord].getType()
+        .equals(type) && !(xCoord == x && yCoord == y)){
+      if(numberOfSides == 8){
+        return true;
+      }
+      if(numberOfSides == 6 && yCoord % 2 != 0 && !(xCoord == x - 1 && yCoord == y + 1) && !(xCoord == x - 1 && yCoord == y + 1) ){
+        //
+        return true;
+      }
+      if(numberOfSides == 6 && yCoord % 2 == 0){
+        //&& !(xCoord == x - 1 && yCoord == y + 1) && !(xCoord == x - 1 && yCoord == y - 1)
+        return true;
+      }
+    }
+    return false;
   }
 
   private void printGrid(State[][] stateOfCells) {
@@ -164,7 +185,7 @@ public class GridManager {
 
   public void judgeStateOfEachCell(Rules rules) {
     List<int[][]> numberOfNeighborsForEachType = getNumberOfNeighborsForEachType(
-        rules.getPossibleTypes());
+        rules.getPossibleTypes(), numberOfSides);
     List<int[][]> nextStates = nextStatesOfCells(numberOfNeighborsForEachType);
 
     for (int x = 0; x < row; x++) {
@@ -199,7 +220,7 @@ public class GridManager {
   private List<int[][]> nextStatesOfCells(List<int[][]> numberOfNeighborsForEachType) {
     List<int[][]> nextStatesForEachType = new ArrayList<>();
     for (int[][] types : numberOfNeighborsForEachType) {
-      nextStatesForEachType.add(numberOfAliveNeighbors(stateOfCells, ""));
+      nextStatesForEachType.add(numberOfAliveNeighbors(stateOfCells, "", numberOfSides));
     }
     return nextStatesForEachType;
   }

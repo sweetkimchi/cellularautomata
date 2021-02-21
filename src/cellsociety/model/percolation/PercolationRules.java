@@ -66,27 +66,8 @@ public class PercolationRules extends Rules {
   @Override
   public void decideState(List<Integer> neighborsOfEachTypeAtCoordinate, List<int[][]> nextStates,
       int x, int y, GridManager gridManager) {
-    if (gridManager.getTypeAtCoordinate(x, y).equals(WATER)) {
-      if (x - 1 >= 0 && y >= 0 && gridManager.getTypeAtCoordinate(x - 1, y).equals(EMPTY)) {
-        nextStates.get(1)[x - 1][y] = 1;
-      }
-      if (x >= 0 && y - 1 >= 0 && gridManager.getTypeAtCoordinate(x, y - 1).equals(EMPTY)) {
-
-        nextStates.get(1)[x][y - 1] = 1;
-
-      }
-      if (x + 1 < gridManager.getRow() && y >= 0 && gridManager.getTypeAtCoordinate(x + 1, y)
-          .equals(EMPTY)) {
-
-        nextStates.get(1)[x + 1][y] = 1;
-
-      }
-      if (x >= 0 && y + 1 < gridManager.getColumn() && gridManager.getTypeAtCoordinate(x, y + 1)
-          .equals(EMPTY)) {
-
-        nextStates.get(1)[x][y + 1] = 1;
-
-      }
+    if (gridManager.getTypeAtCoordinate(x, y).equals(EMPTY) && neighborsOfEachTypeAtCoordinate.get(1) > 0) {
+      nextStates.get(1)[x][y] = 1;
     }
   }
 
