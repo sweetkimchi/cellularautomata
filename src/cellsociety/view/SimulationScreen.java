@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 /**
@@ -54,7 +55,17 @@ public class SimulationScreen {
     simulationEngine = engine;
     sceneNodes = new Group();
     resources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + language);
-    initialize();
+    initializeStartScreen();
+    //initialize();
+  }
+
+  private void initializeStartScreen() {
+    StartScreen startScreen = new StartScreen();
+    Button beginButton = makeButton("BeginCommand",event -> initialize());
+    startScreen.addTitle(resources.getString("SimulationTitle"));
+    startScreen.addButton(beginButton);
+
+    displayScreen(startScreen.getPane());
   }
 
   private void initialize() {
@@ -65,6 +76,10 @@ public class SimulationScreen {
     root.setCenter(gridGraphics.getNode());
     root.setLeft(sidePanel.getNode());
 
+    displayScreen(root);
+  }
+
+  private void displayScreen(Pane root) {
     stage.setTitle(resources.getString("SimulationTitle"));
     scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
     scene.getStylesheets()
@@ -72,7 +87,6 @@ public class SimulationScreen {
 
     stage.setScene(scene);
     stage.show();
-
   }
 
   private void addSidePanelControls() {

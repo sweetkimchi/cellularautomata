@@ -5,6 +5,11 @@
   -fx-background: rgb(204, 204, 255);
 }
 
+#title {
+  -fx-font-size: 32pt;
+  -fx-font-family: "Courier New";
+}
+
 #side-panel {
   -fx-background-color: rgb(224, 176, 255);
 }
