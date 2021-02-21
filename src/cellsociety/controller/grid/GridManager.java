@@ -3,7 +3,9 @@ package cellsociety.controller.grid;
 import cellsociety.model.cell.State;
 import cellsociety.model.rules.Rules;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -22,6 +24,7 @@ public class GridManager {
   private final String ALIVE = "alive";
   private State[][] stateOfCells;
   private int numberOfSides = 6;
+  private Map<String,Integer> summary;
 
   /**
    * Basic constructor
@@ -33,6 +36,7 @@ public class GridManager {
     this.row = row;
     this.col = col;
     grid = new ArrayList<>();
+    summary = new HashMap<>();
 
   }
 
@@ -106,6 +110,10 @@ public class GridManager {
     }
     this.stateOfCells = stateOfCells;
     return stateOfCells;
+  }
+
+  public Map<String,Integer> getSummaryOfTypes(){
+    return summary;
   }
 
   /**
@@ -272,9 +280,14 @@ public class GridManager {
 
   private void updateStatesForAllCells(List<int[][]> nextStates,
       ArrayList<String> possibleTypes, ArrayList<String> possibleColors) {
+    summary = new HashMap<>();
+    for(String types: possibleTypes){
+      summary.put(types, 0);
+    }
     for (int index = 0; index < nextStates.size(); index++) {
       for (int r = 0; r < row; r++) {
         for (int c = 0; c < col; c++) {
+          summary.put(stateOfCells[r][c].getType(), summary.get(stateOfCells[r][c].getType()) + 1);
           if (nextStates.get(index)[r][c] == 1) {
             stateOfCells[r][c] = new State(r, c, possibleTypes.get(index),
                 possibleColors.get(index), 0);
@@ -321,3 +334,4 @@ public class GridManager {
     return this.stateOfCells[x][y].getColor();
   }
 }
+
