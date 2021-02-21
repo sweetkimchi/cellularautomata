@@ -232,10 +232,10 @@ public class Decoder {
     seed = Integer.parseInt(attributes.getOrDefault(SEED, "100"));
     emptyRatio = Float.parseFloat(attributes.getOrDefault(EMPTY_RATIO, "0"));
     threshold = Integer.parseInt(attributes.getOrDefault(THRESHOLD, "3"));
-    emptyColor = attributes.get(EMPTY_COLOR).equals("") ? "black" : attributes.get(EMPTY_COLOR);
-    paperColor = attributes.get("papercolor").equals("") ? "blue" : attributes.get("papercolor");
-    rockColor = attributes.get("rockcolor").equals("") ? "red" : attributes.get("rockcolor");
-    scissorsColor = attributes.get("scissorscolor").equals("") ? "lightgrey" : attributes.get("scissorscolor");
+//    emptyColor = attributes.get(EMPTY_COLOR).equals("") ? "black" : attributes.get(EMPTY_COLOR);
+//    paperColor = attributes.get("papercolor").equals("") ? "blue" : attributes.get("papercolor");
+//    rockColor = attributes.get("rockcolor").equals("") ? "red" : attributes.get("rockcolor");
+//    scissorsColor = attributes.get("scissorscolor").equals("") ? "lightgrey" : attributes.get("scissorscolor");
   }
   private void initializeForagingAnts(Map<String, String> attributes){
     coordinates = new ArrayList<>(Arrays.asList(attributes.getOrDefault(COORDINATES, GOLDefaultShape).split("[,]", 0)));
