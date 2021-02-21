@@ -2,6 +2,7 @@ package cellsociety.controller.simulationengine;
 
 import cellsociety.controller.Decoder;
 import cellsociety.controller.grid.GridManager;
+import cellsociety.model.ForagingAntsRules;
 import cellsociety.model.RockPaperScissorsRules;
 import cellsociety.model.cell.State;
 import cellsociety.model.gameoflife.GameOfLifeRule;
@@ -35,7 +36,6 @@ public class SimulationEngine {
   private final SimulationScreen simulationScreen;
   private GridManager gridManager;
   private Rules rules;
-  private State[][] stateOfAllCells;
   private ArrayList<State> template;
   private Decoder decoder;
   private AnimationTimer animation;
@@ -93,9 +93,8 @@ public class SimulationEngine {
     if (game.equals("gameOfLife")) {
       rules = new GameOfLifeRule(decoder.getAliveColor(), decoder.getDeadColor());
       template = constructStartingStateForSimulation(decoder.getCoordinates());
-      stateOfAllCells = gridManager
-              .buildGridWithTemplate(template, rules.getStartingPositionCellType());
-      updateCellState();
+      gridManager
+              .buildGridWithTemplate(template, rules.getStartingPositionCellType(), rules.getPossibleTypes(), rules.getPossibleColors());
     }
     if (game.equals("percolation")) {
       rules = new PercolationRules(decoder.getSeed(), decoder.getBlockColor(), decoder.getWaterColor(), decoder.getEmptyColor());
@@ -130,6 +129,13 @@ public class SimulationEngine {
       stateOfAllCells = gridManager
               .buildGridWithRandomSeed(decoder.getEmptyRatio(), decoder.getScissorsRatio(),
                       decoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
+    }
+    if (game.equals("foragingants")) {
+      //   rules = new WaTorModelRules(emptyRatio, populationRatio, randomSeed, energyFish, reproduceBoundary, sharkEnergy);
+      rules = new ForagingAntsRules();
+      template = constructStartingStateForSimulation(decoder.getCoordinates());
+      gridManager
+          .buildGridWithTemplate(template, rules.getStartingPositionCellType(), rules.getPossibleTypes(), rules.getPossibleColors());
     }
     //need to be fixed for a better design
   }
