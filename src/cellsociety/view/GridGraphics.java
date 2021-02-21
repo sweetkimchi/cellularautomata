@@ -20,7 +20,7 @@ public class GridGraphics {
   private double gridSize;
 
   // square = 1, triangle = 2, hexagon = 3
-  private static final int GRID_SHAPE = 3;
+  private static final int GRID_SHAPE = 2;
 
   private static final double TRIANGLE_RATIO = Math.sqrt(3)/2;
   private static final double HEXAGON_OFFSET_CORRECTION = 0.5;
@@ -68,20 +68,20 @@ public class GridGraphics {
   private void updateStates() {
     if (currentStates==null || currentModel==null) return;
     reset();
-    for (int r = 0; r < currentStates.length; r++) {
-      for (int c = 0; c < currentStates[0].length; c++) {
+    for (int y = 0; y < currentStates.length; y++) {
+      for (int x = 0; x < currentStates[0].length; x++) {
         Node node;
         if (GRID_SHAPE == 1) {
-          node = makeSquare(r, c);
+          node = makeSquare(y, x);
         }
         else if (GRID_SHAPE == 2) {
-          node = makeTriangle(r, c);
+          node = makeTriangle(y, x);
         }
         else if (GRID_SHAPE == 3) {
-          node = makeHexagon(r, c);
+          node = makeHexagon(y, x);
         }
         else break;
-        node.getStyleClass().add(currentModel + "-" + currentStates[c][r].getType());
+        node.getStyleClass().add(currentModel + "-" + currentStates[x][y].getType());
         paneForGrid.getChildren().add(node);
 
       }

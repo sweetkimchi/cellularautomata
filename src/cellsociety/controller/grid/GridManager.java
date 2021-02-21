@@ -21,7 +21,7 @@ public class GridManager {
   private final String EMPTY = "empty";
   private final String ALIVE = "alive";
   private State[][] stateOfCells;
-  private int numberOfSides = 6;
+  private int numberOfSides = 3;
 
   /**
    * Basic constructor
@@ -161,16 +161,52 @@ public class GridManager {
       if(numberOfSides == 8){
         return true;
       }
-      if(numberOfSides == 6 && yCoord % 2 != 0 && !(xCoord == x - 1 && yCoord == y + 1) && !(xCoord == x - 1 && yCoord == y + 1) ){
-        //
+      if(numberOfSides == 6 && isHexagonalNeighborForOddYCoord(x, y, xCoord, yCoord)){
+        // && !(xCoord == x - 1 && yCoord == y + 1)
         return true;
       }
-      if(numberOfSides == 6 && yCoord % 2 == 0){
-        //&& !(xCoord == x - 1 && yCoord == y + 1) && !(xCoord == x - 1 && yCoord == y - 1)
+      if(numberOfSides == 6 && isHexagonalNeighborForEvenYCoord(x, y, xCoord, yCoord)) {
+        //&& !(xCoord == x + 1 && yCoord == y - 1) && !(xCoord == x + 1 && yCoord == y + 1)
         return true;
       }
+      if(numberOfSides == 4 && isOneOfTheNWSEDirection(x, y, xCoord, yCoord)){
+        return true;
+      }
+      if(numberOfSides == 3 && !isFacingUp(xCoord, yCoord) && isLeftRightUpNeighbors(x, y,
+          xCoord, yCoord, yCoord - 1)){
+        return true;
+      }
+      if(numberOfSides == 3 && isFacingUp(xCoord, yCoord) && isLeftRightUpNeighbors(x, y,
+          xCoord, yCoord, yCoord + 1)){
+        return true;
+      }
+
     }
     return false;
+  }
+
+  private boolean isFacingUp(int xCoord, int yCoord){
+    return (xCoord % 2 == 0 && yCoord % 2 == 0) || (yCoord % 2 != 0 && xCoord % 2 != 0);
+  }
+
+  private boolean isLeftRightUpNeighbors(int x, int y, int xCoord, int yCoord, int i) {
+    return (x == xCoord - 1 && y == yCoord) || (x == xCoord + 1 && y == yCoord) || (x == xCoord
+        && y == i);
+  }
+
+  private boolean isOneOfTheNWSEDirection(int x, int y, int xCoord, int yCoord) {
+    return !(x == xCoord - 1 && y == yCoord - 1) && !(x == xCoord - 1 && y == yCoord + 1) && !(
+        x == xCoord + 1 && y == yCoord - 1) && !(x == xCoord + 1 && y == yCoord + 1);
+  }
+
+  private boolean isHexagonalNeighborForOddYCoord(int x, int y, int xCoord, int yCoord) {
+    return yCoord % 2 != 0 && !(x == xCoord - 1 && y == yCoord - 1) && !(x == xCoord - 1
+        && y == yCoord + 1);
+  }
+
+  private boolean isHexagonalNeighborForEvenYCoord(int x, int y, int xCoord, int yCoord) {
+    return yCoord % 2 == 0 && !(x == xCoord + 1 && y == yCoord + 1) && !(x == xCoord + 1
+        && y == yCoord - 1);
   }
 
   private void printGrid(State[][] stateOfCells) {
