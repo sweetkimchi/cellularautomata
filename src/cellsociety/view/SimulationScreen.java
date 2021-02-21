@@ -1,5 +1,6 @@
 package cellsociety.view;
 
+import cellsociety.controller.grid.GridManager;
 import cellsociety.controller.simulationengine.SimulationEngine;
 import cellsociety.model.cell.State;
 import java.util.ResourceBundle;
@@ -184,11 +185,11 @@ public class SimulationScreen {
    * Updates the screen by calling on the grid to update. Also updates the simulation speed with the
    * current value on the slider.
    *
-   * @param states 2-D array of states for updating the grid
+   * @param gridManager to get states for updating the grid
    * @param model  String for model name
    */
-  public void update(State[][] states, String model) {
-    gridGraphics.update(states, model);
+  public void update(GridManager gridManager, String model) {
+    gridGraphics.update(gridManager, model);
     simulationEngine.setSimulationSpeed((int) slider.getValue());
     checkWindowSizeChanged();
   }
