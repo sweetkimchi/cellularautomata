@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<data game="game">
+  <author>Jiyun</author>
+  <description></description>
+  <numCols>50</numCols>
+  <numRows>50</numRows>
+  <rockratio>0.3</rockratio>
+  <scissorsratio>0.3</scissorsratio>
+  <randomseed>13</randomseed>
+  <threshhold>3</threshhold>
+  <emptyratio>0</emptyratio>
+  <title>Rock, Paper, Scissors</title>
+  <model>rockpaperscissors</model>
+</data>

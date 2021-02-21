@@ -11,7 +11,7 @@ public class RockPaperScissorsRules extends Rules {
   private final String ROCK_COLOR = "red";
   private final String PAPER_COLOR = "blue";
   private final String SCISSORS_COLOR = "lightgrey";
-  private final String EMPTY_COLOR = "black";
+  private final String EMPTY_COLOR = "green";
   private ArrayList<String> possibleTypes;
   private ArrayList<String> possibleColors;
   private String ROCK = "rock";

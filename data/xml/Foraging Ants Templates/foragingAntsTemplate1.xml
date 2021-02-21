@@ -7,7 +7,7 @@
     <shapeCoords>10,10,20,30,35,30</shapeCoords>
     <numberofants>50</numberofants>
     <radius>2</radius>
-    <string1></string1>
+    <emptycolor>black</emptycolor>
     <string2></string2>
     <template>generic</template>
     <title>Foraging Ants</title>
