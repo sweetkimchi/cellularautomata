@@ -21,7 +21,7 @@ public class GridManager {
   private final int row;
   private final int col;
   private State[][] stateOfCells;
-  private int numberOfSides = 4;
+  private int numberOfSides = 6;
   private Map<String,Integer> summary;
   private ArrayList<String> coordinates;
 
