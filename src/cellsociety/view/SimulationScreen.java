@@ -144,9 +144,10 @@ public class SimulationScreen {
     Button stepButton = makeButton("StepCommand", event -> stepSimulation());
     Button resetButton = makeButton("ResetCommand", event -> resetSimulation());
     Button loadNewButton = makeButton("LoadNewCommand", event -> loadNewFile());
+    //Button saveButton = makeButton("SaveCommand", event -> simulationEngine.saveSimulation());
 
     sidePanel.addNodesToPane(startButton, stopButton, stepButton, resetButton, loadNewButton);
-
+    //sidePanel.addNodesToPane(saveButton);
     addSpeedSlider();
 
   }
