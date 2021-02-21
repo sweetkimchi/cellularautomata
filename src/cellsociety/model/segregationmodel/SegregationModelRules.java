@@ -18,9 +18,9 @@ import java.util.Random;
  */
 public class SegregationModelRules extends Rules {
 
-  private final String AGENTX_COLOR = "red";
-  private final String AGENTY_COLOR = "blue";
-  private final String EMPTY_COLOR = "lightgrey";
+  private final String AGENTX_COLOR;
+  private final String AGENTY_COLOR;
+  private final String EMPTY_COLOR;
   private ArrayList<String> possibleTypes;
   private ArrayList<String> possibleColors;
   private String AGENTX = "agentx";
@@ -33,10 +33,13 @@ public class SegregationModelRules extends Rules {
   /**
    * Default constructor
    */
-  public SegregationModelRules(long randomSeed, double THRESHHOLD) {
+  public SegregationModelRules(long randomSeed, double THRESHHOLD, String colorX, String colorY, String emptyColor) {
     random = new Random(randomSeed);
     initializeColorsAndTypes();
     this.THRESHHOLD = THRESHHOLD;
+    this.AGENTX_COLOR = colorX;
+    this.AGENTY_COLOR = colorY;
+    this.EMPTY_COLOR = emptyColor;
   }
 
   private void initializeColorsAndTypes() {
@@ -45,6 +48,7 @@ public class SegregationModelRules extends Rules {
     possibleTypes.add(EMPTY);
     possibleTypes.add(AGENTY);
     possibleTypes.add(AGENTX);
+
     possibleColors.add(EMPTY_COLOR);
     possibleColors.add(AGENTY_COLOR);
     possibleColors.add(AGENTX_COLOR);

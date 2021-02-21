@@ -25,7 +25,7 @@ public class RockPaperScissorsRules extends Rules {
     initializeColorsAndTypes();
   }
 
-  public RockPaperScissorsRules(int threshold, long randomSeed) {
+  public RockPaperScissorsRules(int threshold, long randomSeed, String rockColor, String paperColor, String scissorsColor, String emptyColor) {
     THRESHHOLD = threshold;
     System.out.println(THRESHHOLD);
     random = new Random(randomSeed);
