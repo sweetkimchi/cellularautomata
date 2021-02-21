@@ -1,5 +1,6 @@
 package cellsociety.view;
 
+import cellsociety.controller.grid.GridManager;
 import cellsociety.controller.simulationengine.SimulationEngine;
 import cellsociety.model.cell.State;
 import java.util.ResourceBundle;
@@ -8,9 +9,11 @@ import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 /**
@@ -24,7 +27,9 @@ public class SimulationScreen {
   public static final String DEFAULT_RESOURCE_PACKAGE = "cellsociety.view.resources.";
   public static final String DEFAULT_RESOURCE_FOLDER =
       "/" + DEFAULT_RESOURCE_PACKAGE.replace(".", "/");
-  public static final String STYLESHEET = "default.css";
+  public static final String DEFAULT_STYLESHEET = "default.css";
+  public static final String LIGHT_STYLESHEET = "light.css";
+  public static final String DARK_STYLESHEET = "dark.css";
   public static final double WINDOW_WIDTH = 800;
   public static final double WINDOW_HEIGHT = 600;
   private static final String language = "English";
@@ -35,8 +40,9 @@ public class SimulationScreen {
   private final Stage stage;
   private final ResourceBundle resources;
   private final SimulationEngine simulationEngine;
-  public SidePanel sidePanel;
-  public GridGraphics gridGraphics;
+  private SidePanel sidePanel;
+  private GridGraphics gridGraphics;
+  private TopPanel topPanel;
   private double prevWindowWidth = 0;
   private double prevWindowHeight = 0;
   private Slider slider;
@@ -54,25 +60,61 @@ public class SimulationScreen {
     simulationEngine = engine;
     sceneNodes = new Group();
     resources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + language);
-    initialize();
+    initializeStartScreen();
+    //initialize();
+  }
+
+  private void initializeStartScreen() {
+    StartScreen startScreen = new StartScreen();
+    Button beginButton = makeButton("BeginCommand",event -> initialize());
+    startScreen.addTitle(resources.getString("SimulationTitle"));
+    startScreen.addButton(beginButton);
+
+    displayScreen(startScreen.getPane());
   }
 
   private void initialize() {
     BorderPane root = new BorderPane();
     gridGraphics = new GridGraphics();
     sidePanel = new SidePanel();
+    topPanel = new TopPanel();
     addSidePanelControls();
+    addTopPanelControls();
     root.setCenter(gridGraphics.getNode());
     root.setLeft(sidePanel.getNode());
+    root.setTop(topPanel.getNode());
 
+    stage.close();
+    displayScreen(root);
+  }
+
+  private void addTopPanelControls() {
+    ComboBox<String> comboBox = new ComboBox<>();
+    comboBox.getItems().addAll(
+        "default",
+        "light",
+        "dark"
+    );
+    comboBox.setValue(comboBox.getItems().get(0));
+    comboBox.setOnAction(event -> {
+      setStylesheet(comboBox.getValue() + ".css");
+    });
+    topPanel.add(comboBox);
+  }
+
+  private void setStylesheet(String stylesheet) {
+    scene.getStylesheets().clear();
+    scene.getStylesheets()
+        .add(getClass().getResource(DEFAULT_RESOURCE_FOLDER + stylesheet).toExternalForm());
+  }
+
+  private void displayScreen(Pane root) {
     stage.setTitle(resources.getString("SimulationTitle"));
     scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
-    scene.getStylesheets()
-        .add(getClass().getResource(DEFAULT_RESOURCE_FOLDER + STYLESHEET).toExternalForm());
+    setStylesheet(DEFAULT_STYLESHEET);
 
     stage.setScene(scene);
     stage.show();
-
   }
 
   private void addSidePanelControls() {
@@ -143,11 +185,11 @@ public class SimulationScreen {
    * Updates the screen by calling on the grid to update. Also updates the simulation speed with the
    * current value on the slider.
    *
-   * @param states 2-D array of states for updating the grid
+   * @param gridManager to get states for updating the grid
    * @param model  String for model name
    */
-  public void update(State[][] states, String model) {
-    gridGraphics.update(states, model);
+  public void update(GridManager gridManager, String model) {
+    gridGraphics.update(gridManager, model);
     simulationEngine.setSimulationSpeed((int) slider.getValue());
     checkWindowSizeChanged();
   }

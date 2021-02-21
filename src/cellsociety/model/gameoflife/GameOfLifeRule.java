@@ -48,20 +48,6 @@ public class GameOfLifeRule extends Rules {
     possibleTypes.add(EMPTY);
     possibleTypes.add(ALIVE);
   }
-
-  protected String determineWhetherAliveOrDead(int numberOfNeighbor, String type) {
-    if (type.equals(ALIVE)) {
-      if (numberOfNeighbor < lowerSurvivalBoundary) {
-        return EMPTY;
-      } else if (numberOfNeighbor <= upperSurvivalBoundary) {
-        return ALIVE;
-      }
-    } else if (numberOfNeighbor == 3) {
-      return ALIVE;
-    }
-    return EMPTY;
-  }
-
   /**
    * specifies the starting states of the cells according to the simulation rule
    *
@@ -94,13 +80,13 @@ public class GameOfLifeRule extends Rules {
   @Override
   public void decideState(List<Integer> neighborsOfEachTypeAtCoordinate, List<int[][]> nextStates,
       int x, int y, GridManager gridManager) {
-    gridManager.getStateAtCoordinate(x, y)
-        .setType(determineWhetherAliveOrDead(neighborsOfEachTypeAtCoordinate.get(1),
-            gridManager.getTypeAtCoordinate(x, y)));
-    if (gridManager.getTypeAtCoordinate(x, y).equals(ALIVE)) {
-      gridManager.getStateAtCoordinate(x, y).setColor(ALIVE_COLOR);
-    } else {
-      gridManager.getStateAtCoordinate(x, y).setColor(DEAD_COLOR);
+    if (gridManager.getTypeAtCoordinate(x, y).equals(EMPTY) && neighborsOfEachTypeAtCoordinate.get(1) == 3) {
+      nextStates.get(1)[x][y] = 1;
+    }
+    if (gridManager.getTypeAtCoordinate(x, y).equals(ALIVE)
+        && neighborsOfEachTypeAtCoordinate.get(1) < lowerSurvivalBoundary
+        || neighborsOfEachTypeAtCoordinate.get(1) > upperSurvivalBoundary){
+      nextStates.get(0)[x][y] = 1;
     }
   }
 }
