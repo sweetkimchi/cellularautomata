@@ -10,6 +10,8 @@ import cellsociety.model.percolation.PercolationRules;
 import cellsociety.model.rules.Rules;
 import cellsociety.model.spreadingoffire.SpreadingOfFireRules;
 import cellsociety.model.segregationmodel.SegregationModelRules;
+import cellsociety.model.sugarscape.NavigatingSugarScapeRules;
+import cellsociety.model.sugarscape.SugarScapeGridManager;
 import cellsociety.model.watormodel.WaTorModelRules;
 import cellsociety.view.SimulationScreen;
 
@@ -135,6 +137,25 @@ public class SimulationEngine {
       rules = new ForagingAntsRules(decoder.getNumberOfAnts());
       gridManager
           .buildAntGridWithTemplate(decoder.getCoordinates(), rules.getPossibleTypes(), rules.getPossibleColors(), decoder.getRadius());
+    }
+    if (game.equals("navigatingsugarscape")) {
+      //   rules = new WaTorModelRules(emptyRatio, populationRatio, randomSeed, energyFish, reproduceBoundary, sharkEnergy);
+      int numberOfAgents = 30;
+      int maximumSugar = 5;
+      int growBacksugar = 1;
+      int sugarMetabolism = 2;
+      int vision = 2;
+
+      int randomSeed = 10;
+      double emptyRatio = 0;
+      double patchRatio = 0.7;
+
+      SugarScapeGridManager sugarScapeGridManager = new SugarScapeGridManager(decoder.getRows(), decoder.getCols());
+
+      rules = new NavigatingSugarScapeRules(numberOfAgents, maximumSugar, growBacksugar, sugarMetabolism, vision);
+      sugarScapeGridManager
+          .makeSugarScapeGridWithRandomSeed(emptyRatio, patchRatio,
+              randomSeed, rules.getPossibleTypes(), rules.getPossibleColors());
     }
     //need to be fixed for a better design
   }
