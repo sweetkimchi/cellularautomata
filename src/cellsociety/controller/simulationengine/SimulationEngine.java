@@ -123,11 +123,9 @@ public class SimulationEngine {
     }
     if (game.equals("rockpaperscissors")) {
       //   rules = new WaTorModelRules(emptyRatio, populationRatio, randomSeed, energyFish, reproduceBoundary, sharkEnergy);
-      int threshold = 3;
-      long randomSeed = 10;
-      rules = new RockPaperScissorsRules(threshold, randomSeed);
+      rules = new RockPaperScissorsRules(decoder.getThreshold(), decoder.getSeed());
       stateOfAllCells = gridManager
-              .buildGridWithRandomSeed(decoder.getEmptyRatio(), decoder.getFishSharkRatio(),
+              .buildGridWithRandomSeed(decoder.getEmptyRatio(), decoder.getScissorsRatio(),
                       decoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
     }
     //need to be fixed for a better design
