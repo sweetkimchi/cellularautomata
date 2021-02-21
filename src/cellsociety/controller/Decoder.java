@@ -49,6 +49,18 @@ public class Decoder {
   public static final String SHAPE = "shape";
   public static final String SIDES = "numberofsides";
   public static final String COLOR = "color";
+  //             Sample Text Names               //
+  public static final String RATIO1 = "ratio1";
+  public static final String RATIO2 = "ratio2";
+  public static final String RATIO3 = "ratio3";
+  public static final String RATIO4 = "ratio4";
+  public static final String INTEGER1 = "integer1";
+  public static final String INTEGER2 = "integer2";
+  public static final String INTEGER3 = "integer3";
+  public static final String INTEGER4 = "integer4";
+  public static final String STRING1 = "string1";
+  public static final String STRING2 = "string2";
+
   private String shape;
   private String color;
   private int numberOfSides;
@@ -70,6 +82,17 @@ public class Decoder {
   private float rockRatio;
   private float scissorsRatio;
   private int threshold;
+  // Sample Ratios, Strings, and Integers //
+  private float ratio1;
+  private float ratio2;
+  private float ratio3;
+  private float ratio4;
+  private int integer1;
+  private int integer2;
+  private int integer3;
+  private int integer4;
+  private String string1;
+  private String string2;
   private String description;
   private String model;
   private String title;
