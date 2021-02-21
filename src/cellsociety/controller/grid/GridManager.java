@@ -40,10 +40,9 @@ public class GridManager {
    * Builds the initial stage with specific coordinates that are supplied to the GridManager
    *
    * @param template coordinates of starting states
-   * @param type     type of player occupying the starting states
-   * @return updated grid that contains the starting states of the model
    */
-  public State[][] buildGridWithTemplate(ArrayList<State> template, String type, ArrayList<String> possibleTypes, ArrayList<String> possibleColors) {
+  public void buildGridWithTemplate(ArrayList<State> template,
+      ArrayList<String> possibleTypes, ArrayList<String> possibleColors, int diameter) {
     State[][] stateOfCells = new State[row][col];
     for (int r = 0; r < row; r++) {
       for (int c = 0; c < col; c++) {
@@ -69,7 +68,6 @@ public class GridManager {
       stateOfCells[s.getxCoord()][s.getyCoord()] = new State(s.getxCoord(), s.getyCoord(), possibleTypes.get(1), possibleColors.get(1), 0);
     }
     this.stateOfCells = stateOfCells;
-    return stateOfCells;
   }
 
   /**
@@ -80,9 +78,8 @@ public class GridManager {
    * @param seed            random seed to reproduce results
    * @param possibleTypes   names of all players of a model
    * @param possibleColors  colors of all types
-   * @return the starting states of all cells
    */
-  public State[][] buildGridWithRandomSeed(double emptyRatio, double populationRatio, int seed,
+  public void buildGridWithRandomSeed(double emptyRatio, double populationRatio, int seed,
       ArrayList<String> possibleTypes, ArrayList<String> possibleColors) {
     Random random = new Random(seed);
     State[][] stateOfCells = new State[row][col];
@@ -104,7 +101,6 @@ public class GridManager {
       }
     }
     this.stateOfCells = stateOfCells;
-    return stateOfCells;
   }
 
   public Map<String,Integer> getSummaryOfTypes(){
@@ -327,6 +323,34 @@ public class GridManager {
 
   public String getColorAtCoordinate(int x, int y) {
     return this.stateOfCells[x][y].getColor();
+  }
+
+  public void buildAntGridWithTemplate(ArrayList<String> coordinates, ArrayList<String> possibleTypes, ArrayList<String> possibleColors, int radius) {
+    State[][] stateOfCells = new State[row][col];
+
+    for (int r = 0; r < row; r++) {
+      for (int c = 0; c < col; c++) {
+        State state = new State(r, c, possibleTypes.get(possibleTypes.size()-1), possibleColors.get(possibleTypes.size()-1), 0);
+        stateOfCells[r][c] = state;
+      }
+    }
+
+   //build nest
+      for(int x = Integer.parseInt(coordinates.get(0)) - radius; x < Integer.parseInt(coordinates.get(0)) + radius; x++){
+        for(int y = Integer.parseInt(coordinates.get(1)) - radius; y < Integer.parseInt(coordinates.get(1)) + radius; y++){
+          stateOfCells[x][y] = new State(x,y,possibleTypes.get(0), possibleColors.get(0),0);
+        }
+      }
+
+    for(int index = 2; index < coordinates.size(); index+=2) {
+      for(int x = Integer.parseInt(coordinates.get(index)) - radius; x < Integer.parseInt(coordinates.get(index)) + radius; x++){
+        for(int y = Integer.parseInt(coordinates.get(index)) - radius; y < Integer.parseInt(coordinates.get(index)) + radius; y++){
+          stateOfCells[x][y] = new State(x,y,possibleTypes.get(1), possibleColors.get(1),5);
+        }
+      }
+    }
+
+    this.stateOfCells = stateOfCells;
   }
 }
 

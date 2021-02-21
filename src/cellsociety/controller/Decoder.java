@@ -65,6 +65,7 @@ public class Decoder {
   public static final String STRING1 = "string1";
   public static final String STRING2 = "string2";
 
+  private int radius;
   private String shape;
   private String color;
   private int numberOfSides;
@@ -117,6 +118,7 @@ public class Decoder {
   private String author;
   private int numRows;
   private int numColumns;
+  private int numberOfAnts;
 
   private static FileChooser makeChooser(String extension) {
     FileChooser result = new FileChooser();
@@ -251,10 +253,10 @@ public class Decoder {
     scissorsColor = attributes.get("scissorscolor").equals("") ? "lightgrey" : attributes.get("scissorscolor");
   }
   private void initializeForagingAnts(Map<String, String> attributes){
-    //ratio1 = Float.parseFloat(attributes.getOrDefault("ratio1", "defaultratio1");
+    coordinates = new ArrayList<>(Arrays.asList(attributes.getOrDefault(COORDINATES, GOLDefaultShape).split("[,]", 0)));
     //ratio2 = Float.parseFloat(attributes.getOrDefault("ratio2", "defaultratio2);
-    //integer1 = Integer.parseInt(attributes.getOrDefault("integer1", "defaultinteger1");
-    //integer2 = Integer.parseInt(attributes.getOrDefault("integer2", :defaultinteger2");
+    radius = Integer.parseInt(attributes.getOrDefault("radius", "5"));
+    numberOfAnts = Integer.parseInt(attributes.getOrDefault("numberofants", "50"));
     //string1 = attributes.get("string1");
     //string2 = attributes.get("string2");
   }
@@ -309,8 +311,8 @@ public class Decoder {
   //public float getRatio2(){return ratio2;}
   //public float getRatio3(){return ratio3;}
   //public float getRatio4(){return ratio4;}
-  //public int getInteger1(){return integer1;}
-  //public int getInteger2(){return integer2;}
+  public int getRadius(){return radius;}
+  public int getNumberOfAnts(){return numberOfAnts;}
   //public int getInteger3(){return integer3;}
   //public int getInteger4(){return integer4;}
   //public int getString1(){return string1;}
