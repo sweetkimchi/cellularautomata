@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.*;
 
+import com.sun.source.tree.EmptyStatementTree;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.stage.FileChooser;
@@ -46,6 +47,9 @@ public class Decoder {
   public static final List<String> MODEL_TYPES = List.of("spreadingoffire", "segregationmodel", "percolation", "wator", "gameOfLife", "rockpaperscissors", "foragingants", "langton", "sugarscape");
   public static final String GOLDefaultShape = "25,25,25,26,25,27";
   public static final String FireDefaultShape = "21,20,20,21,21,21,22,21";
+  public static final String BLOCK_COLOR = "blockcolor";
+  public static final String EMPTY_COLOR = "emptycolor";
+  public static final String WATER_COLOR = "watercolor";
   public static final String SHAPE = "shape";
   public static final String SIDES = "numberofsides";
   public static final String COLOR = "color";
@@ -66,6 +70,20 @@ public class Decoder {
   private int numberOfSides;
   private ArrayList<String> coordinates;
   private String template;
+  private String blockColor;
+  private String emptyColor;
+  private String waterColor;
+  private String colorX;
+  private String colorY;
+  private String fireColor;
+  private String treeColor;
+  private String fishColor;
+  private String sharkColor;
+  private String rockColor;
+  private String paperColor;
+  private String scissorsColor;
+  private String aliveColor;
+  private String deadColor;
   private int seed;
   private int fishRate;
   private int sharkRate;
@@ -150,8 +168,9 @@ public class Decoder {
       case "sugarscape" -> initializeSugarScape(attributes);
     }
   }
-  private void saveConfig(Map<String, String> config) throws FileNotFoundException {
+  public void saveConfig(List<String> stateOfSimulation) throws FileNotFoundException {
     Map<String, String> savedConfig = new HashMap<>();
+
     FileChooser chooser = new FileChooser();
     chooser.setTitle("Choose Directory");
     chooser.getExtensionFilters().setAll(new FileChooser.ExtensionFilter("text file ", DATA_FILE_EXTENSION));
@@ -175,6 +194,8 @@ public class Decoder {
   private void initializeGOL(Map<String, String> attributes){
     coordinates = new ArrayList<>(Arrays.asList(attributes.getOrDefault(COORDINATES, GOLDefaultShape).split("[,]", 0)));
     template = attributes.get(TEMPLATE);
+    aliveColor = attributes.get("alivecolor").equals("") ? "black" : attributes.get("alivecolor");
+    deadColor = attributes.get("deadcolor").equals("") ? "lightgrey" : attributes.get("deadcolor");
   }
   private void initializeWaTor(Map<String, String> attributes){
     fishSharkRatio = Float.parseFloat(attributes.getOrDefault(FISH_SHARK_RATIO, "0.5"));
@@ -184,12 +205,18 @@ public class Decoder {
     sharkRate = Integer.parseInt(attributes.getOrDefault(SHARK_RATE, "5"));
     sharkLives = Integer.parseInt(attributes.getOrDefault(SHARK_LIVES, "3"));
     energy = Integer.parseInt(attributes.getOrDefault(ENERGY, "4"));
+    emptyColor = attributes.get(EMPTY_COLOR).equals("") ? "lightgrey" : attributes.get(EMPTY_COLOR);
+    fishColor = attributes.get("fishcolor").equals("") ? "green" : attributes.get("fishcolor");
+    sharkColor = attributes.get("sharkcolor").equals("") ? "blue" : attributes.get("sharkColor");
   }
   private void initializePercolation(Map<String, String> attributes){
     waterToEmptyRatio = Float.parseFloat(attributes.getOrDefault(WATER_EMPTY_RATIO, ".01"));
     blockRatio = Float.parseFloat(attributes.getOrDefault(BLOCK_RATIO, "0.5"));
     seed = Integer.parseInt(attributes.getOrDefault(SEED, "100"));
     template = attributes.getOrDefault(TEMPLATE, "random_one");
+    blockColor = attributes.get(BLOCK_COLOR).equals("") ? "black" : attributes.get(BLOCK_COLOR);
+    emptyColor = attributes.get(EMPTY_COLOR).equals("") ? "lightgrey" : attributes.get(EMPTY_COLOR);
+    waterColor = attributes.get(WATER_COLOR).equals("") ? "blue" : attributes.get(WATER_COLOR);
   }
   private void initializeSegregation(Map<String, String> attributes){
     populationRatio = Float.parseFloat(attributes.getOrDefault(POPULATION_RATIO, "0.5"));
@@ -197,6 +224,9 @@ public class Decoder {
     satisfactionThreshold = Float.parseFloat(attributes.getOrDefault(SATISFACTION_THRESHOLD, "0.6"));
     seed = Integer.parseInt(attributes.getOrDefault(SEED, "100"));
     template = attributes.getOrDefault(TEMPLATE, "random_one");
+    emptyColor = attributes.get(EMPTY_COLOR).equals("") ? "lightgrey" : attributes.get(EMPTY_COLOR);
+    colorX = attributes.get("agentxcolor").equals("") ? "red" : attributes.get("agentxcolor");
+    colorY = attributes.get("agentycolor").equals("") ? "blue" : attributes.get("agentycolor");
   }
   private void initializeFire(Map<String, String> attributes){
     coordinates = new ArrayList<>(Arrays.asList(attributes.getOrDefault(COORDINATES, FireDefaultShape).split("[,]", 0)));
@@ -205,6 +235,9 @@ public class Decoder {
     seed = Integer.parseInt(attributes.getOrDefault(SEED, "100"));
     emptyRatio = Float.parseFloat(attributes.getOrDefault(EMPTY_RATIO, "0.1"));
     treeRatio = Float.parseFloat(attributes.getOrDefault(TREE_RATIO, "0.8"));
+    emptyColor = attributes.get(EMPTY_COLOR).equals("") ? "yellow" : attributes.get(EMPTY_COLOR);
+    treeColor = attributes.get("treecolor").equals("") ? "green" : attributes.get("treecolor");
+    fireColor = attributes.get("firecolor").equals("") ? "red" : attributes.get("firecolor");
   }
   private void initializeRPS(Map<String, String> attributes){
     rockRatio = Float.parseFloat(attributes.getOrDefault(ROCK_RATIO, "0.33"));
@@ -212,6 +245,10 @@ public class Decoder {
     seed = Integer.parseInt(attributes.getOrDefault(SEED, "100"));
     emptyRatio = Float.parseFloat(attributes.getOrDefault(EMPTY_RATIO, "0"));
     threshold = Integer.parseInt(attributes.getOrDefault(THRESHOLD, "3"));
+    emptyColor = attributes.get(EMPTY_COLOR).equals("") ? "black" : attributes.get(EMPTY_COLOR);
+    paperColor = attributes.get("papercolor").equals("") ? "blue" : attributes.get("papercolor");
+    rockColor = attributes.get("rockcolor").equals("") ? "red" : attributes.get("rockcolor");
+    scissorsColor = attributes.get("scissorscolor").equals("") ? "lightgrey" : attributes.get("scissorscolor");
   }
   private void initializeForagingAnts(Map<String, String> attributes){
     //ratio1 = Float.parseFloat(attributes.getOrDefault("ratio1", "defaultratio1");
@@ -253,6 +290,20 @@ public class Decoder {
   public float getRockRatio(){return rockRatio;}
   public float getScissorsRatio(){return scissorsRatio;}
   public int getThreshold(){return threshold;}
+  public String getBlockColor(){return blockColor;}
+  public String getEmptyColor(){return emptyColor;}
+  public String getWaterColor(){return waterColor;}
+  public String getColorX(){return colorX;}
+  public String getColorY(){return colorY;}
+  public String getFireColor(){return fireColor;}
+  public String getTreeColor(){return treeColor;}
+  public String getFishColor(){return fishColor;}
+  public String getSharkColor(){return sharkColor;}
+  public String getRockColor(){return rockColor;}
+  public String getScissorsColor(){return scissorsColor;}
+  public String getPaperColor(){return paperColor;}
+  public String getAliveColor(){return aliveColor;}
+  public String getDeadColor(){return deadColor;}
   //            generic getters           //
   //public float getRatio1(){return ratio1;}
   //public float getRatio2(){return ratio2;}

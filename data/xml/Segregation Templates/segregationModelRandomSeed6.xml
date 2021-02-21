@@ -8,6 +8,9 @@
   <emptyratio>0.1</emptyratio>
   <satisfactionthreshhold>0.5</satisfactionthreshhold>
   <randomseed>100</randomseed>
+  <emptycolor></emptycolor>
+  <agentxcolor></agentxcolor>
+  <agentycolor></agentycolor>x
   <template>random_one</template>
   <title>Segregation Model</title>
   <model>segregationmodel</model>
