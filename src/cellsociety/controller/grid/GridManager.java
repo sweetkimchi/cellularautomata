@@ -41,9 +41,8 @@ public class GridManager {
    *
    * @param template coordinates of starting states
    * @param type     type of player occupying the starting states
-   * @return updated grid that contains the starting states of the model
    */
-  public State[][] buildGridWithTemplate(ArrayList<State> template, String type, ArrayList<String> possibleTypes, ArrayList<String> possibleColors) {
+  public void buildGridWithTemplate(ArrayList<State> template, String type, ArrayList<String> possibleTypes, ArrayList<String> possibleColors) {
     State[][] stateOfCells = new State[row][col];
     for (int r = 0; r < row; r++) {
       for (int c = 0; c < col; c++) {
@@ -69,7 +68,6 @@ public class GridManager {
       stateOfCells[s.getxCoord()][s.getyCoord()] = new State(s.getxCoord(), s.getyCoord(), possibleTypes.get(1), possibleColors.get(1), 0);
     }
     this.stateOfCells = stateOfCells;
-    return stateOfCells;
   }
 
   /**
@@ -80,9 +78,8 @@ public class GridManager {
    * @param seed            random seed to reproduce results
    * @param possibleTypes   names of all players of a model
    * @param possibleColors  colors of all types
-   * @return the starting states of all cells
    */
-  public State[][] buildGridWithRandomSeed(double emptyRatio, double populationRatio, int seed,
+  public void buildGridWithRandomSeed(double emptyRatio, double populationRatio, int seed,
       ArrayList<String> possibleTypes, ArrayList<String> possibleColors) {
     Random random = new Random(seed);
     State[][] stateOfCells = new State[row][col];
@@ -104,7 +101,6 @@ public class GridManager {
       }
     }
     this.stateOfCells = stateOfCells;
-    return stateOfCells;
   }
 
   public Map<String,Integer> getSummaryOfTypes(){
