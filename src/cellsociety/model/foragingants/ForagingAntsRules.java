@@ -25,7 +25,7 @@ public class ForagingAntsRules extends Rules {
   private int numberOfAnts;
   private final Random random;
   private int numberOfSides;
-  private int phermoneAmount = 50;
+  private int phermoneAmount = 30;
   private double moveBias = 0.95;
   
   public ForagingAntsRules(int numberOfAnts, int randomSeed, int numberOfSides){
