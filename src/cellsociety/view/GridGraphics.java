@@ -17,13 +17,13 @@ import javafx.scene.shape.Shape;
  */
 public class GridGraphics {
 
-  private static final double GRID_BUFFER = 15;
+  private static final double GRID_BUFFER = 20;
   private static final double NUM_BUFFERS = 4;
   private static final double GRID_GAP_SIZE = 0.5;
   private double gridSize;
 
   // square = 1, triangle = 2, hexagon = 3
-  private static final int GRID_SHAPE = 3;
+  private static final int GRID_SHAPE = 1;
 
   private static final double TRIANGLE_RATIO = Math.sqrt(3)/2;
   private static final double HEXAGON_OFFSET_CORRECTION = 0.5;
