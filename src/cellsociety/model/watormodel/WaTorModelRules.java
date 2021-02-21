@@ -48,9 +48,9 @@ public class WaTorModelRules extends Rules {
     ENERGY_FROM_FISH = energyFish;
     REPRODUCE_BOUNDARY = reproduceBoundary;
     DEFAULT_ENERGY = sharkEnergy;
-    EMPTY_COLOR = emptyColor;
-    FISH_COLOR = fishColor;
-    SHARK_COLOR = sharkColor;
+    this.EMPTY_COLOR = emptyColor;
+    this.FISH_COLOR = fishColor;
+    this.SHARK_COLOR = sharkColor;
     possibleTypes.add(EMPTY);
     possibleTypes.add(SHARK);
     possibleTypes.add(FISH);

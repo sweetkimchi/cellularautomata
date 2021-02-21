@@ -67,7 +67,6 @@ public class Decoder {
 
   private int radius;
   private String shape;
-  private String color;
   private int numberOfSides;
   private ArrayList<String> coordinates;
   private String template;
@@ -147,10 +146,8 @@ public class Decoder {
       numRows = Integer.parseInt(attributes.get(NUM_ROWS));
       numColumns = Integer.parseInt(attributes.get(NUM_COLS));
       model = attributes.get(MODEL);
-      //           Shape, numSides, and Color                //
-      //shape = attributes.get(SHAPE);
-      //numberOfSides = Integer.parseInt(attributes.get(SIDES));
-      //color = attributes.get(COLOR);
+      shape = attributes.get("shape");
+      numberOfSides = Integer.parseInt(attributes.get(SIDES));
     }
     catch(Exception e){
       Alert alert = new Alert(Alert.AlertType.ERROR, "Invalid Parameter(s)");
@@ -215,7 +212,7 @@ public class Decoder {
     energy = Integer.parseInt(attributes.getOrDefault(ENERGY, "4"));
     emptyColor = attributes.get(EMPTY_COLOR).equals("") ? "lightgrey" : attributes.get(EMPTY_COLOR);
     fishColor = attributes.get("fishcolor").equals("") ? "green" : attributes.get("fishcolor");
-    sharkColor = attributes.get("sharkcolor").equals("") ? "blue" : attributes.get("sharkColor");
+    sharkColor = attributes.get("sharkcolor").equals("") ? "blue" : attributes.get("sharkcolor");
   }
   private void initializePercolation(Map<String, String> attributes){
     waterToEmptyRatio = Float.parseFloat(attributes.getOrDefault(WATER_EMPTY_RATIO, ".01"));
@@ -327,6 +324,7 @@ public class Decoder {
   public String getHormoneColor(){return hormoneColor;}
   public String getFoodColor(){return foodColor;}
   public int getNumberOfSides(){return numberOfSides;}
+  public String getShape(){return shape;}
   //            generic getters           //
   public float getPatchRatio(){return patchRatio;}
   //public float getRatio2(){return ratio2;}

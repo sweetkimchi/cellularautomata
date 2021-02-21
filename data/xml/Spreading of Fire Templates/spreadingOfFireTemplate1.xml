@@ -10,6 +10,8 @@
   <randomseed>100</randomseed>
   <emptyratio>0.1</emptyratio>
   <treeratio>0.8</treeratio>
+  <numberofsides>8</numberofsides>
+  <shape>square</shape>
   <emptycolor>yellow</emptycolor>
   <treecolor>green</treecolor>
   <firecolor>red</firecolor>

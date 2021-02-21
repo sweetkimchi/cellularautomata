@@ -7,13 +7,15 @@
   <fishsharkratio>0.2</fishsharkratio>
   <emptyratio>0.2</emptyratio>
   <randomseed>3</randomseed>
+  <numberofsides>8</numberofsides>
+  <shape>square</shape>
   <fishreproduce>2</fishreproduce>
   <sharkreproduce>2</sharkreproduce>
   <sharklives>3</sharklives>
   <energyfromeating>3</energyfromeating>
+  <emptycolor>lightgrey</emptycolor>
   <fishcolor>green</fishcolor>
   <sharkcolor>blue</sharkcolor>
-  <template>random_one</template>
   <template>random_one</template>
   <title>WaTor Simulation</title>
   <model>wator</model>

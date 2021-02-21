@@ -7,6 +7,8 @@
   <fishsharkratio>0.1</fishsharkratio>
   <emptyratio>0.3</emptyratio>
   <randomseed>0</randomseed>
+  <numberofsides>8</numberofsides>
+  <shape>square</shape>
   <fishreproduce>4</fishreproduce>
   <sharkreproduce>4</sharkreproduce>
   <sharklives>3</sharklives>

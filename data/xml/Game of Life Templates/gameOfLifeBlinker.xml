@@ -5,8 +5,10 @@
   <numCols>50</numCols>
   <numRows>50</numRows>
   <shapeCoords>25,25,25,26,25,27</shapeCoords>
-  <alivecolor></alivecolor>
-  <deadcolor></deadcolor>
+  <numberofsides>3</numberofsides>
+  <shape>triangle</shape>
+  <alivecolor>black</alivecolor>
+  <deadcolor>lightgrey</deadcolor>
   <template>blinker</template>
   <title>Game of Life</title>
   <model>gameOfLife</model>

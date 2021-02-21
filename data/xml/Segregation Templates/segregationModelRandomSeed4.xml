@@ -8,9 +8,11 @@
   <emptyratio>0.5</emptyratio>
   <satisfactionthreshhold>0.9</satisfactionthreshhold>
   <randomseed>100</randomseed>
-  <emptycolor></emptycolor>
-  <agentxcolor></agentxcolor>
-  <agentycolor></agentycolor>
+  <numberofsides>8</numberofsides>
+  <shape>square</shape>
+  <emptycolor>lightgrey</emptycolor>
+  <agentxcolor>red</agentxcolor>
+  <agentycolor>blue</agentycolor>
   <template>random_four</template>
   <title>Segregation Model</title>
   <model>segregationmodel</model>

@@ -333,5 +333,6 @@ public class GridManager {
     this.stateOfCells = foragingAntGridManager.buildAntGridWithTemplateHelper(coordinates, possibleTypes, possibleColors, radius);
     this.numberOfSides = numberOfSides;
   }
+  public void setNumberOfSides(int numSides){numberOfSides = numSides;}
 }
 

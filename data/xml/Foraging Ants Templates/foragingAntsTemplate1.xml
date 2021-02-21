@@ -7,6 +7,7 @@
     <shapeCoords>25,25,11,14,40,40</shapeCoords>
     <numberofants>50</numberofants>
     <radius>2</radius>
+    <shape>square</shape>
     <numberofsides>4</numberofsides>
     <nestcolor>green</nestcolor>
     <antcolor>red</antcolor>

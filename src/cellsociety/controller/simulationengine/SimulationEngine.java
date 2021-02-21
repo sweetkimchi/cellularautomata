@@ -86,6 +86,7 @@ public class SimulationEngine {
   public void initializeData() {
     initializeGrid();
     initializeModelConstructors(decoder.getModel());
+    gridManager.setNumberOfSides(decoder.getNumberOfSides());
     simulationScreen.update(gridManager, decoder.getModel());
     simulationScreen.setDescription(decoder.getMyDesc());
     runSimulation();
@@ -96,6 +97,7 @@ public class SimulationEngine {
     if (game.equals("gameOfLife")) {
       rules = new GameOfLifeRule(decoder.getAliveColor(), decoder.getDeadColor());
       template = constructStartingStateForSimulation(decoder.getCoordinates());
+
       gridManager
               .buildGridWithTemplate(template, rules.getPossibleTypes(), rules.getPossibleColors(), 0);
     }
@@ -129,6 +131,7 @@ public class SimulationEngine {
     if (game.equals("rockpaperscissors")) {
       //   rules = new WaTorModelRules(emptyRatio, populationRatio, randomSeed, energyFish, reproduceBoundary, sharkEnergy);
       rules = new RockPaperScissorsRules(decoder.getThreshold(), decoder.getSeed(), decoder.getRockColor(), decoder.getPaperColor(), decoder.getScissorsColor(), decoder.getEmptyColor());
+
       gridManager
               .buildGridWithRandomSeed(decoder.getEmptyRatio(), decoder.getScissorsRatio(),
                       decoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
@@ -140,7 +143,7 @@ public class SimulationEngine {
       rules = new ForagingAntsRules(decoder.getNumberOfAnts(), decoder.getSeed(), decoder.getNumberOfSides(), decoder.getNestColor(), decoder.getAntColor(), decoder.getHormoneColor(), decoder.getFoodColor(), decoder.getEmptyColor());
       ForagingAntGridManager foragingAntGridManager = new ForagingAntGridManager(decoder.getRows(), decoder.getCols());
       gridManager
-          .buildAntGridWithTemplate(decoder.getCoordinates(), rules.getPossibleTypes(), rules.getPossibleColors(), decoder.getRadius(), numberOfsides);
+          .buildAntGridWithTemplate(decoder.getCoordinates(), rules.getPossibleTypes(), rules.getPossibleColors(), decoder.getRadius(), decoder.getNumberOfSides());
     }
     if (game.equals("navigatingsugarscape")) {
       //   rules = new WaTorModelRules(emptyRatio, populationRatio, randomSeed, energyFish, reproduceBoundary, sharkEnergy);

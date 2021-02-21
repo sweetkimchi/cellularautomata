@@ -7,6 +7,8 @@
     <rockratio>0.2</rockratio>
     <scissorsratio>0.3</scissorsratio>
     <randomseed>100</randomseed>
+    <numberofsides>8</numberofsides>
+    <shape>square</shape>
     <threshhold>1</threshhold>
     <emptyratio>0</emptyratio>
     <emptycolor>black</emptycolor>
