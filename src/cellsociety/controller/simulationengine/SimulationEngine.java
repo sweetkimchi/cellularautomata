@@ -78,7 +78,7 @@ public class SimulationEngine {
   public void initializeData() {
     initializeGrid();
     initializeModelConstructors(decoder.getModel());
-    simulationScreen.update(gridManager.getGrid(), decoder.getModel());
+    simulationScreen.update(gridManager, decoder.getModel());
     simulationScreen.setDescription(decoder.getMyDesc());
     runSimulation();
   }
@@ -123,11 +123,9 @@ public class SimulationEngine {
     }
     if (game.equals("rockpaperscissors")) {
       //   rules = new WaTorModelRules(emptyRatio, populationRatio, randomSeed, energyFish, reproduceBoundary, sharkEnergy);
-      int threshold = 3;
-      long randomSeed = 10;
-      rules = new RockPaperScissorsRules(threshold, randomSeed);
+      rules = new RockPaperScissorsRules(decoder.getThreshold(), decoder.getSeed());
       stateOfAllCells = gridManager
-              .buildGridWithRandomSeed(decoder.getEmptyRatio(), decoder.getFishSharkRatio(),
+              .buildGridWithRandomSeed(decoder.getEmptyRatio(), decoder.getScissorsRatio(),
                       decoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
     }
     //need to be fixed for a better design
@@ -145,7 +143,7 @@ public class SimulationEngine {
     gridManager.judgeStateOfEachCell(rules);
     //THIS IS A BAD EXAMPLE THAT NEEDS TO BE FIXED
     // I WILL PASS IN THE GRID OF COLORS OR MAYBE GRID OF TYPES
-    simulationScreen.update(gridManager.getGrid(), decoder.getModel());
+    simulationScreen.update(gridManager, decoder.getModel());
   }
 
   private void runSimulation() {
@@ -161,7 +159,7 @@ public class SimulationEngine {
         sleepTimer = 0;
       }
     };
-    simulationScreen.update(gridManager.getGrid(), decoder.getModel());
+    simulationScreen.update(gridManager, decoder.getModel());
   }
 
   /**
