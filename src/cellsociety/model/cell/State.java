@@ -134,4 +134,5 @@ public class State {
   public boolean hasFood(){
     return hasFood;
   }
+
 }

@@ -17,7 +17,7 @@ public class AntState extends State {
    * @param numberOfMoves the current, cumulative number of moves
    */
   public AntState(int xCoord, int yCoord, String type, String colorString, int numberOfMoves, int amountOfFood) {
-    super(xCoord, yCoord, type, colorString, numberOfMoves);
+    super(xCoord, yCoord, type, colorString, numberOfMoves, amountOfFood);
     hasFood = false;
     this.amountOfFood = amountOfFood;
   }
