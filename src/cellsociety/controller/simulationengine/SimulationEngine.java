@@ -78,7 +78,7 @@ public class SimulationEngine {
   public void initializeData() {
     initializeGrid();
     initializeModelConstructors(decoder.getModel());
-    simulationScreen.update(gridManager.getGrid(), decoder.getModel());
+    simulationScreen.update(gridManager, decoder.getModel());
     simulationScreen.setDescription(decoder.getMyDesc());
     runSimulation();
   }
@@ -145,7 +145,7 @@ public class SimulationEngine {
     gridManager.judgeStateOfEachCell(rules);
     //THIS IS A BAD EXAMPLE THAT NEEDS TO BE FIXED
     // I WILL PASS IN THE GRID OF COLORS OR MAYBE GRID OF TYPES
-    simulationScreen.update(gridManager.getGrid(), decoder.getModel());
+    simulationScreen.update(gridManager, decoder.getModel());
   }
 
   private void runSimulation() {
@@ -161,7 +161,7 @@ public class SimulationEngine {
         sleepTimer = 0;
       }
     };
-    simulationScreen.update(gridManager.getGrid(), decoder.getModel());
+    simulationScreen.update(gridManager, decoder.getModel());
   }
 
   /**
