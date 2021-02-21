@@ -1,6 +1,7 @@
 package cellsociety.controller.grid;
 
 import cellsociety.model.cell.State;
+import cellsociety.model.foragingants.ForagingAntGridManager;
 import cellsociety.model.rules.Rules;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -322,35 +323,15 @@ public class GridManager {
   }
 
   public String getColorAtCoordinate(int x, int y) {
-    return this.stateOfCells[x][y].getColor();
+    return stateOfCells[x][y].getColor();
   }
 
-  public void buildAntGridWithTemplate(ArrayList<String> coordinates, ArrayList<String> possibleTypes, ArrayList<String> possibleColors, int radius) {
-    State[][] stateOfCells = new State[row][col];
-
-    for (int r = 0; r < row; r++) {
-      for (int c = 0; c < col; c++) {
-        State state = new State(r, c, possibleTypes.get(possibleTypes.size()-1), possibleColors.get(possibleTypes.size()-1), 0);
-        stateOfCells[r][c] = state;
-      }
-    }
-
-   //build nest
-      for(int x = Integer.parseInt(coordinates.get(0)) - radius; x < Integer.parseInt(coordinates.get(0)) + radius; x++){
-        for(int y = Integer.parseInt(coordinates.get(1)) - radius; y < Integer.parseInt(coordinates.get(1)) + radius; y++){
-          stateOfCells[x][y] = new State(x,y,possibleTypes.get(0), possibleColors.get(0),0);
-        }
-      }
-
-    for(int index = 2; index < coordinates.size(); index+=2) {
-      for(int x = Integer.parseInt(coordinates.get(index)) - radius; x < Integer.parseInt(coordinates.get(index)) + radius; x++){
-        for(int y = Integer.parseInt(coordinates.get(index)) - radius; y < Integer.parseInt(coordinates.get(index)) + radius; y++){
-          stateOfCells[x][y] = new State(x,y,possibleTypes.get(1), possibleColors.get(1),5);
-        }
-      }
-    }
-
-    this.stateOfCells = stateOfCells;
+  public void buildAntGridWithTemplate(ArrayList<String> coordinates,
+      ArrayList<String> possibleTypes, ArrayList<String> possibleColors,
+      int radius, int numberOfSides) {
+    ForagingAntGridManager foragingAntGridManager = new ForagingAntGridManager(row, col);
+    this.stateOfCells = foragingAntGridManager.buildAntGridWithTemplateHelper(coordinates, possibleTypes, possibleColors, radius);
+    this.numberOfSides = numberOfSides;
   }
 }
 
