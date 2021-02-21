@@ -3,6 +3,9 @@ package cellsociety.view;
 import cellsociety.controller.grid.GridManager;
 import cellsociety.controller.simulationengine.SimulationEngine;
 import cellsociety.model.cell.State;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -28,8 +31,6 @@ public class SimulationScreen {
   public static final String DEFAULT_RESOURCE_FOLDER =
       "/" + DEFAULT_RESOURCE_PACKAGE.replace(".", "/");
   public static final String DEFAULT_STYLESHEET = "default.css";
-  public static final String LIGHT_STYLESHEET = "light.css";
-  public static final String DARK_STYLESHEET = "dark.css";
   public static final double WINDOW_WIDTH = 800;
   public static final double WINDOW_HEIGHT = 600;
   private static final String language = "English";
@@ -89,15 +90,17 @@ public class SimulationScreen {
   }
 
   private void addTopPanelControls() {
+    Map<String,String> colorTypes = new HashMap<>();
+    colorTypes.put(resources.getString("DefaultColor"),"DefaultColorFile");
+    colorTypes.put(resources.getString("LightColor"),"LightColorFile");
+    colorTypes.put(resources.getString("DarkColor"),"DarkColorFile");
     ComboBox<String> comboBox = new ComboBox<>();
-    comboBox.getItems().addAll(
-        "default",
-        "light",
-        "dark"
-    );
+    for (String s : colorTypes.keySet()) {
+      comboBox.getItems().add(s);
+    }
     comboBox.setValue(comboBox.getItems().get(0));
     comboBox.setOnAction(event -> {
-      setStylesheet(comboBox.getValue() + ".css");
+      setStylesheet(resources.getString(colorTypes.get(comboBox.getValue())));
     });
     topPanel.add(comboBox);
   }
