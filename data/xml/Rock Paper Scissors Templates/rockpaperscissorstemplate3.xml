@@ -7,8 +7,14 @@
   <rockratio>0.2</rockratio>
   <scissorsratio>0.3</scissorsratio>
   <randomseed>100</randomseed>
+  <numberofsides>12</numberofsides>
+  <shape>triangle</shape>
   <threshhold>1</threshhold>
   <emptyratio>0</emptyratio>
+  <emptycolor>black</emptycolor>
+  <papercolor>blue</papercolor>
+  <rockcolor>red</rockcolor>
+  <scissorscolor>lightgrey</scissorscolor>
   <title>Rock, Paper, Scissors</title>
   <model>rockpaperscissors</model>
 </data>

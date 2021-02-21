@@ -4,11 +4,17 @@
   <description></description>
   <numCols>50</numCols>
   <numRows>50</numRows>
-  <rockratio>0.3</rockratio>
+  <rockratio>0.2</rockratio>
   <scissorsratio>0.3</scissorsratio>
-  <randomseed>13</randomseed>
-  <threshhold>3</threshhold>
+  <randomseed>100</randomseed>
+  <numberofsides>6</numberofsides>
+  <shape>hexagon</shape>
+  <threshhold>1</threshhold>
   <emptyratio>0</emptyratio>
+  <emptycolor>black</emptycolor>
+  <papercolor>blue</papercolor>
+  <rockcolor>red</rockcolor>
+  <scissorscolor>lightgrey</scissorscolor>
   <title>Rock, Paper, Scissors</title>
   <model>rockpaperscissors</model>
 </data>
