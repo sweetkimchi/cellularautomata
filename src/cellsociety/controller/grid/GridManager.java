@@ -23,7 +23,7 @@ public class GridManager {
   private State[][] stateOfCells;
 
   //EDIT THIS TO CHANGE THE NUMBER OF SIDES: 3, 4, 6, 8, 12
-  private int numberOfSides = 12;
+  private int numberOfSides = 8;
 
   /**
    * Basic constructor
