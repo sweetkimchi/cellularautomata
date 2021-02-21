@@ -80,8 +80,12 @@ public class ForagingAntsRules extends Rules {
         numberOfAnts--;
       }
 
-      if(gridManager.getTypeAtCoordinate(x,y).equals(EMPTY) && neighborsOfEachTypeAtCoordinate.get(2) > 0){
-        nextStates.get(2)[x][y] = 1;
+    if(gridManager.getTypeAtCoordinate(x,y).equals(EMPTY) && neighborsOfEachTypeAtCoordinate.get(2) > 0){
+      nextStates.get(2)[x][y] = 1;
+    }
+
+      if(gridManager.getTypeAtCoordinate(x,y).equals(ANT) && neighborsOfEachTypeAtCoordinate.get(4) > 0){
+        nextStates.get(4)[x][y] = 1;
       }
   }
 }

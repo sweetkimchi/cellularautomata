@@ -69,6 +69,8 @@ public class State {
     color = colorString;
   }
 
+
+
   /**
    * @return xCoord associated with the state
    */
