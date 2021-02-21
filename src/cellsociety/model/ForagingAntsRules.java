@@ -19,25 +19,28 @@ public class ForagingAntsRules extends Rules {
   private String NEST = "nest";
   private String HORMONE = "hormone";
   private String EMPTY = "empty";
+  private int numberOfAnts;
   
-  public ForagingAntsRules(){
+  public ForagingAntsRules(int numberOfAnts){
+    this.numberOfAnts = numberOfAnts;
     initializeColorsAndTypes();
   }
 
   private void initializeColorsAndTypes() {
     possibleTypes = new ArrayList<>();
     possibleColors = new ArrayList<>();
-    possibleTypes.add(EMPTY);
-    possibleTypes.add(ANT);
-    possibleTypes.add(FOOD);
     possibleTypes.add(NEST);
+    possibleTypes.add(FOOD);
+    possibleTypes.add(ANT);
     possibleTypes.add(HORMONE);
+    possibleTypes.add(EMPTY);
 
-    possibleColors.add(EMPTY_COLOR);
-    possibleColors.add(ANT_COLOR);
-    possibleColors.add(FOOD_COLOR);
+
     possibleColors.add(NEST_COLOR);
+    possibleColors.add(FOOD_COLOR);
+    possibleColors.add(ANT_COLOR);
     possibleColors.add(HORMONE_COLOR);
+    possibleColors.add(EMPTY_COLOR);
   }
   /**
    * specifies the starting states of the cells according to the simulation rule
@@ -72,6 +75,17 @@ public class ForagingAntsRules extends Rules {
   @Override
   public void decideState(List<Integer> neighborsOfEachTypeAtCoordinate, List<int[][]> nextStates,
       int x, int y, GridManager gridManager) {
+      if(gridManager.getTypeAtCoordinate(x,y).equals(EMPTY) && neighborsOfEachTypeAtCoordinate.get(0) > 0 && numberOfAnts > 0){
+        nextStates.get(2)[x][y] = 1;
+        numberOfAnts--;
+      }
 
+    if(gridManager.getTypeAtCoordinate(x,y).equals(EMPTY) && neighborsOfEachTypeAtCoordinate.get(2) > 0){
+      nextStates.get(2)[x][y] = 1;
+    }
+
+      if(gridManager.getTypeAtCoordinate(x,y).equals(ANT) && neighborsOfEachTypeAtCoordinate.get(4) > 0){
+        nextStates.get(4)[x][y] = 1;
+      }
   }
 }
