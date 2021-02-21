@@ -25,12 +25,14 @@ public class ForagingAntsRules extends Rules {
   private int numberOfAnts;
   private final Random random;
   private int numberOfSides;
-  private int phermoneAmount = 30;
-  private double moveBias = 0.96;
+  private int phermoneAmount;
+  private double moveBias;
   
-  public ForagingAntsRules(int numberOfAnts, int randomSeed, int numberOfSides, String nestColor, String antColor, String phermoneColor, String foodColor, String emptyColor, String weakPhermoneColor){
+  public ForagingAntsRules(int numberOfAnts, int randomSeed, int numberOfSides, String nestColor, String antColor, String phermoneColor, String foodColor, String emptyColor, String weakPhermoneColor, double bias, int phermoneAmount){
     this.numberOfAnts = numberOfAnts;
     random = new Random(randomSeed);
+    this.phermoneAmount = phermoneAmount;
+    this.moveBias = bias;
     this.numberOfSides = numberOfSides;
     this.NEST_COLOR = nestColor;
     this.ANT_COLOR = antColor;

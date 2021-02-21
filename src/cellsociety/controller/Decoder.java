@@ -107,9 +107,10 @@ public class Decoder {
   private int threshold;
   // Sample Ratios, Strings, and Integers //
   private float patchRatio;
-  private float ratio2;
+  private float moveBias;
   private float ratio3;
   private float ratio4;
+  private int phermoneAmount;
   private int numAgents;
   private int maxSugar;
   private int growBackSugar;
@@ -257,7 +258,8 @@ public class Decoder {
   }
   private void initializeForagingAnts(Map<String, String> attributes){
     coordinates = new ArrayList<>(Arrays.asList(attributes.getOrDefault(COORDINATES, GOLDefaultShape).split("[,]", 0)));
-    //ratio2 = Float.parseFloat(attributes.getOrDefault("ratio2", "defaultratio2);
+    moveBias = Float.parseFloat(attributes.getOrDefault("movebias", "0.96"));
+    phermoneAmount = Integer.parseInt(attributes.getOrDefault("phermoneamount", "30"));
     radius = Integer.parseInt(attributes.getOrDefault("radius", "5"));
     numberOfAnts = Integer.parseInt(attributes.getOrDefault("numberofants", "50"));
     numberOfSides = Integer.parseInt(attributes.getOrDefault("numberofsides", "4"));
@@ -339,6 +341,8 @@ public class Decoder {
   public int getMetabolism(){return metabolism;}
   public int getVision(){return vision;}
   public int getGrowBackSugar(){return growBackSugar;}
+  public int getPhermoneAmount(){return phermoneAmount;}
+  public float getMoveBias(){return moveBias;}
   public String getFullSugarColor(){return fullSugarColor;}
   public String getLowSugarColor(){return lowSugarColor;}
   public String getAgentColor(){return agentColor;}
