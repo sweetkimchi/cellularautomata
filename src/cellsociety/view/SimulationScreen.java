@@ -46,6 +46,7 @@ public class SimulationScreen {
   private SidePanel sidePanel;
   private GridGraphics gridGraphics;
   private TopPanel topPanel;
+  private GraphGraphics graphGraphics;
   private double prevWindowWidth = 0;
   private double prevWindowHeight = 0;
   private Slider slider;
@@ -109,6 +110,17 @@ public class SimulationScreen {
   }
 
   private void addTopPanelControls() {
+    createColorBox();
+    Button graphButton = makeButton("GraphCommand", event -> initializeGraph());
+    topPanel.add(graphButton);
+  }
+
+  private void initializeGraph() {
+    graphGraphics = new GraphGraphics(resources.getString("GraphTitle"),
+        resources.getString("GraphXLabel"), resources.getString("GraphYLabel"));
+  }
+
+  private void createColorBox() {
     Map<String,String> colorTypes = new HashMap<>();
     colorTypes.put(resources.getString("DefaultColor"),DEFAULT_STYLESHEET);
     colorTypes.put(resources.getString("LightColor"),LIGHT_STYLESHEET);
@@ -162,9 +174,16 @@ public class SimulationScreen {
   private void resetSimulation() {
     if (simulationEngine.decoderInitialized()) {
       gridGraphics.reset();
+      resetGraph();
       sidePanel.removeDescription();
       simulationEngine.stopSimulation();
       simulationEngine.initializeData();
+    }
+  }
+
+  private void resetGraph() {
+    if (graphGraphics != null) {
+      graphGraphics.reset();
     }
   }
 
@@ -175,6 +194,7 @@ public class SimulationScreen {
     if (simulationEngine.decoderInitialized()) {
       simulationEngine.initializeData();
       checkWindowSizeChanged();
+      resetGraph();
     } else {
       sidePanel.setDescription(desc);
     }
@@ -221,8 +241,15 @@ public class SimulationScreen {
    */
   public void update(GridManager gridManager, String model) {
     gridGraphics.update(gridManager, model);
+    updateGraph(gridManager.getSummaryOfTypes());
     simulationEngine.setSimulationSpeed((int) slider.getValue());
     checkWindowSizeChanged();
+  }
+
+  private void updateGraph(Map<String,Integer> map) {
+    if (graphGraphics != null) {
+      graphGraphics.update(map);
+    }
   }
 
   /**
@@ -230,7 +257,8 @@ public class SimulationScreen {
    */
   public void checkWindowSizeChanged() {
     if (scene.getHeight() != prevWindowHeight || scene.getWidth() != prevWindowWidth) {
-      gridGraphics.resizeGrid(scene.getWidth()-sidePanel.MAX_WIDTH, scene.getHeight());
+      gridGraphics.resizeGrid(scene.getWidth() - sidePanel.MAX_WIDTH,
+          scene.getHeight() - topPanel.getHeight());
     }
   }
 }
