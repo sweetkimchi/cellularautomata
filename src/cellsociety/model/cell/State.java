@@ -135,4 +135,7 @@ public class State {
     return hasFood;
   }
 
+  public void setDirection(String down) {
+    this.direction = down;
+  }
 }

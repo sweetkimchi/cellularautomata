@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<data game="game">
+  <author>Jiyun</author>
+  <description></description>
+  <numCols>50</numCols>
+  <numRows>50</numRows>
+  <rockratio>0.2</rockratio>
+  <scissorsratio>0.3</scissorsratio>
+  <randomseed>100</randomseed>
+  <numberofsides>6</numberofsides>
+  <shape>hexagon</shape>
+  <threshhold>1</threshhold>
+  <emptyratio>0</emptyratio>
+  <emptycolor>black</emptycolor>
+  <papercolor>blue</papercolor>
+  <rockcolor>red</rockcolor>
+  <scissorscolor>lightgrey</scissorscolor>
+  <title>Rock, Paper, Scissors</title>
+  <model>rockpaperscissors</model>
+</data>

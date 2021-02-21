@@ -341,5 +341,9 @@ public class GridManager {
   public ArrayList<String> getCoordinates(){
     return coordinates;
   }
+
+  public boolean isAtEdge(int x, int y) {
+    return (x == row - 1 || x == 0 || y == col - 1 || y == 0);
+  }
 }
 
