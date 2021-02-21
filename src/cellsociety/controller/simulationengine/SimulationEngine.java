@@ -1,10 +1,6 @@
 package cellsociety.controller.simulationengine;
 
 import cellsociety.controller.Decoder;
-import cellsociety.controller.FireDecoder;
-import cellsociety.controller.PercDecoder;
-import cellsociety.controller.SegDecoder;
-import cellsociety.controller.WaTorDecoder;
 import cellsociety.controller.grid.GridManager;
 import cellsociety.model.RockPaperScissorsRules;
 import cellsociety.model.cell.State;
@@ -54,7 +50,7 @@ public class SimulationEngine {
     template = new ArrayList<>();
     for (int i = 0; i + 1 < coordinates.size(); i += 2) {
       State state = new State(Integer.parseInt(coordinates.get(i)),
-          Integer.parseInt(coordinates.get(i + 1)), rules.getStartingPositionCellType());
+              Integer.parseInt(coordinates.get(i + 1)), rules.getStartingPositionCellType());
       template.add(state);
     }
     return template;
@@ -91,53 +87,48 @@ public class SimulationEngine {
 
     if (game.equals("gameOfLife")) {
       rules = new GameOfLifeRule();
-      template = constructStartingStateForSimulation(decoder.getGOLDecoder().getCoords());
+      template = constructStartingStateForSimulation(decoder.getCoordinates());
       stateOfAllCells = gridManager
-          .buildGridWithTemplate(template, rules.getStartingPositionCellType());
+              .buildGridWithTemplate(template, rules.getStartingPositionCellType());
       updateCellState();
     }
     if (game.equals("percolation")) {
-      PercDecoder percDecoder = decoder.getPercDecoder();
-      rules = new PercolationRules(percDecoder.getSeed());
+      rules = new PercolationRules(decoder.getSeed());
       stateOfAllCells = gridManager
-          .buildGridWithRandomSeed(percDecoder.getBlockRatio(), percDecoder.getWaterToEmptyRatio(),
-              percDecoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
+              .buildGridWithRandomSeed(decoder.getBlockRatio(), decoder.getWaterToEmptyRatio(),
+                      decoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
     }
     if (game.equals("segregationmodel")) {
-      SegDecoder segDecoder = decoder.getSegDecoder();
       rules = new SegregationModelRules(
-          segDecoder.getRandSeed(), segDecoder.getSatThresh());
+              decoder.getSeed(), decoder.getSatisfactionThreshold());
       stateOfAllCells = gridManager
-          .buildGridWithRandomSeed(segDecoder.getEmptyRatio(), segDecoder.getPopRatio(),
-              segDecoder.getRandSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
+              .buildGridWithRandomSeed(decoder.getEmptyRatio(), decoder.getPopulationRatio(),
+                      decoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
 
     }
     if (game.equals("spreadingoffire")) {
-      FireDecoder fireDecoder = decoder.getFireDecoder();
-      rules = new SpreadingOfFireRules(fireDecoder.getSeed(), fireDecoder.getProb());
+      rules = new SpreadingOfFireRules(decoder.getSeed(), decoder.getProbsOfCatch());
       stateOfAllCells = gridManager
-          .buildGridWithRandomSeed(fireDecoder.getEmptyRatio(), fireDecoder.getTreeRatio(),
-              fireDecoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
+              .buildGridWithRandomSeed(decoder.getEmptyRatio(), decoder.getTreeRatio(),
+                      decoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
     }
     if (game.equals("wator")) {
       //   rules = new WaTorModelRules(emptyRatio, populationRatio, randomSeed, energyFish, reproduceBoundary, sharkEnergy);
-      WaTorDecoder waTorDecoder = decoder.getWaTorDecoder();
       rules = new WaTorModelRules(
-          waTorDecoder.getSeed(), waTorDecoder.getEnergy(), waTorDecoder.getFishRate(),
-          waTorDecoder.getSharkLives());
+              decoder.getSeed(), decoder.getEnergy(), decoder.getFishRate(),
+              decoder.getSharkLives());
       stateOfAllCells = gridManager
-          .buildGridWithRandomSeed(waTorDecoder.getEmptyRatio(), waTorDecoder.getFSRatio(),
-              waTorDecoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
+              .buildGridWithRandomSeed(decoder.getEmptyRatio(), decoder.getFishSharkRatio(),
+                      decoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
     }
     if (game.equals("rockpaperscissors")) {
       //   rules = new WaTorModelRules(emptyRatio, populationRatio, randomSeed, energyFish, reproduceBoundary, sharkEnergy);
-      WaTorDecoder waTorDecoder = decoder.getWaTorDecoder();
       int threshold = 3;
       long randomSeed = 10;
       rules = new RockPaperScissorsRules(threshold, randomSeed);
       stateOfAllCells = gridManager
-          .buildGridWithRandomSeed(waTorDecoder.getEmptyRatio(), waTorDecoder.getFSRatio(),
-              waTorDecoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
+              .buildGridWithRandomSeed(decoder.getEmptyRatio(), decoder.getFishSharkRatio(),
+                      decoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
     }
     //need to be fixed for a better design
   }
