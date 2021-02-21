@@ -23,7 +23,7 @@ public class GridManager {
   private State[][] stateOfCells;
 
   //EDIT THIS TO CHANGE THE NUMBER OF SIDES: 3, 4, 6, 8, 12
-  private int numberOfSides = 6;
+  private int numberOfSides = 4;
 
   /**
    * Basic constructor
@@ -309,6 +309,22 @@ public class GridManager {
         }
       }
     }
+  }
+
+  public List<String> saveSimulation(){
+    ArrayList<String> state = new ArrayList<>();
+    for(int i=0; i < stateOfCells.length; i++){
+      for(int j=0; j < stateOfCells.length; j++){
+
+        state.add(String.valueOf(stateOfCells[i][j].getxCoord()));
+        state.add(String.valueOf(stateOfCells[i][j].getyCoord()));
+        state.add(stateOfCells[i][j].getType());
+        state.add(String.valueOf(stateOfCells[i][j].getColor()));
+        state.add(String.valueOf(stateOfCells[i][j].getEnergy()));
+        state.add(String.valueOf(stateOfCells[i][j].getNumberOfMoves()));
+      }
+    }
+    return state;
   }
 
   private List<int[][]> nextStatesOfCells(List<int[][]> numberOfNeighborsForEachType) {
