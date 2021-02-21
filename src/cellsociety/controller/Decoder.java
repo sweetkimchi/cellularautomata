@@ -219,7 +219,7 @@ public class Decoder {
     coordinates = new ArrayList<>(Arrays.asList(attributes.getOrDefault(COORDINATES, GOLDefaultShape).split("[,]", 0)));
     //ratio2 = Float.parseFloat(attributes.getOrDefault("ratio2", "defaultratio2);
     radius = Integer.parseInt(attributes.getOrDefault("radius", "5"));
-    numberOfAnts = Integer.parseInt(attributes.getOrDefault("numberofants", "50");
+    numberOfAnts = Integer.parseInt(attributes.getOrDefault("numberofants", "50"));
     //string1 = attributes.get("string1");
     //string2 = attributes.get("string2");
   }

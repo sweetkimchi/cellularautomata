@@ -75,6 +75,13 @@ public class ForagingAntsRules extends Rules {
   @Override
   public void decideState(List<Integer> neighborsOfEachTypeAtCoordinate, List<int[][]> nextStates,
       int x, int y, GridManager gridManager) {
+      if(gridManager.getTypeAtCoordinate(x,y).equals(EMPTY) && neighborsOfEachTypeAtCoordinate.get(0) > 0 && numberOfAnts > 0){
+        nextStates.get(2)[x][y] = 1;
+        numberOfAnts--;
+      }
 
+      if(gridManager.getTypeAtCoordinate(x,y).equals(EMPTY) && neighborsOfEachTypeAtCoordinate.get(2) > 0){
+        nextStates.get(2)[x][y] = 1;
+      }
   }
 }
