@@ -5,6 +5,7 @@ import cellsociety.model.cell.State;
 import cellsociety.model.rules.Rules;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class ForagingAntsRules extends Rules {
 
@@ -21,9 +22,11 @@ public class ForagingAntsRules extends Rules {
   private String HORMONE = "hormone";
   private String EMPTY = "empty";
   private int numberOfAnts;
+  private final Random random;
   
-  public ForagingAntsRules(int numberOfAnts){
+  public ForagingAntsRules(int numberOfAnts, int randomSeed){
     this.numberOfAnts = numberOfAnts;
+    random = new Random(randomSeed);
     initializeColorsAndTypes();
   }
 
@@ -81,15 +84,47 @@ public class ForagingAntsRules extends Rules {
         numberOfAnts--;
       }
 
-    if(gridManager.getTypeAtCoordinate(x,y).equals(ANT){
-      gridManager.setStateAtCoordinate(x,y, decideAntState(gridManager, x, y, nextStates));
+    if(gridManager.getTypeAtCoordinate(x,y).equals(ANT)){
+      gridManager.setStateAtCoordinate(x,y, decideAntState(gridManager, x, y, nextStates, getPossibleTypes(), getPossibleColors()));
     }
 
-      if(gridManager.getTypeAtCoordinate(x,y).equals(ANT) && neighborsOfEachTypeAtCoordinate.get(4) > 0){
-        nextStates.get(4)[x][y] = 1;
-      }
+
   }
 
-  private AntState decideAntState(GridManager gridManager, int x, int y, List<int[][]> nextStates) {
+  private State decideAntState(GridManager gridManager, int x, int y, List<int[][]> nextStates, ArrayList<String> possibleTypes, ArrayList<String> possibleColors) {
+    ArrayList<State> emptyCells = new ArrayList<>();
+    if (x - 1 >= 0 && gridManager.getTypeAtCoordinate(x - 1, y).equals(EMPTY)) {
+      //left cell
+      emptyCells.add(gridManager.getStateAtCoordinate(x - 1, y));
+    }
+    if (x >= 0 && y - 1 >= 0 && gridManager.getTypeAtCoordinate(x, y - 1).equals(EMPTY)) {
+      //upper cell
+      emptyCells.add(gridManager.getStateAtCoordinate(x, y - 1));
+    }
+    if (y + 1 < gridManager.getColumn() && gridManager.getTypeAtCoordinate(x, y + 1)
+        .equals(EMPTY)) {
+      //lower cell
+      emptyCells.add(gridManager.getStateAtCoordinate(x, y + 1));
+    }
+    if (x + 1 < gridManager.getRow() && gridManager.getTypeAtCoordinate(x + 1, y)
+        .equals(EMPTY)) {
+      //right cell
+      emptyCells.add(gridManager.getStateAtCoordinate(x + 1, y));
+    }
+
+    //if there are spaces to move to, MOVE
+    if (!emptyCells.isEmpty()) {
+      //cannot reproduce yet
+        int index = random.nextInt(emptyCells.size());
+        State dummy = emptyCells.get(index);
+        //    System.out.println(index);
+        gridManager
+            .setStateAtCoordinate(dummy.getxCoord(), dummy.getyCoord(), new AntState(dummy.getxCoord(),
+                dummy.getyCoord(), possibleTypes.get(2), possibleColors.get(2),
+                gridManager.getStateAtCoordinate(x, y).getNumberOfMoves() + 1, false));
+        return new AntState(x, y, possibleTypes.get(4), possibleColors.get(4), 0);
+
+    }
+    return gridManager.getStateAtCoordinate(x, y);
   }
 }

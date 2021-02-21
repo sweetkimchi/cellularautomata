@@ -33,7 +33,7 @@ public class ForagingAntGridManager extends GridManager {
     //build nest
     for(int x = Integer.parseInt(coordinates.get(0)) - radius; x < Integer.parseInt(coordinates.get(0)) + radius; x++){
       for(int y = Integer.parseInt(coordinates.get(1)) - radius; y < Integer.parseInt(coordinates.get(1)) + radius; y++){
-        stateOfCells[x][y] = new AntState(x,y,possibleTypes.get(0), possibleColors.get(0),0);
+        stateOfCells[x][y] = new AntState(x,y,possibleTypes.get(0), possibleColors.get(0),0, 5);
       }
     }
 

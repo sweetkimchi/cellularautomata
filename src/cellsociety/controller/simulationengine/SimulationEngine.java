@@ -135,7 +135,7 @@ public class SimulationEngine {
     }
     if (game.equals("foragingants")) {
       //   rules = new WaTorModelRules(emptyRatio, populationRatio, randomSeed, energyFish, reproduceBoundary, sharkEnergy);
-      rules = new ForagingAntsRules(decoder.getNumberOfAnts());
+      rules = new ForagingAntsRules(decoder.getNumberOfAnts(), decoder.getSeed());
       ForagingAntGridManager foragingAntGridManager = new ForagingAntGridManager(decoder.getRows(), decoder.getCols());
       gridManager
           .buildAntGridWithTemplate(decoder.getCoordinates(), rules.getPossibleTypes(), rules.getPossibleColors(), decoder.getRadius());

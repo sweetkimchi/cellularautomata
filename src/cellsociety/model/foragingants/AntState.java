@@ -4,7 +4,8 @@ import cellsociety.model.cell.State;
 
 public class AntState extends State {
 
-
+  private boolean hasFood;
+  private int amountOfFood;
   /**
    * Constructor with more variations other than number of moves
    *
@@ -14,7 +15,29 @@ public class AntState extends State {
    * @param colorString   color of the state
    * @param numberOfMoves the current, cumulative number of moves
    */
+  public AntState(int xCoord, int yCoord, String type, String colorString, int numberOfMoves, int amountOfFood) {
+    super(xCoord, yCoord, type, colorString, numberOfMoves);
+    hasFood = false;
+    this.amountOfFood = amountOfFood;
+  }
+
+  public AntState(int xCoord, int yCoord, String type, String colorString,int numberOfMoves, boolean hasFood) {
+    super(xCoord, yCoord, type, colorString, numberOfMoves);
+    this.hasFood = hasFood;
+    amountOfFood = 0;
+  }
+
   public AntState(int xCoord, int yCoord, String type, String colorString, int numberOfMoves) {
     super(xCoord, yCoord, type, colorString, numberOfMoves);
+    hasFood = false;
+    amountOfFood = 0;
+  }
+
+  public boolean hasFood(){
+    return hasFood;
+  }
+
+  public int getFood(){
+    return amountOfFood;
   }
 }
