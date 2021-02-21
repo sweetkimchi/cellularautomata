@@ -21,7 +21,9 @@ public class GridManager {
   private final String EMPTY = "empty";
   private final String ALIVE = "alive";
   private State[][] stateOfCells;
-  private int numberOfSides = 3;
+
+  //EDIT THIS TO CHANGE THE NUMBER OF SIDES: 3, 4, 6, 8, 12
+  private int numberOfSides = 12;
 
   /**
    * Basic constructor
@@ -130,7 +132,7 @@ public class GridManager {
     int[][] numberOfNeighbors = new int[statesOfAllCells.length][statesOfAllCells[0].length];
     for (int x = 0; x < statesOfAllCells.length; x++) {
       for (int y = 0; y < statesOfAllCells[0].length; y++) {
-        checkEightSidesForNumberOfNeighbors(statesOfAllCells, type, numberOfNeighbors, x, y, numberOfSides);
+        checkNumberOfNeighborsForNumberOfSides(statesOfAllCells, type, numberOfNeighbors, x, y, numberOfSides);
       }
       // System.out.println();
     }
@@ -138,11 +140,11 @@ public class GridManager {
     return numberOfNeighbors;
   }
 
-  private void checkEightSidesForNumberOfNeighbors(State[][] statesOfAllCells, String type,
+  private void checkNumberOfNeighborsForNumberOfSides(State[][] statesOfAllCells, String type,
       int[][] numberOfNeighbors, int x,
       int y, int numberOfSides) {
     int numberOfNeighbor = 0;
-    for (int xCoord = x - 1; xCoord <= x + 1; xCoord++) {
+    for (int xCoord = x - 2; xCoord <= x + 2; xCoord++) {
       for (int yCoord = y - 1; yCoord <= y + 1; yCoord++) {
         if (checkNumberOfSidesToSeeWhetherToIncludeThisCell(statesOfAllCells, type, x, y, numberOfSides, xCoord, yCoord)) {
             numberOfNeighbor++;
@@ -158,31 +160,86 @@ public class GridManager {
     if(xCoord >= 0 && yCoord >= 0 && xCoord < statesOfAllCells.length
         && yCoord < statesOfAllCells[0].length && statesOfAllCells[xCoord][yCoord].getType()
         .equals(type) && !(xCoord == x && yCoord == y)){
-      if(numberOfSides == 8){
+      if (checkNeighborsForEightSides(x, numberOfSides, xCoord)) {
         return true;
       }
-      if(numberOfSides == 6 && isHexagonalNeighborForOddYCoord(x, y, xCoord, yCoord)){
-        // && !(xCoord == x - 1 && yCoord == y + 1)
+      if (checkNeighborsForNumberOfSides(numberOfSides, 6,
+          isHexagonalNeighborForOddYCoord(x, y, xCoord, yCoord))) {
         return true;
       }
-      if(numberOfSides == 6 && isHexagonalNeighborForEvenYCoord(x, y, xCoord, yCoord)) {
-        //&& !(xCoord == x + 1 && yCoord == y - 1) && !(xCoord == x + 1 && yCoord == y + 1)
+      if (checkNeighborsForNumberOfSides(numberOfSides, 6,
+          isHexagonalNeighborForEvenYCoord(x, y, xCoord, yCoord))) {
         return true;
       }
-      if(numberOfSides == 4 && isOneOfTheNWSEDirection(x, y, xCoord, yCoord)){
+      if (checkNeighborsForNumberOfSides(numberOfSides, 4, isOneOfTheNWSEDirection(x, y, xCoord, yCoord))) {
         return true;
       }
-      if(numberOfSides == 3 && !isFacingUp(xCoord, yCoord) && isLeftRightUpNeighbors(x, y,
-          xCoord, yCoord, yCoord - 1)){
+      if (checkThreeNeighbors(x, y, numberOfSides, xCoord, yCoord)) {
         return true;
       }
-      if(numberOfSides == 3 && isFacingUp(xCoord, yCoord) && isLeftRightUpNeighbors(x, y,
-          xCoord, yCoord, yCoord + 1)){
+      if (checkTwelveNeighbors(x, y, numberOfSides, xCoord, yCoord)) {
         return true;
       }
 
     }
     return false;
+  }
+
+  private boolean checkNeighborsForEightSides(int x, int numberOfSides, int xCoord) {
+    if(numberOfSides == 8 && xCoord != x -2 && xCoord != x + 2){
+      return true;
+    }
+    return false;
+  }
+
+  private boolean checkNeighborsForNumberOfSides(int numberOfSides, int i, boolean oneOfTheNWSEDirection) {
+    if (numberOfSides == i && oneOfTheNWSEDirection) {
+      return true;
+    }
+    return false;
+  }
+
+  private boolean checkThreeNeighbors(int x, int y, int numberOfSides, int xCoord, int yCoord) {
+    if(numberOfSides == 3 && !isFacingUp(xCoord, yCoord) && isLeftRightUpNeighbors(x, y,
+        xCoord, yCoord, yCoord - 1)){
+      return true;
+    }
+    if(numberOfSides == 3 && isFacingUp(xCoord, yCoord) && isLeftRightUpNeighbors(x, y,
+        xCoord, yCoord, yCoord + 1)){
+      return true;
+    }
+    return false;
+  }
+
+  private boolean checkTwelveNeighbors(int x, int y, int numberOfSides, int xCoord, int yCoord) {
+    if (checkTwelvesNeighborsDependingOnTheDirectionOfTriangle(numberOfSides,
+        isFacingUp(xCoord, yCoord),
+        isOneOfTheSidesForFacingUpTriangles(x,
+            y, xCoord, yCoord))) {
+      return true;
+    }
+    if (checkTwelvesNeighborsDependingOnTheDirectionOfTriangle(numberOfSides,
+        !isFacingUp(xCoord, yCoord), isOneOfTheSidesForFacingDownTriangles(
+            x, y, xCoord, yCoord))) {
+      return true;
+    }
+    return false;
+  }
+
+  private boolean checkTwelvesNeighborsDependingOnTheDirectionOfTriangle(int numberOfSides,
+      boolean facingUp, boolean oneOfTheSidesForFacingUpTriangles) {
+    if (numberOfSides == 12 && facingUp && oneOfTheSidesForFacingUpTriangles) {
+      return true;
+    }
+    return false;
+  }
+
+  private boolean isOneOfTheSidesForFacingDownTriangles(int x, int y, int xCoord, int yCoord) {
+    return (y == yCoord - 1 && (x <= xCoord + 2 && x >= xCoord - 2)) || (y == yCoord && (x <= xCoord + 2 && x >= xCoord - 2)) || (y == yCoord + 1 && (x <= xCoord + 1 && x >= xCoord -1));
+  }
+
+  private boolean isOneOfTheSidesForFacingUpTriangles(int x, int y, int xCoord, int yCoord) {
+    return (y == yCoord - 1 && (x <= xCoord + 1 && x >= xCoord - 1)) || (y == yCoord && (x <= xCoord + 2 && x >= xCoord - 2)) || (y == yCoord + 1 && (x <= xCoord + 2 && x >= xCoord -2));
   }
 
   private boolean isFacingUp(int xCoord, int yCoord){
