@@ -19,7 +19,7 @@ public class ForagingAntsRules extends Rules {
   private String ANT = "rock";
   private String FOOD = "paper";
   private String NEST = "nest";
-  private String HORMONE = "hormone";
+  private String PHERMONE = "hormone";
   private String EMPTY = "empty";
   private int numberOfAnts;
   private final Random random;
@@ -38,7 +38,7 @@ public class ForagingAntsRules extends Rules {
     possibleTypes.add(NEST);
     possibleTypes.add(FOOD);
     possibleTypes.add(ANT);
-    possibleTypes.add(HORMONE);
+    possibleTypes.add(PHERMONE);
     possibleTypes.add(EMPTY);
 
 
@@ -124,7 +124,7 @@ public class ForagingAntsRules extends Rules {
             .setStateAtCoordinate(dummy.getxCoord(), dummy.getyCoord(), new AntState(dummy.getxCoord(),
                 dummy.getyCoord(), possibleTypes.get(2), possibleColors.get(2),
                 gridManager.getStateAtCoordinate(x, y).getNumberOfMoves() + 1, false, determineDirection(dummy, x, y)));
-        return new AntState(x, y, possibleTypes.get(4), possibleColors.get(4), 0);
+        return new AntState(x, y, possibleTypes.get(3), possibleColors.get(3), 0);
 
     }
     return gridManager.getStateAtCoordinate(x, y);

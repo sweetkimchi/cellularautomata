@@ -23,7 +23,7 @@ public class AntState extends State {
   }
 
   public AntState(int xCoord, int yCoord, String type, String colorString,int numberOfMoves, boolean hasFood, String direction) {
-    super(xCoord, yCoord, type, colorString, numberOfMoves);
+    super(xCoord, yCoord, type, colorString, numberOfMoves, hasFood, direction);
     this.hasFood = hasFood;
     amountOfFood = 0;
     this.direction = direction;
@@ -43,6 +43,7 @@ public class AntState extends State {
     return amountOfFood;
   }
 
+  @Override
   public String getDirection(){
     return direction;
   }

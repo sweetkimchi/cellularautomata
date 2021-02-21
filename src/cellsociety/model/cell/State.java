@@ -16,6 +16,7 @@ public class State {
   private int numberOfMoves;
   private int energy;
   private boolean hasFood;
+  private String direction;
 
   /**
    * Basic constructor
@@ -71,13 +72,14 @@ public class State {
   }
 
   public State(int xCoord, int yCoord, String type, String colorString, int numberOfMoves,
-      boolean hasFood) {
+      boolean hasFood, String direction) {
     this.xCoord = xCoord;
     this.yCoord = yCoord;
     this.type = type;
     this.hasFood = hasFood;
     this.numberOfMoves = numberOfMoves;
     color = colorString;
+    this.direction = direction;
   }
 
 
@@ -126,5 +128,10 @@ public class State {
   }
 
   public String getDirection() {
+    return direction;
+  }
+
+  public boolean hasFood(){
+    return hasFood;
   }
 }
