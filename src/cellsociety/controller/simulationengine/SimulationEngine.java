@@ -137,30 +137,18 @@ public class SimulationEngine {
       //   rules = new WaTorModelRules(emptyRatio, populationRatio, randomSeed, energyFish, reproduceBoundary, sharkEnergy);
       int numberOfsides = 4;
 
-      rules = new ForagingAntsRules(decoder.getNumberOfAnts(), decoder.getSeed(),numberOfsides);
+      rules = new ForagingAntsRules(decoder.getNumberOfAnts(), decoder.getSeed(), decoder.getNumberOfSides(), decoder.getNestColor(), decoder.getAntColor(), decoder.getHormoneColor(), decoder.getFoodColor(), decoder.getEmptyColor());
       ForagingAntGridManager foragingAntGridManager = new ForagingAntGridManager(decoder.getRows(), decoder.getCols());
       gridManager
           .buildAntGridWithTemplate(decoder.getCoordinates(), rules.getPossibleTypes(), rules.getPossibleColors(), decoder.getRadius(), numberOfsides);
     }
     if (game.equals("navigatingsugarscape")) {
       //   rules = new WaTorModelRules(emptyRatio, populationRatio, randomSeed, energyFish, reproduceBoundary, sharkEnergy);
-      int numberOfAgents = 30;
-      int maximumSugar = 5;
-      int growBacksugar = 1;
-      int sugarMetabolism = 2;
-      int vision = 2;
-
-      int randomSeed = 10;
-      double emptyRatio = 0;
-      double patchRatio = 0.7;
-
-
       SugarScapeGridManager sugarScapeGridManager = new SugarScapeGridManager(decoder.getRows(), decoder.getCols());
-
-      rules = new NavigatingSugarScapeRules(numberOfAgents, maximumSugar, growBacksugar, sugarMetabolism, vision);
+      rules = new NavigatingSugarScapeRules(decoder.getNumAgents(), decoder.getMaxSugar(), decoder.getGrowBackSugar(), decoder.getMetabolism(), decoder.getVision(), decoder.getFullSugarColor(), decoder.getLowSugarColor(), decoder.getAgentColor(), decoder.getEmptyColor());
       sugarScapeGridManager
-          .makeSugarScapeGridWithRandomSeed(emptyRatio, patchRatio, numberOfAgents, sugarMetabolism, vision,
-              randomSeed, rules.getPossibleTypes(), rules.getPossibleColors());
+          .makeSugarScapeGridWithRandomSeed(decoder.getEmptyRatio(), decoder.getPatchRatio(), decoder.getNumAgents(), decoder.getMetabolism(), decoder.getVision(),
+                  decoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
     }
     //need to be fixed for a better design
   }

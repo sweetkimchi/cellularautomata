@@ -9,11 +9,11 @@ import java.util.Random;
 
 public class ForagingAntsRules extends Rules {
 
-  private static final String NEST_COLOR = "green";
-  private final String ANT_COLOR = "red";
-  private final String HORMONE_COLOR = "blue";
-  private final String FOOD_COLOR = "lightgrey";
-  private final String EMPTY_COLOR = "black";
+  private String NEST_COLOR;
+  private String ANT_COLOR;
+  private String HORMONE_COLOR;
+  private String FOOD_COLOR;
+  private String EMPTY_COLOR;
   private ArrayList<String> possibleTypes;
   private ArrayList<String> possibleColors;
   private String ANT = "rock";
@@ -25,10 +25,15 @@ public class ForagingAntsRules extends Rules {
   private final Random random;
   private int numberOfSides;
   
-  public ForagingAntsRules(int numberOfAnts, int randomSeed, int numberOfSides){
+  public ForagingAntsRules(int numberOfAnts, int randomSeed, int numberOfSides, String nestColor, String antColor, String hormoneColor, String foodColor, String emptyColor){
     this.numberOfAnts = numberOfAnts;
     random = new Random(randomSeed);
     this.numberOfSides = numberOfSides;
+    this.NEST_COLOR = nestColor;
+    this.ANT_COLOR = antColor;
+    this.HORMONE_COLOR = hormoneColor;
+    this.FOOD_COLOR = foodColor;
+    this.EMPTY_COLOR = emptyColor;
     initializeColorsAndTypes();
   }
 

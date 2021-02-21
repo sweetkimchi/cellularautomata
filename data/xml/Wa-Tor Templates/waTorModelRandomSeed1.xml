@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<data game="game">
+  <author>Jiyun</author>
+  <description>Indefinite pattern.</description>
+  <numCols>50</numCols>
+  <numRows>50</numRows>
+  <fishsharkratio>0.1</fishsharkratio>
+  <emptyratio>0.3</emptyratio>
+  <randomseed>0</randomseed>
+  <fishreproduce>4</fishreproduce>
+  <sharkreproduce>4</sharkreproduce>
+  <sharklives>3</sharklives>
+  <energyfromeating>3</energyfromeating>
+  <emptycolor>lightgrey</emptycolor>
+  <fishcolor>green</fishcolor>
+  <sharkcolor>blue</sharkcolor>
+  <template>random_one</template>
+  <title>WaTor Simulation</title>
+  <model>wator</model>
+</data>

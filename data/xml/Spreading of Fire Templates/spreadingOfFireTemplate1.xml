@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<data game="game">
+  <author>Jiyun</author>
+  <description>Fire starts at multiple locations. Probability of fire catching is set to 0.3, modeling a semi-dry envrionment.</description>
+  <numCols>50</numCols>
+  <numRows>50</numRows>
+  <shapeCoords>21,20,20,21,21,21,22,21</shapeCoords>
+  <template>basicfire</template>
+  <probsOfCatch>0.3</probsOfCatch>
+  <randomseed>100</randomseed>
+  <emptyratio>0.1</emptyratio>
+  <treeratio>0.8</treeratio>
+  <emptycolor>yellow</emptycolor>
+  <treecolor>green</treecolor>
+  <firecolor>red</firecolor>
+  <title>Spreading of Fire</title>
+  <model>spreadingoffire</model>
+</data>

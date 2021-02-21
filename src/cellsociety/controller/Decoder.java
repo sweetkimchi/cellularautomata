@@ -85,6 +85,10 @@ public class Decoder {
   private String scissorsColor;
   private String aliveColor;
   private String deadColor;
+  private String nestColor;
+  private String antColor;
+  private String hormoneColor;
+  private String foodColor;
   private int seed;
   private int fishRate;
   private int sharkRate;
@@ -102,16 +106,18 @@ public class Decoder {
   private float scissorsRatio;
   private int threshold;
   // Sample Ratios, Strings, and Integers //
-  private float ratio1;
+  private float patchRatio;
   private float ratio2;
   private float ratio3;
   private float ratio4;
-  private int integer1;
-  private int integer2;
-  private int integer3;
-  private int integer4;
-  private String string1;
-  private String string2;
+  private int numAgents;
+  private int maxSugar;
+  private int growBackSugar;
+  private int metabolism;
+  private int vision;
+  private String fullSugarColor;
+  private String lowSugarColor;
+  private String agentColor;
   private String description;
   private String model;
   private String title;
@@ -257,8 +263,12 @@ public class Decoder {
     //ratio2 = Float.parseFloat(attributes.getOrDefault("ratio2", "defaultratio2);
     radius = Integer.parseInt(attributes.getOrDefault("radius", "5"));
     numberOfAnts = Integer.parseInt(attributes.getOrDefault("numberofants", "50"));
-    //string1 = attributes.get("string1");
-    //string2 = attributes.get("string2");
+    numberOfSides = Integer.parseInt(attributes.getOrDefault("numberofsides", "4"));
+    nestColor = attributes.get("nestcolor").equals("") ? "green" : attributes.get("nestcolor");
+    antColor = attributes.get("antcolor").equals("") ? "red" : attributes.get("antcolor");
+    hormoneColor = attributes.get("hormonecolor").equals("") ? "blue" : attributes.get("hormonecolor");
+    foodColor = attributes.get("foodcolor").equals("") ? "lightgrey" : attributes.get("foodcolor");
+    emptyColor = attributes.get(EMPTY_COLOR).equals("") ? "black" : attributes.get(EMPTY_COLOR);
   }
   private void initializeLangton(Map<String, String> attributes){
     //ratio1 = Float.parseFloat(attributes.getOrDefault("ratio1", "defaultratio1");
@@ -269,12 +279,18 @@ public class Decoder {
     //string2 = attributes.get("string2");
   }
   private void initializeSugarScape(Map<String, String> attributes){
-    //ratio1 = Float.parseFloat(attributes.getOrDefault("ratio1", "defaultratio1");
-    //ratio2 = Float.parseFloat(attributes.getOrDefault("ratio2", "defaultratio2);
-    //integer1 = Integer.parseInt(attributes.getOrDefault("integer1", "defaultinteger1");
-    //integer2 = Integer.parseInt(attributes.getOrDefault("integer2", :defaultinteger2");
-    //string1 = attributes.get("string1");
-    //string2 = attributes.get("string2");
+    seed = Integer.parseInt(attributes.getOrDefault(SEED, "10"));
+    emptyRatio = Float.parseFloat(attributes.getOrDefault(EMPTY_RATIO, "0"));
+    patchRatio = Float.parseFloat(attributes.getOrDefault("patchratio", "0.7"));
+    numAgents = Integer.parseInt(attributes.getOrDefault("numberofagents", "30"));
+    maxSugar = Integer.parseInt(attributes.getOrDefault("maxsugar", "5"));
+    growBackSugar = Integer.parseInt(attributes.getOrDefault("growbacksugar", "1"));
+    metabolism = Integer.parseInt(attributes.getOrDefault("metabolism", "2"));
+    vision = Integer.parseInt(attributes.getOrDefault("vision", "2"));
+    fullSugarColor = attributes.get("fullsugarcolor").equals("") ? "orange" : attributes.get("fullsugarcolor");
+    lowSugarColor = attributes.get("lowsugarcolor").equals("") ? "white" : attributes.get("lowsugarcolor");
+    agentColor = attributes.get("agentcolor").equals("") ? "red" : attributes.get("agentcolor");
+    emptyColor = attributes.get(EMPTY_COLOR).equals("") ? "black" : attributes.get(EMPTY_COLOR);
   }
   public ArrayList<String> getCoordinates(){ return coordinates;}
   public int getSeed() {return seed;}
@@ -306,17 +322,26 @@ public class Decoder {
   public String getPaperColor(){return paperColor;}
   public String getAliveColor(){return aliveColor;}
   public String getDeadColor(){return deadColor;}
+  public String getNestColor(){return nestColor;}
+  public String getAntColor(){return antColor;}
+  public String getHormoneColor(){return hormoneColor;}
+  public String getFoodColor(){return foodColor;}
+  public int getNumberOfSides(){return numberOfSides;}
   //            generic getters           //
-  //public float getRatio1(){return ratio1;}
+  public float getPatchRatio(){return patchRatio;}
   //public float getRatio2(){return ratio2;}
   //public float getRatio3(){return ratio3;}
   //public float getRatio4(){return ratio4;}
   public int getRadius(){return radius;}
   public int getNumberOfAnts(){return numberOfAnts;}
-  //public int getInteger3(){return integer3;}
-  //public int getInteger4(){return integer4;}
-  //public int getString1(){return string1;}
-  //public int getString1(){return string1;}
+  public int getNumAgents(){return numAgents;}
+  public int getMaxSugar(){return maxSugar;}
+  public int getMetabolism(){return metabolism;}
+  public int getVision(){return vision;}
+  public int getGrowBackSugar(){return growBackSugar;}
+  public String getFullSugarColor(){return fullSugarColor;}
+  public String getLowSugarColor(){return lowSugarColor;}
+  public String getAgentColor(){return agentColor;}
 
   /**
    * @return model name
