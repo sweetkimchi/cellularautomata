@@ -77,8 +77,4 @@ public class SidePanel {
     return ret;
   }
 
-  public double getWidth() {
-    return panel.getWidth();
-  }
-
 }

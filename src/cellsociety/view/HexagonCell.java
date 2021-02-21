@@ -4,7 +4,9 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Polygon;
 
 /**
+ * The hexagon cell generates a regular hexagon pointed vertically to be tiled using GridGraphics.
  *
+ * @author Harrison Huang
  */
 public class HexagonCell extends Polygon {
 
@@ -12,10 +14,11 @@ public class HexagonCell extends Polygon {
   private static final double STROKE_WIDTH = .5;
 
   /**
+   * Creates a new Hexagon Cell object for the given parameters.
    *
-   * @param x
-   * @param y
-   * @param sideLength
+   * @param x position in x direction
+   * @param y position in y direction
+   * @param sideLength length of side of hexagon
    */
   public HexagonCell(double x, double y, double sideLength) {
     super();

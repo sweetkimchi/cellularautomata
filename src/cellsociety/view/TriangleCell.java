@@ -4,7 +4,9 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Polygon;
 
 /**
+ * The triangle cell generates an equilateral triangle to be tiled using GridGraphics.
  *
+ * @author Harrison Huang
  */
 public class TriangleCell extends Polygon {
 
@@ -13,11 +15,12 @@ public class TriangleCell extends Polygon {
   private static final double STROKE_WIDTH = .5;
 
   /**
+   * Creates a new Triangle Cell object for the given parameters.
    *
-   * @param x
-   * @param y
-   * @param sideLength
-   * @param pointsUp
+   * @param x position in x direction
+   * @param y position in y direction
+   * @param sideLength length of side of triangle
+   * @param pointsUp boolean of which direction the triangle points
    */
   public TriangleCell(double x, double y, double sideLength, boolean pointsUp) {
     super();
