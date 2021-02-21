@@ -2,6 +2,7 @@ package cellsociety.view;
 
 import cellsociety.controller.grid.GridManager;
 import cellsociety.controller.simulationengine.SimulationEngine;
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -144,10 +145,10 @@ public class SimulationScreen {
     Button stepButton = makeButton("StepCommand", event -> stepSimulation());
     Button resetButton = makeButton("ResetCommand", event -> resetSimulation());
     Button loadNewButton = makeButton("LoadNewCommand", event -> loadNewFile());
-    //Button saveButton = makeButton("SaveCommand", event -> simulationEngine.saveSimulation());
+    Button saveButton = makeButton("SaveCommand", event -> saveSimulation());
 
     sidePanel.addNodesToPane(startButton, stopButton, stepButton, resetButton, loadNewButton);
-    //sidePanel.addNodesToPane(saveButton);
+    sidePanel.addNodesToPane(saveButton);
     addSpeedSlider();
 
   }
@@ -176,6 +177,14 @@ public class SimulationScreen {
       checkWindowSizeChanged();
     } else {
       sidePanel.setDescription(desc);
+    }
+  }
+
+  private void saveSimulation() {
+    try {
+      simulationEngine.saveSimulation();
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
     }
   }
 
