@@ -77,12 +77,14 @@ public class RockPaperScissorsRules extends Rules {
   @Override
   public void decideState(List<Integer> neighborsOfEachTypeAtCoordinate, List<int[][]> nextStates,
       int x, int y, GridManager gridManager) {
-    int total = 0;
-    for(Integer neighbor : neighborsOfEachTypeAtCoordinate){
-      total += neighbor;
+    if(gridManager.getTypeAtCoordinate(x,y).equals(ROCK) && neighborsOfEachTypeAtCoordinate.get(1) > THRESHHOLD){
+      nextStates.get(1)[x][y] = 1;
     }
-    if(gridManager.getTypeAtCoordinate(x,y).equals(ROCK)){
-
+    if(gridManager.getTypeAtCoordinate(x,y).equals(PAPER) && neighborsOfEachTypeAtCoordinate.get(2) > THRESHHOLD){
+      nextStates.get(2)[x][y] = 1;
+    }
+    if(gridManager.getTypeAtCoordinate(x,y).equals(SCISSORS)&& neighborsOfEachTypeAtCoordinate.get(0) > THRESHHOLD){
+      nextStates.get(0)[x][y] = 1;
     }
   }
 }

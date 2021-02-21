@@ -23,7 +23,7 @@ public class GridManager {
   private State[][] stateOfCells;
 
   //EDIT THIS TO CHANGE THE NUMBER OF SIDES: 3, 4, 6, 8, 12
-  private int numberOfSides = 8;
+  private int numberOfSides = 6;
 
   /**
    * Basic constructor
@@ -100,7 +100,8 @@ public class GridManager {
           State state = new State(x, y, possibleTypes.get(1), possibleColors.get(1), 0);
           stateOfCells[x][y] = state;
         } else {
-          State state = new State(x, y, possibleTypes.get(2), possibleColors.get(2), 0);
+          int index = random.nextInt(possibleTypes.size() - 2) + 2;
+          State state = new State(x, y, possibleTypes.get(index), possibleColors.get(index), 0);
           stateOfCells[x][y] = state;
         }
       }

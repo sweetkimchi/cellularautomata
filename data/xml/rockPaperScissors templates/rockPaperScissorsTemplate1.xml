@@ -7,6 +7,7 @@
   <rockratio>0.33</rockratio>
   <scissorsratio>0.5</scissorsratio>
   <randomseed>100</randomseed>
+  <threshhold>3</threshhold>
   <emptyratio>0</emptyratio>
   <title>Rock, Paper, Scissors</title>
   <model>rockpaperscissors</model>
