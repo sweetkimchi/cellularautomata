@@ -25,8 +25,8 @@ public class ForagingAntsRules extends Rules {
   private int numberOfAnts;
   private final Random random;
   private int numberOfSides;
-  private int phermoneAmount = 30;
-  private double moveBias = 0.96;
+  private int phermoneAmount = 50;
+  private double moveBias = 0.95;
   
   public ForagingAntsRules(int numberOfAnts, int randomSeed, int numberOfSides){
     this.numberOfAnts = numberOfAnts;
@@ -129,10 +129,16 @@ public class ForagingAntsRules extends Rules {
 
     if(!gridManager.getStateAtCoordinate(x,y).hasFood()){
 
+      if(gridManager.getStateAtCoordinate(x, y).getDirection() == null){
+        gridManager.getStateAtCoordinate(x, y).setDirection("down");
+      }
+
       checkForNeighbors(gridManager,x,y,nestCells,NEST);
       checkForNeighbors(gridManager, x, y, foodCells, FOOD);
       checkForNeighbors(gridManager, x, y, emptyCells, EMPTY);
       checkForNeighbors(gridManager,x,y, phermoneCells, PHERMONE);
+
+
       if(!foodCells.isEmpty()){
         int index = random.nextInt(foodCells.size());
         State dummy = foodCells.get(index);
@@ -238,25 +244,26 @@ public class ForagingAntsRules extends Rules {
     return gridManager.getStateAtCoordinate(x, y);
   }
 
+
   private void moveTowardsNest(GridManager gridManager, int x, int y, ArrayList<State> cells, String type) {
     int xNest = Integer.parseInt(gridManager.getCoordinates().get(0));
     int yNest = Integer.parseInt(gridManager.getCoordinates().get(1));
     int distance = manhattanDistance(xNest,yNest,x,y);
-    if (x - 1 >= 0 && gridManager.getTypeAtCoordinate(x - 1, y).equals(type) && manhattanDistance(xNest,yNest,x-1,y) < distance && !gridManager.getStateAtCoordinate(x,y).getDirection().equals("right")) {
+    if (x - 1 >= 0 && gridManager.getTypeAtCoordinate(x - 1, y).equals(type) && manhattanDistance(xNest,yNest,x-1,y) < distance ) {
       //left cell
       cells.add(gridManager.getStateAtCoordinate(x - 1, y));
     }
-    if (x >= 0 && y - 1 >= 0 && gridManager.getTypeAtCoordinate(x, y - 1).equals(type) && manhattanDistance(xNest,yNest,x,y-1) < distance && !gridManager.getStateAtCoordinate(x,y).getDirection().equals("up")) {
+    if (x >= 0 && y - 1 >= 0 && gridManager.getTypeAtCoordinate(x, y - 1).equals(type) && manhattanDistance(xNest,yNest,x,y-1) < distance ) {
       //upper cell
       cells.add(gridManager.getStateAtCoordinate(x, y - 1));
     }
     if (y + 1 < gridManager.getColumn() && gridManager.getTypeAtCoordinate(x, y + 1)
-        .equals(type)&& manhattanDistance(xNest,yNest,x,y+1) < distance && !gridManager.getStateAtCoordinate(x,y).getDirection().equals("down")) {
+        .equals(type)&& manhattanDistance(xNest,yNest,x,y+1) < distance ) {
       //lower cell
       cells.add(gridManager.getStateAtCoordinate(x, y + 1));
     }
     if (x + 1 < gridManager.getRow() && gridManager.getTypeAtCoordinate(x + 1, y)
-        .equals(type)&& manhattanDistance(xNest,yNest,x+1,y) < distance && !gridManager.getStateAtCoordinate(x,y).getDirection().equals("left")) {
+        .equals(type)&& manhattanDistance(xNest,yNest,x+1,y) < distance) {
       //right cell
       cells.add(gridManager.getStateAtCoordinate(x + 1, y));
     }
@@ -272,19 +279,19 @@ public class ForagingAntsRules extends Rules {
       //left cell
       emptyCells.add(gridManager.getStateAtCoordinate(x - 1, y));
     }
-    if (x >= 0 && y - 1 >= 0 && gridManager.getTypeAtCoordinate(x, y - 1).equals(type) && probability < moveBias) {
+    if (x >= 0 && y - 1 >= 0 && gridManager.getTypeAtCoordinate(x, y - 1).equals(type) && probability < moveBias ) {
       //upper cell
       emptyCells.add(gridManager.getStateAtCoordinate(x, y - 1));
     }
     if (y + 1 < gridManager.getColumn() && gridManager.getTypeAtCoordinate(x, y + 1)
-        .equals(type)) {
+        .equals(type) ) {
       //lower cell
       emptyCells.add(gridManager.getStateAtCoordinate(x, y + 1));
     }
     if (x + 1 < gridManager.getRow() && gridManager.getTypeAtCoordinate(x + 1, y)
         .equals(type)) {
       //right cell
-      emptyCells.add(gridManager.getStateAtCoordinate(x + 1, y));
+      emptyCells.add(gridManager.getStateAtCoordinate(x + 1, y) );
     }
   }
 

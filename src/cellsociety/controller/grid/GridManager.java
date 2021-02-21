@@ -21,7 +21,7 @@ public class GridManager {
   private final int row;
   private final int col;
   private State[][] stateOfCells;
-  private int numberOfSides = 8;
+  private int numberOfSides = 4;
   private Map<String,Integer> summary;
   private ArrayList<String> coordinates;
 
@@ -340,6 +340,10 @@ public class GridManager {
 
   public ArrayList<String> getCoordinates(){
     return coordinates;
+  }
+
+  public boolean isAtEdge(int x, int y) {
+    return (x == row - 1 || x == 0 || y == col - 1 || y == 0);
   }
 }
 

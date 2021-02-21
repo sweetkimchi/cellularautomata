@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<data game="game">
+  <author>Jiyun</author>
+  <description>Generic Template</description>
+  <numCols>70</numCols>
+  <numRows>70</numRows>
+  <shapeCoords>10,10,15,60,60,60</shapeCoords>
+  <numberofants>50</numberofants>
+  <radius>2</radius>
+  <emptycolor>black</emptycolor>
+  <string2></string2>
+  <template>generic</template>
+  <title>Foraging Ants</title>
+  <model>foragingants</model>
+</data>
