@@ -23,7 +23,7 @@ public class GridManager {
   private final String EMPTY = "empty";
   private final String ALIVE = "alive";
   private State[][] stateOfCells;
-  private int numberOfSides = 6;
+  private int numberOfSides = 8;
   private Map<String,Integer> summary;
 
   /**
@@ -47,11 +47,11 @@ public class GridManager {
    * @param type     type of player occupying the starting states
    * @return updated grid that contains the starting states of the model
    */
-  public State[][] buildGridWithTemplate(ArrayList<State> template, String type) {
+  public State[][] buildGridWithTemplate(ArrayList<State> template, String type, ArrayList<String> possibleTypes, ArrayList<String> possibleColors) {
     State[][] stateOfCells = new State[row][col];
     for (int r = 0; r < row; r++) {
       for (int c = 0; c < col; c++) {
-        State state = new State(r, c, EMPTY);
+        State state = new State(r, c, EMPTY, possibleColors.get(0), 0);
         stateOfCells[r][c] = state;
       }
     }
@@ -70,7 +70,7 @@ public class GridManager {
     }
 
     for (State s : template) {
-      stateOfCells[s.getxCoord()][s.getyCoord()].setType(type);
+      stateOfCells[s.getxCoord()][s.getyCoord()] = new State(s.getxCoord(), s.getyCoord(), possibleTypes.get(1), possibleColors.get(1), 0);
     }
     this.stateOfCells = stateOfCells;
     return stateOfCells;
