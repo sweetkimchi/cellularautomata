@@ -4,9 +4,9 @@
     <description>Generic Template</description>
     <numCols>50</numCols>
     <numRows>50</numRows>
-    <shapeCoords>0,14,30,15,15,14</shapeCoords>
+    <shapeCoords>11,14,30,15,15,14</shapeCoords>
     <numberofants>50</numberofants>
-    <diameter>10</diameter>
+    <radius>10</radius>
     <string1></string1>
     <string2></string2>
     <template>generic</template>

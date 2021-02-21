@@ -89,7 +89,7 @@ public class SimulationEngine {
       rules = new GameOfLifeRule();
       template = constructStartingStateForSimulation(decoder.getCoordinates());
       gridManager
-              .buildGridWithTemplate(template, rules.getPossibleTypes(), rules.getPossibleColors(), decoder.getDiameter());
+              .buildGridWithTemplate(template, rules.getPossibleTypes(), rules.getPossibleColors(), 0);
     }
     if (game.equals("percolation")) {
       rules = new PercolationRules(decoder.getSeed());
@@ -130,9 +130,8 @@ public class SimulationEngine {
     if (game.equals("foragingants")) {
       //   rules = new WaTorModelRules(emptyRatio, populationRatio, randomSeed, energyFish, reproduceBoundary, sharkEnergy);
       rules = new ForagingAntsRules();
-      template = constructStartingStateForSimulation(decoder.getCoordinates());
       gridManager
-          .buildGridWithTemplate(template, rules.getPossibleTypes(), rules.getPossibleColors(), decoder.getDiameter());
+          .buildAntGridWithTemplate(decoder.getCoordinates(), rules.getPossibleTypes(), rules.getPossibleColors(), decoder.getRadius());
     }
     //need to be fixed for a better design
   }

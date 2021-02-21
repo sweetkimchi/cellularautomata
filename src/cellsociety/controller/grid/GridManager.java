@@ -324,5 +324,21 @@ public class GridManager {
   public String getColorAtCoordinate(int x, int y) {
     return this.stateOfCells[x][y].getColor();
   }
+
+  public void buildAntGridWithTemplate(ArrayList<String> coordinates, ArrayList<String> possibleTypes, ArrayList<String> possibleColors, int radius) {
+    State[][] stateOfCells = new State[row][col];
+
+    int counter = 0;
+    for(int index = 0; index < coordinates.size(); index+=2){
+      for(int x = Integer.parseInt(coordinates.get(index)) - radius; x < Integer.parseInt(coordinates.get(index)) + radius; x++){
+        for(int y = Integer.parseInt(coordinates.get(index)) - radius; x < Integer.parseInt(coordinates.get(index)) + radius; x++){
+          stateOfCells[x][y] = new State(x,y,possibleTypes.get(counter), possibleColors.get(counter),0);
+        }
+      }
+      counter++;
+    }
+
+    this.stateOfCells = stateOfCells;
+  }
 }
 
