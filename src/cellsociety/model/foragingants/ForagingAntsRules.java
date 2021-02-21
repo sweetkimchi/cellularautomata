@@ -143,18 +143,18 @@ public class ForagingAntsRules extends Rules {
           gridManager
               .setStateAtCoordinate(dummy.getxCoord(), dummy.getyCoord(), new AntState(dummy.getxCoord(),
                   dummy.getyCoord(), FOOD, FOOD_COLOR, 0, dummy.getEnergy() - 1));
-          return new AntState(x, y, ANT, ANT_COLOR, 0, true, "up");
+          return new AntState(x, y, ANT, ANT_COLOR, 0, true, determineDirection(dummy, x, y));
         }else{
           gridManager
               .setStateAtCoordinate(dummy.getxCoord(), dummy.getyCoord(), new AntState(dummy.getxCoord(),
                   dummy.getyCoord(), EMPTY, EMPTY_COLOR, 0, 0));
-          return new AntState(x, y, ANT, ANT_COLOR, 0, true, "up");
+          return new AntState(x, y, ANT, ANT_COLOR, 0, true, determineDirection(dummy, x, y));
         }
       }
       //if there is phermone follow the phermone
-      if(!phermoneCells.isEmpty() && !emptyCells.isEmpty()){
-        int index = random.nextInt(emptyCells.size());
-        State dummy = emptyCells.get(index);
+      if(!phermoneCells.isEmpty() ){
+        int index = random.nextInt(phermoneCells.size());
+        State dummy = phermoneCells.get(index);
         gridManager
             .setStateAtCoordinate(dummy.getxCoord(), dummy.getyCoord(), new AntState(dummy.getxCoord(),
                 dummy.getyCoord(), ANT, ANT_COLOR,
@@ -242,21 +242,21 @@ public class ForagingAntsRules extends Rules {
     int xNest = Integer.parseInt(gridManager.getCoordinates().get(0));
     int yNest = Integer.parseInt(gridManager.getCoordinates().get(1));
     int distance = manhattanDistance(xNest,yNest,x,y);
-    if (x - 1 >= 0 && gridManager.getTypeAtCoordinate(x - 1, y).equals(type) && manhattanDistance(xNest,yNest,x-1,y) < distance) {
+    if (x - 1 >= 0 && gridManager.getTypeAtCoordinate(x - 1, y).equals(type) && manhattanDistance(xNest,yNest,x-1,y) < distance && !gridManager.getStateAtCoordinate(x,y).getDirection().equals("right")) {
       //left cell
       cells.add(gridManager.getStateAtCoordinate(x - 1, y));
     }
-    if (x >= 0 && y - 1 >= 0 && gridManager.getTypeAtCoordinate(x, y - 1).equals(type) && manhattanDistance(xNest,yNest,x,y-1) < distance) {
+    if (x >= 0 && y - 1 >= 0 && gridManager.getTypeAtCoordinate(x, y - 1).equals(type) && manhattanDistance(xNest,yNest,x,y-1) < distance && !gridManager.getStateAtCoordinate(x,y).getDirection().equals("up")) {
       //upper cell
       cells.add(gridManager.getStateAtCoordinate(x, y - 1));
     }
     if (y + 1 < gridManager.getColumn() && gridManager.getTypeAtCoordinate(x, y + 1)
-        .equals(type)&& manhattanDistance(xNest,yNest,x,y+1) < distance) {
+        .equals(type)&& manhattanDistance(xNest,yNest,x,y+1) < distance && !gridManager.getStateAtCoordinate(x,y).getDirection().equals("down")) {
       //lower cell
       cells.add(gridManager.getStateAtCoordinate(x, y + 1));
     }
     if (x + 1 < gridManager.getRow() && gridManager.getTypeAtCoordinate(x + 1, y)
-        .equals(type)&& manhattanDistance(xNest,yNest,x+1,y) < distance) {
+        .equals(type)&& manhattanDistance(xNest,yNest,x+1,y) < distance && !gridManager.getStateAtCoordinate(x,y).getDirection().equals("left")) {
       //right cell
       cells.add(gridManager.getStateAtCoordinate(x + 1, y));
     }
