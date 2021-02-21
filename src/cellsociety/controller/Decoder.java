@@ -61,6 +61,7 @@ public class Decoder {
   public static final String STRING1 = "string1";
   public static final String STRING2 = "string2";
 
+  private int diameter;
   private String shape;
   private String color;
   private int numberOfSides;
@@ -214,9 +215,9 @@ public class Decoder {
     threshold = Integer.parseInt(attributes.getOrDefault(THRESHOLD, "3"));
   }
   private void initializeForagingAnts(Map<String, String> attributes){
-    //ratio1 = Float.parseFloat(attributes.getOrDefault("ratio1", "defaultratio1");
+    coordinates = new ArrayList<>(Arrays.asList(attributes.getOrDefault(COORDINATES, GOLDefaultShape).split("[,]", 0)));
     //ratio2 = Float.parseFloat(attributes.getOrDefault("ratio2", "defaultratio2);
-    //integer1 = Integer.parseInt(attributes.getOrDefault("integer1", "defaultinteger1");
+    diameter = Integer.parseInt(attributes.getOrDefault("diameter", "10"));
     //integer2 = Integer.parseInt(attributes.getOrDefault("integer2", :defaultinteger2");
     //string1 = attributes.get("string1");
     //string2 = attributes.get("string2");
@@ -258,7 +259,7 @@ public class Decoder {
   //public float getRatio2(){return ratio2;}
   //public float getRatio3(){return ratio3;}
   //public float getRatio4(){return ratio4;}
-  //public int getInteger1(){return integer1;}
+  public int getDiameter(){return diameter;}
   //public int getInteger2(){return integer2;}
   //public int getInteger3(){return integer3;}
   //public int getInteger4(){return integer4;}

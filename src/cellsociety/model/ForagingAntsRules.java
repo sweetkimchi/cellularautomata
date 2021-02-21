@@ -27,17 +27,18 @@ public class ForagingAntsRules extends Rules {
   private void initializeColorsAndTypes() {
     possibleTypes = new ArrayList<>();
     possibleColors = new ArrayList<>();
-    possibleTypes.add(EMPTY);
-    possibleTypes.add(ANT);
-    possibleTypes.add(FOOD);
     possibleTypes.add(NEST);
+    possibleTypes.add(FOOD);
+    possibleTypes.add(ANT);
     possibleTypes.add(HORMONE);
+    possibleTypes.add(EMPTY);
 
-    possibleColors.add(EMPTY_COLOR);
-    possibleColors.add(ANT_COLOR);
-    possibleColors.add(FOOD_COLOR);
+
     possibleColors.add(NEST_COLOR);
+    possibleColors.add(FOOD_COLOR);
+    possibleColors.add(ANT_COLOR);
     possibleColors.add(HORMONE_COLOR);
+    possibleColors.add(EMPTY_COLOR);
   }
   /**
    * specifies the starting states of the cells according to the simulation rule

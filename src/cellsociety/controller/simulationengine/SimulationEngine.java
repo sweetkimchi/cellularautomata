@@ -89,7 +89,7 @@ public class SimulationEngine {
       rules = new GameOfLifeRule();
       template = constructStartingStateForSimulation(decoder.getCoordinates());
       gridManager
-              .buildGridWithTemplate(template, rules.getStartingPositionCellType(), rules.getPossibleTypes(), rules.getPossibleColors());
+              .buildGridWithTemplate(template, rules.getPossibleTypes(), rules.getPossibleColors(), decoder.getDiameter());
     }
     if (game.equals("percolation")) {
       rules = new PercolationRules(decoder.getSeed());
@@ -132,7 +132,7 @@ public class SimulationEngine {
       rules = new ForagingAntsRules();
       template = constructStartingStateForSimulation(decoder.getCoordinates());
       gridManager
-          .buildGridWithTemplate(template, rules.getStartingPositionCellType(), rules.getPossibleTypes(), rules.getPossibleColors());
+          .buildGridWithTemplate(template, rules.getPossibleTypes(), rules.getPossibleColors(), decoder.getDiameter());
     }
     //need to be fixed for a better design
   }

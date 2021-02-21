@@ -40,9 +40,9 @@ public class GridManager {
    * Builds the initial stage with specific coordinates that are supplied to the GridManager
    *
    * @param template coordinates of starting states
-   * @param type     type of player occupying the starting states
    */
-  public void buildGridWithTemplate(ArrayList<State> template, String type, ArrayList<String> possibleTypes, ArrayList<String> possibleColors) {
+  public void buildGridWithTemplate(ArrayList<State> template,
+      ArrayList<String> possibleTypes, ArrayList<String> possibleColors, int diameter) {
     State[][] stateOfCells = new State[row][col];
     for (int r = 0; r < row; r++) {
       for (int c = 0; c < col; c++) {
