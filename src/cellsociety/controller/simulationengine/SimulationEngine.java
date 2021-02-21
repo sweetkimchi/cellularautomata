@@ -12,7 +12,11 @@ import cellsociety.model.spreadingoffire.SpreadingOfFireRules;
 import cellsociety.model.segregationmodel.SegregationModelRules;
 import cellsociety.model.watormodel.WaTorModelRules;
 import cellsociety.view.SimulationScreen;
+
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.List;
+
 import javafx.animation.AnimationTimer;
 import javafx.stage.Stage;
 
@@ -37,6 +41,7 @@ public class SimulationEngine {
   private AnimationTimer animation;
   private int frameDelay;
   private int sleepTimer = 0;
+  private List states;
 
 
   /**
@@ -86,44 +91,42 @@ public class SimulationEngine {
   protected void initializeModelConstructors(String game) {
 
     if (game.equals("gameOfLife")) {
-      rules = new GameOfLifeRule();
+      rules = new GameOfLifeRule(decoder.getAliveColor(), decoder.getDeadColor());
       template = constructStartingStateForSimulation(decoder.getCoordinates());
       gridManager
               .buildGridWithTemplate(template, rules.getPossibleTypes(), rules.getPossibleColors(), 0);
     }
     if (game.equals("percolation")) {
-      rules = new PercolationRules(decoder.getSeed());
-      gridManager
+      rules = new PercolationRules(decoder.getSeed(), decoder.getBlockColor(), decoder.getWaterColor(), decoder.getEmptyColor());
+      stateOfAllCells = gridManager
               .buildGridWithRandomSeed(decoder.getBlockRatio(), decoder.getWaterToEmptyRatio(),
                       decoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
     }
     if (game.equals("segregationmodel")) {
-      rules = new SegregationModelRules(
-              decoder.getSeed(), decoder.getSatisfactionThreshold());
-      gridManager
+      rules = new SegregationModelRules(decoder.getSeed(), decoder.getSatisfactionThreshold(), decoder.getColorX(), decoder.getColorY(), decoder.getEmptyColor());
+      stateOfAllCells = gridManager
               .buildGridWithRandomSeed(decoder.getEmptyRatio(), decoder.getPopulationRatio(),
                       decoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
 
     }
     if (game.equals("spreadingoffire")) {
-      rules = new SpreadingOfFireRules(decoder.getSeed(), decoder.getProbsOfCatch());
-      gridManager
+      rules = new SpreadingOfFireRules(decoder.getSeed(), decoder.getProbsOfCatch(), decoder.getEmptyColor(), decoder.getTreeColor(), decoder.getFireColor());
+      stateOfAllCells = gridManager
               .buildGridWithRandomSeed(decoder.getEmptyRatio(), decoder.getTreeRatio(),
                       decoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
     }
     if (game.equals("wator")) {
       //   rules = new WaTorModelRules(emptyRatio, populationRatio, randomSeed, energyFish, reproduceBoundary, sharkEnergy);
       rules = new WaTorModelRules(
-              decoder.getSeed(), decoder.getEnergy(), decoder.getFishRate(),
-              decoder.getSharkLives());
-      gridManager
+              decoder.getSeed(), decoder.getEnergy(), decoder.getFishRate(),decoder.getSharkLives(), decoder.getEmptyColor(), decoder.getSharkColor(), decoder.getFishColor());
+      stateOfAllCells = gridManager
               .buildGridWithRandomSeed(decoder.getEmptyRatio(), decoder.getFishSharkRatio(),
                       decoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
     }
     if (game.equals("rockpaperscissors")) {
       //   rules = new WaTorModelRules(emptyRatio, populationRatio, randomSeed, energyFish, reproduceBoundary, sharkEnergy);
-      rules = new RockPaperScissorsRules(decoder.getThreshold(), decoder.getSeed());
-      gridManager
+      rules = new RockPaperScissorsRules(decoder.getThreshold(), decoder.getSeed(), decoder.getRockColor(), decoder.getPaperColor(), decoder.getScissorsColor(), decoder.getEmptyColor());
+      stateOfAllCells = gridManager
               .buildGridWithRandomSeed(decoder.getEmptyRatio(), decoder.getScissorsRatio(),
                       decoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
     }
@@ -175,9 +178,10 @@ public class SimulationEngine {
       animation.start();
     }
   }
-  public void saveSimulation(){
+  public void saveSimulation() throws FileNotFoundException {
     stopSimulation();
-
+    states = gridManager.saveSimulation();
+    decoder.saveConfig(states);
   }
   /**
    * Allows interactive button to stop the simulation in View component

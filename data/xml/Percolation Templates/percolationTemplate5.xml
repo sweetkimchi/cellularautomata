@@ -7,6 +7,9 @@
   <watertoemptyratio>0.005</watertoemptyratio>
   <blockratio>0.55</blockratio>
   <randomseed>3232</randomseed>
+  <blockcolor></blockcolor>
+  <emptycolor></emptycolor>
+  <watercolor></watercolor>
   <template>random_one</template>
   <title>Percolation</title>
   <model>percolation</model>

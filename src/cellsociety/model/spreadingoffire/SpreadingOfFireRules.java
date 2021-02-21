@@ -34,16 +34,16 @@ public class SpreadingOfFireRules extends Rules {
    * @param randomSeed  random seed so that the results can be reproduced
    * @param probsOfFire probability of catching fire if the tree is adjacent to a burning tree
    */
-  public SpreadingOfFireRules(long randomSeed, double probsOfFire) {
+  public SpreadingOfFireRules(long randomSeed, double probsOfFire, String emptyColor, String treeColor, String fireColor) {
     random = new Random(randomSeed);
     possibleTypes = new ArrayList<>();
     possibleColors = new ArrayList<>();
     possibleTypes.add(EMPTY);
     possibleTypes.add(TREE);
     possibleTypes.add(FIRE);
-    possibleColors.add(EMPTY_COLOR);
-    possibleColors.add(TREE_COLOR);
-    possibleColors.add(FIRE_COLOR);
+    possibleColors.add(emptyColor);
+    possibleColors.add(treeColor);
+    possibleColors.add(fireColor);
     this.probsOfFire = probsOfFire;
   }
 

@@ -17,9 +17,9 @@ import java.util.Random;
  */
 public class PercolationRules extends Rules {
 
-  private final String BLOCK_COLOR = "black";
-  private final String WATER_COLOR = "blue";
-  private final String EMPTY_COLOR = "lightgrey";
+  private final String BLOCK_COLOR;
+  private final String WATER_COLOR;
+  private final String EMPTY_COLOR;
   private final ArrayList<String> possibleTypes;
   private final ArrayList<String> possibleColors;
   private final String BLOCK = "block";
@@ -31,10 +31,13 @@ public class PercolationRules extends Rules {
   /**
    * Default constructor
    */
-  public PercolationRules(long randomSeed) {
+  public PercolationRules(long randomSeed, String blockColor, String waterColor, String emptyColor) {
     random = new Random(randomSeed);
     possibleTypes = new ArrayList<>();
     possibleColors = new ArrayList<>();
+    EMPTY_COLOR = emptyColor;
+    BLOCK_COLOR = blockColor;
+    WATER_COLOR = waterColor;
     possibleTypes.add(EMPTY);
     possibleTypes.add(WATER);
     possibleTypes.add(BLOCK);

@@ -19,9 +19,9 @@ import java.util.Random;
  */
 public class WaTorModelRules extends Rules {
 
-  private final String FISH_COLOR = "green";
-  private final String SHARK_COLOR = "blue";
-  private final String EMPTY_COLOR = "lightgrey";
+  private final String FISH_COLOR;
+  private final String SHARK_COLOR;
+  private final String EMPTY_COLOR;
   private final ArrayList<String> possibleTypes;
   private final ArrayList<String> possibleColors;
   private final String FISH = "fish";
@@ -41,13 +41,16 @@ public class WaTorModelRules extends Rules {
    * @param sharkEnergy       energy of shark
    */
   public WaTorModelRules(long randomSeed, int energyFish,
-      int reproduceBoundary, int sharkEnergy) {
+      int reproduceBoundary, int sharkEnergy, String emptyColor, String sharkColor, String fishColor) {
     random = new Random(randomSeed);
     possibleTypes = new ArrayList<>();
     possibleColors = new ArrayList<>();
     ENERGY_FROM_FISH = energyFish;
     REPRODUCE_BOUNDARY = reproduceBoundary;
     DEFAULT_ENERGY = sharkEnergy;
+    EMPTY_COLOR = emptyColor;
+    FISH_COLOR = fishColor;
+    SHARK_COLOR = sharkColor;
     possibleTypes.add(EMPTY);
     possibleTypes.add(SHARK);
     possibleTypes.add(FISH);
