@@ -5,8 +5,10 @@
   <numCols>50</numCols>
   <numRows>50</numRows>
   <shapeCoords>22,20,20,21,23,21,20,22,23,22,21,23</shapeCoords>
-  <alivecolor></alivecolor>
-  <deadcolor></deadcolor>
+  <numberofsides>8</numberofsides>
+  <shape>square</shape>
+  <alivecolor>black</alivecolor>
+  <deadcolor>lightgrey</deadcolor>
   <template>toad</template>
   <title>Game of Life</title>
   <model>gameOfLife</model>

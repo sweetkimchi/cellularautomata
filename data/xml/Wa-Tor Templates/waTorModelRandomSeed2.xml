@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<data game="game">
+  <author>Jiyun</author>
+  <description>All fish are quickly eaten up by sharks. Sharks die off.</description>
+  <numCols>60</numCols>
+  <numRows>60</numRows>
+  <fishsharkratio>0.3</fishsharkratio>
+  <emptyratio>0.1</emptyratio>
+  <randomseed>3</randomseed>
+  <numberofsides>8</numberofsides>
+  <shape>square</shape>
+  <fishreproduce>10</fishreproduce>
+  <sharkreproduce>10</sharkreproduce>
+  <sharklives>4</sharklives>
+  <energyfromeating>6</energyfromeating>
+  <emptycolor>lightgrey</emptycolor>
+  <fishcolor>green</fishcolor>
+  <sharkcolor>blue</sharkcolor>
+  <template>random_two</template>
+  <title>WaTor Simulation</title>
+  <model>wator</model>
+</data>

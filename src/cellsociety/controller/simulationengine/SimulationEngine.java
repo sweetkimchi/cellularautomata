@@ -86,6 +86,8 @@ public class SimulationEngine {
   public void initializeData() {
     initializeGrid();
     initializeModelConstructors(decoder.getModel());
+    gridManager.setNumberOfSides(decoder.getNumberOfSides());
+    simulationScreen.setGridShape(decoder.getShape());
     simulationScreen.update(gridManager, decoder.getModel());
     simulationScreen.setDescription(decoder.getMyDesc());
     runSimulation();
@@ -96,6 +98,7 @@ public class SimulationEngine {
     if (game.equals("gameOfLife")) {
       rules = new GameOfLifeRule(decoder.getAliveColor(), decoder.getDeadColor());
       template = constructStartingStateForSimulation(decoder.getCoordinates());
+
       gridManager
               .buildGridWithTemplate(template, rules.getPossibleTypes(), rules.getPossibleColors(), 0);
     }
@@ -129,6 +132,7 @@ public class SimulationEngine {
     if (game.equals("rockpaperscissors")) {
       //   rules = new WaTorModelRules(emptyRatio, populationRatio, randomSeed, energyFish, reproduceBoundary, sharkEnergy);
       rules = new RockPaperScissorsRules(decoder.getThreshold(), decoder.getSeed(), decoder.getRockColor(), decoder.getPaperColor(), decoder.getScissorsColor(), decoder.getEmptyColor());
+
       gridManager
               .buildGridWithRandomSeed(decoder.getEmptyRatio(), decoder.getScissorsRatio(),
                       decoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
@@ -137,30 +141,18 @@ public class SimulationEngine {
       //   rules = new WaTorModelRules(emptyRatio, populationRatio, randomSeed, energyFish, reproduceBoundary, sharkEnergy);
       int numberOfsides = 4;
 
-      rules = new ForagingAntsRules(decoder.getNumberOfAnts(), decoder.getSeed(),numberOfsides);
+      rules = new ForagingAntsRules(decoder.getNumberOfAnts(), decoder.getSeed(), decoder.getNumberOfSides(), decoder.getNestColor(), decoder.getAntColor(), decoder.getPhermoneColor(), decoder.getFoodColor(), decoder.getEmptyColor(), decoder.getWeakPhermoneColor(), decoder.getMoveBias(), decoder.getPhermoneAmount());
       ForagingAntGridManager foragingAntGridManager = new ForagingAntGridManager(decoder.getRows(), decoder.getCols());
       gridManager
-          .buildAntGridWithTemplate(decoder.getCoordinates(), rules.getPossibleTypes(), rules.getPossibleColors(), decoder.getRadius(), numberOfsides);
+          .buildAntGridWithTemplate(decoder.getCoordinates(), rules.getPossibleTypes(), rules.getPossibleColors(), decoder.getRadius(), decoder.getNumberOfSides());
     }
     if (game.equals("navigatingsugarscape")) {
       //   rules = new WaTorModelRules(emptyRatio, populationRatio, randomSeed, energyFish, reproduceBoundary, sharkEnergy);
-      int numberOfAgents = 30;
-      int maximumSugar = 5;
-      int growBacksugar = 1;
-      int sugarMetabolism = 2;
-      int vision = 2;
-
-      int randomSeed = 10;
-      double emptyRatio = 0;
-      double patchRatio = 0.7;
-
-
       SugarScapeGridManager sugarScapeGridManager = new SugarScapeGridManager(decoder.getRows(), decoder.getCols());
-
-      rules = new NavigatingSugarScapeRules(numberOfAgents, maximumSugar, growBacksugar, sugarMetabolism, vision);
+      rules = new NavigatingSugarScapeRules(decoder.getNumAgents(), decoder.getMaxSugar(), decoder.getGrowBackSugar(), decoder.getMetabolism(), decoder.getVision(), decoder.getFullSugarColor(), decoder.getLowSugarColor(), decoder.getAgentColor(), decoder.getEmptyColor());
       sugarScapeGridManager
-          .makeSugarScapeGridWithRandomSeed(emptyRatio, patchRatio, numberOfAgents, sugarMetabolism, vision,
-              randomSeed, rules.getPossibleTypes(), rules.getPossibleColors());
+          .makeSugarScapeGridWithRandomSeed(decoder.getEmptyRatio(), decoder.getPatchRatio(), decoder.getNumAgents(), decoder.getMetabolism(), decoder.getVision(),
+                  decoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
     }
     //need to be fixed for a better design
   }

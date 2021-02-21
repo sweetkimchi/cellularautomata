@@ -5,8 +5,10 @@
   <numCols>50</numCols>
   <numRows>50</numRows>
   <shapeCoords>21,20,22,21,20,22,21,22,22,22</shapeCoords>
-  <alivecolor></alivecolor>
-  <deadcolor></deadcolor>
+  <numberofsides>8</numberofsides>
+  <shape>square</shape>
+  <alivecolor>black</alivecolor>
+  <deadcolor>lightgrey</deadcolor>
   <template>glider</template>
   <title>Game of Life</title>
   <model>gameOfLife</model>

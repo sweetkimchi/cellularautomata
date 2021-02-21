@@ -4,12 +4,19 @@
     <description>Generic Template</description>
     <numCols>50</numCols>
     <numRows>50</numRows>
-    <ratio1></ratio1>
-    <ratio2></ratio2>
-    <integer1></integer1>
-    <integer2></integer2>
-    <string1></string1>
-    <string2></string2>
+    <numberofsides></numberofsides>
+    <randomseed>10</randomseed>
+    <emptyratio>0</emptyratio>
+    <patchratio>0.7</patchratio>
+    <numberofagents>30</numberofagents>
+    <maxsugar>5</maxsugar>
+    <growbacksugar>1</growbacksugar>
+    <metabolism>2</metabolism>
+    <vision>2</vision>
+    <fullsugarcolor>orange</fullsugarcolor>
+    <lowsugarcolor>white</lowsugarcolor>
+    <agentcolor>red</agentcolor>
+    <emptycolor>black</emptycolor>
     <template>generic</template>
     <title>SugarScape</title>
     <model>sugarscape</model>
