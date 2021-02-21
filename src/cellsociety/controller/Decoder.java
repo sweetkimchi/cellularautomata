@@ -190,7 +190,9 @@ public class Decoder {
   public int getFishRate(){return fishRate;}
   public int getSharkLives(){return sharkLives;}
   public float getFishSharkRatio(){return fishSharkRatio;}
-
+  public float getRockRatio(){return rockRatio;}
+  public float getScissorsRatio(){return scissorsRatio;}
+  public int getThreshold(){return threshold;}
   /**
    * @return model name
    */
