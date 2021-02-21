@@ -2,14 +2,13 @@ package cellsociety.view;
 
 import cellsociety.controller.grid.GridManager;
 import cellsociety.controller.simulationengine.SimulationEngine;
-import cellsociety.model.cell.State;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -31,6 +30,8 @@ public class SimulationScreen {
   public static final String DEFAULT_RESOURCE_FOLDER =
       "/" + DEFAULT_RESOURCE_PACKAGE.replace(".", "/");
   public static final String DEFAULT_STYLESHEET = "default.css";
+  public static final String LIGHT_STYLESHEET = "light.css";
+  public static final String DARK_STYLESHEET = "dark.css";
   public static final double WINDOW_WIDTH = 800;
   public static final double WINDOW_HEIGHT = 600;
   private static final String language = "English";
@@ -39,7 +40,7 @@ public class SimulationScreen {
   private static final double DEFAULT_SPEED = 30;
   private final Group sceneNodes;
   private final Stage stage;
-  private final ResourceBundle resources;
+  private ResourceBundle resources;
   private final SimulationEngine simulationEngine;
   private SidePanel sidePanel;
   private GridGraphics gridGraphics;
@@ -62,16 +63,33 @@ public class SimulationScreen {
     sceneNodes = new Group();
     resources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + language);
     initializeStartScreen();
-    //initialize();
   }
 
   private void initializeStartScreen() {
     StartScreen startScreen = new StartScreen();
     Button beginButton = makeButton("BeginCommand",event -> initialize());
     startScreen.addTitle(resources.getString("SimulationTitle"));
-    startScreen.addButton(beginButton);
-
+    startScreen.addNode(beginButton);
+    startScreen.addNode(createLanguageBox(startScreen));
     displayScreen(startScreen.getPane());
+  }
+
+  private Node createLanguageBox(StartScreen screen) {
+    ComboBox<String> box = new ComboBox<>();
+    box.getItems().addAll("English","Chinese","Korean");
+    box.setOnAction(event -> {
+      setResourcePackage(box.getValue());
+      screen.setButtonText(resources.getString("BeginCommand"));
+      screen.setTitle(resources.getString("SimulationTitle"));
+      stage.setTitle(resources.getString("SimulationTitle"));
+    });
+    box.setValue(box.getItems().get(0));
+    return box;
+  }
+
+  private void setResourcePackage(String language) {
+    resources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + language);
+
   }
 
   private void initialize() {
@@ -91,16 +109,16 @@ public class SimulationScreen {
 
   private void addTopPanelControls() {
     Map<String,String> colorTypes = new HashMap<>();
-    colorTypes.put(resources.getString("DefaultColor"),"DefaultColorFile");
-    colorTypes.put(resources.getString("LightColor"),"LightColorFile");
-    colorTypes.put(resources.getString("DarkColor"),"DarkColorFile");
+    colorTypes.put(resources.getString("DefaultColor"),DEFAULT_STYLESHEET);
+    colorTypes.put(resources.getString("LightColor"),LIGHT_STYLESHEET);
+    colorTypes.put(resources.getString("DarkColor"),DARK_STYLESHEET);
     ComboBox<String> comboBox = new ComboBox<>();
     for (String s : colorTypes.keySet()) {
       comboBox.getItems().add(s);
     }
-    comboBox.setValue(comboBox.getItems().get(0));
+    comboBox.setValue(resources.getString("DefaultColor"));
     comboBox.setOnAction(event -> {
-      setStylesheet(resources.getString(colorTypes.get(comboBox.getValue())));
+      setStylesheet(colorTypes.get(comboBox.getValue()));
     });
     topPanel.add(comboBox);
   }

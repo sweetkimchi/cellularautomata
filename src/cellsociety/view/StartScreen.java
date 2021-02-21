@@ -1,34 +1,48 @@
 package cellsociety.view;
 
+import java.sql.BatchUpdateException;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 
 public class StartScreen {
 
-  private GridPane pane;
+  private VBox box;
+  Label label;
 
   public StartScreen() {
-    pane = new GridPane();
-    pane.setAlignment(Pos.CENTER);
+    box = new VBox();
+    box.setAlignment(Pos.CENTER);
   }
 
-  public GridPane getPane() {
-    return pane;
+  public Pane getPane() {
+    return box;
   }
 
   public void addTitle(String title) {
-    Label label = new Label(title);
+    label = new Label(title);
     label.setId("title");
-    pane.add(label,0,0);
+    box.getChildren().add(label);
   }
 
-  public void addButton(Button beginButton) {
-    beginButton.setAlignment(Pos.CENTER);
-    pane.add(beginButton,0,1);
+  public void setTitle(String title) {
+    if (label == null) addTitle(title);
+    else label.setText(title);
+  }
+
+  public void setButtonText(String text) {
+    for (Node node : box.getChildren()) {
+      if (node instanceof Button) {
+        ((Button) node).setText(text);
+      }
+    }
+  }
+
+  public void addNode(Node node) {
+    box.getChildren().add(node);
   }
 }
