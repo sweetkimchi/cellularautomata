@@ -81,7 +81,7 @@ public class GridGraphics {
           node = makeHexagon(r, c);
         }
         else break;
-        node.getStyleClass().add(currentModel + "-" + currentStates[r][c].getType());
+        node.getStyleClass().add(currentModel + "-" + currentStates[c][r].getType());
         paneForGrid.getChildren().add(node);
 
       }
