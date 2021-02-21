@@ -177,8 +177,7 @@ public class Decoder {
     chooser.setTitle("Choose Directory");
     chooser.getExtensionFilters().setAll(new FileChooser.ExtensionFilter("text file ", DATA_FILE_EXTENSION));
     chooser.setInitialDirectory(new File(System.getProperty("user.dir")));
-    File file = null;
-    while(file == null) file = chooser.showSaveDialog(null);
+    File file = chooser.showSaveDialog(null);
     createConfigFile(file, savedConfig);
   }
   private void createConfigFile(File file, Map<String, String> attributes) throws FileNotFoundException {
