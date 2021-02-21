@@ -2,6 +2,7 @@ package cellsociety.controller.simulationengine;
 
 import cellsociety.controller.Decoder;
 import cellsociety.controller.grid.GridManager;
+import cellsociety.model.ForagingAntsRules;
 import cellsociety.model.RockPaperScissorsRules;
 import cellsociety.model.cell.State;
 import cellsociety.model.gameoflife.GameOfLifeRule;
@@ -31,7 +32,6 @@ public class SimulationEngine {
   private final SimulationScreen simulationScreen;
   private GridManager gridManager;
   private Rules rules;
-  private State[][] stateOfAllCells;
   private ArrayList<State> template;
   private Decoder decoder;
   private AnimationTimer animation;
@@ -88,27 +88,26 @@ public class SimulationEngine {
     if (game.equals("gameOfLife")) {
       rules = new GameOfLifeRule();
       template = constructStartingStateForSimulation(decoder.getCoordinates());
-      stateOfAllCells = gridManager
-              .buildGridWithTemplate(template, rules.getStartingPositionCellType());
-      updateCellState();
+      gridManager
+              .buildGridWithTemplate(template, rules.getStartingPositionCellType(), rules.getPossibleTypes(), rules.getPossibleColors());
     }
     if (game.equals("percolation")) {
       rules = new PercolationRules(decoder.getSeed());
-      stateOfAllCells = gridManager
+      gridManager
               .buildGridWithRandomSeed(decoder.getBlockRatio(), decoder.getWaterToEmptyRatio(),
                       decoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
     }
     if (game.equals("segregationmodel")) {
       rules = new SegregationModelRules(
               decoder.getSeed(), decoder.getSatisfactionThreshold());
-      stateOfAllCells = gridManager
+      gridManager
               .buildGridWithRandomSeed(decoder.getEmptyRatio(), decoder.getPopulationRatio(),
                       decoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
 
     }
     if (game.equals("spreadingoffire")) {
       rules = new SpreadingOfFireRules(decoder.getSeed(), decoder.getProbsOfCatch());
-      stateOfAllCells = gridManager
+      gridManager
               .buildGridWithRandomSeed(decoder.getEmptyRatio(), decoder.getTreeRatio(),
                       decoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
     }
@@ -117,16 +116,23 @@ public class SimulationEngine {
       rules = new WaTorModelRules(
               decoder.getSeed(), decoder.getEnergy(), decoder.getFishRate(),
               decoder.getSharkLives());
-      stateOfAllCells = gridManager
+      gridManager
               .buildGridWithRandomSeed(decoder.getEmptyRatio(), decoder.getFishSharkRatio(),
                       decoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
     }
     if (game.equals("rockpaperscissors")) {
       //   rules = new WaTorModelRules(emptyRatio, populationRatio, randomSeed, energyFish, reproduceBoundary, sharkEnergy);
       rules = new RockPaperScissorsRules(decoder.getThreshold(), decoder.getSeed());
-      stateOfAllCells = gridManager
+      gridManager
               .buildGridWithRandomSeed(decoder.getEmptyRatio(), decoder.getScissorsRatio(),
                       decoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
+    }
+    if (game.equals("foragingants")) {
+      //   rules = new WaTorModelRules(emptyRatio, populationRatio, randomSeed, energyFish, reproduceBoundary, sharkEnergy);
+      rules = new ForagingAntsRules();
+      template = constructStartingStateForSimulation(decoder.getCoordinates());
+      gridManager
+          .buildGridWithTemplate(template, rules.getStartingPositionCellType(), rules.getPossibleTypes(), rules.getPossibleColors());
     }
     //need to be fixed for a better design
   }
@@ -170,7 +176,10 @@ public class SimulationEngine {
       animation.start();
     }
   }
+  public void saveSimulation(){
+    stopSimulation();
 
+  }
   /**
    * Allows interactive button to stop the simulation in View component
    */

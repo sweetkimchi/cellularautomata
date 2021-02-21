@@ -19,11 +19,8 @@ public class GridManager {
 
   private final int row;
   private final int col;
-  private final List<List<State>> grid;
-  private final String EMPTY = "empty";
-  private final String ALIVE = "alive";
   private State[][] stateOfCells;
-  private int numberOfSides = 6;
+  private int numberOfSides = 8;
   private Map<String,Integer> summary;
 
   /**
@@ -35,7 +32,6 @@ public class GridManager {
   public GridManager(int row, int col) {
     this.row = row;
     this.col = col;
-    grid = new ArrayList<>();
     summary = new HashMap<>();
 
   }
@@ -47,14 +43,15 @@ public class GridManager {
    * @param type     type of player occupying the starting states
    * @return updated grid that contains the starting states of the model
    */
-  public State[][] buildGridWithTemplate(ArrayList<State> template, String type) {
+  public State[][] buildGridWithTemplate(ArrayList<State> template, String type, ArrayList<String> possibleTypes, ArrayList<String> possibleColors) {
     State[][] stateOfCells = new State[row][col];
     for (int r = 0; r < row; r++) {
       for (int c = 0; c < col; c++) {
-        State state = new State(r, c, EMPTY);
+        State state = new State(r, c, possibleTypes.get(0), possibleColors.get(0), 0);
         stateOfCells[r][c] = state;
       }
     }
+    System.out.println();
 
     int xSize = 0;
     int ySize = 0;
@@ -69,7 +66,7 @@ public class GridManager {
     }
 
     for (State s : template) {
-      stateOfCells[s.getxCoord()][s.getyCoord()].setType(type);
+      stateOfCells[s.getxCoord()][s.getyCoord()] = new State(s.getxCoord(), s.getyCoord(), possibleTypes.get(1), possibleColors.get(1), 0);
     }
     this.stateOfCells = stateOfCells;
     return stateOfCells;
@@ -87,8 +84,6 @@ public class GridManager {
    */
   public State[][] buildGridWithRandomSeed(double emptyRatio, double populationRatio, int seed,
       ArrayList<String> possibleTypes, ArrayList<String> possibleColors) {
-//    System.out.println("FEAWFEW" + emptyRatio);
-//    System.out.println("????" + (emptyRatio + (1-emptyRatio) * populationRatio));
     Random random = new Random(seed);
     State[][] stateOfCells = new State[row][col];
     for (int x = 0; x < row; x++) {
