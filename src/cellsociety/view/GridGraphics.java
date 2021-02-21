@@ -68,20 +68,20 @@ public class GridGraphics {
   private void updateStates() {
     if (currentStates==null || currentModel==null) return;
     reset();
-    for (int x = 0; x < currentStates.length; x++) {
-      for (int y = 0; y < currentStates[0].length; y++) {
+    for (int y = 0; y < currentStates.length; y++) {
+      for (int x = 0; x < currentStates[0].length; x++) {
         Node node;
         if (GRID_SHAPE == 1) {
-          node = makeSquare(x, y);
+          node = makeSquare(y, x);
         }
         else if (GRID_SHAPE == 2) {
-          node = makeTriangle(x, y);
+          node = makeTriangle(y, x);
         }
         else if (GRID_SHAPE == 3) {
-          node = makeHexagon(x, y);
+          node = makeHexagon(y, x);
         }
         else break;
-        node.getStyleClass().add(currentModel + "-" + currentStates[y][x].getType());
+        node.getStyleClass().add(currentModel + "-" + currentStates[x][y].getType());
         paneForGrid.getChildren().add(node);
 
       }
