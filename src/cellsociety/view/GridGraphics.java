@@ -1,11 +1,9 @@
 package cellsociety.view;
 
 import cellsociety.controller.grid.GridManager;
-import cellsociety.model.cell.State;
 import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
-import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
@@ -22,8 +20,10 @@ public class GridGraphics {
   private static final double GRID_GAP_SIZE = 0.5;
   private double gridSize;
 
-  // square = 1, triangle = 2, hexagon = 3
-  private static final int GRID_SHAPE = 3;
+  private String gridShape;
+  private static final String SQUARE = "square";
+  private static final String TRIANGLE = "triangle";
+  private static final String HEXAGON = "hexagon";
 
   private static final double TRIANGLE_RATIO = Math.sqrt(3)/2;
   private static final double HEXAGON_OFFSET_CORRECTION = 0.5;
@@ -63,13 +63,13 @@ public class GridGraphics {
     for (int y = 0; y < gridManager.getColumn(); y++) {
       for (int x = 0; x < gridManager.getRow(); x++) {
         Shape shape;
-        if (GRID_SHAPE == 1) {
+        if (gridShape.equals(SQUARE)) {
           shape = makeSquare(y, x, gridManager.getRow());
         }
-        else if (GRID_SHAPE == 2) {
+        else if (gridShape.equals(TRIANGLE)) {
           shape = makeTriangle(y, x, gridManager.getRow());
         }
-        else if (GRID_SHAPE == 3) {
+        else if (gridShape.equals(HEXAGON)) {
           shape = makeHexagon(y, x, gridManager.getRow());
         }
         else break;
@@ -133,6 +133,15 @@ public class GridGraphics {
 
   private double calculateGridSize(double size) {
     return size - NUM_BUFFERS * GRID_BUFFER;
+  }
+
+  /**
+   * Sets the grid shape to square, triangle, or hexagon.
+   *
+   * @param shape String for shape
+   */
+  public void setGridShape(String shape) {
+    gridShape = shape;
   }
 
 }
