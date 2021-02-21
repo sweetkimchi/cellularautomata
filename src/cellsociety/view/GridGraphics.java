@@ -14,8 +14,8 @@ import javafx.scene.shape.Rectangle;
  */
 public class GridGraphics {
 
-  private static final double GRID_BUFFER = 20;
-  private static final double NUM_BUFFERS = 2;
+  private static final double GRID_BUFFER = 15;
+  private static final double NUM_BUFFERS = 4;
   private static final double GRID_GAP_SIZE = 0.5;
   private double gridSize;
 
