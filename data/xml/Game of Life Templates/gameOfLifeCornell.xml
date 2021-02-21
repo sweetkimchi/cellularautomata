@@ -5,8 +5,10 @@
   <numCols>50</numCols>
   <numRows>50</numRows>
   <shapeCoords>21,20,20,21,21,21,22,21</shapeCoords>
-  <alivecolor></alivecolor>
-  <deadcolor></deadcolor>
+  <numsides>6</numsides>
+  <shape>hexagon</shape>
+  <alivecolor>black</alivecolor>
+  <deadcolor>lightgrey</deadcolor>
   <template>cornell</template>
   <title>Game of Life</title>
   <model>gameOfLife</model>

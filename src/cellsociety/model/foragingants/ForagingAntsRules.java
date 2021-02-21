@@ -9,12 +9,12 @@ import java.util.Random;
 
 public class ForagingAntsRules extends Rules {
 
-  private static final String NEST_COLOR = "green";
-  private final String ANT_COLOR = "red";
-  private final String PHERMONE_COLOR = "blue";
-  private final String FOOD_COLOR = "lightgrey";
-  private final String EMPTY_COLOR = "black";
-  private final String WEAK_PHERMONE_COLOR = "skyblue";
+  private String NEST_COLOR;
+  private String ANT_COLOR;
+  private String PHERMONE_COLOR;
+  private String FOOD_COLOR;
+  private String EMPTY_COLOR;
+  private String WEAK_PHERMONE_COLOR;
   private ArrayList<String> possibleTypes;
   private ArrayList<String> possibleColors;
   private String ANT = "rock";
@@ -25,13 +25,21 @@ public class ForagingAntsRules extends Rules {
   private int numberOfAnts;
   private final Random random;
   private int numberOfSides;
-  private int phermoneAmount = 30;
-  private double moveBias = 0.95;
+  private int phermoneAmount;
+  private double moveBias;
   
-  public ForagingAntsRules(int numberOfAnts, int randomSeed, int numberOfSides){
+  public ForagingAntsRules(int numberOfAnts, int randomSeed, int numberOfSides, String nestColor, String antColor, String phermoneColor, String foodColor, String emptyColor, String weakPhermoneColor, double bias, int phermoneAmount){
     this.numberOfAnts = numberOfAnts;
     random = new Random(randomSeed);
+    this.phermoneAmount = phermoneAmount;
+    this.moveBias = bias;
     this.numberOfSides = numberOfSides;
+    this.NEST_COLOR = nestColor;
+    this.ANT_COLOR = antColor;
+    this.PHERMONE_COLOR = phermoneColor;
+    this.FOOD_COLOR = foodColor;
+    this.EMPTY_COLOR = emptyColor;
+    this.WEAK_PHERMONE_COLOR = weakPhermoneColor;
     initializeColorsAndTypes();
   }
 
@@ -129,16 +137,10 @@ public class ForagingAntsRules extends Rules {
 
     if(!gridManager.getStateAtCoordinate(x,y).hasFood()){
 
-      if(gridManager.getStateAtCoordinate(x, y).getDirection() == null){
-        gridManager.getStateAtCoordinate(x, y).setDirection("down");
-      }
-
       checkForNeighbors(gridManager,x,y,nestCells,NEST);
       checkForNeighbors(gridManager, x, y, foodCells, FOOD);
       checkForNeighbors(gridManager, x, y, emptyCells, EMPTY);
       checkForNeighbors(gridManager,x,y, phermoneCells, PHERMONE);
-
-
       if(!foodCells.isEmpty()){
         int index = random.nextInt(foodCells.size());
         State dummy = foodCells.get(index);
@@ -149,18 +151,18 @@ public class ForagingAntsRules extends Rules {
           gridManager
               .setStateAtCoordinate(dummy.getxCoord(), dummy.getyCoord(), new AntState(dummy.getxCoord(),
                   dummy.getyCoord(), FOOD, FOOD_COLOR, 0, dummy.getEnergy() - 1));
-          return new AntState(x, y, ANT, ANT_COLOR, 0, true, determineDirection(dummy, x, y));
+          return new AntState(x, y, ANT, ANT_COLOR, 0, true, "up");
         }else{
           gridManager
               .setStateAtCoordinate(dummy.getxCoord(), dummy.getyCoord(), new AntState(dummy.getxCoord(),
                   dummy.getyCoord(), EMPTY, EMPTY_COLOR, 0, 0));
-          return new AntState(x, y, ANT, ANT_COLOR, 0, true, determineDirection(dummy, x, y));
+          return new AntState(x, y, ANT, ANT_COLOR, 0, true, "up");
         }
       }
       //if there is phermone follow the phermone
-      if(!phermoneCells.isEmpty() ){
-        int index = random.nextInt(phermoneCells.size());
-        State dummy = phermoneCells.get(index);
+      if(!phermoneCells.isEmpty() && !emptyCells.isEmpty()){
+        int index = random.nextInt(emptyCells.size());
+        State dummy = emptyCells.get(index);
         gridManager
             .setStateAtCoordinate(dummy.getxCoord(), dummy.getyCoord(), new AntState(dummy.getxCoord(),
                 dummy.getyCoord(), ANT, ANT_COLOR,
@@ -244,21 +246,20 @@ public class ForagingAntsRules extends Rules {
     return gridManager.getStateAtCoordinate(x, y);
   }
 
-
   private void moveTowardsNest(GridManager gridManager, int x, int y, ArrayList<State> cells, String type) {
     int xNest = Integer.parseInt(gridManager.getCoordinates().get(0));
     int yNest = Integer.parseInt(gridManager.getCoordinates().get(1));
     int distance = manhattanDistance(xNest,yNest,x,y);
-    if (x - 1 >= 0 && gridManager.getTypeAtCoordinate(x - 1, y).equals(type) && manhattanDistance(xNest,yNest,x-1,y) < distance ) {
+    if (x - 1 >= 0 && gridManager.getTypeAtCoordinate(x - 1, y).equals(type) && manhattanDistance(xNest,yNest,x-1,y) < distance) {
       //left cell
       cells.add(gridManager.getStateAtCoordinate(x - 1, y));
     }
-    if (x >= 0 && y - 1 >= 0 && gridManager.getTypeAtCoordinate(x, y - 1).equals(type) && manhattanDistance(xNest,yNest,x,y-1) < distance ) {
+    if (x >= 0 && y - 1 >= 0 && gridManager.getTypeAtCoordinate(x, y - 1).equals(type) && manhattanDistance(xNest,yNest,x,y-1) < distance) {
       //upper cell
       cells.add(gridManager.getStateAtCoordinate(x, y - 1));
     }
     if (y + 1 < gridManager.getColumn() && gridManager.getTypeAtCoordinate(x, y + 1)
-        .equals(type)&& manhattanDistance(xNest,yNest,x,y+1) < distance ) {
+        .equals(type)&& manhattanDistance(xNest,yNest,x,y+1) < distance) {
       //lower cell
       cells.add(gridManager.getStateAtCoordinate(x, y + 1));
     }
@@ -279,19 +280,19 @@ public class ForagingAntsRules extends Rules {
       //left cell
       emptyCells.add(gridManager.getStateAtCoordinate(x - 1, y));
     }
-    if (x >= 0 && y - 1 >= 0 && gridManager.getTypeAtCoordinate(x, y - 1).equals(type) && probability < moveBias ) {
+    if (x >= 0 && y - 1 >= 0 && gridManager.getTypeAtCoordinate(x, y - 1).equals(type) && probability < moveBias) {
       //upper cell
       emptyCells.add(gridManager.getStateAtCoordinate(x, y - 1));
     }
     if (y + 1 < gridManager.getColumn() && gridManager.getTypeAtCoordinate(x, y + 1)
-        .equals(type) ) {
+        .equals(type)) {
       //lower cell
       emptyCells.add(gridManager.getStateAtCoordinate(x, y + 1));
     }
     if (x + 1 < gridManager.getRow() && gridManager.getTypeAtCoordinate(x + 1, y)
         .equals(type)) {
       //right cell
-      emptyCells.add(gridManager.getStateAtCoordinate(x + 1, y) );
+      emptyCells.add(gridManager.getStateAtCoordinate(x + 1, y));
     }
   }
 

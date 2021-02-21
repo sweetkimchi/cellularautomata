@@ -7,9 +7,11 @@
   <watertoemptyratio>0.01</watertoemptyratio>
   <blockratio>0.6</blockratio>
   <randomseed>100</randomseed>
-  <blockcolor></blockcolor>
-  <emptycolor></emptycolor>
-  <watercolor></watercolor>
+  <numberofsides>8</numberofsides>
+  <shape>square</shape>
+  <blockcolor>black</blockcolor>
+  <emptycolor>lightgrey</emptycolor>
+  <watercolor>blue</watercolor>
   <template>random_one</template>
   <title>Percolation</title>
   <model>percolation</model>

@@ -7,10 +7,10 @@ import java.util.List;
 import java.util.Random;
 
 public class NavigatingSugarScapeRules extends Rules {
-  private final String FULL_SUGAR_COLOR = "orange";
-  private final String LOW_SUGAR_COLOR  = "white";
-  private final String AGENT_COLOR = "red";
-  private final String EMPTY_COLOR = "black";
+  private String FULL_SUGAR_COLOR;
+  private String LOW_SUGAR_COLOR;
+  private String AGENT_COLOR;
+  private String EMPTY_COLOR;
   private ArrayList<String> possibleTypes;
   private ArrayList<String> possibleColors;
   private String FULLPATCH = "fullpatch";
@@ -22,7 +22,12 @@ public class NavigatingSugarScapeRules extends Rules {
   private double THRESHHOLD;
   private Random random;
 
-  public NavigatingSugarScapeRules(int numberOfAgents, int maximumSugar, int growBackSugar, int sugarMetabolism, int vision){
+  public NavigatingSugarScapeRules(int numberOfAgents, int maximumSugar, int growBackSugar, int sugarMetabolism, int vision,
+                                   String fullColor, String lowColor, String agentColor, String emptyColor){
+    this.FULL_SUGAR_COLOR = fullColor;
+    this.LOW_SUGAR_COLOR = lowColor;
+    this.AGENT_COLOR = agentColor;
+    this.EMPTY_COLOR = emptyColor;
     initializeColorsAndTypes();
     initializePatches();
   }
