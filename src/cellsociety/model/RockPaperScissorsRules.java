@@ -27,6 +27,7 @@ public class RockPaperScissorsRules extends Rules {
 
   public RockPaperScissorsRules(int threshold, long randomSeed) {
     THRESHHOLD = threshold;
+    System.out.println(THRESHHOLD);
     random = new Random(randomSeed);
     initializeColorsAndTypes();
   }
@@ -61,7 +62,7 @@ public class RockPaperScissorsRules extends Rules {
    */
   @Override
   public ArrayList<String> getPossibleTypes() {
-    return null;
+    return possibleTypes;
   }
 
   /**
@@ -71,20 +72,21 @@ public class RockPaperScissorsRules extends Rules {
    */
   @Override
   public ArrayList<String> getPossibleColors() {
-    return null;
+    return possibleColors;
   }
 
   @Override
   public void decideState(List<Integer> neighborsOfEachTypeAtCoordinate, List<int[][]> nextStates,
       int x, int y, GridManager gridManager) {
-    if(gridManager.getTypeAtCoordinate(x,y).equals(ROCK) && neighborsOfEachTypeAtCoordinate.get(1) > THRESHHOLD){
-      nextStates.get(1)[x][y] = 1;
-    }
-    if(gridManager.getTypeAtCoordinate(x,y).equals(PAPER) && neighborsOfEachTypeAtCoordinate.get(2) > THRESHHOLD){
+
+    if(gridManager.getTypeAtCoordinate(x,y).equals(ROCK) && neighborsOfEachTypeAtCoordinate.get(2) > THRESHHOLD){
       nextStates.get(2)[x][y] = 1;
     }
-    if(gridManager.getTypeAtCoordinate(x,y).equals(SCISSORS)&& neighborsOfEachTypeAtCoordinate.get(0) > THRESHHOLD){
-      nextStates.get(0)[x][y] = 1;
+    if(gridManager.getTypeAtCoordinate(x,y).equals(PAPER) && neighborsOfEachTypeAtCoordinate.get(3) > THRESHHOLD){
+      nextStates.get(3)[x][y] = 1;
+    }
+    if(gridManager.getTypeAtCoordinate(x,y).equals(SCISSORS)&& neighborsOfEachTypeAtCoordinate.get(1) > THRESHHOLD){
+      nextStates.get(1)[x][y] = 1;
     }
   }
 }

@@ -42,8 +42,8 @@ public class Decoder {
   public static final String SEED = "randomseed";
   public static final String ROCK_RATIO = "rockratio";
   public static final String SCISSORS_RATIO = "scissorsratio";
-  public static final String THRESHOLD = "threshold";
-  public static final List<String> MODEL_TYPES = List.of("spreadingoffire", "segregationmodel", "percolation", "wator", "gameOfLife");
+  public static final String THRESHOLD = "threshhold";
+  public static final List<String> MODEL_TYPES = List.of("spreadingoffire", "segregationmodel", "percolation", "wator", "gameOfLife","rockpaperscissors");
   public static final String GOLDefaultShape = "25,25,25,26,25,27";
   public static final String FireDefaultShape = "21,20,20,21,21,21,22,21";
   private ArrayList<String> coordinates;

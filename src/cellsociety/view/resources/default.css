@@ -73,3 +73,15 @@
 .wator-empty {
   -fx-fill: lightgrey;
 }
+.rockpaperscissors-rock {
+  -fx-fill: red;
+}
+.rockpaperscissors-paper {
+  -fx-fill: blue;
+}
+.rockpaperscissors-scissors {
+  -fx-fill: green;
+}
+.rockpaperscissors-empty {
+  -fx-fill: lightgrey;
+}
