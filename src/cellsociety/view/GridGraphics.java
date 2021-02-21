@@ -20,10 +20,10 @@ public class GridGraphics {
   private static final double GRID_GAP_SIZE = 0.5;
   private double gridSize;
 
-  private String gridShape;
   private static final String SQUARE = "square";
   private static final String TRIANGLE = "triangle";
   private static final String HEXAGON = "hexagon";
+  private String gridShape = SQUARE;
 
   private static final double TRIANGLE_RATIO = Math.sqrt(3)/2;
   private static final double HEXAGON_OFFSET_CORRECTION = 0.5;
