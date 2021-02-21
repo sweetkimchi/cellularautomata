@@ -5,6 +5,8 @@
   <numCols>50</numCols>
   <numRows>50</numRows>
   <shapeCoords>25,25,26,25,25,26,26,26,27,27,28,27,27,28,28,28</shapeCoords>
+  <alivecolor></alivecolor>
+  <deadcolor></deadcolor>
   <template>beacon</template>
   <title>Game of Life</title>
   <model>gameOfLife</model>

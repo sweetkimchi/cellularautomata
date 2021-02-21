@@ -25,15 +25,15 @@ public class GameOfLifeRule extends Rules {
   private final int upperSurvivalBoundary;
   private final String ALIVE = "alive";
   private final String EMPTY = "empty";
-  private final String ALIVE_COLOR = "black";
-  private final String DEAD_COLOR = "lightgrey";
+  private final String ALIVE_COLOR;
+  private final String DEAD_COLOR;
   private final ArrayList<String> possibleTypes;
   private ArrayList<String> possibleColors;
 
   /**
    * Default constructor for GameOfLifeRule
    */
-  public GameOfLifeRule() {
+  public GameOfLifeRule(String aliveColor, String deadColor) {
     /*
     Each cell with one or no neighbors dies, as if by solitude.
     Each cell with four or more neighbors dies, as if by overpopulation.
@@ -43,6 +43,8 @@ public class GameOfLifeRule extends Rules {
     upperSurvivalBoundary = 3;
     possibleTypes = new ArrayList<>();
     possibleColors = new ArrayList<>();
+    ALIVE_COLOR = aliveColor;
+    DEAD_COLOR = deadColor;
     possibleColors.add(DEAD_COLOR);
     possibleColors.add(ALIVE_COLOR);
     possibleTypes.add(EMPTY);
