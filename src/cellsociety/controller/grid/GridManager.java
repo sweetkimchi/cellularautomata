@@ -87,19 +87,19 @@ public class GridManager {
 //    System.out.println("????" + (emptyRatio + (1-emptyRatio) * populationRatio));
     Random random = new Random(seed);
     State[][] stateOfCells = new State[row][col];
-    for (int r = 0; r < row; r++) {
-      for (int c = 0; c < col; c++) {
+    for (int x = 0; x < row; x++) {
+      for (int y = 0; y < col; y++) {
         double probability = random.nextDouble();
         //      System.out.println(probability);
         if (probability < emptyRatio) {
-          State state = new State(r, c, possibleTypes.get(0), possibleColors.get(0), 0);
-          stateOfCells[r][c] = state;
+          State state = new State(x, y, possibleTypes.get(0), possibleColors.get(0), 0);
+          stateOfCells[x][y] = state;
         } else if (probability < emptyRatio + (1 - emptyRatio) * populationRatio) {
-          State state = new State(r, c, possibleTypes.get(1), possibleColors.get(1), 0);
-          stateOfCells[r][c] = state;
+          State state = new State(x, y, possibleTypes.get(1), possibleColors.get(1), 0);
+          stateOfCells[x][y] = state;
         } else {
-          State state = new State(r, c, possibleTypes.get(2), possibleColors.get(2), 0);
-          stateOfCells[r][c] = state;
+          State state = new State(x, y, possibleTypes.get(2), possibleColors.get(2), 0);
+          stateOfCells[x][y] = state;
         }
       }
     }
