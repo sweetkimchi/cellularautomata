@@ -19,9 +19,6 @@ public class GridManager {
 
   private final int row;
   private final int col;
-  private final List<List<State>> grid;
-  private final String EMPTY = "empty";
-  private final String ALIVE = "alive";
   private State[][] stateOfCells;
   private int numberOfSides = 8;
   private Map<String,Integer> summary;
@@ -35,7 +32,6 @@ public class GridManager {
   public GridManager(int row, int col) {
     this.row = row;
     this.col = col;
-    grid = new ArrayList<>();
     summary = new HashMap<>();
 
   }
@@ -51,7 +47,7 @@ public class GridManager {
     State[][] stateOfCells = new State[row][col];
     for (int r = 0; r < row; r++) {
       for (int c = 0; c < col; c++) {
-        State state = new State(r, c, EMPTY, possibleColors.get(0), 0);
+        State state = new State(r, c, possibleTypes.get(0), possibleColors.get(0), 0);
         stateOfCells[r][c] = state;
       }
     }
