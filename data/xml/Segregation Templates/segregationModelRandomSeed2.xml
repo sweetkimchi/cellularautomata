@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<data game="game">
+  <author>Jiyun</author>
+  <description>Red is dominated by blue. The dominating population does not have to move as often. Red moves until all of them find a satisfying location.</description>
+  <numCols>50</numCols>
+  <numRows>50</numRows>
+  <populationratio>0.8</populationratio>
+  <emptyratio>0.4</emptyratio>
+  <satisfactionthreshhold>0.6</satisfactionthreshhold>
+  <randomseed>12</randomseed>
+  <template>random_two</template>
+  <title>Segregation Model</title>
+  <model>segregationmodel</model>
+</data>
