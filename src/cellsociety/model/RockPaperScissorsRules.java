@@ -8,10 +8,10 @@ import java.util.Random;
 
 public class RockPaperScissorsRules extends Rules {
 
-  private final String ROCK_COLOR = "red";
-  private final String PAPER_COLOR = "blue";
-  private final String SCISSORS_COLOR = "lightgrey";
-  private final String EMPTY_COLOR = "green";
+  private String ROCK_COLOR;
+  private String PAPER_COLOR;
+  private String SCISSORS_COLOR;
+  private String EMPTY_COLOR;
   private ArrayList<String> possibleTypes;
   private ArrayList<String> possibleColors;
   private String ROCK = "rock";
@@ -27,6 +27,10 @@ public class RockPaperScissorsRules extends Rules {
 
   public RockPaperScissorsRules(int threshold, long randomSeed, String rockColor, String paperColor, String scissorsColor, String emptyColor) {
     THRESHHOLD = threshold;
+    ROCK_COLOR = rockColor;
+    PAPER_COLOR = paperColor;
+    SCISSORS_COLOR = scissorsColor;
+    EMPTY_COLOR = emptyColor;
     System.out.println(THRESHHOLD);
     random = new Random(randomSeed);
     initializeColorsAndTypes();

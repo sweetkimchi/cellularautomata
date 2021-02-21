@@ -7,8 +7,16 @@
   <shapeCoords>10,10,20,40,35,40</shapeCoords>
   <numberofants>50</numberofants>
   <radius>2</radius>
+  <phermoneamount>30</phermoneamount>
+  <movebias>0.96</movebias>
+  <shape>square</shape>
+  <numberofsides>4</numberofsides>
+  <nestcolor>green</nestcolor>
+  <antcolor>red</antcolor>
+  <phermonecolor>blue</phermonecolor>
+  <foodcolor>lightgrey</foodcolor>
   <emptycolor>black</emptycolor>
-  <string2></string2>
+  <weakphermonecolor>skyblue</weakphermonecolor>
   <template>generic</template>
   <title>Foraging Ants</title>
   <model>foragingants</model>
