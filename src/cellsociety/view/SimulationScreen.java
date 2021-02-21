@@ -261,4 +261,13 @@ public class SimulationScreen {
           scene.getHeight() - topPanel.getHeight());
     }
   }
+
+  /**
+   * Sets shape of tile for the grid.
+   *
+   * @param shape String for tile shape
+   */
+  public void setGridShape(String shape) {
+    gridGraphics.setGridShape(shape);
+  }
 }
