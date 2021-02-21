@@ -326,9 +326,12 @@ public class GridManager {
     return stateOfCells[x][y].getColor();
   }
 
-  public void buildAntGridWithTemplate(ArrayList<String> coordinates, ArrayList<String> possibleTypes, ArrayList<String> possibleColors, int radius) {
+  public void buildAntGridWithTemplate(ArrayList<String> coordinates,
+      ArrayList<String> possibleTypes, ArrayList<String> possibleColors,
+      int radius, int numberOfSides) {
     ForagingAntGridManager foragingAntGridManager = new ForagingAntGridManager(row, col);
     this.stateOfCells = foragingAntGridManager.buildAntGridWithTemplateHelper(coordinates, possibleTypes, possibleColors, radius);
+    this.numberOfSides = numberOfSides;
   }
 }
 

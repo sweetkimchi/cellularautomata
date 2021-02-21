@@ -6,6 +6,7 @@ public class AntState extends State {
 
   private boolean hasFood;
   private int amountOfFood;
+  private String direction;
   /**
    * Constructor with more variations other than number of moves
    *
@@ -21,10 +22,11 @@ public class AntState extends State {
     this.amountOfFood = amountOfFood;
   }
 
-  public AntState(int xCoord, int yCoord, String type, String colorString,int numberOfMoves, boolean hasFood) {
+  public AntState(int xCoord, int yCoord, String type, String colorString,int numberOfMoves, boolean hasFood, String direction) {
     super(xCoord, yCoord, type, colorString, numberOfMoves);
     this.hasFood = hasFood;
     amountOfFood = 0;
+    this.direction = direction;
   }
 
   public AntState(int xCoord, int yCoord, String type, String colorString, int numberOfMoves) {
@@ -39,5 +41,9 @@ public class AntState extends State {
 
   public int getFood(){
     return amountOfFood;
+  }
+
+  public String getDirection(){
+    return direction;
   }
 }

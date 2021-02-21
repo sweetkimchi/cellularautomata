@@ -124,4 +124,7 @@ public class State {
   public void setColor(String colorName) {
     color = colorName;
   }
+
+  public String getDirection() {
+  }
 }

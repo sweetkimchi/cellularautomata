@@ -135,10 +135,12 @@ public class SimulationEngine {
     }
     if (game.equals("foragingants")) {
       //   rules = new WaTorModelRules(emptyRatio, populationRatio, randomSeed, energyFish, reproduceBoundary, sharkEnergy);
-      rules = new ForagingAntsRules(decoder.getNumberOfAnts(), decoder.getSeed());
+      int numberOfsides = 4;
+
+      rules = new ForagingAntsRules(decoder.getNumberOfAnts(), decoder.getSeed(),numberOfsides);
       ForagingAntGridManager foragingAntGridManager = new ForagingAntGridManager(decoder.getRows(), decoder.getCols());
       gridManager
-          .buildAntGridWithTemplate(decoder.getCoordinates(), rules.getPossibleTypes(), rules.getPossibleColors(), decoder.getRadius());
+          .buildAntGridWithTemplate(decoder.getCoordinates(), rules.getPossibleTypes(), rules.getPossibleColors(), decoder.getRadius(), numberOfsides);
     }
     if (game.equals("navigatingsugarscape")) {
       //   rules = new WaTorModelRules(emptyRatio, populationRatio, randomSeed, energyFish, reproduceBoundary, sharkEnergy);

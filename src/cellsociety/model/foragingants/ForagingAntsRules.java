@@ -23,10 +23,12 @@ public class ForagingAntsRules extends Rules {
   private String EMPTY = "empty";
   private int numberOfAnts;
   private final Random random;
+  private int numberOfSides;
   
-  public ForagingAntsRules(int numberOfAnts, int randomSeed){
+  public ForagingAntsRules(int numberOfAnts, int randomSeed, int numberOfSides){
     this.numberOfAnts = numberOfAnts;
     random = new Random(randomSeed);
+    this.numberOfSides = numberOfSides;
     initializeColorsAndTypes();
   }
 
@@ -121,10 +123,24 @@ public class ForagingAntsRules extends Rules {
         gridManager
             .setStateAtCoordinate(dummy.getxCoord(), dummy.getyCoord(), new AntState(dummy.getxCoord(),
                 dummy.getyCoord(), possibleTypes.get(2), possibleColors.get(2),
-                gridManager.getStateAtCoordinate(x, y).getNumberOfMoves() + 1, false));
+                gridManager.getStateAtCoordinate(x, y).getNumberOfMoves() + 1, false, determineDirection(dummy, x, y)));
         return new AntState(x, y, possibleTypes.get(4), possibleColors.get(4), 0);
 
     }
     return gridManager.getStateAtCoordinate(x, y);
+  }
+
+  //0 - up
+  //
+  private String determineDirection(State dummy, int x, int y) {
+    if(dummy.getxCoord() > x){
+      return "right";
+    }else if(dummy.getxCoord() < x){
+      return "left";
+    }else if(dummy.getyCoord() > y){
+      return "up";
+    }else{
+      return "down";
+    }
   }
 }
