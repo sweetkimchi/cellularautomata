@@ -5,9 +5,9 @@
   <numCols>70</numCols>
   <numRows>70</numRows>
   <shapeCoords>10,10,15,60,60,60</shapeCoords>
-  <numberofants>50</numberofants>
+  <numberofants>100</numberofants>
   <radius>2</radius>
-  <phermoneamount>30</phermoneamount>
+  <phermoneamount>100</phermoneamount>
   <movebias>0.96</movebias>
   <shape>square</shape>
   <numberofsides>4</numberofsides>
@@ -15,8 +15,8 @@
   <antcolor>red</antcolor>
   <phermonecolor>blue</phermonecolor>
   <foodcolor>lightgrey</foodcolor>
-  <weakphermonecolor>skyblue</weakphermonecolor>
   <emptycolor>black</emptycolor>
+  <weakphermonecolor>skyblue</weakphermonecolor>
   <template>generic</template>
   <title>Foraging Ants</title>
   <model>foragingants</model>

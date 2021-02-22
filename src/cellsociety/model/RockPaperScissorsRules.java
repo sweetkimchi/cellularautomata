@@ -46,7 +46,7 @@ public class RockPaperScissorsRules extends Rules {
     possibleColors.add(EMPTY_COLOR);
     possibleColors.add(ROCK_COLOR);
     possibleColors.add(PAPER_COLOR);
-    possibleColors.add(EMPTY_COLOR);
+    possibleColors.add(SCISSORS_COLOR);
   }
 
   /**
