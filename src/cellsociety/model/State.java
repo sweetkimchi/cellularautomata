@@ -1,4 +1,4 @@
-package cellsociety.model.cell;
+package cellsociety.model;
 
 
 /**
@@ -16,7 +16,6 @@ public class State {
   private int numberOfMoves;
   private int energy;
   private boolean hasFood;
-  private String direction;
   private int sugarMetabolism;
   private int vision;
   private int sugarPossession;
@@ -82,7 +81,6 @@ public class State {
     this.hasFood = hasFood;
     this.numberOfMoves = numberOfMoves;
     color = colorString;
-    this.direction = direction;
   }
 
   public State(int xCoord, int yCoord, String type, String colorString, int numberOfMoves,

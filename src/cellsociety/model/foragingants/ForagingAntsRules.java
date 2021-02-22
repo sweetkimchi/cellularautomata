@@ -1,8 +1,8 @@
 package cellsociety.model.foragingants;
 
-import cellsociety.controller.grid.GridManager;
-import cellsociety.model.cell.State;
-import cellsociety.model.rules.Rules;
+import cellsociety.model.GridManager;
+import cellsociety.model.State;
+import cellsociety.model.Rules;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -84,7 +84,7 @@ public class ForagingAntsRules extends Rules {
   @Override
   public void decideState(List<Integer> neighborsOfEachTypeAtCoordinate,
       List<int[][]> markStateForFurtherAnalysis,
-      ArrayList<State> updateStates, int x, int y,
+      List<State> updateStates, int x, int y,
       GridManager gridManager) {
     if (gridManager.getTypeAtCoordinate(x, y).equals(EMPTY)
         && neighborsOfEachTypeAtCoordinate.get(0) > 0 && numberOfAnts > 0) {
@@ -102,15 +102,14 @@ public class ForagingAntsRules extends Rules {
 
     if (gridManager.getTypeAtCoordinate(x, y).equals(PHEROMONE)) {
       gridManager.setStateAtCoordinate(x, y,
-          decidePhermoneState(gridManager, x, y, markStateForFurtherAnalysis, getPossibleTypes(),
-              getPossibleColors()));
+          decidePhermoneState(gridManager, x, y
+          ));
     }
 
 
   }
 
-  private State decidePhermoneState(GridManager gridManager, int x, int y, List<int[][]> nextStates,
-      ArrayList<String> possibleTypes, ArrayList<String> possibleColors) {
+  private State decidePhermoneState(GridManager gridManager, int x, int y) {
     if (gridManager.getStateAtCoordinate(x, y).getEnergy() <= 0) {
       return new AntState(x, y, EMPTY, EMPTY_COLOR, 0, 0);
     } else {

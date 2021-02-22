@@ -1,6 +1,6 @@
 package cellsociety.view;
 
-import cellsociety.controller.grid.GridManager;
+import cellsociety.model.GridManager;
 import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;

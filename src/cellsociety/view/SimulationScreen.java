@@ -1,7 +1,7 @@
 package cellsociety.view;
 
-import cellsociety.controller.grid.GridManager;
-import cellsociety.controller.simulationengine.SimulationEngine;
+import cellsociety.model.GridManager;
+import cellsociety.model.SimulationEngine;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
@@ -258,7 +258,7 @@ public class SimulationScreen {
    */
   public void update(GridManager gridManager) {
     gridGraphics.update(gridManager);
-    updateGraph(gridManager.getSummaryOfTypes());
+    updateGraph(gridManager.getTallyOfEachTypeToPresentAsSummary());
     simulationEngine.setSimulationSpeed((int) slider.getValue());
     checkWindowSizeChanged();
   }

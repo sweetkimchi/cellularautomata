@@ -1,8 +1,7 @@
-package cellsociety.model.rules;
+package cellsociety.model;
 
-import cellsociety.controller.grid.GridManager;
-import cellsociety.model.cell.State;
-import java.util.ArrayList;
+import cellsociety.model.GridManager;
+import cellsociety.model.State;
 import java.util.List;
 
 /**
@@ -23,16 +22,16 @@ public abstract class Rules {
    *
    * @return arraylist of possible types
    */
-  public abstract ArrayList<String> getPossibleTypes();
+  public abstract List<String> getPossibleTypes();
 
   /**
    * Returns the possible colors for each type
    *
    * @return arraylist of colors
    */
-  public abstract ArrayList<String> getPossibleColors();
+  public abstract List<String> getPossibleColors();
 
   public abstract void decideState(List<Integer> neighborsOfEachTypeAtCoordinate,
-      List<int[][]> nextStates, ArrayList<State> updateStates,
+      List<int[][]> nextStates, List<State> updateStates,
       int x, int y, GridManager gridManager);
 }

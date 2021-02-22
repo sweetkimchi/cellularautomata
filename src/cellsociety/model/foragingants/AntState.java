@@ -1,6 +1,6 @@
 package cellsociety.model.foragingants;
 
-import cellsociety.model.cell.State;
+import cellsociety.model.State;
 
 public class AntState extends State {
 
@@ -41,9 +41,4 @@ public class AntState extends State {
   public boolean hasFood() {
     return hasFood;
   }
-
-  public int getFood() {
-    return amountOfFood;
-  }
-
 }

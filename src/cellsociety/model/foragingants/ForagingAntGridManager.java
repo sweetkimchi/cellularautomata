@@ -1,8 +1,8 @@
 package cellsociety.model.foragingants;
 
-import cellsociety.controller.grid.GridManager;
-import cellsociety.model.cell.State;
-import java.util.ArrayList;
+import cellsociety.model.GridManager;
+import cellsociety.model.State;
+import java.util.List;
 
 public class ForagingAntGridManager extends GridManager {
 
@@ -16,14 +16,14 @@ public class ForagingAntGridManager extends GridManager {
    * @param row
    * @param col
    */
-  public ForagingAntGridManager(int row, int col) {
-    super(row, col);
+  public ForagingAntGridManager(int row, int col, int numberOfSides) {
+    super(row, col, numberOfSides);
     this.row = row;
     this.col = col;
   }
 
-  public State[][] buildAntGridWithTemplateHelper(ArrayList<String> coordinates,
-      ArrayList<String> possibleTypes, ArrayList<String> possibleColors, int radius) {
+  public State[][] buildAntGridWithTemplateHelper(List<String> coordinates,
+      List<String> possibleTypes, List<String> possibleColors, int radius) {
     State[][] stateOfCells = new State[row][col];
 
     for (int r = 0; r < row; r++) {

@@ -1,8 +1,5 @@
-package cellsociety.model.spreadingoffire;
+package cellsociety.model;
 
-import cellsociety.controller.grid.GridManager;
-import cellsociety.model.cell.State;
-import cellsociety.model.rules.Rules;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -51,18 +48,18 @@ public class SpreadingOfFireRules extends Rules {
 
 
   @Override
-  public ArrayList<String> getPossibleTypes() {
+  public List<String> getPossibleTypes() {
     return possibleTypes;
   }
 
   @Override
-  public ArrayList<String> getPossibleColors() {
+  public List<String> getPossibleColors() {
     return possibleColors;
   }
 
   @Override
   public void decideState(List<Integer> neighborsOfEachTypeAtCoordinate, List<int[][]> nextStates,
-      ArrayList<State> updateStates, int x, int y,
+      List<State> updateStates, int x, int y,
       GridManager gridManager) {
     if (gridManager.getTypeAtCoordinate(x, y).equals(FIRE)) {
       updateStates.add(new State(x, y, EMPTY, EMPTY_COLOR, 0));

@@ -1,8 +1,6 @@
-package cellsociety.controller.grid;
+package cellsociety.model;
 
-import cellsociety.model.cell.State;
 import cellsociety.model.foragingants.ForagingAntGridManager;
-import cellsociety.model.rules.Rules;
 import cellsociety.model.sugarscape.AgentState;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,7 +20,7 @@ public class GridManager {
   private final int row;
   private final int col;
   private State[][] stateOfCells;
-  private int numberOfSides = 6;
+  private int numberOfSides;
   private Map<String, Integer> summary;
   private ArrayList<String> coordinates;
 
@@ -32,11 +30,11 @@ public class GridManager {
    * @param row
    * @param col
    */
-  public GridManager(int row, int col) {
+  public GridManager(int row, int col, int numberOfSides) {
     this.row = row;
     this.col = col;
+    this.numberOfSides = numberOfSides;
     summary = new HashMap<>();
-
   }
 
   /**
@@ -44,8 +42,8 @@ public class GridManager {
    *
    * @param template coordinates of starting states
    */
-  public void buildGridWithTemplate(ArrayList<State> template,
-      ArrayList<String> possibleTypes, ArrayList<String> possibleColors, int diameter) {
+  public void buildGridWithTemplate(List<State> template,
+      List<String> possibleTypes, List<String> possibleColors) {
     State[][] stateOfCells = new State[row][col];
     for (int r = 0; r < row; r++) {
       for (int c = 0; c < col; c++) {
@@ -53,11 +51,8 @@ public class GridManager {
         stateOfCells[r][c] = state;
       }
     }
-    System.out.println();
-
     int xSize = 0;
     int ySize = 0;
-
     for (State s : template) {
       if (xSize < s.getxCoord()) {
         xSize = s.getxCoord();
@@ -84,7 +79,7 @@ public class GridManager {
    * @param possibleColors  colors of all types
    */
   public void buildGridWithRandomSeed(double emptyRatio, double populationRatio, int seed,
-      ArrayList<String> possibleTypes, ArrayList<String> possibleColors) {
+      List<String> possibleTypes, List<String> possibleColors) {
     Random random = new Random(seed);
     State[][] stateOfCells = new State[row][col];
     for (int x = 0; x < row; x++) {
@@ -107,22 +102,12 @@ public class GridManager {
     this.stateOfCells = stateOfCells;
   }
 
-  public Map<String, Integer> getSummaryOfTypes() {
+  public Map<String, Integer> getTallyOfEachTypeToPresentAsSummary() {
     return summary;
   }
 
-  /**
-   * Stores the grid for future use. It is not really used but GridManager does want to keep a
-   * record of the current state of all cells.
-   *
-   * @param stateOfCells the updated cells
-   */
-  public void updateGrid(State[][] stateOfCells) {
-    this.stateOfCells = stateOfCells;
-  }
 
-
-  public List<int[][]> getNumberOfNeighborsForEachType(ArrayList<String> possibleTypes,
+  public List<int[][]> getNumberOfNeighborsForEachType(List<String> possibleTypes,
       int numberOfSides) {
     ArrayList<int[][]> numberOfNeighborsForEachType = new ArrayList<>();
     for (String type : possibleTypes) {
@@ -198,6 +183,24 @@ public class GridManager {
     return isValidNeighbor;
   }
 
+  public void judgeStateOfEachCell(Rules rules) {
+    List<int[][]> numberOfNeighborsForEachType = getNumberOfNeighborsForEachType(
+        rules.getPossibleTypes(), numberOfSides);
+    List<int[][]> nextStates = nextStatesOfCells(numberOfNeighborsForEachType);
+    ArrayList<State> updateStates = new ArrayList<>();
+
+    for (int x = 0; x < row; x++) {
+      for (int y = 0; y < col; y++) {
+        List<Integer> neighborsOfEachTypeAtCoordinate = new ArrayList<>();
+        for (int index = 0; index < numberOfNeighborsForEachType.size(); index++) {
+          neighborsOfEachTypeAtCoordinate.add(numberOfNeighborsForEachType.get(index)[x][y]);
+        }
+        rules.decideState(neighborsOfEachTypeAtCoordinate, nextStates, updateStates, x, y, this);
+      }
+    }
+    updateStatesForNextRound(updateStates);
+  }
+
   private boolean isValidNeighborOfTriangleCell(int x, int y, int numberOfSides, int xCoord, int yCoord, boolean count) {
     if (numberOfSides == 3 && !isFacingUp(xCoord, yCoord) && isLeftRightUpNeighbors(x, y,
         xCoord, yCoord, yCoord - 1)) {
@@ -216,6 +219,31 @@ public class GridManager {
       count = true;
     }
     return count;
+  }
+
+  public void makeSugarScapeGridWithRandomSeed(float emptyRatio, float patchRatio,
+      int metabolism, int vision, int seed,
+      List<String> possibleTypes, List<String> possibleColors) {
+    Random random = new Random(seed);
+    State[][] stateOfCells = new State[row][col];
+    for (int x = 0; x < row; x++) {
+      for (int y = 0; y < col; y++) {
+        double probability = random.nextDouble();
+        //      System.out.println(probability);
+        if (probability < emptyRatio) {
+          State state = new State(x, y, possibleTypes.get(0), possibleColors.get(0), 0);
+          stateOfCells[x][y] = state;
+        } else if (probability < emptyRatio + (1 - emptyRatio) * patchRatio) {
+          State state = new State(x, y, possibleTypes.get(1), possibleColors.get(1), 0);
+          stateOfCells[x][y] = state;
+        } else {
+          AgentState state = new AgentState(x, y, possibleTypes.get(3), possibleColors.get(3), 0,
+              metabolism, vision, 0);
+          stateOfCells[x][y] = state;
+        }
+      }
+    }
+    this.stateOfCells = stateOfCells;
   }
 
   private boolean isOneOfTheSidesForFacingDownTriangles(int x, int y, int xCoord, int yCoord) {
@@ -239,6 +267,21 @@ public class GridManager {
         && y == i);
   }
 
+  public List<String> saveSimulation() {
+    ArrayList<String> state = new ArrayList<>();
+    for (int i = 0; i < stateOfCells.length; i++) {
+      for (int j = 0; j < stateOfCells.length; j++) {
+        state.add(String.valueOf(stateOfCells[i][j].getxCoord()));
+        state.add(String.valueOf(stateOfCells[i][j].getyCoord()));
+        state.add(stateOfCells[i][j].getType());
+        state.add(String.valueOf(stateOfCells[i][j].getColor()));
+        state.add(String.valueOf(stateOfCells[i][j].getEnergy()));
+        state.add(String.valueOf(stateOfCells[i][j].getNumberOfMoves()));
+      }
+    }
+    return state;
+  }
+
   private boolean isOneOfTheNWSEDirection(int x, int y, int xCoord, int yCoord) {
     return !(x == xCoord - 1 && y == yCoord - 1) && !(x == xCoord - 1 && y == yCoord + 1) && !(
         x == xCoord + 1 && y == yCoord - 1) && !(x == xCoord + 1 && y == yCoord + 1) && (
@@ -255,80 +298,22 @@ public class GridManager {
         && y == yCoord - 1) && (xCoord != x - 2 && xCoord != x + 2);
   }
 
-  private void printGrid(State[][] stateOfCells) {
-    for (int x = 0; x < stateOfCells.length; x++) {
-      for (int y = 0; y < stateOfCells[0].length; y++) {
-        System.out.print(" " + stateOfCells[y][x].getType() + " ");
-      }
-      System.out.println();
-    }
-    System.out.println();
-  }
-
-  public void judgeStateOfEachCell(Rules rules) {
-    List<int[][]> numberOfNeighborsForEachType = getNumberOfNeighborsForEachType(
-        rules.getPossibleTypes(), numberOfSides);
-    List<int[][]> nextStates = nextStatesOfCells(numberOfNeighborsForEachType);
-    ArrayList<State> updateStates = new ArrayList<>();
-
-    for (int x = 0; x < row; x++) {
-      for (int y = 0; y < col; y++) {
-        List<Integer> neighborsOfEachTypeAtCoordinate = new ArrayList<>();
-        //      System.out.print(" " + stateOfCells[x][y].getType() + " ");
-
-        for (int index = 0; index < numberOfNeighborsForEachType.size(); index++) {
-          neighborsOfEachTypeAtCoordinate.add(numberOfNeighborsForEachType.get(index)[x][y]);
-        }
-        rules.decideState(neighborsOfEachTypeAtCoordinate, nextStates, updateStates, x, y, this);
-
-      }
-      //     System.out.println();
-    }
-
-    updateStatesForNextRound(updateStates);
-    //  updateStatesForAllCells(nextStates, rules.getPossibleTypes(), rules.getPossibleColors());
-  }
-
-  private void updateStatesForNextRound(ArrayList<State> updateStates) {
+  private void updateStatesForNextRound(List<State> updateStates) {
     for (State state : updateStates) {
       stateOfCells[state.getxCoord()][state.getyCoord()] = state;
     }
   }
 
-  public List<String> saveSimulation() {
-    ArrayList<String> state = new ArrayList<>();
-    for (int i = 0; i < stateOfCells.length; i++) {
-      for (int j = 0; j < stateOfCells.length; j++) {
-
-        state.add(String.valueOf(stateOfCells[i][j].getxCoord()));
-        state.add(String.valueOf(stateOfCells[i][j].getyCoord()));
-        state.add(stateOfCells[i][j].getType());
-        state.add(String.valueOf(stateOfCells[i][j].getColor()));
-        state.add(String.valueOf(stateOfCells[i][j].getEnergy()));
-        state.add(String.valueOf(stateOfCells[i][j].getNumberOfMoves()));
-      }
-    }
-    return state;
+  public void buildAntGridWithTemplate(List<String> coordinates,
+      List<String> possibleTypes, List<String> possibleColors,
+      int radius, int numberOfSides) {
+    this.coordinates = (ArrayList<String>) coordinates;
+    ForagingAntGridManager foragingAntGridManager = new ForagingAntGridManager(row, col, numberOfSides);
+    this.stateOfCells = foragingAntGridManager
+        .buildAntGridWithTemplateHelper(coordinates, possibleTypes, possibleColors, radius);
+    this.numberOfSides = numberOfSides;
   }
 
-  private void updateStatesForAllCells(List<int[][]> nextStates,
-      ArrayList<String> possibleTypes, ArrayList<String> possibleColors) {
-    summary = new HashMap<>();
-    for (String types : possibleTypes) {
-      summary.put(types, 0);
-    }
-    for (int index = 0; index < nextStates.size(); index++) {
-      for (int r = 0; r < row; r++) {
-        for (int c = 0; c < col; c++) {
-          summary.put(stateOfCells[r][c].getType(), summary.get(stateOfCells[r][c].getType()) + 1);
-          if (nextStates.get(index)[r][c] == 1) {
-            stateOfCells[r][c] = new State(r, c, possibleTypes.get(index),
-                possibleColors.get(index), 0);
-          }
-        }
-      }
-    }
-  }
 
   private List<int[][]> nextStatesOfCells(List<int[][]> numberOfNeighborsForEachType) {
     List<int[][]> nextStatesForEachType = new ArrayList<>();
@@ -350,11 +335,6 @@ public class GridManager {
     return col;
   }
 
-  //This is a method that needs to go
-  public State[][] getGrid() {
-    return stateOfCells;
-  }
-
   public State getStateAtCoordinate(int x, int y) {
     return this.stateOfCells[x][y];
   }
@@ -367,51 +347,9 @@ public class GridManager {
     return stateOfCells[x][y].getColor();
   }
 
-  public void buildAntGridWithTemplate(ArrayList<String> coordinates,
-      ArrayList<String> possibleTypes, ArrayList<String> possibleColors,
-      int radius, int numberOfSides) {
-    this.coordinates = coordinates;
-    ForagingAntGridManager foragingAntGridManager = new ForagingAntGridManager(row, col);
-    this.stateOfCells = foragingAntGridManager
-        .buildAntGridWithTemplateHelper(coordinates, possibleTypes, possibleColors, radius);
-    this.numberOfSides = numberOfSides;
-  }
-
-  public void setNumberOfSides(int sides) {
-    numberOfSides = sides;
-  }
-
-  public ArrayList<String> getCoordinates() {
+  public List<String> getCoordinates() {
     return coordinates;
   }
 
-  public boolean isAtEdge(int x, int y) {
-    return (x == row - 1 || x == 0 || y == col - 1 || y == 0);
-  }
-
-  public void makeSugarScapeGridWithRandomSeed(float emptyRatio, float patchRatio,
-      int metabolism, int vision, int seed,
-      ArrayList<String> possibleTypes, ArrayList<String> possibleColors) {
-    Random random = new Random(seed);
-    State[][] stateOfCells = new State[row][col];
-    for (int x = 0; x < row; x++) {
-      for (int y = 0; y < col; y++) {
-        double probability = random.nextDouble();
-        //      System.out.println(probability);
-        if (probability < emptyRatio) {
-          State state = new State(x, y, possibleTypes.get(0), possibleColors.get(0), 0);
-          stateOfCells[x][y] = state;
-        } else if (probability < emptyRatio + (1 - emptyRatio) * patchRatio) {
-          State state = new State(x, y, possibleTypes.get(1), possibleColors.get(1), 0);
-          stateOfCells[x][y] = state;
-        } else {
-          AgentState state = new AgentState(x, y, possibleTypes.get(3), possibleColors.get(3), 0,
-              metabolism, vision, 0);
-          stateOfCells[x][y] = state;
-        }
-      }
-    }
-    this.stateOfCells = stateOfCells;
-  }
 }
 

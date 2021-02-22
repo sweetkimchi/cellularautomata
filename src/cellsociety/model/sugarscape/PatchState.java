@@ -1,6 +1,6 @@
 package cellsociety.model.sugarscape;
 
-import cellsociety.model.cell.State;
+import cellsociety.model.State;
 
 public class PatchState extends State {
 

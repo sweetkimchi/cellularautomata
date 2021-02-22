@@ -1,8 +1,5 @@
 package cellsociety.model;
 
-import cellsociety.controller.grid.GridManager;
-import cellsociety.model.cell.State;
-import cellsociety.model.rules.Rules;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -57,7 +54,7 @@ public class RockPaperScissorsRules extends Rules {
    * @return arraylist of possible types
    */
   @Override
-  public ArrayList<String> getPossibleTypes() {
+  public List<String> getPossibleTypes() {
     return possibleTypes;
   }
 
@@ -67,30 +64,27 @@ public class RockPaperScissorsRules extends Rules {
    * @return arraylist of colors
    */
   @Override
-  public ArrayList<String> getPossibleColors() {
+  public List<String> getPossibleColors() {
     return possibleColors;
   }
 
   @Override
   public void decideState(List<Integer> neighborsOfEachTypeAtCoordinate, List<int[][]> nextStates,
-      ArrayList<State> updateStates, int x, int y,
+      List<State> updateStates, int x, int y,
       GridManager gridManager) {
 
     System.out.println(THRESHHOLD);
 
     if (gridManager.getTypeAtCoordinate(x, y).equals(ROCK)
         && neighborsOfEachTypeAtCoordinate.get(2) > THRESHHOLD) {
-      //     nextStates.get(2)[x][y] = 1;
       updateStates.add(new State(x, y, PAPER, PAPER_COLOR, 0));
     }
     if (gridManager.getTypeAtCoordinate(x, y).equals(PAPER)
         && neighborsOfEachTypeAtCoordinate.get(3) > THRESHHOLD) {
-      //     nextStates.get(3)[x][y] = 1;
       updateStates.add(new State(x, y, SCISSORS, SCISSORS_COLOR, 0));
     }
     if (gridManager.getTypeAtCoordinate(x, y).equals(SCISSORS)
         && neighborsOfEachTypeAtCoordinate.get(1) > THRESHHOLD) {
-      //    nextStates.get(1)[x][y] = 1;
       updateStates.add(new State(x, y, ROCK, ROCK_COLOR, 0));
     }
   }

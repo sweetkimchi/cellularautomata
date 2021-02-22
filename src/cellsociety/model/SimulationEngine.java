@@ -1,18 +1,9 @@
-package cellsociety.controller.simulationengine;
+package cellsociety.model;
 
 import cellsociety.controller.Decoder;
-import cellsociety.controller.grid.GridManager;
-import cellsociety.model.RockPaperScissorsRules;
-import cellsociety.model.cell.State;
 import cellsociety.model.foragingants.ForagingAntGridManager;
 import cellsociety.model.foragingants.ForagingAntsRules;
-import cellsociety.model.gameoflife.GameOfLifeRule;
-import cellsociety.model.percolation.PercolationRules;
-import cellsociety.model.rules.Rules;
-import cellsociety.model.segregationmodel.SegregationModelRules;
-import cellsociety.model.spreadingoffire.SpreadingOfFireRules;
 import cellsociety.model.sugarscape.SugarScapeRules;
-import cellsociety.model.watormodel.WaTorModelRules;
 import cellsociety.view.SimulationScreen;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -41,7 +32,6 @@ public class SimulationEngine {
   private AnimationTimer animation;
   private int frameDelay;
   private int sleepTimer = 0;
-  private List states;
 
 
   /**
@@ -51,7 +41,7 @@ public class SimulationEngine {
     simulationScreen = new SimulationScreen(new Stage(), this);
   }
 
-  private ArrayList<State> constructStartingStateForSimulation(ArrayList<String> coordinates) {
+  private List<State> constructStartingStateForSimulation(List<String> coordinates) {
     template = new ArrayList<>();
     for (int i = 0; i + 1 < coordinates.size(); i += 2) {
       State state = new State(Integer.parseInt(coordinates.get(i)),
@@ -83,7 +73,6 @@ public class SimulationEngine {
   public void initializeData() {
     initializeGrid();
     initializeModelConstructors(decoder.getModel());
-    gridManager.setNumberOfSides(decoder.getNumberOfSides());
     simulationScreen.setGridShape(decoder.getShape());
     simulationScreen.update(gridManager);
     simulationScreen.setDescription(decoder.getMyDesc());
@@ -94,10 +83,10 @@ public class SimulationEngine {
 
     if (game.equals("gameOfLife")) {
       rules = new GameOfLifeRule(decoder.getAliveColor(), decoder.getDeadColor());
-      template = constructStartingStateForSimulation(decoder.getCoordinates());
+      template = (ArrayList<State>) constructStartingStateForSimulation(decoder.getCoordinates());
 
       gridManager
-          .buildGridWithTemplate(template, rules.getPossibleTypes(), rules.getPossibleColors(), 0);
+          .buildGridWithTemplate(template, rules.getPossibleTypes(), rules.getPossibleColors());
     }
     if (game.equals("percolation")) {
       rules = new PercolationRules(decoder.getSeed(), decoder.getBlockColor(),
@@ -149,7 +138,7 @@ public class SimulationEngine {
           decoder.getPhermoneColor(), decoder.getFoodColor(), decoder.getEmptyColor(),
           decoder.getWeakPhermoneColor(), decoder.getMoveBias(), decoder.getPhermoneAmount());
       ForagingAntGridManager foragingAntGridManager = new ForagingAntGridManager(decoder.getRows(),
-          decoder.getCols());
+          decoder.getCols(),decoder.getNumberOfSides());
       gridManager
           .buildAntGridWithTemplate(decoder.getCoordinates(), rules.getPossibleTypes(),
               rules.getPossibleColors(), decoder.getRadius(), decoder.getNumberOfSides());
@@ -170,7 +159,7 @@ public class SimulationEngine {
 
 
   protected void initializeGrid() {
-    gridManager = new GridManager(decoder.getRows(), decoder.getCols());
+    gridManager = new GridManager(decoder.getRows(), decoder.getCols(), decoder.getNumberOfSides());
   }
 
   /**
@@ -210,7 +199,7 @@ public class SimulationEngine {
 
   public void saveSimulation() throws FileNotFoundException {
     stopSimulation();
-    states = gridManager.saveSimulation();
+    List states = gridManager.saveSimulation();
     decoder.saveConfig(states);
   }
 
