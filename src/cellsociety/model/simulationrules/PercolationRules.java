@@ -25,15 +25,13 @@ public class PercolationRules extends Rules {
   private final String BLOCK = "block";
   private final String WATER = "water";
   private final String EMPTY = "empty";
-  private final Random random;
-  private double probsOfFire;
 
   /**
    * Default constructor
    */
   public PercolationRules(long randomSeed, String blockColor, String waterColor,
       String emptyColor) {
-    random = new Random(randomSeed);
+    Random random = new Random(randomSeed);
     possibleTypes = new ArrayList<>();
     possibleColors = new ArrayList<>();
     EMPTY_COLOR = emptyColor;

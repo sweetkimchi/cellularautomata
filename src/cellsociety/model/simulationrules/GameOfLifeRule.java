@@ -28,7 +28,7 @@ public class GameOfLifeRule extends Rules {
   private final String ALIVE_COLOR;
   private final String DEAD_COLOR;
   private final ArrayList<String> possibleTypes;
-  private ArrayList<String> possibleColors;
+  private final ArrayList<String> possibleColors;
 
   /**
    * Default constructor for GameOfLifeRule
