@@ -8,11 +8,11 @@
   <numCols>50</numCols>
   <numRows>50</numRows>
   <numberofsides>8</numberofsides>
-  <papercolor>blue</papercolor>
+  <papercolor>gold</papercolor>
   <randomseed>100</randomseed>
-  <rockcolor>red</rockcolor>
+  <rockcolor>brown</rockcolor>
   <rockratio>0.2</rockratio>
-  <scissorscolor>green</scissorscolor>
+  <scissorscolor>yellow</scissorscolor>
   <scissorsratio>0.3</scissorsratio>
   <shape>square</shape>
   <threshhold>2</threshhold>

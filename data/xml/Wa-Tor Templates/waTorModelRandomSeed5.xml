@@ -2,7 +2,7 @@
 <data game="game">
   <author>Jiyun</author>
   <description>Indefinite pattern of swarms of fish with sharks following.</description>
-  <emptycolor>lightgrey</emptycolor>
+  <emptycolor>darkgrey</emptycolor>
   <emptyratio>0.3</emptyratio>
   <energyfromeating>3</energyfromeating>
   <fishcolor>green</fishcolor>
@@ -14,7 +14,7 @@
   <numberofsides>6</numberofsides>
   <randomseed>0</randomseed>
   <shape>hexagon</shape>
-  <sharkcolor>blue</sharkcolor>
+  <sharkcolor>black</sharkcolor>
   <sharklives>3</sharklives>
   <sharkreproduce>4</sharkreproduce>
   <template>random_one</template>

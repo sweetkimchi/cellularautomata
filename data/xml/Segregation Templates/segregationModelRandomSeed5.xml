@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <data game="game">
-  <agentxcolor>red</agentxcolor>
-  <agentycolor>blue</agentycolor>
+  <agentxcolor>orange</agentxcolor>
+  <agentycolor>skyblue</agentycolor>
   <author>Jiyun</author>
   <description>Most are content with where they are and don't move.</description>
-  <emptycolor>lightgrey</emptycolor>
+  <emptycolor>white</emptycolor>
   <emptyratio>0.1</emptyratio>
   <model>segregationmodel</model>
   <numCols>50</numCols>
