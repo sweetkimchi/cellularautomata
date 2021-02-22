@@ -1,4 +1,4 @@
-package cellsociety.model.foragingants;
+package cellsociety.model.simulationrules.foragingants;
 
 import cellsociety.model.GridManager;
 import cellsociety.model.State;
@@ -7,6 +7,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Purpose: This class contains the rules for the Foraging ant model. Rules include the types of the
+ * players as well as logic to update each cell. Assumptions: xml file is correctly formatted and
+ * supplies the correct information to the constructor. Dependencies: Depends on SimulationEngine to
+ * declare constructors based on the parameters read from XML files. Depends on GridManager to
+ * provide it with the grid to work with.
+ *
+ * @author Ji Yun Hyo
+ */
 public class ForagingAntsRules extends Rules {
 
   private final Random random;

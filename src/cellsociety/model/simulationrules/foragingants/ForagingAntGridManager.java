@@ -1,20 +1,24 @@
-package cellsociety.model.foragingants;
+package cellsociety.model.simulationrules.foragingants;
 
 import cellsociety.model.GridManager;
 import cellsociety.model.State;
 import java.util.List;
 
+/**
+ * Purpose of this class is to facilitate making of Ant grid. The entire purpose for this class
+ * is the create and return the grid to GridManager.
+ * @author Ji Yun Hyo
+ */
 public class ForagingAntGridManager extends GridManager {
 
-  private int row;
-  private int col;
-  private State[][] stateOfCells;
+  private final int row;
+  private final int col;
 
   /**
-   * Basic constructor
-   *
+   * Basic constructor including the number of sides to check for neighbors
    * @param row
    * @param col
+   * @param numberOfSides number of sides to check for neighbors
    */
   public ForagingAntGridManager(int row, int col, int numberOfSides) {
     super(row, col, numberOfSides);
@@ -22,6 +26,14 @@ public class ForagingAntGridManager extends GridManager {
     this.col = col;
   }
 
+  /**
+   * Purpose of this method is to allow GridManager to call
+   * @param coordinates coordinates of nests and food sources
+   * @param possibleTypes types defined by the simulation
+   * @param possibleColors colors defined by the simulation
+   * @param radius radius of nests and food sources
+   * @return starting states and the grid containing them
+   */
   public State[][] buildAntGridWithTemplateHelper(List<String> coordinates,
       List<String> possibleTypes, List<String> possibleColors, int radius) {
     State[][] stateOfCells = new State[row][col];

@@ -1,7 +1,7 @@
 package cellsociety.model;
 
 import cellsociety.model.simulationrules.Rules;
-import cellsociety.model.foragingants.ForagingAntGridManager;
+import cellsociety.model.simulationrules.foragingants.ForagingAntGridManager;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -26,10 +26,10 @@ public class GridManager {
   private ArrayList<String> coordinates;
 
   /**
-   * Basic constructor
-   *
+   * Basic constructor for GridManager that takes in the number of sides to consider
    * @param row
    * @param col
+   * @param numberOfSides
    */
   public GridManager(int row, int col, int numberOfSides) {
     this.row = row;

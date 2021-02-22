@@ -1,6 +1,8 @@
 package cellsociety.model;
 
 import cellsociety.controller.Decoder;
+import cellsociety.model.simulationrules.foragingants.ForagingAntGridManager;
+import cellsociety.model.simulationrules.foragingants.ForagingAntsRules;
 import cellsociety.model.simulationrules.GameOfLifeRule;
 import cellsociety.model.simulationrules.PercolationRules;
 import cellsociety.model.simulationrules.RockPaperScissorsRules;
@@ -8,8 +10,6 @@ import cellsociety.model.simulationrules.Rules;
 import cellsociety.model.simulationrules.SegregationModelRules;
 import cellsociety.model.simulationrules.SpreadingOfFireRules;
 import cellsociety.model.simulationrules.WaTorModelRules;
-import cellsociety.model.foragingants.ForagingAntGridManager;
-import cellsociety.model.foragingants.ForagingAntsRules;
 import cellsociety.view.SimulationScreen;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
