@@ -16,14 +16,14 @@ public class HexagonCell extends Polygon {
   /**
    * Creates a new Hexagon Cell object for the given parameters.
    *
-   * @param x position in x direction
-   * @param y position in y direction
+   * @param x          position in x direction
+   * @param y          position in y direction
    * @param sideLength length of side of hexagon
    */
   public HexagonCell(double x, double y, double sideLength) {
     super();
-    double halfSide = sideLength/2;
-    double height = sideLength * Math.sqrt(3)/2;
+    double halfSide = sideLength / 2;
+    double height = sideLength * Math.sqrt(3) / 2;
     getPoints().addAll(
         x, y,
         x + height, y + halfSide,
@@ -34,6 +34,7 @@ public class HexagonCell extends Polygon {
     );
     setBorders();
   }
+
   private void setBorders() {
     setStroke(Paint.valueOf(STROKE_COLOR));
     setStrokeWidth(STROKE_WIDTH);

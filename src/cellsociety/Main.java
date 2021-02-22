@@ -1,12 +1,11 @@
 package cellsociety;
 
-import cellsociety.controller.simulationengine.SimulationEngine;
+import cellsociety.model.SimulationEngine;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
 /**
  * launches the model by calling the simulation engine
- *
  * @author Ji Yun Hyo
  */
 public class Main extends Application {

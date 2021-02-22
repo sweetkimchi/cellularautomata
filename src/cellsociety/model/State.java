@@ -1,4 +1,4 @@
-package cellsociety.model.cell;
+package cellsociety.model;
 
 
 /**
@@ -16,7 +16,6 @@ public class State {
   private int numberOfMoves;
   private int energy;
   private boolean hasFood;
-  private String direction;
   private int sugarMetabolism;
   private int vision;
   private int sugarPossession;
@@ -82,15 +81,26 @@ public class State {
     this.hasFood = hasFood;
     this.numberOfMoves = numberOfMoves;
     color = colorString;
-    this.direction = direction;
   }
 
-  public State(int xCoord, int yCoord, String type, String colorString, int numberOfMoves, int sugarMetabolism, int vision, int sugarPossession) {
+  public State(int xCoord, int yCoord, String type, String colorString, int numberOfMoves,
+      int sugarMetabolism, int vision, int sugarPossession) {
     this.xCoord = xCoord;
     this.yCoord = yCoord;
     this.type = type;
     color = colorString;
     this.numberOfMoves = numberOfMoves;
+  }
+
+  public State(int xCoord, int yCoord, String type, String colorString, int numberOfMoves,
+      int sugarMetabolism, int vision) {
+    this.xCoord = xCoord;
+    this.yCoord = yCoord;
+    this.type = type;
+    color = colorString;
+    this.numberOfMoves = numberOfMoves;
+    this.sugarMetabolism = sugarMetabolism;
+    this.vision = vision;
   }
 
 
@@ -137,15 +147,8 @@ public class State {
     color = colorName;
   }
 
-  public String getDirection() {
-    return direction;
-  }
-
-  public boolean hasFood(){
+  public boolean hasFood() {
     return hasFood;
   }
 
-  public void setDirection(String down) {
-    this.direction = down;
-  }
 }

@@ -54,8 +54,11 @@ public class StartScreen {
    * @param title text
    */
   public void setTitle(String title) {
-    if (label == null) addTitle(title);
-    else label.setText(title);
+    if (label == null) {
+      addTitle(title);
+    } else {
+      label.setText(title);
+    }
   }
 
   /**

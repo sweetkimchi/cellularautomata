@@ -1,11 +1,9 @@
-package cellsociety.model.segregationmodel;
+package cellsociety.model.simulationrules;
 
-import cellsociety.controller.grid.GridManager;
-import cellsociety.model.cell.State;
-import cellsociety.model.rules.Rules;
+import cellsociety.model.GridManager;
+import cellsociety.model.State;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 /**
@@ -35,12 +33,13 @@ public class SegregationModelRules extends Rules {
   /**
    * Default constructor
    */
-  public SegregationModelRules(long randomSeed, double THRESHHOLD, Map<String, String> colors) {
+  public SegregationModelRules(long randomSeed, double THRESHHOLD, String colorX, String colorY,
+      String emptyColor) {
     random = new Random(randomSeed);
     this.THRESHHOLD = THRESHHOLD;
-    this.AGENTX_COLOR = colors.get("agentx");
-    this.AGENTY_COLOR = colors.get("agenty");
-    this.EMPTY_COLOR = colors.get("empty");
+    this.AGENTX_COLOR = colorX;
+    this.AGENTY_COLOR = colorY;
+    this.EMPTY_COLOR = emptyColor;
 
     initializeColorsAndTypes();
   }
@@ -70,22 +69,12 @@ public class SegregationModelRules extends Rules {
 
 
   /**
-   * specifies the starting states of the cells according to the simulation rule
-   *
-   * @return type of cells
-   */
-  @Override
-  public String getStartingPositionCellType() {
-    return null;
-  }
-
-  /**
    * returns the possible types (e.g. agent x, agent y, empty)
    *
    * @return arraylist of possible types
    */
   @Override
-  public ArrayList<String> getPossibleTypes() {
+  public List<String> getPossibleTypes() {
     return possibleTypes;
   }
 
@@ -95,16 +84,33 @@ public class SegregationModelRules extends Rules {
    * @return arraylist of colors
    */
   @Override
-  public ArrayList<String> getPossibleColors() {
+  public List<String> getPossibleColors() {
     return possibleColors;
   }
 
+  /**
+   * Decide state updates each cell at each specific coordinate location according to the rules.
+   * Assumption is that all the parameters are non-null values that are properly defined.
+   * @param neighborsOfEachTypeAtTheCurrentLocation counts the number of neighbors that are specific "type" of
+   *                                                neighbors at the specific x, y coordinate location for all
+   *                                                possible types of the simulation.
+   * @param markStateForFurtherAnalysis this list of integer array acts as the means for each rules class
+   *                                    to keep track of each possible type of state. List contains one integer
+   *                                    array per possible type of state.
+   * @param updateStates List of states contains all the states that are to be updated at the end of each iteration.
+   *                     UpdateStates is sent to each Rules class where rules are applied. If a state has to be
+   *                     updated, the rules class adds the state to updateStates.
+   * @param x x coordinate
+   * @param y y coordinate
+   * @param gridManager gridManager object needed to control and oversee state checking
+   */
   @Override
-  public void decideState(List<Integer> neighborsOfEachTypeAtCoordinate, List<int[][]> nextStates,
-      int x, int y, GridManager gridManager) {
+  public void decideState(List<Integer> neighborsOfEachTypeAtTheCurrentLocation, List<int[][]> markStateForFurtherAnalysis,
+      List<State> updateStates, int x, int y,
+      GridManager gridManager) {
 
-    int agentXNeighbor = neighborsOfEachTypeAtCoordinate.get(2);
-    int agentYNeighbor = neighborsOfEachTypeAtCoordinate.get(1);
+    int agentXNeighbor = neighborsOfEachTypeAtTheCurrentLocation.get(2);
+    int agentYNeighbor = neighborsOfEachTypeAtTheCurrentLocation.get(1);
     double total = agentYNeighbor + agentXNeighbor;
     double ratio = 0;
 
@@ -112,21 +118,21 @@ public class SegregationModelRules extends Rules {
       ratio = ((double) agentYNeighbor) / total;
       if (ratio < THRESHHOLD) {
 
-        nextStates.get(1)[x][y] = 1;
+        markStateForFurtherAnalysis.get(1)[x][y] = 1;
       }
     }
     if (gridManager.getTypeAtCoordinate(x, y).equals(AGENTX) && total != 0) {
       ratio = ((double) agentXNeighbor) / total;
       if (ratio < THRESHHOLD) {
-        nextStates.get(2)[x][y] = 1;
+        markStateForFurtherAnalysis.get(2)[x][y] = 1;
       }
     }
     if (gridManager.getTypeAtCoordinate(x, y).equals(EMPTY)) {
-      nextStates.get(0)[x][y] = 1;
+      markStateForFurtherAnalysis.get(0)[x][y] = 1;
     }
 
-    relocateDissatisfiedNeighbors(nextStates, gridManager);
-    removeEmptyCells(nextStates);
+    relocateDissatisfiedNeighbors(markStateForFurtherAnalysis, gridManager);
+    removeEmptyCells(markStateForFurtherAnalysis);
   }
 
   private void removeEmptyCells(List<int[][]> nextStates) {

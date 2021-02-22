@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <data game="game">
   <author>Jiyun</author>
+  <blockcolor>black</blockcolor>
+  <blockratio>0.4</blockratio>
   <description>Simulates water spreading in tight spaces such as caves.</description>
+  <emptycolor>lightgrey</emptycolor>
+  <model>percolation</model>
   <numCols>50</numCols>
   <numRows>50</numRows>
-  <watertoemptyratio>0.01</watertoemptyratio>
-  <blockratio>0.4</blockratio>
-  <randomseed>100</randomseed>
   <numberofsides>6</numberofsides>
+  <randomseed>100</randomseed>
   <shape>hexagon</shape>
-  <blockcolor>black</blockcolor>
-  <emptycolor>lightgrey</emptycolor>
-  <watercolor>blue</watercolor>
   <template>random_one</template>
   <title>Percolation</title>
-  <model>percolation</model>
+  <watercolor>blue</watercolor>
+  <watertoemptyratio>0.01</watertoemptyratio>
 </data>

@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <data game="game">
-  <author>Jiyun</author>
-  <description>Most are content with where they are and don't move.</description>
-  <numCols>50</numCols>
-  <numRows>50</numRows>
-  <populationratio>0.5</populationratio>
-  <emptyratio>0.3</emptyratio>
-  <satisfactionthreshhold>0.2</satisfactionthreshhold>
-  <randomseed>100</randomseed>
-  <numberofsides>8</numberofsides>
-  <shape>square</shape>
-  <emptycolor>lightgrey</emptycolor>
   <agentxcolor>red</agentxcolor>
   <agentycolor>blue</agentycolor>
+  <author>Jiyun</author>
+  <description>Most are content with where they are and don't move.</description>
+  <emptycolor>lightgrey</emptycolor>
+  <emptyratio>0.3</emptyratio>
+  <model>segregationmodel</model>
+  <numCols>50</numCols>
+  <numRows>50</numRows>
+  <numberofsides>8</numberofsides>
+  <populationratio>0.5</populationratio>
+  <randomseed>100</randomseed>
+  <satisfactionthreshhold>0.2</satisfactionthreshhold>
+  <shape>square</shape>
   <template>random_one</template>
   <title>Segregation Model</title>
-  <model>segregationmodel</model>
 </data>

@@ -2,21 +2,21 @@
 <data game="game">
   <author>Jiyun</author>
   <description>Indefinite pattern of swarms of fish with sharks following.</description>
+  <emptycolor>lightgrey</emptycolor>
+  <emptyratio>0.3</emptyratio>
+  <energyfromeating>3</energyfromeating>
+  <fishcolor>green</fishcolor>
+  <fishreproduce>4</fishreproduce>
+  <fishsharkratio>0.1</fishsharkratio>
+  <model>wator</model>
   <numCols>50</numCols>
   <numRows>50</numRows>
-  <fishsharkratio>0.1</fishsharkratio>
-  <emptyratio>0.3</emptyratio>
+  <numberofsides>6</numberofsides>
   <randomseed>0</randomseed>
-  <numberofsides>8</numberofsides>
-  <shape>square</shape>
-  <fishreproduce>4</fishreproduce>
-  <sharkreproduce>4</sharkreproduce>
-  <sharklives>3</sharklives>
-  <energyfromeating>3</energyfromeating>
-  <emptycolor>lightgrey</emptycolor>
-  <fishcolor>green</fishcolor>
+  <shape>hexagon</shape>
   <sharkcolor>blue</sharkcolor>
+  <sharklives>3</sharklives>
+  <sharkreproduce>4</sharkreproduce>
   <template>random_one</template>
   <title>WaTor Simulation</title>
-  <model>wator</model>
 </data>

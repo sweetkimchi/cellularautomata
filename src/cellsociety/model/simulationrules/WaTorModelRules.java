@@ -1,11 +1,9 @@
-package cellsociety.model.watormodel;
+package cellsociety.model.simulationrules;
 
-import cellsociety.controller.grid.GridManager;
-import cellsociety.model.cell.State;
-import cellsociety.model.rules.Rules;
+import cellsociety.model.GridManager;
+import cellsociety.model.State;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 
@@ -36,20 +34,23 @@ public class WaTorModelRules extends Rules {
   /**
    * WaTor Model Constructor that initializes the model
    *
-   * @param randomSeed to reproduce the results
-   * @param colors
-   * @param ints contains all integer parameters in map form
+   * @param randomSeed        random seed to reproduce the results
+   * @param energyFish        energy of the fish
+   * @param reproduceBoundary number of steps needed to reproduce
+   * @param sharkEnergy       energy of shark
    */
-  public WaTorModelRules(long randomSeed, Map<String, Integer> ints, Map<String, String> colors) {
+  public WaTorModelRules(long randomSeed, int energyFish,
+      int reproduceBoundary, int sharkEnergy, String emptyColor, String sharkColor,
+      String fishColor) {
     random = new Random(randomSeed);
     possibleTypes = new ArrayList<>();
     possibleColors = new ArrayList<>();
-    ENERGY_FROM_FISH = ints.get("energy");
-    REPRODUCE_BOUNDARY = ints.get("fishrate");
-    DEFAULT_ENERGY = ints.get("sharklives");
-    this.EMPTY_COLOR = colors.get("empty");
-    this.FISH_COLOR = colors.get("fish");
-    this.SHARK_COLOR = colors.get("shark");
+    ENERGY_FROM_FISH = energyFish;
+    REPRODUCE_BOUNDARY = reproduceBoundary;
+    DEFAULT_ENERGY = sharkEnergy;
+    this.EMPTY_COLOR = emptyColor;
+    this.FISH_COLOR = fishColor;
+    this.SHARK_COLOR = sharkColor;
     possibleTypes.add(EMPTY);
     possibleTypes.add(SHARK);
     possibleTypes.add(FISH);
@@ -57,7 +58,6 @@ public class WaTorModelRules extends Rules {
     possibleColors.add(SHARK_COLOR);
     possibleColors.add(FISH_COLOR);
   }
-
 
   private void setColor(State state) {
     if (state.getType().equals(FISH)) {
@@ -69,33 +69,49 @@ public class WaTorModelRules extends Rules {
     }
   }
 
-
   /**
-   * specifies the starting states of the cells according to the simulation rule
+   * returns the possible types (e.g. agent x, agent y, empty)
    *
-   * @return type of cells
+   * @return arraylist of possible types
    */
   @Override
-  public String getStartingPositionCellType() {
-    return null;
-  }
-
-  @Override
-  public ArrayList<String> getPossibleTypes() {
+  public List<String> getPossibleTypes() {
     return possibleTypes;
   }
 
+  /**
+   * Returns the possible colors for each type
+   *
+   * @return arraylist of colors
+   */
   @Override
-  public ArrayList<String> getPossibleColors() {
+  public List<String> getPossibleColors() {
     return possibleColors;
   }
 
+  /**
+   * Decide state updates each cell at each specific coordinate location according to the rules.
+   * Assumption is that all the parameters are non-null values that are properly defined.
+   * @param neighborsOfEachTypeAtTheCurrentLocation counts the number of neighbors that are specific "type" of
+   *                                                neighbors at the specific x, y coordinate location for all
+   *                                                possible types of the simulation.
+   * @param markStateForFurtherAnalysis this list of integer array acts as the means for each rules class
+   *                                    to keep track of each possible type of state. List contains one integer
+   *                                    array per possible type of state.
+   * @param updateStates List of states contains all the states that are to be updated at the end of each iteration.
+   *                     UpdateStates is sent to each Rules class where rules are applied. If a state has to be
+   *                     updated, the rules class adds the state to updateStates.
+   * @param x x coordinate
+   * @param y y coordinate
+   * @param gridManager gridManager object needed to control and oversee state checking
+   */
   @Override
-  public void decideState(List<Integer> neighborsOfEachTypeAtCoordinate, List<int[][]> nextStates,
-      int x, int y, GridManager gridManager) {
+  public void decideState(List<Integer> neighborsOfEachTypeAtTheCurrentLocation, List<int[][]> markStateForFurtherAnalysis,
+      List<State> updateStates, int x, int y,
+      GridManager gridManager) {
     if (gridManager.getTypeAtCoordinate(x, y).equals(FISH)) {
       gridManager.setStateAtCoordinate(x, y,
-          decideFishState(gridManager, x, y, gridManager.getTypeAtCoordinate(x, y), nextStates));
+          decideFishState(gridManager, x, y));
     } else if (gridManager.getTypeAtCoordinate(x, y).equals(SHARK)) {
       gridManager.setStateAtCoordinate(x, y,
           decideSharkState(gridManager, x, y, gridManager.getTypeAtCoordinate(x, y)));
@@ -104,89 +120,75 @@ public class WaTorModelRules extends Rules {
 
   }
 
-  private State decideFishState(GridManager gridManager, int x, int y, String typeAtCoordinate,
-      List<int[][]> nextStates) {
+  private State decideFishState(GridManager gridManager, int x, int y) {
     ArrayList<State> emptyCells = new ArrayList<>();
-    if (x - 1 >= 0 && gridManager.getTypeAtCoordinate(x - 1, y).equals(EMPTY)) {
-      //left cell
-      emptyCells.add(gridManager.getStateAtCoordinate(x - 1, y));
-    }
-    if (x >= 0 && y - 1 >= 0 && gridManager.getTypeAtCoordinate(x, y - 1).equals(EMPTY)) {
-      //upper cell
-      emptyCells.add(gridManager.getStateAtCoordinate(x, y - 1));
-    }
-    if (y + 1 < gridManager.getColumn() && gridManager.getTypeAtCoordinate(x, y + 1)
-        .equals(EMPTY)) {
-      //lower cell
-      emptyCells.add(gridManager.getStateAtCoordinate(x, y + 1));
-    }
-    if (x + 1 < gridManager.getRow() && gridManager.getTypeAtCoordinate(x + 1, y)
-        .equals(EMPTY)) {
-      //right cell
-      emptyCells.add(gridManager.getStateAtCoordinate(x + 1, y));
-    }
-
+    checkNeighboringCellsForEmptyCells(gridManager, y, emptyCells, x - 1 >= 0, y >= 0, x - 1);
+    checkNeighboringCellsForEmptyCells(gridManager, y - 1, emptyCells, x >= 0, y - 1 >= 0, x);
+    checkNeighboringCellsForEmptyCells(gridManager, y + 1, emptyCells, x >= 0,
+        y + 1 < gridManager.getColumn(), x);
+    checkNeighboringCellsForEmptyCells(gridManager, y, emptyCells, x + 1 < gridManager.getRow(),
+        y >= 0, x + 1);
     //if there are spaces to move to, MOVE
     if (!emptyCells.isEmpty()) {
       //cannot reproduce yet
       if (gridManager.getStateAtCoordinate(x, y).getNumberOfMoves() < REPRODUCE_BOUNDARY) {
         int index = random.nextInt(emptyCells.size());
         State dummy = emptyCells.get(index);
-        //    System.out.println(index);
-        gridManager
-            .setStateAtCoordinate(dummy.getxCoord(), dummy.getyCoord(), new State(dummy.getxCoord(),
-                dummy.getyCoord(), FISH, FISH_COLOR,
+        gridManager.setStateAtCoordinate(dummy.getxCoord(), dummy.getyCoord(),
+            new State(dummy.getxCoord(), dummy.getyCoord(), FISH, FISH_COLOR,
                 gridManager.getStateAtCoordinate(x, y).getNumberOfMoves() + 1));
         return new State(x, y, EMPTY, EMPTY_COLOR, 0, 0);
       } else {
         //reproduce
         int index = random.nextInt(emptyCells.size());
         State dummy = emptyCells.get(index);
-        // System.out.println("REPRODUCE");
-        gridManager
-            .setStateAtCoordinate(dummy.getxCoord(), dummy.getyCoord(), new State(dummy.getxCoord(),
-                dummy.getyCoord(), FISH, FISH_COLOR, 0, 0));
+        gridManager.setStateAtCoordinate(dummy.getxCoord(), dummy.getyCoord(),
+            new State(dummy.getxCoord(), dummy.getyCoord(), FISH, FISH_COLOR, 0, 0));
         return new State(x, y, FISH, FISH_COLOR, 0, 0);
       }
     }
     return gridManager.getStateAtCoordinate(x, y);
   }
 
+  private void checkNeighboringCellsForEmptyCells(GridManager gridManager, int y,
+      ArrayList<State> emptyCells, boolean isXInBound, boolean isYInBound, int x) {
+    if (isXInBound && isYInBound && gridManager.getTypeAtCoordinate(x, y).equals(EMPTY)) {
+      emptyCells.add(gridManager.getStateAtCoordinate(x, y));
+    }
+  }
+
   private State decideSharkState(GridManager gridManager, int xCoord, int yCoord, String type) {
     ArrayList<State> emptyCells = new ArrayList<>();
     ArrayList<State> fishCells = new ArrayList<>();
-
     //if no energy, die
     if (gridManager.getStateAtCoordinate(xCoord, yCoord).getEnergy() <= 0) {
       return new State(xCoord, yCoord, EMPTY, EMPTY_COLOR, 0, 0);
     }
-
-    checkOneNeighborForFish(gridManager, yCoord, emptyCells, fishCells, xCoord - 1 >= 0,
+    checkNeighborsForFish(gridManager, yCoord, emptyCells, fishCells, xCoord - 1 >= 0,
         xCoord - 1);
-    checkOneNeighborForFish(gridManager, yCoord - 1, emptyCells, fishCells,
+    checkNeighborsForFish(gridManager, yCoord - 1, emptyCells, fishCells,
         xCoord >= 0 && yCoord - 1 >= 0, xCoord);
+    checkNeighborsForFish(gridManager, yCoord, emptyCells, fishCells,
+        xCoord + 1 < gridManager.getRow(), xCoord + 1);
 
     if (yCoord + 1 < gridManager.getColumn()) {
       //lower cell
       checkNeighborsForFishOrEmptyCell(gridManager, yCoord + 1, emptyCells, fishCells, xCoord);
     }
-    checkOneNeighborForFish(gridManager, yCoord, emptyCells, fishCells,
-        xCoord + 1 < gridManager.getRow(), xCoord + 1);
 
     //check if there are any adjacent fish cells
     if (!fishCells.isEmpty()) {
       return moveSharkToNearbyFishCell(gridManager, xCoord, yCoord, fishCells);
     }
-
     //if the shark is not dead, but nowhere to move just return
-    return tryToMoveSharkToEmptyCell(gridManager, xCoord, yCoord, emptyCells);
+    return moveSharkToEmptyCell(gridManager, xCoord, yCoord, emptyCells);
   }
 
-  private void checkOneNeighborForFish(GridManager gridManager, int yCoord,
-      ArrayList<State> emptyCells, ArrayList<State> fishCells, boolean b, int i) {
-    if (b) {
+  private void checkNeighborsForFish(GridManager gridManager, int yCoord,
+      ArrayList<State> emptyCells, ArrayList<State> fishCells, boolean xInBound, int xCoord) {
+    if (xInBound) {
       //left cell
-      checkNeighborsForFishOrEmptyCell(gridManager, yCoord, emptyCells, fishCells, i);
+      checkNeighborsForFishOrEmptyCell(gridManager, yCoord, emptyCells, fishCells, xCoord);
     }
   }
 
@@ -229,7 +231,7 @@ public class WaTorModelRules extends Rules {
     }
   }
 
-  private State tryToMoveSharkToEmptyCell(GridManager gridManager, int xCoord, int yCoord,
+  private State moveSharkToEmptyCell(GridManager gridManager, int xCoord, int yCoord,
       ArrayList<State> emptyCells) {
     if (emptyCells.isEmpty()) {
       return new State(xCoord, yCoord, EMPTY, EMPTY_COLOR,
@@ -252,7 +254,5 @@ public class WaTorModelRules extends Rules {
 
     }
   }
-
-
 }
 
