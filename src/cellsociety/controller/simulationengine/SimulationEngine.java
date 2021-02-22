@@ -94,7 +94,7 @@ public class SimulationEngine {
     gridManager.setNumberOfSides(decoder.getNumberOfSides());
     simulationScreen.setGridShape(decoder.getShape());
     simulationScreen.update(gridManager);
-    simulationScreen.setDescription(decoder.getMyDesc());
+    simulationScreen.setDescription(descriptors.get("description"));
     runSimulation();
   }
 
