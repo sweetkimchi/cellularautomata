@@ -5,7 +5,7 @@
   <numCols>40</numCols>
   <numRows>40</numRows>
   <shapeCoords>10,10,20,30,35,30</shapeCoords>
-  <numberofants>20</numberofants>
+  <numberofants>30</numberofants>
   <radius>2</radius>
   <phermoneamount>30</phermoneamount>
   <movebias>0.96</movebias>
