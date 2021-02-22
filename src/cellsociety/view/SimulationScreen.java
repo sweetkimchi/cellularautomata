@@ -39,8 +39,8 @@ public class SimulationScreen {
   private static final double MIN_SPEED = 0;
   private static final double MAX_SPEED = 60;
   private static final double DEFAULT_SPEED = 30;
-  private final Group sceneNodes;
   private final Stage stage;
+  private BorderPane root;
   private ResourceBundle resources;
   private final SimulationEngine simulationEngine;
   private SidePanel sidePanel;
@@ -62,7 +62,6 @@ public class SimulationScreen {
   public SimulationScreen(Stage stage, SimulationEngine engine) {
     this.stage = stage;
     simulationEngine = engine;
-    sceneNodes = new Group();
     resources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + language);
     initializeStartScreen();
   }
@@ -95,7 +94,7 @@ public class SimulationScreen {
   }
 
   private void initialize() {
-    BorderPane root = new BorderPane();
+    root = new BorderPane();
     gridGraphics = new GridGraphics();
     sidePanel = new SidePanel();
     topPanel = new TopPanel();
@@ -111,8 +110,19 @@ public class SimulationScreen {
 
   private void addTopPanelControls() {
     createColorBox();
+    Button gridButton = makeButton("GridCommand",event -> toggleGrid());
     Button graphButton = makeButton("GraphCommand", event -> initializeGraph());
+    topPanel.add(gridButton);
     topPanel.add(graphButton);
+  }
+
+  private void toggleGrid() {
+    if (root.getCenter() == null) {
+      root.setCenter(gridGraphics.getNode());
+    }
+    else {
+      root.setCenter(null);
+    }
   }
 
   private void initializeGraph() {
@@ -238,10 +248,9 @@ public class SimulationScreen {
    * current value on the slider.
    *
    * @param gridManager to get states for updating the grid
-   * @param model  String for model name
    */
-  public void update(GridManager gridManager, String model) {
-    gridGraphics.update(gridManager, model);
+  public void update(GridManager gridManager) {
+    gridGraphics.update(gridManager);
     updateGraph(gridManager.getSummaryOfTypes());
     simulationEngine.setSimulationSpeed((int) slider.getValue());
     checkWindowSizeChanged();
