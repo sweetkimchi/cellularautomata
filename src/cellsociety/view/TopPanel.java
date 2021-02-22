@@ -10,7 +10,7 @@ import javafx.scene.layout.HBox;
  */
 public class TopPanel {
 
-  private HBox panel;
+  private final HBox panel;
   private static final String NODE_ID = "top-panel";
 
   /**
@@ -25,10 +25,10 @@ public class TopPanel {
   /**
    * Adds nodes to the TopPanel.
    *
-   * @param node to be added
+   * @param nodes to be added
    */
-  public void add(Node node) {
-    panel.getChildren().add(node);
+  public void add(Node... nodes) {
+    panel.getChildren().addAll(nodes);
   }
 
   /**

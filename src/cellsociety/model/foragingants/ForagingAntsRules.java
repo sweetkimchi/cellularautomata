@@ -18,10 +18,10 @@ public class ForagingAntsRules extends Rules {
   private String WEAK_PHERMONE_COLOR;
   private ArrayList<String> possibleTypes;
   private ArrayList<String> possibleColors;
-  private String ANT = "rock";
-  private String FOOD = "paper";
+  private String ANT = "ant";
+  private String FOOD = "food";
   private String NEST = "nest";
-  private String PHERMONE = "hormone";
+  private String PHEROMONE = "pheromone";
   private String EMPTY = "empty";
   private int numberOfAnts;
   private final Random random;
@@ -50,7 +50,7 @@ public class ForagingAntsRules extends Rules {
     possibleTypes.add(NEST);
     possibleTypes.add(FOOD);
     possibleTypes.add(ANT);
-    possibleTypes.add(PHERMONE);
+    possibleTypes.add(PHEROMONE);
     possibleTypes.add(EMPTY);
 
 
@@ -102,7 +102,7 @@ public class ForagingAntsRules extends Rules {
       gridManager.setStateAtCoordinate(x,y, decideAntState(gridManager, x, y, nextStates, getPossibleTypes(), getPossibleColors()));
     }
 
-    if(gridManager.getTypeAtCoordinate(x,y).equals(PHERMONE)){
+    if(gridManager.getTypeAtCoordinate(x,y).equals(PHEROMONE)){
       gridManager.setStateAtCoordinate(x,y, decidePhermoneState(gridManager, x, y, nextStates, getPossibleTypes(), getPossibleColors()));
     }
 
@@ -122,11 +122,12 @@ public class ForagingAntsRules extends Rules {
         //    System.out.println(index);
         gridManager
             .setStateAtCoordinate(dummy.getxCoord(), dummy.getyCoord(), new AntState(dummy.getxCoord(),
-                dummy.getyCoord(), PHERMONE, WEAK_PHERMONE_COLOR,
+                dummy.getyCoord(), PHEROMONE, WEAK_PHERMONE_COLOR,
                 0, gridManager.getStateAtCoordinate(x, y).getEnergy() - phermoneAmount/2));
         emptyCells.remove(index);
       }
-      return new AntState(x, y, PHERMONE, PHERMONE_COLOR, 0, gridManager.getStateAtCoordinate(x, y).getEnergy() - 1);
+      return new AntState(x, y,
+          PHEROMONE, PHERMONE_COLOR, 0, gridManager.getStateAtCoordinate(x, y).getEnergy() - 1);
     }
   }
 
@@ -141,7 +142,7 @@ public class ForagingAntsRules extends Rules {
       checkForNeighbors(gridManager,x,y,nestCells,NEST);
       checkForNeighbors(gridManager, x, y, foodCells, FOOD);
       checkForNeighbors(gridManager, x, y, emptyCells, EMPTY);
-      checkForNeighbors(gridManager,x,y, phermoneCells, PHERMONE);
+      checkForNeighbors(gridManager,x,y, phermoneCells, PHEROMONE);
       if(!foodCells.isEmpty()){
         int index = random.nextInt(foodCells.size());
         State dummy = foodCells.get(index);
@@ -162,18 +163,23 @@ public class ForagingAntsRules extends Rules {
       }
       //if there is phermone follow the phermone
       if(!phermoneCells.isEmpty() && !emptyCells.isEmpty()){
-        int index = random.nextInt(emptyCells.size());
-        State dummy = emptyCells.get(index);
+        State dummy = null;
+        for(State phermone : phermoneCells){
+          if(phermone.getColor().equals(WEAK_PHERMONE_COLOR)){
+            dummy = phermone;
+            break;
+          }
+        }
+        if(dummy == null){
+          int index = random.nextInt(emptyCells.size());
+          dummy = emptyCells.get(index);
+        }
         gridManager
             .setStateAtCoordinate(dummy.getxCoord(), dummy.getyCoord(), new AntState(dummy.getxCoord(),
                 dummy.getyCoord(), ANT, ANT_COLOR,
                 gridManager.getStateAtCoordinate(x, y).getNumberOfMoves() + 1, false, determineDirection(dummy, x, y)));
         //if the phermone doesn't have enough health, return empty
-        if(gridManager.getStateAtCoordinate(dummy.getxCoord(), dummy.getyCoord()).getEnergy() - 1 > 0){
-          return new AntState(x, y,PHERMONE, PHERMONE_COLOR, 0, gridManager.getStateAtCoordinate(dummy.getxCoord(), dummy.getyCoord()).getEnergy() - 1);
-        }else{
-          return new AntState(x, y, EMPTY, EMPTY_COLOR, 0);
-        }
+          return new AntState(x, y, PHEROMONE, PHERMONE_COLOR, 0, gridManager.getStateAtCoordinate(dummy.getxCoord(), dummy.getyCoord()).getEnergy());
 
       }
       //if there are spaces to move to, MOVE
@@ -194,7 +200,7 @@ public class ForagingAntsRules extends Rules {
       moveTowardsNest(gridManager,x,y,nestCells,NEST);
       moveTowardsNest(gridManager, x, y, foodCells, FOOD);
       moveTowardsNest(gridManager, x, y, emptyCells, EMPTY);
-      moveTowardsNest(gridManager,x,y, phermoneCells, PHERMONE);
+      moveTowardsNest(gridManager,x,y, phermoneCells, PHEROMONE);
       if(!nestCells.isEmpty()){
         int index = random.nextInt(nestCells.size());
         State dummy = nestCells.get(index);
@@ -212,7 +218,7 @@ public class ForagingAntsRules extends Rules {
             .setStateAtCoordinate(dummy.getxCoord(), dummy.getyCoord(), new AntState(dummy.getxCoord(),
                 dummy.getyCoord(), ANT, ANT_COLOR,
                 0, true, determineDirection(dummy, x, y)));
-        return new AntState(x, y, PHERMONE, PHERMONE_COLOR, 0, phermoneAmount);
+        return new AntState(x, y, PHEROMONE, PHERMONE_COLOR, 0, phermoneAmount);
 
 
 
@@ -228,7 +234,7 @@ public class ForagingAntsRules extends Rules {
             .setStateAtCoordinate(dummy.getxCoord(), dummy.getyCoord(), new AntState(dummy.getxCoord(),
                 dummy.getyCoord(), ANT, ANT_COLOR,
                 0, true, determineDirection(dummy, x, y)));
-        return new AntState(x, y, PHERMONE, PHERMONE_COLOR, 0, phermoneAmount);
+        return new AntState(x, y, PHEROMONE, PHERMONE_COLOR, 0, phermoneAmount);
 
 
 

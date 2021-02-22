@@ -25,7 +25,7 @@ public class GraphGraphics {
   private static final int LINE_WINDOW_SIZE = 150;
   private static final double WINDOW_WIDTH = 500;
   private static final double WINDOW_HEIGHT = 500;
-  private Map<String,XYChart.Series<String,Number>> lines;
+  private final Map<String,XYChart.Series<String,Number>> lines;
   private static final String EMPTY_CELL = "empty";
 
   /**
@@ -82,7 +82,7 @@ public class GraphGraphics {
   }
 
   private void putIfAbsent(String type) {
-    if (!lines.keySet().contains(type)) {
+    if (!lines.containsKey(type)) {
       lines.put(type,new XYChart.Series<>());
       lines.get(type).setName(type);
       lineChart.getData().add(lines.get(type));
@@ -115,5 +115,9 @@ public class GraphGraphics {
    */
   public boolean isActive() {
     return stage.isShowing();
+  }
+
+  public void close() {
+    stage.close();
   }
 }

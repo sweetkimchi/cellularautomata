@@ -56,9 +56,8 @@ public class GridGraphics {
    * in order to determine color, as predetermined by the CSS file.
    *
    * @param gridManager to get states for updating the grid
-   * @param model  name of model
    */
-  public void update(GridManager gridManager, String model) {
+  public void update(GridManager gridManager) {
     reset();
     for (int y = 0; y < gridManager.getColumn(); y++) {
       for (int x = 0; x < gridManager.getRow(); x++) {
@@ -106,7 +105,7 @@ public class GridGraphics {
           GRID_BUFFER + r * hexagonHeight, sideLength);
     }
     else {
-      return new HexagonCell(GRID_BUFFER + (c +HEXAGON_OFFSET_CORRECTION) * hexagonWidth,
+      return new HexagonCell(GRID_BUFFER + (c + HEXAGON_OFFSET_CORRECTION) * hexagonWidth,
           GRID_BUFFER + r * hexagonHeight, sideLength);
     }
   }
@@ -125,7 +124,7 @@ public class GridGraphics {
    * @param height double for the new height of the grid
    */
   public void resizeGrid(double width, double height) {
-    if (width/height > paneForGrid.getMaxWidth()/ paneForGrid.getMaxHeight()) {
+    if (width / height > paneForGrid.getMaxWidth() / paneForGrid.getMaxHeight()) {
       gridSize = calculateGridSize(height);
     }
     else gridSize = calculateGridSize(width);
