@@ -298,4 +298,55 @@ public class ForagingAntsRules extends Rules {
     if (y + 1 < gridManager.getColumn() && gridManager.getTypeAtCoordinate(x, y + 1)
         .equals(type) && manhattanDistance(xNest, yNest, x, y + 1) < distance) {
       //lower cell
-      cells.add
+      cells.add(gridManager.getStateAtCoordinate(x, y + 1));
+    }
+    if (x + 1 < gridManager.getRow() && gridManager.getTypeAtCoordinate(x + 1, y)
+        .equals(type) && manhattanDistance(xNest, yNest, x + 1, y) < distance) {
+      //right cell
+      cells.add(gridManager.getStateAtCoordinate(x + 1, y));
+    }
+  }
+
+  private int manhattanDistance(int xNest, int yNest, int x, int y) {
+    return Math.abs(x - xNest) + Math.abs(y - yNest);
+  }
+
+  private void checkForNeighbors(GridManager gridManager, int x, int y, ArrayList<State> emptyCells,
+      String type) {
+    double probability = random.nextDouble();
+    if (x - 1 >= 0 && gridManager.getTypeAtCoordinate(x - 1, y).equals(type)
+        && probability < moveBias) {
+      //left cell
+      emptyCells.add(gridManager.getStateAtCoordinate(x - 1, y));
+    }
+    if (x >= 0 && y - 1 >= 0 && gridManager.getTypeAtCoordinate(x, y - 1).equals(type)
+        && probability < moveBias) {
+      //upper cell
+      emptyCells.add(gridManager.getStateAtCoordinate(x, y - 1));
+    }
+    if (y + 1 < gridManager.getColumn() && gridManager.getTypeAtCoordinate(x, y + 1)
+        .equals(type)) {
+      //lower cell
+      emptyCells.add(gridManager.getStateAtCoordinate(x, y + 1));
+    }
+    if (x + 1 < gridManager.getRow() && gridManager.getTypeAtCoordinate(x + 1, y)
+        .equals(type)) {
+      //right cell
+      emptyCells.add(gridManager.getStateAtCoordinate(x + 1, y));
+    }
+  }
+
+  //0 - up
+  //
+  private String determineDirection(State dummy, int x, int y) {
+    if (dummy.getxCoord() > x) {
+      return "right";
+    } else if (dummy.getxCoord() < x) {
+      return "left";
+    } else if (dummy.getyCoord() > y) {
+      return "up";
+    } else {
+      return "down";
+    }
+  }
+}
