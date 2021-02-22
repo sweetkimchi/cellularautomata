@@ -108,4 +108,12 @@ public class GraphGraphics {
     currentTime = 0;
   }
 
+  /**
+   * Returns a boolean of whether or not the graph window is open.
+   * 
+   * @return boolean if graph window is active
+   */
+  public boolean isActive() {
+    return stage.isShowing();
+  }
 }

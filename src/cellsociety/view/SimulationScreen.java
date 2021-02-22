@@ -116,6 +116,7 @@ public class SimulationScreen {
   }
 
   private void initializeGraph() {
+    if (graphGraphics != null && graphGraphics.isActive()) return;
     graphGraphics = new GraphGraphics(resources.getString("GraphTitle"),
         resources.getString("GraphXLabel"), resources.getString("GraphYLabel"));
   }
