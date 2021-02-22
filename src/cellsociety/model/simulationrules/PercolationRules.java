@@ -57,8 +57,24 @@ public class PercolationRules extends Rules {
     return possibleColors;
   }
 
+  /**
+   * Decide state updates each cell at each specific coordinate location according to the rules.
+   * Assumption is that all the parameters are non-null values that are properly defined.
+   * @param neighborsOfEachTypeAtTheCurrentLocation counts the number of neighbors that are specific "type" of
+   *                                                neighbors at the specific x, y coordinate location for all
+   *                                                possible types of the simulation.
+   * @param markStateForFurtherAnalysis this list of integer array acts as the means for each rules class
+   *                                    to keep track of each possible type of state. List contains one integer
+   *                                    array per possible type of state.
+   * @param updateStates List of states contains all the states that are to be updated at the end of each iteration.
+   *                     UpdateStates is sent to each Rules class where rules are applied. If a state has to be
+   *                     updated, the rules class adds the state to updateStates.
+   * @param x x coordinate
+   * @param y y coordinate
+   * @param gridManager gridManager object needed to control and oversee state checking
+   */
   @Override
-  public void decideState(List<Integer> neighborsOfEachTypeAtTheCurrentLocation, List<int[][]> nextStates,
+  public void decideState(List<Integer> neighborsOfEachTypeAtTheCurrentLocation, List<int[][]> markStateForFurtherAnalysis,
       List<State> updateStates, int x, int y,
       GridManager gridManager) {
     if (gridManager.getTypeAtCoordinate(x, y).equals(EMPTY)
