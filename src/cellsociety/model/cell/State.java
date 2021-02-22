@@ -17,6 +17,9 @@ public class State {
   private int energy;
   private boolean hasFood;
   private String direction;
+  private int sugarMetabolism;
+  private int vision;
+  private int sugarPossession;
 
   /**
    * Basic constructor
@@ -82,6 +85,13 @@ public class State {
     this.direction = direction;
   }
 
+  public State(int xCoord, int yCoord, String type, String colorString, int numberOfMoves, int sugarMetabolism, int vision, int sugarPossession) {
+    this.xCoord = xCoord;
+    this.yCoord = yCoord;
+    this.type = type;
+    color = colorString;
+    this.numberOfMoves = numberOfMoves;
+  }
 
 
   /**
