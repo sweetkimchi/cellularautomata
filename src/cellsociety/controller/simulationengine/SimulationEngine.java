@@ -104,42 +104,36 @@ public class SimulationEngine {
       rules = new GameOfLifeRule(decoder.getGOLColors());
       template = constructStartingStateForSimulation(decoder.getCoordinates());
 
-      gridManager
-              .buildGridWithTemplate(template, rules.getPossibleTypes(), rules.getPossibleColors(), 0);
+      gridManager.buildGridWithTemplate(template, rules.getPossibleTypes(), rules.getPossibleColors(), 0);
     }
     if (game.equals("percolation")) {
 
       rules = new PercolationRules(decoder.getSeed(), decoder.getPercolationColors());
-      gridManager
-              .buildGridWithRandomSeed(decoder.getPercolationRatios().get("block"), decoder.getPercolationRatios().get("waterempty"),
+      gridManager.buildGridWithRandomSeed(decoder.getPercolationRatios().get("block"), decoder.getPercolationRatios().get("waterempty"),
                       decoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
     }
     if (game.equals("segregationmodel")) {
       rules = new SegregationModelRules(decoder.getSeed(), decoder.getSegregationRatios().get("satisfaction"), decoder.getSegregationColors());
-      gridManager
-              .buildGridWithRandomSeed(decoder.getSegregationRatios().get("empty"), decoder.getSegregationRatios().get("population"),
+      gridManager.buildGridWithRandomSeed(decoder.getSegregationRatios().get("empty"), decoder.getSegregationRatios().get("population"),
                       decoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
 
     }
     if (game.equals("spreadingoffire")) {
       rules = new SpreadingOfFireRules(decoder.getSeed(), decoder.getFireRatios().get("probcatch"), decoder.getFireColors());
-      gridManager
-              .buildGridWithRandomSeed(decoder.getFireRatios().get("empty"), decoder.getFireRatios().get("tree"),
+      gridManager.buildGridWithRandomSeed(decoder.getFireRatios().get("empty"), decoder.getFireRatios().get("tree"),
                       decoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
     }
     if (game.equals("wator")) {
       //   rules = new WaTorModelRules(emptyRatio, populationRatio, randomSeed, energyFish, reproduceBoundary, sharkEnergy);
       rules = new WaTorModelRules(decoder.getSeed(), decoder.getWaTorIntegers(), decoder.getWaTorColors());
-      gridManager
-              .buildGridWithRandomSeed(decoder.getWaTorRatios().get("empty"), decoder.getWaTorRatios().get("fishshark"),
+      gridManager.buildGridWithRandomSeed(decoder.getWaTorRatios().get("empty"), decoder.getWaTorRatios().get("fishshark"),
                       decoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
     }
     if (game.equals("rockpaperscissors")) {
       //   rules = new WaTorModelRules(emptyRatio, populationRatio, randomSeed, energyFish, reproduceBoundary, sharkEnergy);
       rules = new RockPaperScissorsRules(decoder.getRPSIntegers().get("threshold"), decoder.getRPSIntegers().get("seed"), decoder.getRPSColors());
 
-      gridManager
-              .buildGridWithRandomSeed(decoder.getRPSRatios().get("empty"), decoder.getRPSRatios().get("scissors"),
+      gridManager.buildGridWithRandomSeed(decoder.getRPSRatios().get("empty"), decoder.getRPSRatios().get("scissors"),
                       decoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
     }
     if (game.equals("foragingants")) {
@@ -201,10 +195,33 @@ public class SimulationEngine {
       animation.start();
     }
   }
+
+  /**
+   * Stops simulation and saves states as list of strings
+   * @throws FileNotFoundException
+   */
   public void saveSimulation() throws FileNotFoundException {
     stopSimulation();
     states = gridManager.saveSimulation();
     decoder.saveConfig(states);
+    sendSavedConfig(decoder.returnTemplate());
+  }
+
+  /**
+   * sends parsed state list to gridManager to load
+   * @param states
+   */
+  public void sendSavedConfig(List<String> states){
+    String[] lastState = states.get(states.size()-1).split(" ");
+    int size = Integer.parseInt(lastState[0]) + 1;
+    State[][] states1 = new State[size][size];
+    for(int i=0; i<size; i++){
+      for(int j=0; j<size; j++){
+        String[] state = states.get(i * size + j).split(" ");
+        states1[i][j] = new State(Integer.parseInt(state[0]), Integer.parseInt(state[1]), state[2], state[3], Integer.parseInt(state[4]), Integer.parseInt(state[5]));
+      }
+    }
+    gridManager.loadFromSave(states1);
   }
   /**
    * Allows interactive button to stop the simulation in View component

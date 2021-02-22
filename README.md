@@ -16,12 +16,16 @@ Finish Date: February 21st
 
 Hours Spent:
 Jiyun - 40 hours (February 6th - 14th) <br>
-Harrison - 40 hours (weeks 1 + 2)
+Harrison - 40 hours (weeks 1 + 2)  
+Shaw - 30 hours (weeks 1 + 2)  
 
 ### Primary Roles
 
-Shaw: Shaw was in charge of the Configuration package, which entailed parsing all the XML files and
-sending model-specific parameters to the Model package to initialize the simulation.
+Shaw: I created the Decoder class along with the XMLParser and XMLException classes, which dealt with
+prompting the user to select a file, parsing it, and passing the appropriate parameters to the Simulation
+Engine in order to setup the simulation. I added the XML template files and setup the ability to save 
+the simulation's configuration. I also implemented error checking and exception handling for the XML files through the use of 
+JavaFX alerts. 
 
 Jiyun: I designed the overall structure of the project using StarUML. Facilitated better work
 communication by integrating Gitlab to Slack (all members get notified with Gitlab notifications in
@@ -42,8 +46,13 @@ additional language support, and color palette functionality, among other things
 ### Resources Used
 
 1. Shaw
-    - Professor Duvall's example XML Parser
-    - Java Tutorial on Reading XML Data
+    - [Example XML Parser](https://coursework.cs.duke.edu/compsci308_2021spring/spike_cellsociety/-/blob/master/src/xml/XMLParser.java)
+    - [XML Java Tutorial](https://www.tutorialspoint.com/java_xml/index.htm)
+    - [Java FileChooser Tutorial](https://docs.oracle.com/javase/8/javafx/api/javafx/stage/FileChooser.html)
+    - [Java PrintWriter Tutorial](https://docs.oracle.com/javase/7/docs/api/java/io/PrintWriter.html)
+    - [ResourceBundle Tutorial](https://www.geeksforgeeks.org/resourcebundle-and-listresourcebundle-class-in-java-with-examples/)
+    - [Exception Handling](https://www.tutorialspoint.com/java/java_exceptions.htm)
+    - [JavaFX Alerts](https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/Alert.html)
 2. Harrison Huang
     - [JavaFX Tutorial](https://zetcode.com/gui/javafx/intro/)
     - [Layout Panes](https://docs.oracle.com/javafx/2/layout/builtin_layouts.htm)

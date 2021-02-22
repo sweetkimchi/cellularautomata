@@ -36,7 +36,9 @@ public class WaTorModelRules extends Rules {
   /**
    * WaTor Model Constructor that initializes the model
    *
-   * @param randomSeed        random seed to reproduce the results
+   * @param randomSeed to reproduce the results
+   * @param colors
+   * @param ints contains all integer parameters in map form
    */
   public WaTorModelRules(long randomSeed, Map<String, Integer> ints, Map<String, String> colors) {
     random = new Random(randomSeed);
