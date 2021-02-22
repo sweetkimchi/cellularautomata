@@ -50,7 +50,6 @@ public class RockPaperScissorsRules extends Rules {
     PAPER_COLOR = paperColor;
     SCISSORS_COLOR = scissorsColor;
     EMPTY_COLOR = emptyColor;
-    System.out.println(THRESHHOLD);
     random = new Random(randomSeed);
     initializeColorsAndTypes();
   }
@@ -108,9 +107,6 @@ public class RockPaperScissorsRules extends Rules {
   public void decideState(List<Integer> neighborsOfEachTypeAtTheCurrentLocation, List<int[][]> markStateForFurtherAnalysis,
       List<State> updateStates, int x, int y,
       GridManager gridManager) {
-
-    System.out.println(THRESHHOLD);
-
     if (gridManager.getTypeAtCoordinate(x, y).equals(ROCK)
         && neighborsOfEachTypeAtTheCurrentLocation.get(2) > THRESHHOLD) {
       updateStates.add(new State(x, y, PAPER, PAPER_COLOR, 0));

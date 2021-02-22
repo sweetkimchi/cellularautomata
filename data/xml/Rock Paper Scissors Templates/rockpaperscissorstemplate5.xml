@@ -15,6 +15,6 @@
   <scissorscolor>green</scissorscolor>
   <scissorsratio>0.3</scissorsratio>
   <shape>triangle</shape>
-  <threshhold>4</threshhold>
+  <threshhold>3</threshhold>
   <title>Rock, Paper, Scissors</title>
 </data>

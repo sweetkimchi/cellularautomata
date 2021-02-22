@@ -15,7 +15,7 @@ Start Date: February 6th
 Finish Date: February 21st
 
 Hours Spent:
-Jiyun - 40 hours (February 6th - 14th) <br>
+Jiyun - 80 hours (weeks 1 + 2) <br>
 Harrison - 40 hours (weeks 1 + 2)
 Shaw - 30 hours (weeks 1 + 2)
 ### Primary Roles
@@ -33,6 +33,7 @@ parts of Controller component) and 2) entirety of Models. I also wrote the templ
 descriptions, formatted the files according to Google format, and helped refactor parts of the
 classes for better design. I also followed up with team members to facilitate communication and to
 make sure we have implemented everything specified by the spec.
+Implemented classes: Main, model package
 
 Harrison: I created the view component of the project, of which the main three components are the
 SimulationScreen, GridGraphics, and SidePanel. I also had to provide functionality of the controls
