@@ -5,6 +5,7 @@ import cellsociety.model.cell.State;
 import cellsociety.model.rules.Rules;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 public class ForagingAntsRules extends Rules {
@@ -28,18 +29,18 @@ public class ForagingAntsRules extends Rules {
   private int phermoneAmount;
   private double moveBias;
   
-  public ForagingAntsRules(int numberOfAnts, int randomSeed, int numberOfSides, String nestColor, String antColor, String phermoneColor, String foodColor, String emptyColor, String weakPhermoneColor, double bias, int phermoneAmount){
-    this.numberOfAnts = numberOfAnts;
-    random = new Random(randomSeed);
-    this.phermoneAmount = phermoneAmount;
+  public ForagingAntsRules(Map<String, Integer> ints, Map<String, String> colors, double bias, int numberOfSides){
+    this.numberOfAnts = ints.get("numants");
+    random = new Random(ints.get("seed"));
+    this.phermoneAmount = ints.get("phermone");
     this.moveBias = bias;
     this.numberOfSides = numberOfSides;
-    this.NEST_COLOR = nestColor;
-    this.ANT_COLOR = antColor;
-    this.PHERMONE_COLOR = phermoneColor;
-    this.FOOD_COLOR = foodColor;
-    this.EMPTY_COLOR = emptyColor;
-    this.WEAK_PHERMONE_COLOR = weakPhermoneColor;
+    this.NEST_COLOR = colors.get("nest");
+    this.ANT_COLOR = colors.get("ant");
+    this.PHERMONE_COLOR = colors.get("phermone");
+    this.FOOD_COLOR = colors.get("food");
+    this.EMPTY_COLOR = colors.get("empty");
+    this.WEAK_PHERMONE_COLOR = colors.get("weakphermone");
     initializeColorsAndTypes();
   }
 

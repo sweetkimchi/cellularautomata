@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.*;
 
-import com.sun.source.tree.EmptyStatementTree;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.stage.FileChooser;
@@ -53,6 +52,10 @@ public class Decoder {
   public static final String SIDES = "numberofsides";
   public static final List<String> MODEL_TYPES = List.of("spreadingoffire", "navigatingsugarscape", "segregationmodel", "percolation", "wator", "gameOfLife", "rockpaperscissors", "foragingants", "langton", "sugarscape");
 
+  private Map<String, String> universal;
+  private Map<String, String> colors;
+  private Map<String, Integer> integerMap;
+  private Map<String, Float> ratios;
   private ArrayList<String> coordinates;
   private String shape;
   private String blockColor;
@@ -141,7 +144,7 @@ public class Decoder {
               .filter(response -> response == ButtonType.OK)
               .ifPresent(response -> alert.close());
     }
-    if(model == null || !MODEL_TYPES.contains(model)){
+    if(!MODEL_TYPES.contains(model)){
       Alert modelAlert = new Alert(Alert.AlertType.ERROR, "Invalid Model");
       modelAlert.showAndWait()
               .filter(response -> response == ButtonType.OK)
@@ -232,10 +235,10 @@ public class Decoder {
     seed = Integer.parseInt(attributes.getOrDefault(SEED, "100"));
     emptyRatio = Float.parseFloat(attributes.getOrDefault(EMPTY_RATIO, "0"));
     threshold = Integer.parseInt(attributes.getOrDefault(THRESHOLD, "3"));
-//    emptyColor = attributes.get(EMPTY_COLOR).equals("") ? "black" : attributes.get(EMPTY_COLOR);
-//    paperColor = attributes.get("papercolor").equals("") ? "blue" : attributes.get("papercolor");
-//    rockColor = attributes.get("rockcolor").equals("") ? "red" : attributes.get("rockcolor");
-//    scissorsColor = attributes.get("scissorscolor").equals("") ? "lightgrey" : attributes.get("scissorscolor");
+    emptyColor = attributes.get(EMPTY_COLOR).equals("") ? "black" : attributes.get(EMPTY_COLOR);
+    paperColor = attributes.get("papercolor").equals("") ? "blue" : attributes.get("papercolor");
+    rockColor = attributes.get("rockcolor").equals("") ? "red" : attributes.get("rockcolor");
+    scissorsColor = attributes.get("scissorscolor").equals("") ? "lightgrey" : attributes.get("scissorscolor");
   }
   private void initializeForagingAnts(Map<String, String> attributes){
     coordinates = new ArrayList<>(Arrays.asList(attributes.getOrDefault(COORDINATES, GOLDefaultShape).split("[,]", 0)));
@@ -243,7 +246,6 @@ public class Decoder {
     phermoneAmount = Integer.parseInt(attributes.getOrDefault("phermoneamount", "30"));
     radius = Integer.parseInt(attributes.getOrDefault("radius", "5"));
     numberOfAnts = Integer.parseInt(attributes.getOrDefault("numberofants", "50"));
-    numberOfSides = Integer.parseInt(attributes.getOrDefault("numberofsides", "4"));
     nestColor = attributes.get("nestcolor").equals("") ? "green" : attributes.get("nestcolor");
     antColor = attributes.get("antcolor").equals("") ? "red" : attributes.get("antcolor");
     phermoneColor = attributes.get("phermonecolor").equals("") ? "blue" : attributes.get("phermonecolor");
@@ -273,79 +275,223 @@ public class Decoder {
     agentColor = attributes.get("agentcolor").equals("") ? "red" : attributes.get("agentcolor");
     emptyColor = attributes.get(EMPTY_COLOR).equals("") ? "black" : attributes.get(EMPTY_COLOR);
   }
-  public ArrayList<String> getCoordinates(){ return coordinates;}
+  /**
+   * @return map of Game of Life colors
+   */
+  public Map<String, String> getGOLColors(){
+    colors = new HashMap<>();
+    colors.put("alive", aliveColor);
+    colors.put("dead", deadColor);
+    return colors;
+  }
+  /**
+   * @return map of Wa-Tor colors
+   */
+  public Map<String, String> getWaTorColors(){
+    colors = new HashMap<>();
+    colors.put("empty", emptyColor);
+    colors.put("fish", fishColor);
+    colors.put("shark", sharkColor);
+    return colors;
+  }
+  /**
+   * @return map of Wa-Tor integer parameters
+   */
+  public Map<String, Integer> getWaTorIntegers(){
+    integerMap = new HashMap<>();
+    integerMap.put("seed", seed);
+    integerMap.put("fishrate", fishRate);
+    integerMap.put("sharkrate", sharkRate);
+    integerMap.put("sharklives", sharkLives);
+    integerMap.put("energy", energy);
+    return integerMap;
+  }
+  /**
+   * @return map of Wa-Tor ratios
+   */
+  public Map<String, Float> getWaTorRatios(){
+    ratios = new HashMap<>();
+    ratios.put("fishshark", fishSharkRatio);
+    ratios.put("empty", emptyRatio);
+    return ratios;
+  }
+  /**
+   * @return map of Percolation colors
+   */
+  public Map<String, String> getPercolationColors(){
+    colors = new HashMap<>();
+    colors.put("block", blockColor);
+    colors.put("empty", emptyColor);
+    colors.put("water", waterColor);
+    return colors;
+  }
+  /**
+   * @return map of Percolation ratios
+   */
+  public Map<String, Float> getPercolationRatios(){
+    ratios = new HashMap<>();
+    ratios.put("waterempty", waterToEmptyRatio);
+    ratios.put("block", blockRatio);
+    return ratios;
+  }
+  /**
+   * @return map of Segregation colors
+   */
+  public Map<String, String> getSegregationColors(){
+    colors = new HashMap<>();
+    colors.put("empty", emptyColor);
+    colors.put("agentx", colorX);
+    colors.put("agenty", colorY);
+    return colors;
+  }
+  /**
+   * @return map of Segregation ratios
+   */
+  public Map<String, Float> getSegregationRatios(){
+    ratios = new HashMap<>();
+    ratios.put("population", populationRatio);
+    ratios.put("empty", emptyRatio);
+    ratios.put("satisfaction", satisfactionThreshold);
+    return ratios;
+  }
+  /**
+   * @return map of Spreading of Fire colors
+   */
+  public Map<String, String> getFireColors(){
+    colors = new HashMap<>();
+    colors.put("empty", emptyColor);
+    colors.put("tree", treeColor);
+    colors.put("fire", fireColor);
+    return colors;
+  }
+  /**
+   * @return map of Spreading of Fire ratios
+   */
+  public Map<String, Float> getFireRatios(){
+    ratios = new HashMap<>();
+    ratios.put("probcatch", probsOfCatch);
+    ratios.put("empty", emptyRatio);
+    ratios.put("tree", treeRatio);
+    return ratios;
+  }
+  /**
+   * @return map of Rock-Paper-Scissors colors
+   */
+  public Map<String, String> getRPSColors(){
+    colors = new HashMap<>();
+    colors.put("empty", emptyColor);
+    colors.put("paper", paperColor);
+    colors.put("rock", rockColor);
+    colors.put("scissors", scissorsColor);
+    return colors;
+  }
+  /**
+   * @return map of Rock-Paper-Scissors ratios
+   */
+  public Map<String, Float> getRPSRatios(){
+    ratios = new HashMap<>();
+    ratios.put("rock", rockRatio);
+    ratios.put("scissors", scissorsRatio);
+    ratios.put("empty", emptyRatio);
+    return ratios;
+  }
+  /**
+   * @return map of Rock-Paper-Scissors integer parameters
+   */
+  public Map<String, Integer> getRPSIntegers(){
+    integerMap = new HashMap<>();
+    integerMap.put("seed", seed);
+    integerMap.put("threshold", threshold);
+    return integerMap;
+  }
+  /**
+   * @return map of Foraging Ants colors
+   */
+  public Map<String, String> getAntColors(){
+    colors = new HashMap<>();
+    colors.put("nest", nestColor);
+    colors.put("ant", antColor);
+    colors.put("phermone", phermoneColor);
+    colors.put("weakphermone", weakPhermoneColor);
+    colors.put("food", foodColor);
+    colors.put("empty", emptyColor);
+    return colors;
+  }
+  /**
+   * @return map of Foraging Ants integer parameters
+   */
+  public Map<String, Integer> getAntIntegers(){
+    integerMap = new HashMap<>();
+    integerMap.put("phermone", phermoneAmount);
+    integerMap.put("radius", radius);
+    integerMap.put("numants", numberOfAnts);
+    integerMap.put("seed", seed);
+    return integerMap;
+  }
+  /**
+   * @return map of SugarScape colors
+   */
+  public Map<String, String> getSugarScapeColors(){
+    colors = new HashMap<>();
+    colors.put("full", fullSugarColor);
+    colors.put("low", lowSugarColor);
+    colors.put("agent", agentColor);
+    colors.put("empty", emptyColor);
+    return colors;
+  }
+  /**
+   * @return map of SugarScape integer parameters
+   */
+  public Map<String, Integer> getSugarScapeIntegers(){
+    integerMap = new HashMap<>();
+    integerMap.put("seed", seed);
+    integerMap.put("numagents", numAgents);
+    integerMap.put("maxsugar", maxSugar);
+    integerMap.put("growbacksugar", growBackSugar);
+    integerMap.put("metabolism", metabolism);
+    integerMap.put("vision", vision);
+    return integerMap;
+  }
+  /**
+   * @return map of SugarScape ratios
+   */
+  public Map<String, Float> getSugarScapeRatios(){
+    ratios = new HashMap<>();
+    ratios.put("empty", emptyRatio);
+    ratios.put("patch", patchRatio);
+    return ratios;
+  }
+  /**
+   * @return map of universal parameters for every simulation
+   */
+  public Map<String, String> getUniversalParameters(){
+    universal = new HashMap<>();
+    universal.put("model", model);
+    universal.put("title", title);
+    universal.put("author", author);
+    universal.put("description", description);
+    return universal;
+  }
+  /**
+   * @return model seed
+   */
   public int getSeed() {return seed;}
-  public float getBlockRatio(){return blockRatio;}
-  public float getWaterToEmptyRatio(){return waterToEmptyRatio;}
-  public float getSatisfactionThreshold(){return satisfactionThreshold;}
-  public float getEmptyRatio(){return emptyRatio;}
-  public float getPopulationRatio(){return populationRatio;}
-  public float getProbsOfCatch(){return probsOfCatch;}
-  public float getTreeRatio(){return treeRatio;}
-  public int getEnergy(){return energy;}
-  public int getFishRate(){return fishRate;}
-  public int getSharkLives(){return sharkLives;}
-  public float getFishSharkRatio(){return fishSharkRatio;}
-  public float getRockRatio(){return rockRatio;}
-  public float getScissorsRatio(){return scissorsRatio;}
-  public int getThreshold(){return threshold;}
-  public String getBlockColor(){return blockColor;}
-  public String getEmptyColor(){return emptyColor;}
-  public String getWaterColor(){return waterColor;}
-  public String getColorX(){return colorX;}
-  public String getColorY(){return colorY;}
-  public String getFireColor(){return fireColor;}
-  public String getTreeColor(){return treeColor;}
-  public String getFishColor(){return fishColor;}
-  public String getSharkColor(){return sharkColor;}
-  public String getRockColor(){return rockColor;}
-  public String getScissorsColor(){return scissorsColor;}
-  public String getPaperColor(){return paperColor;}
-  public String getAliveColor(){return aliveColor;}
-  public String getDeadColor(){return deadColor;}
-  public String getNestColor(){return nestColor;}
-  public String getAntColor(){return antColor;}
-  public String getPhermoneColor(){return phermoneColor;}
-  public String getWeakPhermoneColor(){return weakPhermoneColor;}
-  public String getFoodColor(){return foodColor;}
-  public int getNumberOfSides(){return numberOfSides;}
-  public String getShape(){return shape;}
-  //            generic getters           //
-  public float getPatchRatio(){return patchRatio;}
-  //public float getRatio2(){return ratio2;}
-  //public float getRatio3(){return ratio3;}
-  //public float getRatio4(){return ratio4;}
-  public int getRadius(){return radius;}
-  public int getNumberOfAnts(){return numberOfAnts;}
-  public int getNumAgents(){return numAgents;}
-  public int getMaxSugar(){return maxSugar;}
-  public int getMetabolism(){return metabolism;}
-  public int getVision(){return vision;}
-  public int getGrowBackSugar(){return growBackSugar;}
-  public int getPhermoneAmount(){return phermoneAmount;}
+  /**
+   * @return coordinates for starting shape
+   */
+  public ArrayList<String> getCoordinates(){ return coordinates;}
+  /**
+   * @return move bias
+   */
   public float getMoveBias(){return moveBias;}
-  public String getFullSugarColor(){return fullSugarColor;}
-  public String getLowSugarColor(){return lowSugarColor;}
-  public String getAgentColor(){return agentColor;}
-
   /**
-   * @return model name
+   * @return number of sides for simulation shape
    */
-  public String getModel() {
-    return model;
-  }
+  public int getNumberOfSides(){return numberOfSides;}
   /**
-   * @return title
+   * @return cell shape
    */
-  public String getTitle() {
-    return title;
-  }
-  /**
-   * @return author
-   */
-  public String getAuthor() {
-    return author;
-  }
+  public String getShape(){return shape;}
   /**
    * @return number of rows
    */
@@ -357,11 +503,5 @@ public class Decoder {
    */
   public int getCols() {
     return numColumns;
-  }
-  /**
-   * @return description
-   */
-  public String getMyDesc() {
-    return description;
   }
 }

@@ -4,6 +4,7 @@ import cellsociety.controller.grid.GridManager;
 import cellsociety.model.rules.Rules;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 public class NavigatingSugarScapeRules extends Rules {
@@ -22,12 +23,12 @@ public class NavigatingSugarScapeRules extends Rules {
   private double THRESHHOLD;
   private Random random;
 
-  public NavigatingSugarScapeRules(int numberOfAgents, int maximumSugar, int growBackSugar, int sugarMetabolism, int vision,
-                                   String fullColor, String lowColor, String agentColor, String emptyColor){
-    this.FULL_SUGAR_COLOR = fullColor;
-    this.LOW_SUGAR_COLOR = lowColor;
-    this.AGENT_COLOR = agentColor;
-    this.EMPTY_COLOR = emptyColor;
+  public NavigatingSugarScapeRules(Map<String, Integer> ints,
+                                   Map<String, String> colors){
+    this.FULL_SUGAR_COLOR = colors.get("full");
+    this.LOW_SUGAR_COLOR = colors.get("low");
+    this.AGENT_COLOR = colors.get("agent");
+    this.EMPTY_COLOR = colors.get("empty");
     initializeColorsAndTypes();
     initializePatches();
   }

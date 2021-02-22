@@ -7,8 +7,8 @@
   <watertoemptyratio>0.5</watertoemptyratio>
   <blockratio>0.3</blockratio>
   <randomseed>100</randomseed>
-  <numberofsides>8</numberofsides>
-  <shape>square</shape>
+  <numberofsides>12</numberofsides>
+  <shape>triangle</shape>
   <blockcolor>black</blockcolor>
   <emptycolor>lightgrey</emptycolor>
   <watercolor>blue</watercolor>

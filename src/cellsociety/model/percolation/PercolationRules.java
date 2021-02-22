@@ -4,6 +4,7 @@ import cellsociety.controller.grid.GridManager;
 import cellsociety.model.rules.Rules;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -31,13 +32,13 @@ public class PercolationRules extends Rules {
   /**
    * Default constructor
    */
-  public PercolationRules(long randomSeed, String blockColor, String waterColor, String emptyColor) {
+  public PercolationRules(long randomSeed, Map<String, String> colors) {
     random = new Random(randomSeed);
     possibleTypes = new ArrayList<>();
     possibleColors = new ArrayList<>();
-    EMPTY_COLOR = emptyColor;
-    BLOCK_COLOR = blockColor;
-    WATER_COLOR = waterColor;
+    EMPTY_COLOR = colors.get("empty");
+    BLOCK_COLOR = colors.get("block");
+    WATER_COLOR = colors.get("water");
     possibleTypes.add(EMPTY);
     possibleTypes.add(WATER);
     possibleTypes.add(BLOCK);
