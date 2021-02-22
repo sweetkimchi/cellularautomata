@@ -12,7 +12,7 @@
   <numCols>50</numCols>
   <numRows>50</numRows>
   <numberofsides>6</numberofsides>
-  <populationratio>0.8</populationratio>
+  <populationratio>0.5</populationratio>
   <randomseed>12</randomseed>
   <satisfactionthreshhold>0.6</satisfactionthreshhold>
   <shape>hexagon</shape>
