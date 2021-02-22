@@ -14,7 +14,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 
 /**
- * This class handles XML file selection and initialization of parameters.
+ * This class handles XML file selection, initialization of parameters and saving of the simulation.
  *
  * @author Shaw Phillips
  */
@@ -132,42 +132,43 @@ public class Decoder {
     File dataFile = FILE_CHOOSER.showOpenDialog(null);
     XMLParser parser = new XMLParser("game");
     Map<String, String> attributes = parser.getAttribute(dataFile);
-    if(attributes.get("buildfromtemplate") != null) loadTemplate(attributes);
-    else {
-      try {
-        description = attributes.get(DESC);
-        title = attributes.get(TITLE);
-        author = attributes.get(AUTHOR);
-        numRows = Integer.parseInt(attributes.get(NUM_ROWS));
-        numColumns = Integer.parseInt(attributes.get(NUM_COLS));
-        model = attributes.get(MODEL);
-        shape = attributes.get(SHAPE);
-        numberOfSides = Integer.parseInt(attributes.get(SIDES));
-      } catch (Exception e) {
-        Alert alert = new Alert(Alert.AlertType.ERROR, "Invalid Parameter(s)");
-        alert.showAndWait()
-                .filter(response -> response == ButtonType.OK)
-                .ifPresent(response -> alert.close());
-      }
-      if (!MODEL_TYPES.contains(model)) {
-        Alert modelAlert = new Alert(Alert.AlertType.ERROR, "Invalid Model");
-        modelAlert.showAndWait()
-                .filter(response -> response == ButtonType.OK)
-                .ifPresent(response -> modelAlert.close());
-      }
-      switch (model) {
-        case "gameOfLife" -> initializeGOL(attributes);
-        case "wator" -> initializeWaTor(attributes);
-        case "segregationmodel" -> initializeSegregation(attributes);
-        case "spreadingoffire" -> initializeFire(attributes);
-        case "percolation" -> initializePercolation(attributes);
-        case "rockpaperscissors" -> initializeRPS(attributes);
-        case "foragingants" -> initializeForagingAnts(attributes);
-        case "langton" -> initializeLangton(attributes);
-        case "sugarscape" -> initializeSugarScape(attributes);
-      }
+    try {
+      description = attributes.get(DESC);
+      title = attributes.get(TITLE);
+      author = attributes.get(AUTHOR);
+      numRows = Integer.parseInt(attributes.get(NUM_ROWS));
+      numColumns = Integer.parseInt(attributes.get(NUM_COLS));
+      model = attributes.get(MODEL);
+      shape = attributes.get(SHAPE);
+      numberOfSides = Integer.parseInt(attributes.get(SIDES));
+    } catch (Exception e) {
+      Alert alert = new Alert(Alert.AlertType.ERROR, "Invalid Parameter(s)");
+      alert.showAndWait()
+              .filter(response -> response == ButtonType.OK)
+              .ifPresent(response -> alert.close());
+    }
+    if (!MODEL_TYPES.contains(model)) {
+      Alert modelAlert = new Alert(Alert.AlertType.ERROR, "Invalid Model");
+      modelAlert.showAndWait()
+              .filter(response -> response == ButtonType.OK)
+              .ifPresent(response -> modelAlert.close());
+    }
+    switch (model) {
+      case "gameOfLife" -> initializeGOL(attributes);
+      case "wator" -> initializeWaTor(attributes);
+      case "segregationmodel" -> initializeSegregation(attributes);
+      case "spreadingoffire" -> initializeFire(attributes);
+      case "percolation" -> initializePercolation(attributes);
+      case "rockpaperscissors" -> initializeRPS(attributes);
+      case "foragingants" -> initializeForagingAnts(attributes);
+      case "sugarscape" -> initializeSugarScape(attributes);
     }
   }
+  /**
+   * Opens save directory for saving current state of simulation as XML file
+   * @param stateOfSimulation
+   * @throws FileNotFoundException
+   */
   public void saveConfig(List<String> stateOfSimulation) throws FileNotFoundException {
     FileChooser chooser = new FileChooser();
     chooser.setTitle("Choose Directory");
@@ -181,7 +182,6 @@ public class Decoder {
     writer.println(HEAD);
     writer.println("<buildfromtemplate>1</buildfromtemplate>");
     writer.print("<states>");
-
     for(int i=0; i<states.size(); i+=6){
       writer.print("[");
       for(int j=0; j<6; j++){
@@ -195,10 +195,13 @@ public class Decoder {
     writer.close();
   }
   private void loadTemplate(Map<String, String> attributes){
-    String str[] = attributes.get("states").split(",");
+    String[] str = attributes.get("states").split(",");
     stringStates = new ArrayList<String>();
     stringStates = Arrays.asList(str);
   }
+  /**
+   * @return parsed String array of simulation state
+   */
   public List<String> returnTemplate(){return stringStates;}
   private void initializeGOL(Map<String, String> attributes){
     coordinates = new ArrayList<>(Arrays.asList(attributes.getOrDefault(COORDINATES, GOLDefaultShape).split("[,]", 0)));
@@ -267,14 +270,6 @@ public class Decoder {
     foodColor = attributes.get("foodcolor").equals("") ? "lightgrey" : attributes.get("foodcolor");
     emptyColor = attributes.get(EMPTY_COLOR).equals("") ? "black" : attributes.get(EMPTY_COLOR);
     weakPhermoneColor = attributes.get("weakphermonecolor").equals("") ? "skyblue" : attributes.get("weakphermonecolor");
-  }
-  private void initializeLangton(Map<String, String> attributes){
-    //ratio1 = Float.parseFloat(attributes.getOrDefault("ratio1", "defaultratio1");
-    //ratio2 = Float.parseFloat(attributes.getOrDefault("ratio2", "defaultratio2);
-    //integer1 = Integer.parseInt(attributes.getOrDefault("integer1", "defaultinteger1");
-    //integer2 = Integer.parseInt(attributes.getOrDefault("integer2", :defaultinteger2");
-    //string1 = attributes.get("string1");
-    //string2 = attributes.get("string2");
   }
   private void initializeSugarScape(Map<String, String> attributes){
     seed = Integer.parseInt(attributes.getOrDefault(SEED, "10"));
