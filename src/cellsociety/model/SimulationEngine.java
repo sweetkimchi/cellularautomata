@@ -192,10 +192,14 @@ public class SimulationEngine {
     }
   }
 
+  /**
+   * Unfinished version of save simulation. I think the idea was that Decoder was going to
+   * call the method to save the states of all cells.
+   * @throws FileNotFoundException
+   */
   public void saveSimulation() throws FileNotFoundException {
     stopSimulation();
-    List states = gridManager.saveSimulation();
-    decoder.saveConfig(states);
+    decoder.saveConfig(gridManager.saveSimulation());
   }
 
   /**
