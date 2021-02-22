@@ -27,7 +27,11 @@ public class PercolationRules extends Rules {
   private final String EMPTY = "empty";
 
   /**
-   * Default constructor
+   * Constructor defining the parameters of the simulation
+   * @param randomSeed
+   * @param blockColor
+   * @param waterColor
+   * @param emptyColor
    */
   public PercolationRules(long randomSeed, String blockColor, String waterColor,
       String emptyColor) {

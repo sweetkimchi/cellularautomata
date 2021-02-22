@@ -12,7 +12,7 @@
   <randomseed>100</randomseed>
   <rockcolor>red</rockcolor>
   <rockratio>0.2</rockratio>
-  <scissorscolor>lightgrey</scissorscolor>
+  <scissorscolor>green</scissorscolor>
   <scissorsratio>0.3</scissorsratio>
   <shape>hexagon</shape>
   <threshhold>1</threshhold>

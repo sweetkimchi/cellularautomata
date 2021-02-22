@@ -6,6 +6,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Purpose: This class contains the rules for the rock paper scissors model. Rules include the types of the
+ * players as well as logic to update each cell. Assumptions: xml file is correctly formatted and
+ * supplies the correct information to the constructor. Dependencies: Depends on SimulationEngine to
+ * declare constructors based on the parameters read from XML files. Depends on GridManager to
+ * provide it with the grid to work with.
+ *
+ * @author Ji Yun Hyo
+ */
 public class RockPaperScissorsRules extends Rules {
 
   private String ROCK_COLOR;
@@ -25,14 +34,22 @@ public class RockPaperScissorsRules extends Rules {
     initializeColorsAndTypes();
   }
 
-  public RockPaperScissorsRules(int threshold, long randomSeed, String rockColor, String paperColor,
+  /**
+   * Basic constructor for rock paper scissors class
+   * @param threshhold threshhold beyond which the rock paper scissors start changing states
+   * @param randomSeed
+   * @param rockColor
+   * @param paperColor
+   * @param scissorsColor
+   * @param emptyColor
+   */
+  public RockPaperScissorsRules(int threshhold, long randomSeed, String rockColor, String paperColor,
       String scissorsColor, String emptyColor) {
-    THRESHHOLD = threshold;
+    THRESHHOLD = threshhold;
     ROCK_COLOR = rockColor;
     PAPER_COLOR = paperColor;
     SCISSORS_COLOR = scissorsColor;
     EMPTY_COLOR = emptyColor;
-    System.out.println(THRESHHOLD);
     random = new Random(randomSeed);
     initializeColorsAndTypes();
   }
@@ -90,9 +107,6 @@ public class RockPaperScissorsRules extends Rules {
   public void decideState(List<Integer> neighborsOfEachTypeAtTheCurrentLocation, List<int[][]> markStateForFurtherAnalysis,
       List<State> updateStates, int x, int y,
       GridManager gridManager) {
-
-    System.out.println(THRESHHOLD);
-
     if (gridManager.getTypeAtCoordinate(x, y).equals(ROCK)
         && neighborsOfEachTypeAtTheCurrentLocation.get(2) > THRESHHOLD) {
       updateStates.add(new State(x, y, PAPER, PAPER_COLOR, 0));
