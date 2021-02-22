@@ -1,7 +1,7 @@
 package cellsociety.model;
 
 import cellsociety.model.simulationrules.Rules;
-import cellsociety.model.simulationrules.foragingants.ForagingAntGridManager;
+import cellsociety.model.foragingants.ForagingAntGridManager;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -328,8 +328,7 @@ public class GridManager {
     this.coordinates = (ArrayList<String>) coordinates;
     ForagingAntGridManager foragingAntGridManager = new ForagingAntGridManager(row, col,
         numberOfSides);
-    this.stateOfCells = foragingAntGridManager
-        .buildAntGridWithTemplateHelper(coordinates, possibleTypes, possibleColors, radius);
+    this.stateOfCells = foragingAntGridManager.buildAntGridWithTemplateHelper(coordinates, possibleTypes, possibleColors, radius);
     this.numberOfSides = numberOfSides;
   }
 

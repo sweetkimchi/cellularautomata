@@ -1,4 +1,4 @@
-package cellsociety.model.simulationrules.foragingants;
+package cellsociety.model.foragingants;
 
 import cellsociety.model.State;
 
