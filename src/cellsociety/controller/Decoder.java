@@ -6,8 +6,7 @@ import java.io.PrintWriter;
 import java.lang.reflect.Array;
 import java.util.*;
 
-import cellsociety.controller.simulationengine.SimulationEngine;
-import cellsociety.model.cell.State;
+
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.stage.FileChooser;
