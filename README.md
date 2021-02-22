@@ -32,7 +32,7 @@ real-time through Slack). Was in charge of 1) Main.java, simulationengine packag
 parts of Controller component) and 2) entirety of Models. I also wrote the templates and its
 descriptions, formatted the files according to Google format, and helped refactor parts of the
 classes for better design. I also followed up with team members to facilitate communication and to
-make sure we have implemented everything specified by the spec.
+make sure we have implemented everything specified by the spec. Spent time refactoring.
 Implemented classes: Main, model package
 
 Harrison: I created the view component of the project, of which the main three components are the
@@ -79,6 +79,14 @@ additional language support, and color palette functionality, among other things
     - [Four Pillars of Object Oriented Programming](https://medium.com/@benjaminpjacobs/the-four-principle-of-object-oriented-programming-f78600f62608)
     - [MVC model 2nd resource](https://www.educative.io/blog/mvc-tutorial)
     - [StarUML Documentation](https://docs.staruml.io/)
+    - [Ant Foraging](https://greenteapress.com/complexity/html/thinkcomplexity013.html)
+    - example_encapsulation code for refactoring
+    - [Rock Paper Scissors](https://softologyblog.wordpress.com/2018/03/23/rock-paper-scissors-cellular-automata/)
+    - [Arrangement of Neighbors](http://golly.sourceforge.net/Help/Algorithms/QuickLife.html#nontotal)
+    - [Grid shape](https://mathworld.wolfram.com/Grid.html)
+    - [Hexagonal neighborhood](https://www.conwaylife.com/wiki/Hexagonal_neighbourhood)
+    - [A Systematic Approach to Write Better Code With OOP Concepts](https://dzone.com/articles/object-oriented-programming-concepts-with-a-system)
+    - Liskov Substitution Principle
 
 ### Running the Program
 
@@ -89,7 +97,8 @@ Data files needed: All necessary XML files are under "data" folder
 Features implemented: WaTor Simulation, Percolation, Spreading of Fire, Game of Life, Segregation; 6
 templates for each; simulation screen with functional start/stop/reset buttons, speed slider,
 ability to load new XML files, dynamically updating and sized grid, independent grid and graph 
-views, multiple simultaneous simulations, simulation appearance selection in colors and language
+views, multiple simultaneous simulations, simulation appearance selection in colors and language, ForagingAnt,
+Rock scissor paper, different number of neighbors (3, 4, 6, 8, 12).
 
 ### Notes/Assumptions
 
@@ -128,7 +137,7 @@ Extra credit: None
 
 Jiyun: Personally, I really liked working on this project. I liked how Cellular Automata could be
 used to simulate real-life situations. I also liked witnessing how a good design could help out
-immensely throughout the project.
+immensely throughout the project. I also appreciate everyone putting in the effort.
 
 Harrison: I think it was really cool that we were all able to put together a working project all
 while trusting each other to do our own part. While largely independent of the Model, I could focus
