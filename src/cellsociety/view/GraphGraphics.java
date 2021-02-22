@@ -116,4 +116,8 @@ public class GraphGraphics {
   public boolean isActive() {
     return stage.isShowing();
   }
+
+  public void close() {
+    stage.close();
+  }
 }
