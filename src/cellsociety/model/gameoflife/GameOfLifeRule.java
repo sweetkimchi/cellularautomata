@@ -51,14 +51,6 @@ public class GameOfLifeRule extends Rules {
     possibleTypes.add(EMPTY);
     possibleTypes.add(ALIVE);
   }
-  /**
-   * specifies the starting states of the cells according to the simulation rule
-   *
-   * @return type of cells
-   */
-  public String getStartingPositionCellType() {
-    return ALIVE;
-  }
 
   /**
    * returns the possible types (e.g. agent x, agent y, empty)
@@ -84,13 +76,14 @@ public class GameOfLifeRule extends Rules {
   public void decideState(List<Integer> neighborsOfEachTypeAtCoordinate, List<int[][]> nextStates,
       ArrayList<State> updateStates, int x, int y,
       GridManager gridManager) {
-    if (gridManager.getTypeAtCoordinate(x, y).equals(EMPTY) && neighborsOfEachTypeAtCoordinate.get(1) == 3) {
-      updateStates.add(new State(x,y, ALIVE, ALIVE_COLOR, 0));
+    if (gridManager.getTypeAtCoordinate(x, y).equals(EMPTY)
+        && neighborsOfEachTypeAtCoordinate.get(1) == 3) {
+      updateStates.add(new State(x, y, ALIVE, ALIVE_COLOR, 0));
     }
     if (gridManager.getTypeAtCoordinate(x, y).equals(ALIVE)
         && neighborsOfEachTypeAtCoordinate.get(1) < lowerSurvivalBoundary
-        || neighborsOfEachTypeAtCoordinate.get(1) > upperSurvivalBoundary){
-      updateStates.add(new State(x,y, EMPTY, DEAD_COLOR, 0));
+        || neighborsOfEachTypeAtCoordinate.get(1) > upperSurvivalBoundary) {
+      updateStates.add(new State(x, y, EMPTY, DEAD_COLOR, 0));
     }
   }
 }

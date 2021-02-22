@@ -3,9 +3,11 @@ package cellsociety.controller;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.util.*;
-
-import com.sun.source.tree.EmptyStatementTree;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.stage.FileChooser;
@@ -17,6 +19,7 @@ import javafx.stage.FileChooser.ExtensionFilter;
  * @author Shaw Phillips
  */
 public class Decoder {
+
   public static final String DATA_FILE_EXTENSION = "*.xml";
   public final static FileChooser FILE_CHOOSER = makeChooser(DATA_FILE_EXTENSION);
   public static final String HEAD = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n <data game=\"game\">";
@@ -51,7 +54,9 @@ public class Decoder {
   public static final String WATER_COLOR = "watercolor";
   public static final String SHAPE = "shape";
   public static final String SIDES = "numberofsides";
-  public static final List<String> MODEL_TYPES = List.of("spreadingoffire", "navigatingsugarscape", "segregationmodel", "percolation", "wator", "gameOfLife", "rockpaperscissors", "foragingants", "langton", "sugarscape");
+  public static final List<String> MODEL_TYPES = List
+      .of("spreadingoffire", "navigatingsugarscape", "segregationmodel", "percolation", "wator",
+          "gameOfLife", "rockpaperscissors", "foragingants", "langton", "sugarscape");
 
   private ArrayList<String> coordinates;
   private String shape;
@@ -118,14 +123,16 @@ public class Decoder {
     result.getExtensionFilters().setAll(new ExtensionFilter("Text Files", extension));
     return result;
   }
+
   /**
-   *  Open window to choose XML file, initialize parser, parse universal values, and determine the model
+   * Open window to choose XML file, initialize parser, parse universal values, and determine the
+   * model
    */
   public void readValuesFromXMLFile() {
     File dataFile = FILE_CHOOSER.showOpenDialog(null);
     XMLParser parser = new XMLParser("game");
     Map<String, String> attributes = parser.getAttribute(dataFile);
-    try{
+    try {
       description = attributes.get(DESC);
       title = attributes.get(TITLE);
       author = attributes.get(AUTHOR);
@@ -134,18 +141,17 @@ public class Decoder {
       model = attributes.get(MODEL);
       shape = attributes.get(SHAPE);
       numberOfSides = Integer.parseInt(attributes.get(SIDES));
-    }
-    catch(Exception e){
+    } catch (Exception e) {
       Alert alert = new Alert(Alert.AlertType.ERROR, "Invalid Parameter(s)");
       alert.showAndWait()
-              .filter(response -> response == ButtonType.OK)
-              .ifPresent(response -> alert.close());
+          .filter(response -> response == ButtonType.OK)
+          .ifPresent(response -> alert.close());
     }
-    if(model == null || !MODEL_TYPES.contains(model)){
+    if (model == null || !MODEL_TYPES.contains(model)) {
       Alert modelAlert = new Alert(Alert.AlertType.ERROR, "Invalid Model");
       modelAlert.showAndWait()
-              .filter(response -> response == ButtonType.OK)
-              .ifPresent(response -> modelAlert.close());
+          .filter(response -> response == ButtonType.OK)
+          .ifPresent(response -> modelAlert.close());
     }
     switch (model) {
       case "gameOfLife" -> initializeGOL(attributes);
@@ -159,22 +165,28 @@ public class Decoder {
       case "sugarscape" -> initializeSugarScape(attributes);
     }
   }
+
   public void saveConfig(List<String> stateOfSimulation) throws FileNotFoundException {
     Map<String, String> savedConfig = new HashMap<>();
 
     FileChooser chooser = new FileChooser();
     chooser.setTitle("Choose Directory");
-    chooser.getExtensionFilters().setAll(new FileChooser.ExtensionFilter("text file ", DATA_FILE_EXTENSION));
+    chooser.getExtensionFilters()
+        .setAll(new FileChooser.ExtensionFilter("text file ", DATA_FILE_EXTENSION));
     chooser.setInitialDirectory(new File(System.getProperty("user.dir")));
     File file = chooser.showSaveDialog(null);
     createConfigFile(file, savedConfig);
   }
-  private void createConfigFile(File file, Map<String, String> attributes) throws FileNotFoundException {
+
+  private void createConfigFile(File file, Map<String, String> attributes)
+      throws FileNotFoundException {
     PrintWriter writer = new PrintWriter(file);
     writer.println(HEAD);
     writer.println("<buildfromtemplate>1</buildfromtemplate>");
-    for(String s : attributes.keySet()){
-      if(attributes.get(s) == null) continue;
+    for (String s : attributes.keySet()) {
+      if (attributes.get(s) == null) {
+        continue;
+      }
       writer.print("<" + s + ">");
       writer.print(attributes.get(s));
       writer.println("</" + s + ">");
@@ -182,12 +194,15 @@ public class Decoder {
     writer.println("</data>");
     writer.close();
   }
-  private void initializeGOL(Map<String, String> attributes){
-    coordinates = new ArrayList<>(Arrays.asList(attributes.getOrDefault(COORDINATES, GOLDefaultShape).split("[,]", 0)));
+
+  private void initializeGOL(Map<String, String> attributes) {
+    coordinates = new ArrayList<>(
+        Arrays.asList(attributes.getOrDefault(COORDINATES, GOLDefaultShape).split("[,]", 0)));
     aliveColor = attributes.get("alivecolor").equals("") ? "black" : attributes.get("alivecolor");
     deadColor = attributes.get("deadcolor").equals("") ? "lightgrey" : attributes.get("deadcolor");
   }
-  private void initializeWaTor(Map<String, String> attributes){
+
+  private void initializeWaTor(Map<String, String> attributes) {
     fishSharkRatio = Float.parseFloat(attributes.getOrDefault(FISH_SHARK_RATIO, "0.5"));
     emptyRatio = Float.parseFloat(attributes.getOrDefault(EMPTY_RATIO, "0.3"));
     seed = Integer.parseInt(attributes.getOrDefault(SEED, "0"));
@@ -199,7 +214,8 @@ public class Decoder {
     fishColor = attributes.get("fishcolor").equals("") ? "green" : attributes.get("fishcolor");
     sharkColor = attributes.get("sharkcolor").equals("") ? "blue" : attributes.get("sharkcolor");
   }
-  private void initializePercolation(Map<String, String> attributes){
+
+  private void initializePercolation(Map<String, String> attributes) {
     waterToEmptyRatio = Float.parseFloat(attributes.getOrDefault(WATER_EMPTY_RATIO, ".01"));
     blockRatio = Float.parseFloat(attributes.getOrDefault(BLOCK_RATIO, "0.5"));
     seed = Integer.parseInt(attributes.getOrDefault(SEED, "100"));
@@ -207,17 +223,21 @@ public class Decoder {
     emptyColor = attributes.get(EMPTY_COLOR).equals("") ? "lightgrey" : attributes.get(EMPTY_COLOR);
     waterColor = attributes.get(WATER_COLOR).equals("") ? "blue" : attributes.get(WATER_COLOR);
   }
-  private void initializeSegregation(Map<String, String> attributes){
+
+  private void initializeSegregation(Map<String, String> attributes) {
     populationRatio = Float.parseFloat(attributes.getOrDefault(POPULATION_RATIO, "0.5"));
     emptyRatio = Float.parseFloat(attributes.getOrDefault(EMPTY_RATIO, "0.1"));
-    satisfactionThreshold = Float.parseFloat(attributes.getOrDefault(SATISFACTION_THRESHOLD, "0.6"));
+    satisfactionThreshold = Float
+        .parseFloat(attributes.getOrDefault(SATISFACTION_THRESHOLD, "0.6"));
     seed = Integer.parseInt(attributes.getOrDefault(SEED, "100"));
     emptyColor = attributes.get(EMPTY_COLOR).equals("") ? "lightgrey" : attributes.get(EMPTY_COLOR);
     colorX = attributes.get("agentxcolor").equals("") ? "red" : attributes.get("agentxcolor");
     colorY = attributes.get("agentycolor").equals("") ? "blue" : attributes.get("agentycolor");
   }
-  private void initializeFire(Map<String, String> attributes){
-    coordinates = new ArrayList<>(Arrays.asList(attributes.getOrDefault(COORDINATES, FireDefaultShape).split("[,]", 0)));
+
+  private void initializeFire(Map<String, String> attributes) {
+    coordinates = new ArrayList<>(
+        Arrays.asList(attributes.getOrDefault(COORDINATES, FireDefaultShape).split("[,]", 0)));
     probsOfCatch = Float.parseFloat(attributes.getOrDefault(PROB_OF_CATCH, "0.3"));
     seed = Integer.parseInt(attributes.getOrDefault(SEED, "100"));
     emptyRatio = Float.parseFloat(attributes.getOrDefault(EMPTY_RATIO, "0.1"));
@@ -226,7 +246,8 @@ public class Decoder {
     treeColor = attributes.get("treecolor").equals("") ? "green" : attributes.get("treecolor");
     fireColor = attributes.get("firecolor").equals("") ? "red" : attributes.get("firecolor");
   }
-  private void initializeRPS(Map<String, String> attributes){
+
+  private void initializeRPS(Map<String, String> attributes) {
     rockRatio = Float.parseFloat(attributes.getOrDefault(ROCK_RATIO, "0.33"));
     scissorsRatio = Float.parseFloat(attributes.getOrDefault(SCISSORS_RATIO, "0.5"));
     seed = Integer.parseInt(attributes.getOrDefault(SEED, "100"));
@@ -235,10 +256,13 @@ public class Decoder {
     emptyColor = attributes.get(EMPTY_COLOR).equals("") ? "black" : attributes.get(EMPTY_COLOR);
     paperColor = attributes.get("papercolor").equals("") ? "blue" : attributes.get("papercolor");
     rockColor = attributes.get("rockcolor").equals("") ? "red" : attributes.get("rockcolor");
-    scissorsColor = attributes.get("scissorscolor").equals("") ? "lightgrey" : attributes.get("scissorscolor");
+    scissorsColor =
+        attributes.get("scissorscolor").equals("") ? "lightgrey" : attributes.get("scissorscolor");
   }
-  private void initializeForagingAnts(Map<String, String> attributes){
-    coordinates = new ArrayList<>(Arrays.asList(attributes.getOrDefault(COORDINATES, GOLDefaultShape).split("[,]", 0)));
+
+  private void initializeForagingAnts(Map<String, String> attributes) {
+    coordinates = new ArrayList<>(
+        Arrays.asList(attributes.getOrDefault(COORDINATES, GOLDefaultShape).split("[,]", 0)));
     moveBias = Float.parseFloat(attributes.getOrDefault("movebias", "0.96"));
     phermoneAmount = Integer.parseInt(attributes.getOrDefault("phermoneamount", "30"));
     radius = Integer.parseInt(attributes.getOrDefault("radius", "5"));
@@ -246,12 +270,15 @@ public class Decoder {
     numberOfSides = Integer.parseInt(attributes.getOrDefault("numberofsides", "4"));
     nestColor = attributes.get("nestcolor").equals("") ? "green" : attributes.get("nestcolor");
     antColor = attributes.get("antcolor").equals("") ? "red" : attributes.get("antcolor");
-    phermoneColor = attributes.get("phermonecolor").equals("") ? "blue" : attributes.get("phermonecolor");
+    phermoneColor =
+        attributes.get("phermonecolor").equals("") ? "blue" : attributes.get("phermonecolor");
     foodColor = attributes.get("foodcolor").equals("") ? "lightgrey" : attributes.get("foodcolor");
     emptyColor = attributes.get(EMPTY_COLOR).equals("") ? "black" : attributes.get(EMPTY_COLOR);
-    weakPhermoneColor = attributes.get("weakphermonecolor").equals("") ? "skyblue" : attributes.get("weakphermonecolor");
+    weakPhermoneColor = attributes.get("weakphermonecolor").equals("") ? "skyblue"
+        : attributes.get("weakphermonecolor");
   }
-  private void initializeLangton(Map<String, String> attributes){
+
+  private void initializeLangton(Map<String, String> attributes) {
     //ratio1 = Float.parseFloat(attributes.getOrDefault("ratio1", "defaultratio1");
     //ratio2 = Float.parseFloat(attributes.getOrDefault("ratio2", "defaultratio2);
     //integer1 = Integer.parseInt(attributes.getOrDefault("integer1", "defaultinteger1");
@@ -259,7 +286,8 @@ public class Decoder {
     //string1 = attributes.get("string1");
     //string2 = attributes.get("string2");
   }
-  private void initializeSugarScape(Map<String, String> attributes){
+
+  private void initializeSugarScape(Map<String, String> attributes) {
     seed = Integer.parseInt(attributes.getOrDefault(SEED, "10"));
     emptyRatio = Float.parseFloat(attributes.getOrDefault(EMPTY_RATIO, "0"));
     patchRatio = Float.parseFloat(attributes.getOrDefault("patchratio", "0.7"));
@@ -268,65 +296,217 @@ public class Decoder {
     growBackSugar = Integer.parseInt(attributes.getOrDefault("growbacksugar", "1"));
     metabolism = Integer.parseInt(attributes.getOrDefault("metabolism", "2"));
     vision = Integer.parseInt(attributes.getOrDefault("vision", "2"));
-    fullSugarColor = attributes.get("fullsugarcolor").equals("") ? "orange" : attributes.get("fullsugarcolor");
-    lowSugarColor = attributes.get("lowsugarcolor").equals("") ? "white" : attributes.get("lowsugarcolor");
+    fullSugarColor =
+        attributes.get("fullsugarcolor").equals("") ? "orange" : attributes.get("fullsugarcolor");
+    lowSugarColor =
+        attributes.get("lowsugarcolor").equals("") ? "white" : attributes.get("lowsugarcolor");
     agentColor = attributes.get("agentcolor").equals("") ? "red" : attributes.get("agentcolor");
     emptyColor = attributes.get(EMPTY_COLOR).equals("") ? "black" : attributes.get(EMPTY_COLOR);
   }
-  public ArrayList<String> getCoordinates(){ return coordinates;}
-  public int getSeed() {return seed;}
-  public float getBlockRatio(){return blockRatio;}
-  public float getWaterToEmptyRatio(){return waterToEmptyRatio;}
-  public float getSatisfactionThreshold(){return satisfactionThreshold;}
-  public float getEmptyRatio(){return emptyRatio;}
-  public float getPopulationRatio(){return populationRatio;}
-  public float getProbsOfCatch(){return probsOfCatch;}
-  public float getTreeRatio(){return treeRatio;}
-  public int getEnergy(){return energy;}
-  public int getFishRate(){return fishRate;}
-  public int getSharkLives(){return sharkLives;}
-  public float getFishSharkRatio(){return fishSharkRatio;}
-  public float getRockRatio(){return rockRatio;}
-  public float getScissorsRatio(){return scissorsRatio;}
-  public int getThreshold(){return threshold;}
-  public String getBlockColor(){return blockColor;}
-  public String getEmptyColor(){return emptyColor;}
-  public String getWaterColor(){return waterColor;}
-  public String getColorX(){return colorX;}
-  public String getColorY(){return colorY;}
-  public String getFireColor(){return fireColor;}
-  public String getTreeColor(){return treeColor;}
-  public String getFishColor(){return fishColor;}
-  public String getSharkColor(){return sharkColor;}
-  public String getRockColor(){return rockColor;}
-  public String getScissorsColor(){return scissorsColor;}
-  public String getPaperColor(){return paperColor;}
-  public String getAliveColor(){return aliveColor;}
-  public String getDeadColor(){return deadColor;}
-  public String getNestColor(){return nestColor;}
-  public String getAntColor(){return antColor;}
-  public String getPhermoneColor(){return phermoneColor;}
-  public String getWeakPhermoneColor(){return weakPhermoneColor;}
-  public String getFoodColor(){return foodColor;}
-  public int getNumberOfSides(){return numberOfSides;}
-  public String getShape(){return shape;}
+
+  public ArrayList<String> getCoordinates() {
+    return coordinates;
+  }
+
+  public int getSeed() {
+    return seed;
+  }
+
+  public float getBlockRatio() {
+    return blockRatio;
+  }
+
+  public float getWaterToEmptyRatio() {
+    return waterToEmptyRatio;
+  }
+
+  public float getSatisfactionThreshold() {
+    return satisfactionThreshold;
+  }
+
+  public float getEmptyRatio() {
+    return emptyRatio;
+  }
+
+  public float getPopulationRatio() {
+    return populationRatio;
+  }
+
+  public float getProbsOfCatch() {
+    return probsOfCatch;
+  }
+
+  public float getTreeRatio() {
+    return treeRatio;
+  }
+
+  public int getEnergy() {
+    return energy;
+  }
+
+  public int getFishRate() {
+    return fishRate;
+  }
+
+  public int getSharkLives() {
+    return sharkLives;
+  }
+
+  public float getFishSharkRatio() {
+    return fishSharkRatio;
+  }
+
+  public float getRockRatio() {
+    return rockRatio;
+  }
+
+  public float getScissorsRatio() {
+    return scissorsRatio;
+  }
+
+  public int getThreshold() {
+    return threshold;
+  }
+
+  public String getBlockColor() {
+    return blockColor;
+  }
+
+  public String getEmptyColor() {
+    return emptyColor;
+  }
+
+  public String getWaterColor() {
+    return waterColor;
+  }
+
+  public String getColorX() {
+    return colorX;
+  }
+
+  public String getColorY() {
+    return colorY;
+  }
+
+  public String getFireColor() {
+    return fireColor;
+  }
+
+  public String getTreeColor() {
+    return treeColor;
+  }
+
+  public String getFishColor() {
+    return fishColor;
+  }
+
+  public String getSharkColor() {
+    return sharkColor;
+  }
+
+  public String getRockColor() {
+    return rockColor;
+  }
+
+  public String getScissorsColor() {
+    return scissorsColor;
+  }
+
+  public String getPaperColor() {
+    return paperColor;
+  }
+
+  public String getAliveColor() {
+    return aliveColor;
+  }
+
+  public String getDeadColor() {
+    return deadColor;
+  }
+
+  public String getNestColor() {
+    return nestColor;
+  }
+
+  public String getAntColor() {
+    return antColor;
+  }
+
+  public String getPhermoneColor() {
+    return phermoneColor;
+  }
+
+  public String getWeakPhermoneColor() {
+    return weakPhermoneColor;
+  }
+
+  public String getFoodColor() {
+    return foodColor;
+  }
+
+  public int getNumberOfSides() {
+    return numberOfSides;
+  }
+
+  public String getShape() {
+    return shape;
+  }
+
   //            generic getters           //
-  public float getPatchRatio(){return patchRatio;}
+  public float getPatchRatio() {
+    return patchRatio;
+  }
+
   //public float getRatio2(){return ratio2;}
   //public float getRatio3(){return ratio3;}
   //public float getRatio4(){return ratio4;}
-  public int getRadius(){return radius;}
-  public int getNumberOfAnts(){return numberOfAnts;}
-  public int getNumAgents(){return numAgents;}
-  public int getMaxSugar(){return maxSugar;}
-  public int getMetabolism(){return metabolism;}
-  public int getVision(){return vision;}
-  public int getGrowBackSugar(){return growBackSugar;}
-  public int getPhermoneAmount(){return phermoneAmount;}
-  public float getMoveBias(){return moveBias;}
-  public String getFullSugarColor(){return fullSugarColor;}
-  public String getLowSugarColor(){return lowSugarColor;}
-  public String getAgentColor(){return agentColor;}
+  public int getRadius() {
+    return radius;
+  }
+
+  public int getNumberOfAnts() {
+    return numberOfAnts;
+  }
+
+  public int getNumAgents() {
+    return numAgents;
+  }
+
+  public int getMaxSugar() {
+    return maxSugar;
+  }
+
+  public int getMetabolism() {
+    return metabolism;
+  }
+
+  public int getVision() {
+    return vision;
+  }
+
+  public int getGrowBackSugar() {
+    return growBackSugar;
+  }
+
+  public int getPhermoneAmount() {
+    return phermoneAmount;
+  }
+
+  public float getMoveBias() {
+    return moveBias;
+  }
+
+  public String getFullSugarColor() {
+    return fullSugarColor;
+  }
+
+  public String getLowSugarColor() {
+    return lowSugarColor;
+  }
+
+  public String getAgentColor() {
+    return agentColor;
+  }
 
   /**
    * @return model name
@@ -334,30 +514,35 @@ public class Decoder {
   public String getModel() {
     return model;
   }
+
   /**
    * @return title
    */
   public String getTitle() {
     return title;
   }
+
   /**
    * @return author
    */
   public String getAuthor() {
     return author;
   }
+
   /**
    * @return number of rows
    */
   public int getRows() {
     return numRows;
   }
+
   /**
    * @return number of columns
    */
   public int getCols() {
     return numColumns;
   }
+
   /**
    * @return description
    */

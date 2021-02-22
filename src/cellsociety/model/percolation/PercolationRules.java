@@ -32,7 +32,8 @@ public class PercolationRules extends Rules {
   /**
    * Default constructor
    */
-  public PercolationRules(long randomSeed, String blockColor, String waterColor, String emptyColor) {
+  public PercolationRules(long randomSeed, String blockColor, String waterColor,
+      String emptyColor) {
     random = new Random(randomSeed);
     possibleTypes = new ArrayList<>();
     possibleColors = new ArrayList<>();
@@ -45,16 +46,6 @@ public class PercolationRules extends Rules {
     possibleColors.add(EMPTY_COLOR);
     possibleColors.add(WATER_COLOR);
     possibleColors.add(BLOCK_COLOR);
-  }
-
-  /**
-   * specifices the starting states of the cells according to the simulation rule
-   *
-   * @return type of cells
-   */
-  @Override
-  public String getStartingPositionCellType() {
-    return null;
   }
 
   @Override
@@ -71,8 +62,9 @@ public class PercolationRules extends Rules {
   public void decideState(List<Integer> neighborsOfEachTypeAtCoordinate, List<int[][]> nextStates,
       ArrayList<State> updateStates, int x, int y,
       GridManager gridManager) {
-    if (gridManager.getTypeAtCoordinate(x, y).equals(EMPTY) && neighborsOfEachTypeAtCoordinate.get(1) > 0) {
-      updateStates.add(new State(x,y, WATER, WATER_COLOR, 0));
+    if (gridManager.getTypeAtCoordinate(x, y).equals(EMPTY)
+        && neighborsOfEachTypeAtCoordinate.get(1) > 0) {
+      updateStates.add(new State(x, y, WATER, WATER_COLOR, 0));
     }
   }
 

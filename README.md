@@ -33,9 +33,9 @@ make sure we have implemented everything specified by the spec.
 
 Harrison: I created the view component of the project, of which the main three components are the
 SimulationScreen, GridGraphics, and SidePanel. I also had to provide functionality of the controls
-put in SidePanel by coordinating with the SimulationEngine. I implemented the resource property 
-file and CSS file for the front end in order to have more flexibility in the display. I had
-to manage the view and state of the grid, as well as allow for resizing.
+put in SidePanel by coordinating with the SimulationEngine. I implemented the resource property file
+and CSS file for the front end in order to have more flexibility in the display. I had to manage the
+view and state of the grid, as well as allow for resizing.
 
 ### Resources Used
 
@@ -85,12 +85,12 @@ GridManager was able to take in all the parameters for all models and produce th
 and update the cell states successfully. Therefore, the design became much "simpler" and more
 efficient than what we had initially imagined. As of the basic implementation, all three
 components (MVC) are working together by informing each other of its states but do not specifically
-have to know the inner-workings of each class in order to cooperate. One simplification for the 
-resource property file is that the language (English) is currently stored as a private static final 
-String rather than by being determined by an input to the main class. Another simplification is 
-that the current method of updating the Grid is by clearing all the Rectangles and re-adding
-them all one-by-one, while it would be better in the future to instead simply change the color of
-each of these Rectangles.
+have to know the inner-workings of each class in order to cooperate. One simplification for the
+resource property file is that the language (English) is currently stored as a private static final
+String rather than by being determined by an input to the main class. Another simplification is that
+the current method of updating the Grid is by clearing all the Rectangles and re-adding them all
+one-by-one, while it would be better in the future to instead simply change the color of each of
+these Rectangles.
 
 Interesting data files: (Jiyun) I manually tested out the templates and have selected the ones that
 produce interesting results. I think all the templates are worth your time to checkout. I tried to "
@@ -98,7 +98,7 @@ model" real life situations with the models.
 
 Known Bugs: The grid resizing only works when the simulation is running, so when the simulation is
 stopped, the grid will not resize if the window size is changed. When Load New is pressed but no
-file is selected, the program will throw a NullPointerException, though this does not affect the 
+file is selected, the program will throw a NullPointerException, though this does not affect the
 overall program functionality. The descriptions can also disappear too soon if a new file is not
 selected.
 

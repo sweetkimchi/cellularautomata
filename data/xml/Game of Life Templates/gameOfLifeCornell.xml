@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <data game="game">
+  <alivecolor>black</alivecolor>
   <author>Cornell</author>
+  <deadcolor>lightgrey</deadcolor>
   <description>Existing template named Cornell.</description>
+  <model>gameOfLife</model>
   <numCols>50</numCols>
   <numRows>50</numRows>
-  <shapeCoords>21,20,20,21,21,21,22,21</shapeCoords>
   <numberofsides>8</numberofsides>
   <shape>square</shape>
-  <alivecolor>black</alivecolor>
-  <deadcolor>lightgrey</deadcolor>
+  <shapeCoords>21,20,20,21,21,21,22,21</shapeCoords>
   <template>cornell</template>
   <title>Game of Life</title>
-  <model>gameOfLife</model>
 </data>

@@ -2,19 +2,19 @@
 <data game="game">
   <author>Jiyun</author>
   <description></description>
+  <emptycolor>black</emptycolor>
+  <emptyratio>0</emptyratio>
+  <model>rockpaperscissors</model>
   <numCols>50</numCols>
   <numRows>50</numRows>
-  <rockratio>0.2</rockratio>
-  <scissorsratio>0.3</scissorsratio>
-  <randomseed>100</randomseed>
   <numberofsides>6</numberofsides>
+  <papercolor>blue</papercolor>
+  <randomseed>100</randomseed>
+  <rockcolor>red</rockcolor>
+  <rockratio>0.2</rockratio>
+  <scissorscolor>lightgrey</scissorscolor>
+  <scissorsratio>0.3</scissorsratio>
   <shape>hexagon</shape>
   <threshhold>1</threshhold>
-  <emptyratio>0</emptyratio>
-  <emptycolor>black</emptycolor>
-  <papercolor>blue</papercolor>
-  <rockcolor>red</rockcolor>
-  <scissorscolor>lightgrey</scissorscolor>
   <title>Rock, Paper, Scissors</title>
-  <model>rockpaperscissors</model>
 </data>

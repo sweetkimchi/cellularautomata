@@ -26,7 +26,8 @@ public class RockPaperScissorsRules extends Rules {
     initializeColorsAndTypes();
   }
 
-  public RockPaperScissorsRules(int threshold, long randomSeed, String rockColor, String paperColor, String scissorsColor, String emptyColor) {
+  public RockPaperScissorsRules(int threshold, long randomSeed, String rockColor, String paperColor,
+      String scissorsColor, String emptyColor) {
     THRESHHOLD = threshold;
     ROCK_COLOR = rockColor;
     PAPER_COLOR = paperColor;
@@ -48,16 +49,6 @@ public class RockPaperScissorsRules extends Rules {
     possibleColors.add(ROCK_COLOR);
     possibleColors.add(PAPER_COLOR);
     possibleColors.add(SCISSORS_COLOR);
-  }
-
-  /**
-   * specifies the starting states of the cells according to the simulation rule
-   *
-   * @return type of cells
-   */
-  @Override
-  public String getStartingPositionCellType() {
-    return null;
   }
 
   /**
@@ -87,16 +78,19 @@ public class RockPaperScissorsRules extends Rules {
 
     System.out.println(THRESHHOLD);
 
-    if(gridManager.getTypeAtCoordinate(x,y).equals(ROCK) && neighborsOfEachTypeAtCoordinate.get(2) > THRESHHOLD){
- //     nextStates.get(2)[x][y] = 1;
+    if (gridManager.getTypeAtCoordinate(x, y).equals(ROCK)
+        && neighborsOfEachTypeAtCoordinate.get(2) > THRESHHOLD) {
+      //     nextStates.get(2)[x][y] = 1;
       updateStates.add(new State(x, y, PAPER, PAPER_COLOR, 0));
     }
-    if(gridManager.getTypeAtCoordinate(x,y).equals(PAPER) && neighborsOfEachTypeAtCoordinate.get(3) > THRESHHOLD){
- //     nextStates.get(3)[x][y] = 1;
+    if (gridManager.getTypeAtCoordinate(x, y).equals(PAPER)
+        && neighborsOfEachTypeAtCoordinate.get(3) > THRESHHOLD) {
+      //     nextStates.get(3)[x][y] = 1;
       updateStates.add(new State(x, y, SCISSORS, SCISSORS_COLOR, 0));
     }
-    if(gridManager.getTypeAtCoordinate(x,y).equals(SCISSORS)&& neighborsOfEachTypeAtCoordinate.get(1) > THRESHHOLD){
-  //    nextStates.get(1)[x][y] = 1;
+    if (gridManager.getTypeAtCoordinate(x, y).equals(SCISSORS)
+        && neighborsOfEachTypeAtCoordinate.get(1) > THRESHHOLD) {
+      //    nextStates.get(1)[x][y] = 1;
       updateStates.add(new State(x, y, ROCK, ROCK_COLOR, 0));
     }
   }

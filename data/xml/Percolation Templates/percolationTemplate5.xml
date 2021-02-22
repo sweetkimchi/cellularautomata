@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <data game="game">
   <author>Jiyun</author>
-  <description>Simulate formation of trapped water bodies such as lakes.</description>
+  <blockcolor>black</blockcolor>
+  <blockratio>0.4</blockratio>
+  <description>Formation of smaller water bodies such as ponds.</description>
+  <emptycolor>lightgrey</emptycolor>
+  <model>percolation</model>
   <numCols>50</numCols>
   <numRows>50</numRows>
-  <watertoemptyratio>0.005</watertoemptyratio>
-  <blockratio>0.55</blockratio>
-  <randomseed>3232</randomseed>
-  <numberofsides>8</numberofsides>
-  <shape>square</shape>
-  <blockcolor>black</blockcolor>
-  <emptycolor>lightgrey</emptycolor>
-  <watercolor>blue</watercolor>
+  <numberofsides>12</numberofsides>
+  <randomseed>2</randomseed>
+  <shape>triangle</shape>
   <template>random_one</template>
   <title>Percolation</title>
-  <model>percolation</model>
+  <watercolor>blue</watercolor>
+  <watertoemptyratio>0.01</watertoemptyratio>
 </data>

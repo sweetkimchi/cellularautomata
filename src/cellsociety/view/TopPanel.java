@@ -10,8 +10,8 @@ import javafx.scene.layout.HBox;
  */
 public class TopPanel {
 
-  private final HBox panel;
   private static final String NODE_ID = "top-panel";
+  private final HBox panel;
 
   /**
    * Creates new TopPanel.

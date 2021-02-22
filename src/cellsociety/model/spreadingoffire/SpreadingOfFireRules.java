@@ -35,7 +35,8 @@ public class SpreadingOfFireRules extends Rules {
    * @param randomSeed  random seed so that the results can be reproduced
    * @param probsOfFire probability of catching fire if the tree is adjacent to a burning tree
    */
-  public SpreadingOfFireRules(long randomSeed, double probsOfFire, String emptyColor, String treeColor, String fireColor) {
+  public SpreadingOfFireRules(long randomSeed, double probsOfFire, String emptyColor,
+      String treeColor, String fireColor) {
     random = new Random(randomSeed);
     possibleTypes = new ArrayList<>();
     possibleColors = new ArrayList<>();
@@ -48,16 +49,6 @@ public class SpreadingOfFireRules extends Rules {
     this.probsOfFire = probsOfFire;
   }
 
-
-  /**
-   * specifices the starting states of the cells according to the simulation rule
-   *
-   * @return type of cells
-   */
-  @Override
-  public String getStartingPositionCellType() {
-    return null;
-  }
 
   @Override
   public ArrayList<String> getPossibleTypes() {
@@ -74,12 +65,13 @@ public class SpreadingOfFireRules extends Rules {
       ArrayList<State> updateStates, int x, int y,
       GridManager gridManager) {
     if (gridManager.getTypeAtCoordinate(x, y).equals(FIRE)) {
-      updateStates.add(new State(x,y,EMPTY, EMPTY_COLOR, 0));
+      updateStates.add(new State(x, y, EMPTY, EMPTY_COLOR, 0));
     }
-    if(gridManager.getTypeAtCoordinate(x,y).equals(TREE) && neighborsOfEachTypeAtCoordinate.get(2) > 0){
+    if (gridManager.getTypeAtCoordinate(x, y).equals(TREE)
+        && neighborsOfEachTypeAtCoordinate.get(2) > 0) {
       double randomNumber = random.nextDouble();
       if (randomNumber < probsOfFire) {
-        updateStates.add(new State(x,y,FIRE, FIRE_COLOR, 0));
+        updateStates.add(new State(x, y, FIRE, FIRE_COLOR, 0));
       }
     }
   }

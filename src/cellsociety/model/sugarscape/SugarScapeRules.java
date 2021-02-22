@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Random;
 
 public class SugarScapeRules extends Rules {
+
   private String FULL_SUGAR_COLOR;
   private String LOW_SUGAR_COLOR;
   private String AGENT_COLOR;
@@ -23,8 +24,9 @@ public class SugarScapeRules extends Rules {
   private double THRESHHOLD;
   private Random random;
 
-  public SugarScapeRules(int numberOfAgents, int maximumSugar, int growBackSugar, int sugarMetabolism, int vision,
-                                   String fullColor, String lowColor, String agentColor, String emptyColor){
+  public SugarScapeRules(int numberOfAgents, int maximumSugar, int growBackSugar,
+      int sugarMetabolism, int vision,
+      String fullColor, String lowColor, String agentColor, String emptyColor) {
     this.FULL_SUGAR_COLOR = fullColor;
     this.LOW_SUGAR_COLOR = lowColor;
     this.AGENT_COLOR = agentColor;
@@ -51,15 +53,6 @@ public class SugarScapeRules extends Rules {
     possibleColors.add(FULL_SUGAR_COLOR);
     possibleColors.add(LOW_SUGAR_COLOR);
     possibleColors.add(AGENT_COLOR);
-  }
-  /**
-   * specifies the starting states of the cells according to the simulation rule
-   *
-   * @return type of cells
-   */
-  @Override
-  public String getStartingPositionCellType() {
-    return null;
   }
 
   /**

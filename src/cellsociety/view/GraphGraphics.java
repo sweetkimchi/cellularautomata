@@ -18,20 +18,20 @@ import javafx.stage.Stage;
  */
 public class GraphGraphics {
 
+  private static final int LINE_WINDOW_SIZE = 150;
+  private static final double WINDOW_WIDTH = 500;
+  private static final double WINDOW_HEIGHT = 500;
+  private static final String EMPTY_CELL = "empty";
+  private final Map<String, XYChart.Series<String, Number>> lines;
   BorderPane pane;
   Stage stage;
   private int currentTime;
   private LineChart<String, Number> lineChart;
-  private static final int LINE_WINDOW_SIZE = 150;
-  private static final double WINDOW_WIDTH = 500;
-  private static final double WINDOW_HEIGHT = 500;
-  private final Map<String,XYChart.Series<String,Number>> lines;
-  private static final String EMPTY_CELL = "empty";
 
   /**
    * Creates a new window for displaying the graph.
    *
-   * @param title title for the graph displayed for the window and at the top
+   * @param title  title for the graph displayed for the window and at the top
    * @param xLabel label for the x-axis
    * @param yLabel label for the y-axis
    */
@@ -65,32 +65,34 @@ public class GraphGraphics {
   }
 
   /**
-   * Updates the graph given a map of new values. Adds new lines if they do not exist.
-   * Skips all empty cells. Maintains a window size to show a limited time frame.
+   * Updates the graph given a map of new values. Adds new lines if they do not exist. Skips all
+   * empty cells. Maintains a window size to show a limited time frame.
    *
    * @param values a Map of values to update the grid.
    */
-  public void update(Map<String,Integer> values) {
-    if (values.keySet().size()!= 0) {
+  public void update(Map<String, Integer> values) {
+    if (values.keySet().size() != 0) {
       currentTime++;
       for (String type : values.keySet()) {
-        if (type.equals(EMPTY_CELL)) continue;
+        if (type.equals(EMPTY_CELL)) {
+          continue;
+        }
         putIfAbsent(type);
-        updateLine(type,values.get(type));
+        updateLine(type, values.get(type));
       }
     }
   }
 
   private void putIfAbsent(String type) {
     if (!lines.containsKey(type)) {
-      lines.put(type,new XYChart.Series<>());
+      lines.put(type, new XYChart.Series<>());
       lines.get(type).setName(type);
       lineChart.getData().add(lines.get(type));
     }
   }
 
   private void updateLine(String type, Integer value) {
-    lines.get(type).getData().add(new XYChart.Data<>(""+currentTime, value));
+    lines.get(type).getData().add(new XYChart.Data<>("" + currentTime, value));
     if (lines.get(type).getData().size() > LINE_WINDOW_SIZE) {
       lines.get(type).getData().remove(0);
     }
@@ -100,7 +102,7 @@ public class GraphGraphics {
    * Resets the window and previous data.
    */
   public void reset() {
-    for (XYChart.Series<String,Number> line : lines.values()) {
+    for (XYChart.Series<String, Number> line : lines.values()) {
       line.getData().clear();
     }
     lines.clear();
@@ -110,7 +112,7 @@ public class GraphGraphics {
 
   /**
    * Returns a boolean of whether or not the graph window is open.
-   * 
+   *
    * @return boolean if graph window is active
    */
   public boolean isActive() {

@@ -23,7 +23,7 @@ public class GridManager {
   private final int col;
   private State[][] stateOfCells;
   private int numberOfSides = 6;
-  private Map<String,Integer> summary;
+  private Map<String, Integer> summary;
   private ArrayList<String> coordinates;
 
   /**
@@ -68,7 +68,8 @@ public class GridManager {
     }
 
     for (State s : template) {
-      stateOfCells[s.getxCoord()][s.getyCoord()] = new State(s.getxCoord(), s.getyCoord(), possibleTypes.get(1), possibleColors.get(1), 0);
+      stateOfCells[s.getxCoord()][s.getyCoord()] = new State(s.getxCoord(), s.getyCoord(),
+          possibleTypes.get(1), possibleColors.get(1), 0);
     }
     this.stateOfCells = stateOfCells;
   }
@@ -106,7 +107,7 @@ public class GridManager {
     this.stateOfCells = stateOfCells;
   }
 
-  public Map<String,Integer> getSummaryOfTypes(){
+  public Map<String, Integer> getSummaryOfTypes() {
     return summary;
   }
 
@@ -121,7 +122,8 @@ public class GridManager {
   }
 
 
-  public List<int[][]> getNumberOfNeighborsForEachType(ArrayList<String> possibleTypes, int numberOfSides) {
+  public List<int[][]> getNumberOfNeighborsForEachType(ArrayList<String> possibleTypes,
+      int numberOfSides) {
     ArrayList<int[][]> numberOfNeighborsForEachType = new ArrayList<>();
     for (String type : possibleTypes) {
       numberOfNeighborsForEachType.add(numberOfAliveNeighbors(stateOfCells, type, numberOfSides));
@@ -129,11 +131,13 @@ public class GridManager {
     return numberOfNeighborsForEachType;
   }
 
-  private int[][] numberOfAliveNeighbors(State[][] statesOfAllCells, String type, int numberOfSides) {
+  private int[][] numberOfAliveNeighbors(State[][] statesOfAllCells, String type,
+      int numberOfSides) {
     int[][] numberOfNeighbors = new int[statesOfAllCells.length][statesOfAllCells[0].length];
     for (int x = 0; x < statesOfAllCells.length; x++) {
       for (int y = 0; y < statesOfAllCells[0].length; y++) {
-        checkEightSidesForNumberOfNeighbors(statesOfAllCells, type, numberOfNeighbors, x, y, numberOfSides);
+        checkEightSidesForNumberOfNeighbors(statesOfAllCells, type, numberOfNeighbors, x, y,
+            numberOfSides);
       }
       // System.out.println();
     }
@@ -147,7 +151,8 @@ public class GridManager {
     int numberOfNeighbor = 0;
     for (int xCoord = x - 2; xCoord <= x + 2; xCoord++) {
       for (int yCoord = y - 1; yCoord <= y + 1; yCoord++) {
-        if (checkNumberOfSidesToSeeWhetherToIncludeThisCell(statesOfAllCells, type, x, y, numberOfSides, xCoord, yCoord)) {
+        if (checkNumberOfSidesToSeeWhetherToIncludeThisCell(statesOfAllCells, type, x, y,
+            numberOfSides, xCoord, yCoord)) {
           numberOfNeighbor++;
         }
       }
@@ -155,54 +160,77 @@ public class GridManager {
     numberOfNeighbors[x][y] = numberOfNeighbor;
   }
 
-  private boolean checkNumberOfSidesToSeeWhetherToIncludeThisCell(State[][] statesOfAllCells, String type, int x, int y,
+  private boolean checkNumberOfSidesToSeeWhetherToIncludeThisCell(State[][] statesOfAllCells,
+      String type, int x, int y,
       int numberOfSides, int xCoord, int yCoord) {
-    boolean count = true;
-    if(xCoord >= 0 && yCoord >= 0 && xCoord < statesOfAllCells.length
+    boolean isValidNeighbor = false;
+    if (xCoord >= 0 && yCoord >= 0 && xCoord < statesOfAllCells.length
         && yCoord < statesOfAllCells[0].length && statesOfAllCells[xCoord][yCoord].getType()
-        .equals(type) && !(xCoord == x && yCoord == y)){
-      if(numberOfSides == 8 && (xCoord != x-2 && xCoord != x+2)){
-        return true;
-      }
-      if(numberOfSides == 6 && isHexagonalNeighborForOddYCoord(x, y, xCoord, yCoord)){
-        // && !(xCoord == x - 1 && yCoord == y + 1)
-        return true;
-      }
-      if(numberOfSides == 6 && isHexagonalNeighborForEvenYCoord(x, y, xCoord, yCoord)) {
-        //&& !(xCoord == x + 1 && yCoord == y - 1) && !(xCoord == x + 1 && yCoord == y + 1)
-        return true;
-      }
-      if(numberOfSides == 4 && isOneOfTheNWSEDirection(x, y, xCoord, yCoord)){
-        return true;
-      }
-      if(numberOfSides == 3 && !isFacingUp(xCoord, yCoord) && isLeftRightUpNeighbors(x, y,
-          xCoord, yCoord, yCoord - 1)){
-        return true;
-      }
-      if(numberOfSides == 3 && isFacingUp(xCoord, yCoord) && isLeftRightUpNeighbors(x, y,
-          xCoord, yCoord, yCoord + 1)){
-        return true;
-      }
-      if(numberOfSides == 12 && isFacingUp(xCoord, yCoord) && isOneOfTheSidesForFacingUpTriangles(x,y,xCoord,yCoord)){
-        return true;
-      }
-      if(numberOfSides == 12 && !isFacingUp(xCoord, yCoord) && isOneOfTheSidesForFacingDownTriangles(x,y,xCoord,yCoord)){
-        return false;
-      }
-
+        .equals(type) && !(xCoord == x && yCoord == y)) {
+      isValidNeighbor = isValidNeighborOfSquareCell(x, y, numberOfSides, xCoord, yCoord, isValidNeighbor);
+      isValidNeighbor = isValidNeighborOfHexagonalCell(x, y, numberOfSides, xCoord, yCoord, isValidNeighbor);
+      isValidNeighbor = isValidNeighborOfTriangleCell(x, y, numberOfSides, xCoord, yCoord, isValidNeighbor);
     }
-    return false;
+    return isValidNeighbor;
+  }
+
+  private boolean isValidNeighborOfHexagonalCell(int x, int y, int numberOfSides, int xCoord, int yCoord,
+      boolean isValidNeighbor) {
+    if (numberOfSides == 6 && isHexagonalNeighborForOddYCoord(x, y, xCoord, yCoord)) {
+      // && !(xCoord == x - 1 && yCoord == y + 1)
+      isValidNeighbor = true;
+    }
+    if (numberOfSides == 6 && isHexagonalNeighborForEvenYCoord(x, y, xCoord, yCoord)) {
+      //&& !(xCoord == x + 1 && yCoord == y - 1) && !(xCoord == x + 1 && yCoord == y + 1)
+      isValidNeighbor = true;
+    }
+    return isValidNeighbor;
+  }
+
+  private boolean isValidNeighborOfSquareCell(int x, int y, int numberOfSides, int xCoord, int yCoord,
+      boolean isValidNeighbor) {
+    if (numberOfSides == 8 && (xCoord != x - 2 && xCoord != x + 2)) {
+      isValidNeighbor = true;
+    }
+    if (numberOfSides == 4 && isOneOfTheNWSEDirection(x, y, xCoord, yCoord)) {
+      isValidNeighbor = true;
+    }
+    return isValidNeighbor;
+  }
+
+  private boolean isValidNeighborOfTriangleCell(int x, int y, int numberOfSides, int xCoord, int yCoord, boolean count) {
+    if (numberOfSides == 3 && !isFacingUp(xCoord, yCoord) && isLeftRightUpNeighbors(x, y,
+        xCoord, yCoord, yCoord - 1)) {
+      count = true;
+    }
+    if (numberOfSides == 3 && isFacingUp(xCoord, yCoord) && isLeftRightUpNeighbors(x, y,
+        xCoord, yCoord, yCoord + 1)) {
+      count = true;
+    }
+    if (numberOfSides == 12 && isFacingUp(xCoord, yCoord) && isOneOfTheSidesForFacingUpTriangles(
+        x, y, xCoord, yCoord)) {
+      count = true;
+    }
+    if (numberOfSides == 12 && !isFacingUp(xCoord, yCoord)
+        && isOneOfTheSidesForFacingDownTriangles(x, y, xCoord, yCoord)) {
+      count = true;
+    }
+    return count;
   }
 
   private boolean isOneOfTheSidesForFacingDownTriangles(int x, int y, int xCoord, int yCoord) {
-    return (y == yCoord - 1 && (x <= xCoord + 2 && x >= xCoord - 2)) || (y == yCoord && (x <= xCoord + 2 && x >= xCoord - 2)) || (y == yCoord + 1 && (x <= xCoord + 1 && x >= xCoord -1));
+    return (y == yCoord - 1 && (x <= xCoord + 2 && x >= xCoord - 2)) || (y == yCoord && (
+        x <= xCoord + 2 && x >= xCoord - 2)) || (y == yCoord + 1 && (x <= xCoord + 1
+        && x >= xCoord - 1));
   }
 
   private boolean isOneOfTheSidesForFacingUpTriangles(int x, int y, int xCoord, int yCoord) {
-    return (y == yCoord - 1 && (x <= xCoord + 1 && x >= xCoord - 1)) || (y == yCoord && (x <= xCoord + 2 && x >= xCoord - 2)) || (y == yCoord + 1 && (x <= xCoord + 2 && x >= xCoord -2));
+    return (y == yCoord - 1 && (x <= xCoord + 1 && x >= xCoord - 1)) || (y == yCoord && (
+        x <= xCoord + 2 && x >= xCoord - 2)) || (y == yCoord + 1 && (x <= xCoord + 2
+        && x >= xCoord - 2));
   }
 
-  private boolean isFacingUp(int xCoord, int yCoord){
+  private boolean isFacingUp(int xCoord, int yCoord) {
     return (xCoord % 2 == 0 && yCoord % 2 == 0) || (yCoord % 2 != 0 && xCoord % 2 != 0);
   }
 
@@ -213,17 +241,18 @@ public class GridManager {
 
   private boolean isOneOfTheNWSEDirection(int x, int y, int xCoord, int yCoord) {
     return !(x == xCoord - 1 && y == yCoord - 1) && !(x == xCoord - 1 && y == yCoord + 1) && !(
-        x == xCoord + 1 && y == yCoord - 1) && !(x == xCoord + 1 && y == yCoord + 1) && (xCoord != x-2 && xCoord != x+2);
+        x == xCoord + 1 && y == yCoord - 1) && !(x == xCoord + 1 && y == yCoord + 1) && (
+        xCoord != x - 2 && xCoord != x + 2);
   }
 
   private boolean isHexagonalNeighborForOddYCoord(int x, int y, int xCoord, int yCoord) {
     return yCoord % 2 != 0 && !(x == xCoord - 1 && y == yCoord - 1) && !(x == xCoord - 1
-        && y == yCoord + 1) && (xCoord != x-2 && xCoord != x+2);
+        && y == yCoord + 1) && (xCoord != x - 2 && xCoord != x + 2);
   }
 
   private boolean isHexagonalNeighborForEvenYCoord(int x, int y, int xCoord, int yCoord) {
     return yCoord % 2 == 0 && !(x == xCoord + 1 && y == yCoord + 1) && !(x == xCoord + 1
-        && y == yCoord - 1) && (xCoord != x-2 && xCoord != x+2);
+        && y == yCoord - 1) && (xCoord != x - 2 && xCoord != x + 2);
   }
 
   private void printGrid(State[][] stateOfCells) {
@@ -257,19 +286,19 @@ public class GridManager {
     }
 
     updateStatesForNextRound(updateStates);
-   // updateStatesForAllCells(nextStates, rules.getPossibleTypes(), rules.getPossibleColors());
+    //  updateStatesForAllCells(nextStates, rules.getPossibleTypes(), rules.getPossibleColors());
   }
 
   private void updateStatesForNextRound(ArrayList<State> updateStates) {
-    for(State state : updateStates){
+    for (State state : updateStates) {
       stateOfCells[state.getxCoord()][state.getyCoord()] = state;
     }
   }
 
-  public List<String> saveSimulation(){
+  public List<String> saveSimulation() {
     ArrayList<String> state = new ArrayList<>();
-    for(int i=0; i < stateOfCells.length; i++){
-      for(int j=0; j < stateOfCells.length; j++){
+    for (int i = 0; i < stateOfCells.length; i++) {
+      for (int j = 0; j < stateOfCells.length; j++) {
 
         state.add(String.valueOf(stateOfCells[i][j].getxCoord()));
         state.add(String.valueOf(stateOfCells[i][j].getyCoord()));
@@ -285,7 +314,7 @@ public class GridManager {
   private void updateStatesForAllCells(List<int[][]> nextStates,
       ArrayList<String> possibleTypes, ArrayList<String> possibleColors) {
     summary = new HashMap<>();
-    for(String types: possibleTypes){
+    for (String types : possibleTypes) {
       summary.put(types, 0);
     }
     for (int index = 0; index < nextStates.size(); index++) {
@@ -343,11 +372,16 @@ public class GridManager {
       int radius, int numberOfSides) {
     this.coordinates = coordinates;
     ForagingAntGridManager foragingAntGridManager = new ForagingAntGridManager(row, col);
-    this.stateOfCells = foragingAntGridManager.buildAntGridWithTemplateHelper(coordinates, possibleTypes, possibleColors, radius);
+    this.stateOfCells = foragingAntGridManager
+        .buildAntGridWithTemplateHelper(coordinates, possibleTypes, possibleColors, radius);
     this.numberOfSides = numberOfSides;
   }
-  public void setNumberOfSides(int sides){numberOfSides = sides;}
-  public ArrayList<String> getCoordinates(){
+
+  public void setNumberOfSides(int sides) {
+    numberOfSides = sides;
+  }
+
+  public ArrayList<String> getCoordinates() {
     return coordinates;
   }
 
@@ -371,7 +405,8 @@ public class GridManager {
           State state = new State(x, y, possibleTypes.get(1), possibleColors.get(1), 0);
           stateOfCells[x][y] = state;
         } else {
-          AgentState state = new AgentState(x, y, possibleTypes.get(3), possibleColors.get(3), 0, metabolism, vision, 0);
+          AgentState state = new AgentState(x, y, possibleTypes.get(3), possibleColors.get(3), 0,
+              metabolism, vision, 0);
           stateOfCells[x][y] = state;
         }
       }

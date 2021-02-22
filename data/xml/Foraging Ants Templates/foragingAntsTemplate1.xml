@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <data game="game">
-    <author>Jiyun</author>
-    <description>Generic Template</description>
-    <numCols>40</numCols>
-    <numRows>40</numRows>
-    <shapeCoords>10,10,20,30,35,30</shapeCoords>
-    <numberofants>10</numberofants>
-    <radius>2</radius>
-    <phermoneamount>30</phermoneamount>
-    <movebias>0.96</movebias>
-    <shape>square</shape>
-    <numberofsides>4</numberofsides>
-    <nestcolor>green</nestcolor>
-    <antcolor>red</antcolor>
-    <phermonecolor>blue</phermonecolor>
-    <foodcolor>lightgrey</foodcolor>
-    <emptycolor>black</emptycolor>
-    <weakphermonecolor>skyblue</weakphermonecolor>
-    <template>generic</template>
-    <title>Foraging Ants</title>
-    <model>foragingants</model>
+  <antcolor>red</antcolor>
+  <author>Jiyun</author>
+  <description>Generic Template</description>
+  <emptycolor>black</emptycolor>
+  <foodcolor>lightgrey</foodcolor>
+  <model>foragingants</model>
+  <movebias>0.96</movebias>
+  <nestcolor>green</nestcolor>
+  <numCols>40</numCols>
+  <numRows>40</numRows>
+  <numberofants>30</numberofants>
+  <numberofsides>4</numberofsides>
+  <phermoneamount>30</phermoneamount>
+  <phermonecolor>blue</phermonecolor>
+  <radius>2</radius>
+  <shape>square</shape>
+  <shapeCoords>10,10,20,30,35,30</shapeCoords>
+  <template>generic</template>
+  <title>Foraging Ants</title>
+  <weakphermonecolor>skyblue</weakphermonecolor>
 </data>

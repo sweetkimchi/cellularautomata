@@ -85,7 +85,8 @@ public class State {
     this.direction = direction;
   }
 
-  public State(int xCoord, int yCoord, String type, String colorString, int numberOfMoves, int sugarMetabolism, int vision, int sugarPossession) {
+  public State(int xCoord, int yCoord, String type, String colorString, int numberOfMoves,
+      int sugarMetabolism, int vision, int sugarPossession) {
     this.xCoord = xCoord;
     this.yCoord = yCoord;
     this.type = type;
@@ -93,7 +94,8 @@ public class State {
     this.numberOfMoves = numberOfMoves;
   }
 
-  public State(int xCoord, int yCoord, String type, String colorString, int numberOfMoves, int sugarMetabolism, int vision) {
+  public State(int xCoord, int yCoord, String type, String colorString, int numberOfMoves,
+      int sugarMetabolism, int vision) {
     this.xCoord = xCoord;
     this.yCoord = yCoord;
     this.type = type;
@@ -147,7 +149,7 @@ public class State {
     color = colorName;
   }
 
-  public boolean hasFood(){
+  public boolean hasFood() {
     return hasFood;
   }
 

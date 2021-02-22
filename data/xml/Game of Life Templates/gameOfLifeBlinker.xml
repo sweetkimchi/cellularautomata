@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <data game="game">
+  <alivecolor>black</alivecolor>
   <author>John Conway</author>
+  <deadcolor>lightgrey</deadcolor>
   <description>Blinks back and forth</description>
+  <model>gameOfLife</model>
   <numCols>50</numCols>
   <numRows>50</numRows>
-  <shapeCoords>25,25,25,26,25,27</shapeCoords>
   <numberofsides>8</numberofsides>
   <shape>square</shape>
-  <alivecolor>black</alivecolor>
-  <deadcolor>lightgrey</deadcolor>
+  <shapeCoords>25,25,25,26,25,27</shapeCoords>
   <template>blinker</template>
   <title>Game of Life</title>
-  <model>gameOfLife</model>
 </data>

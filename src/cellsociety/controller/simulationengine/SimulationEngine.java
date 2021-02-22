@@ -2,23 +2,21 @@ package cellsociety.controller.simulationengine;
 
 import cellsociety.controller.Decoder;
 import cellsociety.controller.grid.GridManager;
-import cellsociety.model.foragingants.ForagingAntGridManager;
-import cellsociety.model.foragingants.ForagingAntsRules;
 import cellsociety.model.RockPaperScissorsRules;
 import cellsociety.model.cell.State;
+import cellsociety.model.foragingants.ForagingAntGridManager;
+import cellsociety.model.foragingants.ForagingAntsRules;
 import cellsociety.model.gameoflife.GameOfLifeRule;
 import cellsociety.model.percolation.PercolationRules;
 import cellsociety.model.rules.Rules;
-import cellsociety.model.spreadingoffire.SpreadingOfFireRules;
 import cellsociety.model.segregationmodel.SegregationModelRules;
+import cellsociety.model.spreadingoffire.SpreadingOfFireRules;
 import cellsociety.model.sugarscape.SugarScapeRules;
 import cellsociety.model.watormodel.WaTorModelRules;
 import cellsociety.view.SimulationScreen;
-
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
-
 import javafx.animation.AnimationTimer;
 import javafx.stage.Stage;
 
@@ -57,7 +55,7 @@ public class SimulationEngine {
     template = new ArrayList<>();
     for (int i = 0; i + 1 < coordinates.size(); i += 2) {
       State state = new State(Integer.parseInt(coordinates.get(i)),
-              Integer.parseInt(coordinates.get(i + 1)), rules.getStartingPositionCellType());
+          Integer.parseInt(coordinates.get(i + 1)), rules.getPossibleTypes().get(0));
       template.add(state);
     }
     return template;
@@ -99,59 +97,73 @@ public class SimulationEngine {
       template = constructStartingStateForSimulation(decoder.getCoordinates());
 
       gridManager
-              .buildGridWithTemplate(template, rules.getPossibleTypes(), rules.getPossibleColors(), 0);
+          .buildGridWithTemplate(template, rules.getPossibleTypes(), rules.getPossibleColors(), 0);
     }
     if (game.equals("percolation")) {
-      rules = new PercolationRules(decoder.getSeed(), decoder.getBlockColor(), decoder.getWaterColor(), decoder.getEmptyColor());
+      rules = new PercolationRules(decoder.getSeed(), decoder.getBlockColor(),
+          decoder.getWaterColor(), decoder.getEmptyColor());
       gridManager
-              .buildGridWithRandomSeed(decoder.getBlockRatio(), decoder.getWaterToEmptyRatio(),
-                      decoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
+          .buildGridWithRandomSeed(decoder.getBlockRatio(), decoder.getWaterToEmptyRatio(),
+              decoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
     }
     if (game.equals("segregationmodel")) {
-      rules = new SegregationModelRules(decoder.getSeed(), decoder.getSatisfactionThreshold(), decoder.getColorX(), decoder.getColorY(), decoder.getEmptyColor());
+      rules = new SegregationModelRules(decoder.getSeed(), decoder.getSatisfactionThreshold(),
+          decoder.getColorX(), decoder.getColorY(), decoder.getEmptyColor());
       gridManager
-              .buildGridWithRandomSeed(decoder.getEmptyRatio(), decoder.getPopulationRatio(),
-                      decoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
+          .buildGridWithRandomSeed(decoder.getEmptyRatio(), decoder.getPopulationRatio(),
+              decoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
 
     }
     if (game.equals("spreadingoffire")) {
-      rules = new SpreadingOfFireRules(decoder.getSeed(), decoder.getProbsOfCatch(), decoder.getEmptyColor(), decoder.getTreeColor(), decoder.getFireColor());
+      rules = new SpreadingOfFireRules(decoder.getSeed(), decoder.getProbsOfCatch(),
+          decoder.getEmptyColor(), decoder.getTreeColor(), decoder.getFireColor());
       gridManager
-              .buildGridWithRandomSeed(decoder.getEmptyRatio(), decoder.getTreeRatio(),
-                      decoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
+          .buildGridWithRandomSeed(decoder.getEmptyRatio(), decoder.getTreeRatio(),
+              decoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
     }
     if (game.equals("wator")) {
       //   rules = new WaTorModelRules(emptyRatio, populationRatio, randomSeed, energyFish, reproduceBoundary, sharkEnergy);
       rules = new WaTorModelRules(
-              decoder.getSeed(), decoder.getEnergy(), decoder.getFishRate(),decoder.getSharkLives(), decoder.getEmptyColor(), decoder.getSharkColor(), decoder.getFishColor());
+          decoder.getSeed(), decoder.getEnergy(), decoder.getFishRate(), decoder.getSharkLives(),
+          decoder.getEmptyColor(), decoder.getSharkColor(), decoder.getFishColor());
       gridManager
-              .buildGridWithRandomSeed(decoder.getEmptyRatio(), decoder.getFishSharkRatio(),
-                      decoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
+          .buildGridWithRandomSeed(decoder.getEmptyRatio(), decoder.getFishSharkRatio(),
+              decoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
     }
     if (game.equals("rockpaperscissors")) {
       //   rules = new WaTorModelRules(emptyRatio, populationRatio, randomSeed, energyFish, reproduceBoundary, sharkEnergy);
-      rules = new RockPaperScissorsRules(decoder.getThreshold(), decoder.getSeed(), decoder.getRockColor(), decoder.getPaperColor(), decoder.getScissorsColor(), decoder.getEmptyColor());
+      rules = new RockPaperScissorsRules(decoder.getThreshold(), decoder.getSeed(),
+          decoder.getRockColor(), decoder.getPaperColor(), decoder.getScissorsColor(),
+          decoder.getEmptyColor());
 
       gridManager
-              .buildGridWithRandomSeed(decoder.getEmptyRatio(), decoder.getScissorsRatio(),
-                      decoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
+          .buildGridWithRandomSeed(decoder.getEmptyRatio(), decoder.getScissorsRatio(),
+              decoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
     }
     if (game.equals("foragingants")) {
       //   rules = new WaTorModelRules(emptyRatio, populationRatio, randomSeed, energyFish, reproduceBoundary, sharkEnergy);
       int numberOfsides = 4;
 
-      rules = new ForagingAntsRules(decoder.getNumberOfAnts(), decoder.getSeed(), decoder.getNumberOfSides(), decoder.getNestColor(), decoder.getAntColor(), decoder.getPhermoneColor(), decoder.getFoodColor(), decoder.getEmptyColor(), decoder.getWeakPhermoneColor(), decoder.getMoveBias(), decoder.getPhermoneAmount());
-      ForagingAntGridManager foragingAntGridManager = new ForagingAntGridManager(decoder.getRows(), decoder.getCols());
+      rules = new ForagingAntsRules(decoder.getNumberOfAnts(), decoder.getSeed(),
+          decoder.getNumberOfSides(), decoder.getNestColor(), decoder.getAntColor(),
+          decoder.getPhermoneColor(), decoder.getFoodColor(), decoder.getEmptyColor(),
+          decoder.getWeakPhermoneColor(), decoder.getMoveBias(), decoder.getPhermoneAmount());
+      ForagingAntGridManager foragingAntGridManager = new ForagingAntGridManager(decoder.getRows(),
+          decoder.getCols());
       gridManager
-          .buildAntGridWithTemplate(decoder.getCoordinates(), rules.getPossibleTypes(), rules.getPossibleColors(), decoder.getRadius(), decoder.getNumberOfSides());
+          .buildAntGridWithTemplate(decoder.getCoordinates(), rules.getPossibleTypes(),
+              rules.getPossibleColors(), decoder.getRadius(), decoder.getNumberOfSides());
     }
     if (game.equals("sugarscape")) {
       //   rules = new WaTorModelRules(emptyRatio, populationRatio, randomSeed, energyFish, reproduceBoundary, sharkEnergy);
-      rules = new SugarScapeRules(decoder.getNumAgents(), decoder.getMaxSugar(), decoder.getGrowBackSugar(), decoder.getMetabolism(), decoder.getVision(), decoder.getFullSugarColor(), decoder.getLowSugarColor(), decoder.getAgentColor(), decoder.getEmptyColor());
+      rules = new SugarScapeRules(decoder.getNumAgents(), decoder.getMaxSugar(),
+          decoder.getGrowBackSugar(), decoder.getMetabolism(), decoder.getVision(),
+          decoder.getFullSugarColor(), decoder.getLowSugarColor(), decoder.getAgentColor(),
+          decoder.getEmptyColor());
       gridManager
           .makeSugarScapeGridWithRandomSeed(decoder.getEmptyRatio(), decoder.getPatchRatio(),
               decoder.getMetabolism(), decoder.getVision(),
-                  decoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
+              decoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
     }
     //need to be fixed for a better design
   }
@@ -195,11 +207,13 @@ public class SimulationEngine {
       animation.start();
     }
   }
+
   public void saveSimulation() throws FileNotFoundException {
     stopSimulation();
     states = gridManager.saveSimulation();
     decoder.saveConfig(states);
   }
+
   /**
    * Allows interactive button to stop the simulation in View component
    */

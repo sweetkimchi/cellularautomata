@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <data game="game">
   <author>Jiyun</author>
-  <description>Shows how some empty spots in between next to the fire can actually prevent fire from spreading too much.</description>
+  <description>Shows how some empty spots in between next to the fire can actually prevent fire from
+    spreading too much.
+  </description>
+  <emptycolor>yellow</emptycolor>
+  <emptyratio>0.1</emptyratio>
+  <firecolor>red</firecolor>
+  <model>spreadingoffire</model>
   <numCols>50</numCols>
   <numRows>50</numRows>
-  <shapeCoords>21,20,20,21,21,21,22,21</shapeCoords>
-  <template>basicfire</template>
+  <numberofsides>12</numberofsides>
   <probsOfCatch>0.5</probsOfCatch>
   <randomseed>14</randomseed>
-  <emptyratio>0.1</emptyratio>
-  <treeratio>0.99</treeratio>
-  <numberofsides>12</numberofsides>
   <shape>triangle</shape>
-  <emptycolor>yellow</emptycolor>
-  <treecolor>green</treecolor>
-  <firecolor>red</firecolor>
+  <shapeCoords>21,20,20,21,21,21,22,21</shapeCoords>
+  <template>basicfire</template>
   <title>Spreading of Fire</title>
-  <model>spreadingoffire</model>
+  <treecolor>green</treecolor>
+  <treeratio>0.99</treeratio>
 </data>

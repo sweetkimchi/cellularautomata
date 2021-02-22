@@ -34,7 +34,8 @@ public class SegregationModelRules extends Rules {
   /**
    * Default constructor
    */
-  public SegregationModelRules(long randomSeed, double THRESHHOLD, String colorX, String colorY, String emptyColor) {
+  public SegregationModelRules(long randomSeed, double THRESHHOLD, String colorX, String colorY,
+      String emptyColor) {
     random = new Random(randomSeed);
     this.THRESHHOLD = THRESHHOLD;
     this.AGENTX_COLOR = colorX;
@@ -67,16 +68,6 @@ public class SegregationModelRules extends Rules {
     }
   }
 
-
-  /**
-   * specifies the starting states of the cells according to the simulation rule
-   *
-   * @return type of cells
-   */
-  @Override
-  public String getStartingPositionCellType() {
-    return null;
-  }
 
   /**
    * returns the possible types (e.g. agent x, agent y, empty)

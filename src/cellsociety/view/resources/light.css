@@ -1,75 +1,75 @@
 .root {
-    -fx-font-size: 14pt;
-    -fx-font-family: "Courier New";
-    -fx-base: rgb(248,233,217);
-    -fx-background: rgb(254,252,250);
+  -fx-font-size: 14pt;
+  -fx-font-family: "Courier New";
+  -fx-base: rgb(248, 233, 217);
+  -fx-background: rgb(254, 252, 250);
 }
 
 #title {
-    -fx-font-size: 32pt;
-    -fx-font-family: "Courier New";
+  -fx-font-size: 32pt;
+  -fx-font-family: "Courier New";
 }
 
 #top-panel {
-    -fx-background-color: rgb(248,233,217);
+  -fx-background-color: rgb(248, 233, 217);
 }
 
 #side-panel {
-    -fx-background-color: rgb(248,233,217);
+  -fx-background-color: rgb(248, 233, 217);
 }
 
 .gameOfLife-alive {
-    -fx-fill: black;
+  -fx-fill: black;
 }
 
 .gameOfLife-empty {
-    -fx-fill: lightgrey;
+  -fx-fill: lightgrey;
 }
 
 .percolation-block {
-    -fx-fill: black;
+  -fx-fill: black;
 }
 
 .percolation-water {
-    -fx-fill: blue;
+  -fx-fill: blue;
 }
 
 .percolation-empty {
-    -fx-fill: lightgrey;
+  -fx-fill: lightgrey;
 }
 
 .segregationmodel-agentx {
-    -fx-fill: red;
+  -fx-fill: red;
 }
 
 .segregationmodel-agenty {
-    -fx-fill: blue;
+  -fx-fill: blue;
 }
 
 .segregationmodel-empty {
-    -fx-fill: lightgrey;
+  -fx-fill: lightgrey;
 }
 
 .spreadingoffire-fire {
-    -fx-fill: brown;
+  -fx-fill: brown;
 }
 
 .spreadingoffire-tree {
-    -fx-fill: green;
+  -fx-fill: green;
 }
 
 .spreadingoffire-empty {
-    -fx-fill: yellow;
+  -fx-fill: yellow;
 }
 
 .wator-fish {
-    -fx-fill: green;
+  -fx-fill: green;
 }
 
 .wator-shark {
-    -fx-fill: blue;
+  -fx-fill: blue;
 }
 
 .wator-empty {
-    -fx-fill: lightgrey;
+  -fx-fill: lightgrey;
 }

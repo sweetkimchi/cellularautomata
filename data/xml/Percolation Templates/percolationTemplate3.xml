@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <data game="game">
   <author>Jiyun</author>
-  <description>Water flowing through different channels which ends up flooding the entire area.</description>
+  <blockcolor>black</blockcolor>
+  <blockratio>0.7</blockratio>
+  <description>Water flowing through different channels which ends up flooding the entire area.
+  </description>
+  <emptycolor>lightgrey</emptycolor>
+  <model>percolation</model>
   <numCols>50</numCols>
   <numRows>50</numRows>
-  <watertoemptyratio>0.01</watertoemptyratio>
-  <blockratio>0.7</blockratio>
+  <numberofsides>4</numberofsides>
   <randomseed>321</randomseed>
-  <numberofsides>8</numberofsides>
   <shape>square</shape>
-  <blockcolor>black</blockcolor>
-  <emptycolor>lightgrey</emptycolor>
-  <watercolor>blue</watercolor>
   <template>random_one</template>
   <title>Percolation</title>
-  <model>percolation</model>
+  <watercolor>blue</watercolor>
+  <watertoemptyratio>0.01</watertoemptyratio>
 </data>

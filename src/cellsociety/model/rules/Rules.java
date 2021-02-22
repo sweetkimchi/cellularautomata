@@ -19,13 +19,6 @@ public abstract class Rules {
   }
 
   /**
-   * specifies the starting states of the cells according to the simulation rule
-   *
-   * @return type of cells
-   */
-  public abstract String getStartingPositionCellType();
-
-  /**
    * returns the possible types (e.g. agent x, agent y, empty)
    *
    * @return arraylist of possible types

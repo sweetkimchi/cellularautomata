@@ -39,9 +39,9 @@ public class SimulationScreen {
   private static final double MAX_SPEED = 60;
   private static final double DEFAULT_SPEED = 30;
   private final Stage stage;
+  private final SimulationEngine simulationEngine;
   private BorderPane root;
   private ResourceBundle resources;
-  private final SimulationEngine simulationEngine;
   private SidePanel sidePanel;
   private GridGraphics gridGraphics;
   private TopPanel topPanel;
@@ -67,7 +67,7 @@ public class SimulationScreen {
 
   private void initializeStartScreen() {
     StartScreen startScreen = new StartScreen();
-    Button beginButton = makeButton("BeginCommand",event -> initialize());
+    Button beginButton = makeButton("BeginCommand", event -> initialize());
     startScreen.addTitle(resources.getString("SimulationTitle"));
     startScreen.addNode(beginButton);
     startScreen.addNode(createLanguageBox(startScreen));
@@ -76,7 +76,7 @@ public class SimulationScreen {
 
   private Node createLanguageBox(StartScreen screen) {
     ComboBox<String> box = new ComboBox<>();
-    box.getItems().addAll("English","Chinese","Korean");
+    box.getItems().addAll("English", "Chinese", "Korean");
     box.setOnAction(event -> {
       setResourcePackage(box.getValue());
       screen.setButtonText(resources.getString("BeginCommand"));
@@ -119,29 +119,32 @@ public class SimulationScreen {
 
   private void exitSimulation() {
     stage.close();
-    if (graphGraphics != null) graphGraphics.close();
+    if (graphGraphics != null) {
+      graphGraphics.close();
+    }
   }
 
   private void toggleGrid() {
     if (root.getCenter() == null) {
       root.setCenter(gridGraphics.getNode());
-    }
-    else {
+    } else {
       root.setCenter(null);
     }
   }
 
   private void initializeGraph() {
-    if (graphGraphics != null && graphGraphics.isActive()) return;
+    if (graphGraphics != null && graphGraphics.isActive()) {
+      return;
+    }
     graphGraphics = new GraphGraphics(resources.getString("GraphTitle"),
         resources.getString("GraphXLabel"), resources.getString("GraphYLabel"));
   }
 
   private ComboBox<String> createColorBox() {
-    Map<String,String> colorTypes = new HashMap<>();
-    colorTypes.put(resources.getString("DefaultColor"),DEFAULT_STYLESHEET);
-    colorTypes.put(resources.getString("LightColor"),LIGHT_STYLESHEET);
-    colorTypes.put(resources.getString("DarkColor"),DARK_STYLESHEET);
+    Map<String, String> colorTypes = new HashMap<>();
+    colorTypes.put(resources.getString("DefaultColor"), DEFAULT_STYLESHEET);
+    colorTypes.put(resources.getString("LightColor"), LIGHT_STYLESHEET);
+    colorTypes.put(resources.getString("DarkColor"), DARK_STYLESHEET);
     ComboBox<String> comboBox = new ComboBox<>();
     for (String s : colorTypes.keySet()) {
       comboBox.getItems().add(s);
@@ -260,7 +263,7 @@ public class SimulationScreen {
     checkWindowSizeChanged();
   }
 
-  private void updateGraph(Map<String,Integer> map) {
+  private void updateGraph(Map<String, Integer> map) {
     if (graphGraphics != null) {
       graphGraphics.update(map);
     }
