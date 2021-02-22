@@ -207,7 +207,11 @@ public class GridManager {
         rules.getPossibleTypes(), numberOfSides);
     List<int[][]> nextStates = nextStatesOfCells(numberOfNeighborsForEachType);
     ArrayList<State> updateStates = new ArrayList<>();
-
+    summary = new HashMap<>();
+    for(String type : rules.getPossibleTypes()){
+      summary.put(type,0);
+    }
+    countEachType();
     for (int x = 0; x < row; x++) {
       for (int y = 0; y < col; y++) {
         List<Integer> neighborsOfEachTypeAtCoordinate = new ArrayList<>();
@@ -296,6 +300,14 @@ public class GridManager {
   private boolean isHexagonalNeighborForEvenYCoord(int x, int y, int xCoord, int yCoord) {
     return yCoord % 2 == 0 && !(x == xCoord + 1 && y == yCoord + 1) && !(x == xCoord + 1
         && y == yCoord - 1) && (xCoord != x - 2 && xCoord != x + 2);
+  }
+
+  private void countEachType(){
+    for (int x = 0; x < row; x++) {
+      for (int y = 0; y < col; y++) {
+        summary.put(getTypeAtCoordinate(x,y), summary.get(getTypeAtCoordinate(x,y)) + 1);
+      }
+    }
   }
 
   private void updateStatesForNextRound(List<State> updateStates) {
