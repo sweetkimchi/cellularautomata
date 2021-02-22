@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -39,8 +38,8 @@ public class SimulationScreen {
   private static final double MIN_SPEED = 0;
   private static final double MAX_SPEED = 60;
   private static final double DEFAULT_SPEED = 30;
-  private final Group sceneNodes;
   private final Stage stage;
+  private BorderPane root;
   private ResourceBundle resources;
   private final SimulationEngine simulationEngine;
   private SidePanel sidePanel;
@@ -62,7 +61,6 @@ public class SimulationScreen {
   public SimulationScreen(Stage stage, SimulationEngine engine) {
     this.stage = stage;
     simulationEngine = engine;
-    sceneNodes = new Group();
     resources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + language);
     initializeStartScreen();
   }
@@ -95,7 +93,7 @@ public class SimulationScreen {
   }
 
   private void initialize() {
-    BorderPane root = new BorderPane();
+    root = new BorderPane();
     gridGraphics = new GridGraphics();
     sidePanel = new SidePanel();
     topPanel = new TopPanel();
@@ -110,9 +108,27 @@ public class SimulationScreen {
   }
 
   private void addTopPanelControls() {
-    createColorBox();
+    ComboBox<String> comboBox = createColorBox();
+    Button gridButton = makeButton("GridCommand", event -> toggleGrid());
     Button graphButton = makeButton("GraphCommand", event -> initializeGraph());
-    topPanel.add(graphButton);
+    Button newSimulationButton = makeButton("NewSimulationCommand",
+        event -> new SimulationEngine());
+    Button exitButton = makeButton("ExitCommand", event -> exitSimulation());
+    topPanel.add(comboBox, gridButton, graphButton, newSimulationButton, exitButton);
+  }
+
+  private void exitSimulation() {
+    stage.close();
+    if (graphGraphics != null) graphGraphics.close();
+  }
+
+  private void toggleGrid() {
+    if (root.getCenter() == null) {
+      root.setCenter(gridGraphics.getNode());
+    }
+    else {
+      root.setCenter(null);
+    }
   }
 
   private void initializeGraph() {
@@ -121,7 +137,7 @@ public class SimulationScreen {
         resources.getString("GraphXLabel"), resources.getString("GraphYLabel"));
   }
 
-  private void createColorBox() {
+  private ComboBox<String> createColorBox() {
     Map<String,String> colorTypes = new HashMap<>();
     colorTypes.put(resources.getString("DefaultColor"),DEFAULT_STYLESHEET);
     colorTypes.put(resources.getString("LightColor"),LIGHT_STYLESHEET);
@@ -131,10 +147,8 @@ public class SimulationScreen {
       comboBox.getItems().add(s);
     }
     comboBox.setValue(resources.getString("DefaultColor"));
-    comboBox.setOnAction(event -> {
-      setStylesheet(colorTypes.get(comboBox.getValue()));
-    });
-    topPanel.add(comboBox);
+    comboBox.setOnAction(event -> setStylesheet(colorTypes.get(comboBox.getValue())));
+    return comboBox;
   }
 
   private void setStylesheet(String stylesheet) {
@@ -238,10 +252,9 @@ public class SimulationScreen {
    * current value on the slider.
    *
    * @param gridManager to get states for updating the grid
-   * @param model  String for model name
    */
-  public void update(GridManager gridManager, String model) {
-    gridGraphics.update(gridManager, model);
+  public void update(GridManager gridManager) {
+    gridGraphics.update(gridManager);
     updateGraph(gridManager.getSummaryOfTypes());
     simulationEngine.setSimulationSpeed((int) slider.getValue());
     checkWindowSizeChanged();
@@ -258,8 +271,10 @@ public class SimulationScreen {
    */
   public void checkWindowSizeChanged() {
     if (scene.getHeight() != prevWindowHeight || scene.getWidth() != prevWindowWidth) {
-      gridGraphics.resizeGrid(scene.getWidth() - sidePanel.MAX_WIDTH,
+      gridGraphics.resizeGrid(scene.getWidth() - SidePanel.MAX_WIDTH,
           scene.getHeight() - topPanel.getHeight());
+      prevWindowHeight = scene.getHeight();
+      prevWindowWidth = scene.getWidth();
     }
   }
 

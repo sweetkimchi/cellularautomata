@@ -1,11 +1,9 @@
 package cellsociety.view;
 
-import java.sql.BatchUpdateException;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
@@ -17,7 +15,8 @@ import javafx.scene.layout.VBox;
  */
 public class StartScreen {
 
-  private VBox box;
+  private static final double BOX_SPACING = 10;
+  private final VBox box;
   Label label;
 
   /**
@@ -26,6 +25,7 @@ public class StartScreen {
   public StartScreen() {
     box = new VBox();
     box.setAlignment(Pos.CENTER);
+    box.setSpacing(BOX_SPACING);
   }
 
   /**
