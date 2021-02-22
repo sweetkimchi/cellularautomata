@@ -7,7 +7,7 @@
   <model>rockpaperscissors</model>
   <numCols>50</numCols>
   <numRows>50</numRows>
-  <numberofsides>12</numberofsides>
+  <numberofsides>3</numberofsides>
   <papercolor>blue</papercolor>
   <randomseed>100</randomseed>
   <rockcolor>red</rockcolor>

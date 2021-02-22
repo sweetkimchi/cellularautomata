@@ -3,18 +3,17 @@ package cellsociety.controller;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.lang.reflect.Array;
+import java.util.*;
+
+
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 
 /**
- * This class handles XML file selection, initialization of parameters and saving of the simulation.
+ * This class handles XML file selection, initialization of parameters, error-checking, and saving of the simulation.
  *
  * @author Shaw Phillips
  */
@@ -134,6 +133,11 @@ public class Decoder {
     File dataFile = FILE_CHOOSER.showOpenDialog(null);
     XMLParser parser = new XMLParser("game");
     Map<String, String> attributes = parser.getAttribute(dataFile);
+    initializeUniversalParameters(attributes);
+    checkValidParameters();
+    initializeModel(attributes);
+  }
+  private void initializeUniversalParameters(Map<String, String> attributes) {
     try {
       description = attributes.get(DESC);
       title = attributes.get(TITLE);
@@ -149,7 +153,9 @@ public class Decoder {
               .filter(response -> response == ButtonType.OK)
               .ifPresent(response -> alert.close());
     }
-    checkValidParameters();
+  }
+
+  private void initializeModel(Map<String, String> attributes) {
     switch (model) {
       case "gameOfLife" -> initializeGOL(attributes);
       case "wator" -> initializeWaTor(attributes);
@@ -185,11 +191,10 @@ public class Decoder {
       }
     }
   }
-
   /**
    * Opens save directory for saving current state of simulation as XML file
-   * @param stateOfSimulation
-   * @throws FileNotFoundException
+   * @param stateOfSimulation contains information for each cell in a list of strings
+   * @throws FileNotFoundException if file isn't saved
    */
   public void saveConfig(List<String> stateOfSimulation) throws FileNotFoundException {
     FileChooser chooser = new FileChooser();
