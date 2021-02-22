@@ -108,11 +108,18 @@ public class SimulationScreen {
   }
 
   private void addTopPanelControls() {
-    createColorBox();
-    Button gridButton = makeButton("GridCommand",event -> toggleGrid());
+    ComboBox<String> comboBox = createColorBox();
+    Button gridButton = makeButton("GridCommand", event -> toggleGrid());
     Button graphButton = makeButton("GraphCommand", event -> initializeGraph());
-    topPanel.add(gridButton);
-    topPanel.add(graphButton);
+    Button newSimulationButton = makeButton("NewSimulationCommand",
+        event -> new SimulationEngine());
+    Button exitButton = makeButton("ExitCommand", event -> exitSimulation());
+    topPanel.add(comboBox, gridButton, graphButton, newSimulationButton, exitButton);
+  }
+
+  private void exitSimulation() {
+    stage.close();
+    if (graphGraphics != null) graphGraphics.close();
   }
 
   private void toggleGrid() {
@@ -130,7 +137,7 @@ public class SimulationScreen {
         resources.getString("GraphXLabel"), resources.getString("GraphYLabel"));
   }
 
-  private void createColorBox() {
+  private ComboBox<String> createColorBox() {
     Map<String,String> colorTypes = new HashMap<>();
     colorTypes.put(resources.getString("DefaultColor"),DEFAULT_STYLESHEET);
     colorTypes.put(resources.getString("LightColor"),LIGHT_STYLESHEET);
@@ -141,7 +148,7 @@ public class SimulationScreen {
     }
     comboBox.setValue(resources.getString("DefaultColor"));
     comboBox.setOnAction(event -> setStylesheet(colorTypes.get(comboBox.getValue())));
-    topPanel.add(comboBox);
+    return comboBox;
   }
 
   private void setStylesheet(String stylesheet) {
