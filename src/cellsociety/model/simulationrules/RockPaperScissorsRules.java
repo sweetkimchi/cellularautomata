@@ -71,22 +71,22 @@ public class RockPaperScissorsRules extends Rules {
   }
 
   @Override
-  public void decideState(List<Integer> neighborsOfEachTypeAtCoordinate, List<int[][]> nextStates,
+  public void decideState(List<Integer> neighborsOfEachTypeAtTheCurrentLocation, List<int[][]> nextStates,
       List<State> updateStates, int x, int y,
       GridManager gridManager) {
 
     System.out.println(THRESHHOLD);
 
     if (gridManager.getTypeAtCoordinate(x, y).equals(ROCK)
-        && neighborsOfEachTypeAtCoordinate.get(2) > THRESHHOLD) {
+        && neighborsOfEachTypeAtTheCurrentLocation.get(2) > THRESHHOLD) {
       updateStates.add(new State(x, y, PAPER, PAPER_COLOR, 0));
     }
     if (gridManager.getTypeAtCoordinate(x, y).equals(PAPER)
-        && neighborsOfEachTypeAtCoordinate.get(3) > THRESHHOLD) {
+        && neighborsOfEachTypeAtTheCurrentLocation.get(3) > THRESHHOLD) {
       updateStates.add(new State(x, y, SCISSORS, SCISSORS_COLOR, 0));
     }
     if (gridManager.getTypeAtCoordinate(x, y).equals(SCISSORS)
-        && neighborsOfEachTypeAtCoordinate.get(1) > THRESHHOLD) {
+        && neighborsOfEachTypeAtTheCurrentLocation.get(1) > THRESHHOLD) {
       updateStates.add(new State(x, y, ROCK, ROCK_COLOR, 0));
     }
   }

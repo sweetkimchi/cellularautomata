@@ -6,7 +6,6 @@ import javafx.stage.Stage;
 
 /**
  * launches the model by calling the simulation engine
- *
  * @author Ji Yun Hyo
  */
 public class Main extends Application {

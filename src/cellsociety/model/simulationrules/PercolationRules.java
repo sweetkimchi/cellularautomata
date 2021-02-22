@@ -58,11 +58,11 @@ public class PercolationRules extends Rules {
   }
 
   @Override
-  public void decideState(List<Integer> neighborsOfEachTypeAtCoordinate, List<int[][]> nextStates,
+  public void decideState(List<Integer> neighborsOfEachTypeAtTheCurrentLocation, List<int[][]> nextStates,
       List<State> updateStates, int x, int y,
       GridManager gridManager) {
     if (gridManager.getTypeAtCoordinate(x, y).equals(EMPTY)
-        && neighborsOfEachTypeAtCoordinate.get(1) > 0) {
+        && neighborsOfEachTypeAtTheCurrentLocation.get(1) > 0) {
       updateStates.add(new State(x, y, WATER, WATER_COLOR, 0));
     }
   }

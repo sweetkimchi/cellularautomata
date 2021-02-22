@@ -60,14 +60,14 @@ public class SpreadingOfFireRules extends Rules {
   }
 
   @Override
-  public void decideState(List<Integer> neighborsOfEachTypeAtCoordinate, List<int[][]> nextStates,
+  public void decideState(List<Integer> neighborsOfEachTypeAtTheCurrentLocation, List<int[][]> nextStates,
       List<State> updateStates, int x, int y,
       GridManager gridManager) {
     if (gridManager.getTypeAtCoordinate(x, y).equals(FIRE)) {
       updateStates.add(new State(x, y, EMPTY, EMPTY_COLOR, 0));
     }
     if (gridManager.getTypeAtCoordinate(x, y).equals(TREE)
-        && neighborsOfEachTypeAtCoordinate.get(2) > 0) {
+        && neighborsOfEachTypeAtTheCurrentLocation.get(2) > 0) {
       double randomNumber = random.nextDouble();
       if (randomNumber < probsOfFire) {
         updateStates.add(new State(x, y, FIRE, FIRE_COLOR, 0));

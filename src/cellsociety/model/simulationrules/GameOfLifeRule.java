@@ -72,16 +72,16 @@ public class GameOfLifeRule extends Rules {
   }
 
   @Override
-  public void decideState(List<Integer> neighborsOfEachTypeAtCoordinate, List<int[][]> nextStates,
+  public void decideState(List<Integer> neighborsOfEachTypeAtTheCurrentLocation, List<int[][]> nextStates,
       List<State> updateStates, int x, int y,
       GridManager gridManager) {
     if (gridManager.getTypeAtCoordinate(x, y).equals(EMPTY)
-        && neighborsOfEachTypeAtCoordinate.get(1) == 3) {
+        && neighborsOfEachTypeAtTheCurrentLocation.get(1) == 3) {
       updateStates.add(new State(x, y, ALIVE, ALIVE_COLOR, 0));
     }
     if (gridManager.getTypeAtCoordinate(x, y).equals(ALIVE)
-        && neighborsOfEachTypeAtCoordinate.get(1) < lowerSurvivalBoundary
-        || neighborsOfEachTypeAtCoordinate.get(1) > upperSurvivalBoundary) {
+        && neighborsOfEachTypeAtTheCurrentLocation.get(1) < lowerSurvivalBoundary
+        || neighborsOfEachTypeAtTheCurrentLocation.get(1) > upperSurvivalBoundary) {
       updateStates.add(new State(x, y, EMPTY, DEAD_COLOR, 0));
     }
   }

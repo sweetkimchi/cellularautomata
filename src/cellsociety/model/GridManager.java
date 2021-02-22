@@ -1,7 +1,7 @@
 package cellsociety.model;
 
-import cellsociety.model.simulationrules.foragingants.ForagingAntGridManager;
 import cellsociety.model.simulationrules.Rules;
+import cellsociety.model.simulationrules.foragingants.ForagingAntGridManager;
 import cellsociety.model.simulationrules.sugarscape.AgentState;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -153,14 +153,18 @@ public class GridManager {
     if (xCoord >= 0 && yCoord >= 0 && xCoord < statesOfAllCells.length
         && yCoord < statesOfAllCells[0].length && statesOfAllCells[xCoord][yCoord].getType()
         .equals(type) && !(xCoord == x && yCoord == y)) {
-      isValidNeighbor = isValidNeighborOfSquareCell(x, y, numberOfSides, xCoord, yCoord, isValidNeighbor);
-      isValidNeighbor = isValidNeighborOfHexagonalCell(x, y, numberOfSides, xCoord, yCoord, isValidNeighbor);
-      isValidNeighbor = isValidNeighborOfTriangleCell(x, y, numberOfSides, xCoord, yCoord, isValidNeighbor);
+      isValidNeighbor = isValidNeighborOfSquareCell(x, y, numberOfSides, xCoord, yCoord,
+          isValidNeighbor);
+      isValidNeighbor = isValidNeighborOfHexagonalCell(x, y, numberOfSides, xCoord, yCoord,
+          isValidNeighbor);
+      isValidNeighbor = isValidNeighborOfTriangleCell(x, y, numberOfSides, xCoord, yCoord,
+          isValidNeighbor);
     }
     return isValidNeighbor;
   }
 
-  private boolean isValidNeighborOfHexagonalCell(int x, int y, int numberOfSides, int xCoord, int yCoord,
+  private boolean isValidNeighborOfHexagonalCell(int x, int y, int numberOfSides, int xCoord,
+      int yCoord,
       boolean isValidNeighbor) {
     if (numberOfSides == 6 && isHexagonalNeighborForOddYCoord(x, y, xCoord, yCoord)) {
       // && !(xCoord == x - 1 && yCoord == y + 1)
@@ -173,7 +177,8 @@ public class GridManager {
     return isValidNeighbor;
   }
 
-  private boolean isValidNeighborOfSquareCell(int x, int y, int numberOfSides, int xCoord, int yCoord,
+  private boolean isValidNeighborOfSquareCell(int x, int y, int numberOfSides, int xCoord,
+      int yCoord,
       boolean isValidNeighbor) {
     if (numberOfSides == 8 && (xCoord != x - 2 && xCoord != x + 2)) {
       isValidNeighbor = true;
@@ -202,7 +207,8 @@ public class GridManager {
     updateStatesForNextRound(updateStates);
   }
 
-  private boolean isValidNeighborOfTriangleCell(int x, int y, int numberOfSides, int xCoord, int yCoord, boolean count) {
+  private boolean isValidNeighborOfTriangleCell(int x, int y, int numberOfSides, int xCoord,
+      int yCoord, boolean count) {
     if (numberOfSides == 3 && !isFacingUp(xCoord, yCoord) && isLeftRightUpNeighbors(x, y,
         xCoord, yCoord, yCoord - 1)) {
       count = true;
@@ -309,7 +315,8 @@ public class GridManager {
       List<String> possibleTypes, List<String> possibleColors,
       int radius, int numberOfSides) {
     this.coordinates = (ArrayList<String>) coordinates;
-    ForagingAntGridManager foragingAntGridManager = new ForagingAntGridManager(row, col, numberOfSides);
+    ForagingAntGridManager foragingAntGridManager = new ForagingAntGridManager(row, col,
+        numberOfSides);
     this.stateOfCells = foragingAntGridManager
         .buildAntGridWithTemplateHelper(coordinates, possibleTypes, possibleColors, radius);
     this.numberOfSides = numberOfSides;

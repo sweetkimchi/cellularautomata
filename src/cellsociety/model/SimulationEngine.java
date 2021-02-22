@@ -145,7 +145,7 @@ public class SimulationEngine {
           decoder.getPhermoneColor(), decoder.getFoodColor(), decoder.getEmptyColor(),
           decoder.getWeakPhermoneColor(), decoder.getMoveBias(), decoder.getPhermoneAmount());
       ForagingAntGridManager foragingAntGridManager = new ForagingAntGridManager(decoder.getRows(),
-          decoder.getCols(),decoder.getNumberOfSides());
+          decoder.getCols(), decoder.getNumberOfSides());
       gridManager
           .buildAntGridWithTemplate(decoder.getCoordinates(), rules.getPossibleTypes(),
               rules.getPossibleColors(), decoder.getRadius(), decoder.getNumberOfSides());

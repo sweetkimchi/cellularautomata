@@ -89,12 +89,12 @@ public class SegregationModelRules extends Rules {
   }
 
   @Override
-  public void decideState(List<Integer> neighborsOfEachTypeAtCoordinate, List<int[][]> nextStates,
+  public void decideState(List<Integer> neighborsOfEachTypeAtTheCurrentLocation, List<int[][]> nextStates,
       List<State> updateStates, int x, int y,
       GridManager gridManager) {
 
-    int agentXNeighbor = neighborsOfEachTypeAtCoordinate.get(2);
-    int agentYNeighbor = neighborsOfEachTypeAtCoordinate.get(1);
+    int agentXNeighbor = neighborsOfEachTypeAtTheCurrentLocation.get(2);
+    int agentYNeighbor = neighborsOfEachTypeAtTheCurrentLocation.get(1);
     double total = agentYNeighbor + agentXNeighbor;
     double ratio = 0;
 

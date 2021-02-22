@@ -13,9 +13,9 @@
   <model>wator</model>
   <numCols>50</numCols>
   <numRows>50</numRows>
-  <numberofsides>8</numberofsides>
+  <numberofsides>12</numberofsides>
   <randomseed>0</randomseed>
-  <shape>square</shape>
+  <shape>triangle</shape>
   <sharkcolor>blue</sharkcolor>
   <sharklives>3</sharklives>
   <sharkreproduce>4</sharkreproduce>

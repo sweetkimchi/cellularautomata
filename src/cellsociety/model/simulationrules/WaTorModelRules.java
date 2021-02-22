@@ -80,12 +80,12 @@ public class WaTorModelRules extends Rules {
   }
 
   @Override
-  public void decideState(List<Integer> neighborsOfEachTypeAtCoordinate, List<int[][]> nextStates,
+  public void decideState(List<Integer> neighborsOfEachTypeAtTheCurrentLocation, List<int[][]> nextStates,
       List<State> updateStates, int x, int y,
       GridManager gridManager) {
     if (gridManager.getTypeAtCoordinate(x, y).equals(FISH)) {
       gridManager.setStateAtCoordinate(x, y,
-          decideFishState(gridManager, x, y, gridManager.getTypeAtCoordinate(x, y), nextStates));
+          decideFishState(gridManager, x, y));
     } else if (gridManager.getTypeAtCoordinate(x, y).equals(SHARK)) {
       gridManager.setStateAtCoordinate(x, y,
           decideSharkState(gridManager, x, y, gridManager.getTypeAtCoordinate(x, y)));
@@ -94,8 +94,7 @@ public class WaTorModelRules extends Rules {
 
   }
 
-  private State decideFishState(GridManager gridManager, int x, int y, String typeAtCoordinate,
-      List<int[][]> nextStates) {
+  private State decideFishState(GridManager gridManager, int x, int y) {
     ArrayList<State> emptyCells = new ArrayList<>();
     checkNeighboringCellsForEmptyCells(gridManager, y, emptyCells, x - 1 >= 0, y >= 0, x - 1);
     checkNeighboringCellsForEmptyCells(gridManager, y - 1, emptyCells, x >= 0, y - 1 >= 0, x);
