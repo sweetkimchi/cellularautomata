@@ -1,8 +1,8 @@
-package cellsociety.model.foragingants;
+package cellsociety.model.simulationrules.foragingants;
 
 import cellsociety.model.GridManager;
 import cellsociety.model.State;
-import cellsociety.model.Rules;
+import cellsociety.model.simulationrules.Rules;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;

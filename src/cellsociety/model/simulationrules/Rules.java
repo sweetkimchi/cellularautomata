@@ -1,4 +1,4 @@
-package cellsociety.model;
+package cellsociety.model.simulationrules;
 
 import cellsociety.model.GridManager;
 import cellsociety.model.State;

@@ -1,5 +1,7 @@
-package cellsociety.model;
+package cellsociety.model.simulationrules;
 
+import cellsociety.model.GridManager;
+import cellsociety.model.State;
 import java.util.ArrayList;
 import java.util.List;
 

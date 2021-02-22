@@ -1,7 +1,8 @@
 package cellsociety.model;
 
-import cellsociety.model.foragingants.ForagingAntGridManager;
-import cellsociety.model.sugarscape.AgentState;
+import cellsociety.model.simulationrules.foragingants.ForagingAntGridManager;
+import cellsociety.model.simulationrules.Rules;
+import cellsociety.model.simulationrules.sugarscape.AgentState;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

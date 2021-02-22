@@ -1,8 +1,8 @@
-package cellsociety.model.sugarscape;
+package cellsociety.model.simulationrules.sugarscape;
 
 import cellsociety.model.GridManager;
 import cellsociety.model.State;
-import cellsociety.model.Rules;
+import cellsociety.model.simulationrules.Rules;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;

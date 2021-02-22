@@ -1,4 +1,4 @@
-package cellsociety.model.sugarscape;
+package cellsociety.model.simulationrules.sugarscape;
 
 import cellsociety.model.State;
 
