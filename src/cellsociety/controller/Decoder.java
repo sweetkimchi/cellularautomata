@@ -3,8 +3,11 @@ package cellsociety.controller;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.lang.reflect.Array;
 import java.util.*;
 
+import cellsociety.controller.simulationengine.SimulationEngine;
+import cellsociety.model.cell.State;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.stage.FileChooser;
@@ -18,7 +21,7 @@ import javafx.stage.FileChooser.ExtensionFilter;
 public class Decoder {
   public static final String DATA_FILE_EXTENSION = "*.xml";
   public final static FileChooser FILE_CHOOSER = makeChooser(DATA_FILE_EXTENSION);
-  public static final String HEAD = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n <data game=\"game\">";
+  public static final String HEAD = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n<data game=\"game\">";
   public static final String TITLE = "title";
   public static final String AUTHOR = "author";
   public static final String DESC = "description";
@@ -56,6 +59,7 @@ public class Decoder {
   private Map<String, String> colors;
   private Map<String, Integer> integerMap;
   private Map<String, Float> ratios;
+  private List<String> stringStates;
   private ArrayList<String> coordinates;
   private String shape;
   private String blockColor;
@@ -128,63 +132,74 @@ public class Decoder {
     File dataFile = FILE_CHOOSER.showOpenDialog(null);
     XMLParser parser = new XMLParser("game");
     Map<String, String> attributes = parser.getAttribute(dataFile);
-    try{
-      description = attributes.get(DESC);
-      title = attributes.get(TITLE);
-      author = attributes.get(AUTHOR);
-      numRows = Integer.parseInt(attributes.get(NUM_ROWS));
-      numColumns = Integer.parseInt(attributes.get(NUM_COLS));
-      model = attributes.get(MODEL);
-      shape = attributes.get(SHAPE);
-      numberOfSides = Integer.parseInt(attributes.get(SIDES));
-    }
-    catch(Exception e){
-      Alert alert = new Alert(Alert.AlertType.ERROR, "Invalid Parameter(s)");
-      alert.showAndWait()
-              .filter(response -> response == ButtonType.OK)
-              .ifPresent(response -> alert.close());
-    }
-    if(!MODEL_TYPES.contains(model)){
-      Alert modelAlert = new Alert(Alert.AlertType.ERROR, "Invalid Model");
-      modelAlert.showAndWait()
-              .filter(response -> response == ButtonType.OK)
-              .ifPresent(response -> modelAlert.close());
-    }
-    switch (model) {
-      case "gameOfLife" -> initializeGOL(attributes);
-      case "wator" -> initializeWaTor(attributes);
-      case "segregationmodel" -> initializeSegregation(attributes);
-      case "spreadingoffire" -> initializeFire(attributes);
-      case "percolation" -> initializePercolation(attributes);
-      case "rockpaperscissors" -> initializeRPS(attributes);
-      case "foragingants" -> initializeForagingAnts(attributes);
-      case "langton" -> initializeLangton(attributes);
-      case "sugarscape" -> initializeSugarScape(attributes);
+    if(attributes.get("buildfromtemplate") != null) loadTemplate(attributes);
+    else {
+      try {
+        description = attributes.get(DESC);
+        title = attributes.get(TITLE);
+        author = attributes.get(AUTHOR);
+        numRows = Integer.parseInt(attributes.get(NUM_ROWS));
+        numColumns = Integer.parseInt(attributes.get(NUM_COLS));
+        model = attributes.get(MODEL);
+        shape = attributes.get(SHAPE);
+        numberOfSides = Integer.parseInt(attributes.get(SIDES));
+      } catch (Exception e) {
+        Alert alert = new Alert(Alert.AlertType.ERROR, "Invalid Parameter(s)");
+        alert.showAndWait()
+                .filter(response -> response == ButtonType.OK)
+                .ifPresent(response -> alert.close());
+      }
+      if (!MODEL_TYPES.contains(model)) {
+        Alert modelAlert = new Alert(Alert.AlertType.ERROR, "Invalid Model");
+        modelAlert.showAndWait()
+                .filter(response -> response == ButtonType.OK)
+                .ifPresent(response -> modelAlert.close());
+      }
+      switch (model) {
+        case "gameOfLife" -> initializeGOL(attributes);
+        case "wator" -> initializeWaTor(attributes);
+        case "segregationmodel" -> initializeSegregation(attributes);
+        case "spreadingoffire" -> initializeFire(attributes);
+        case "percolation" -> initializePercolation(attributes);
+        case "rockpaperscissors" -> initializeRPS(attributes);
+        case "foragingants" -> initializeForagingAnts(attributes);
+        case "langton" -> initializeLangton(attributes);
+        case "sugarscape" -> initializeSugarScape(attributes);
+      }
     }
   }
   public void saveConfig(List<String> stateOfSimulation) throws FileNotFoundException {
-    Map<String, String> savedConfig = new HashMap<>();
-
     FileChooser chooser = new FileChooser();
     chooser.setTitle("Choose Directory");
     chooser.getExtensionFilters().setAll(new FileChooser.ExtensionFilter("text file ", DATA_FILE_EXTENSION));
     chooser.setInitialDirectory(new File(System.getProperty("user.dir")));
     File file = chooser.showSaveDialog(null);
-    createConfigFile(file, savedConfig);
+    createConfigFile(file, stateOfSimulation);
   }
-  private void createConfigFile(File file, Map<String, String> attributes) throws FileNotFoundException {
+  private void createConfigFile(File file, List<String> states) throws FileNotFoundException {
     PrintWriter writer = new PrintWriter(file);
     writer.println(HEAD);
     writer.println("<buildfromtemplate>1</buildfromtemplate>");
-    for(String s : attributes.keySet()){
-      if(attributes.get(s) == null) continue;
-      writer.print("<" + s + ">");
-      writer.print(attributes.get(s));
-      writer.println("</" + s + ">");
+    writer.print("<states>");
+
+    for(int i=0; i<states.size(); i+=6){
+      writer.print("[");
+      for(int j=0; j<6; j++){
+        if(states.get(i + j) == null) continue;
+        writer.print(states.get(i + j));
+      }
+      writer.print("],");
     }
+    writer.println("</states>");
     writer.println("</data>");
     writer.close();
   }
+  private void loadTemplate(Map<String, String> attributes){
+    String str[] = attributes.get("states").split(",");
+    stringStates = new ArrayList<String>();
+    stringStates = Arrays.asList(str);
+  }
+  public List<String> returnTemplate(){return stringStates;}
   private void initializeGOL(Map<String, String> attributes){
     coordinates = new ArrayList<>(Arrays.asList(attributes.getOrDefault(COORDINATES, GOLDefaultShape).split("[,]", 0)));
     aliveColor = attributes.get("alivecolor").equals("") ? "black" : attributes.get("alivecolor");

@@ -1,5 +1,6 @@
 package cellsociety.controller.grid;
 
+import cellsociety.controller.simulationengine.SimulationEngine;
 import cellsociety.model.cell.State;
 import cellsociety.model.foragingants.ForagingAntGridManager;
 import cellsociety.model.rules.Rules;
@@ -44,6 +45,7 @@ public class GridManager {
    * @param template coordinates of starting states
    */
   public void buildGridWithTemplate(ArrayList<State> template,
+
       ArrayList<String> possibleTypes, ArrayList<String> possibleColors, int diameter) {
     State[][] stateOfCells = new State[row][col];
     for (int r = 0; r < row; r++) {
@@ -262,15 +264,18 @@ public class GridManager {
     for(int i=0; i < stateOfCells.length; i++){
       for(int j=0; j < stateOfCells.length; j++){
 
-        state.add(String.valueOf(stateOfCells[i][j].getxCoord()));
-        state.add(String.valueOf(stateOfCells[i][j].getyCoord()));
-        state.add(stateOfCells[i][j].getType());
-        state.add(String.valueOf(stateOfCells[i][j].getColor()));
-        state.add(String.valueOf(stateOfCells[i][j].getEnergy()));
+        state.add(String.valueOf(stateOfCells[i][j].getxCoord()).concat(" "));
+        state.add(String.valueOf(stateOfCells[i][j].getyCoord()).concat(" "));
+        state.add(stateOfCells[i][j].getType().concat(" "));
+        state.add(String.valueOf(stateOfCells[i][j].getColor()).concat(" "));
+        state.add(String.valueOf(stateOfCells[i][j].getEnergy()).concat(" "));
         state.add(String.valueOf(stateOfCells[i][j].getNumberOfMoves()));
       }
     }
     return state;
+  }
+  public void loadFromSave(State[][] states){
+    stateOfCells = states;
   }
 
   private void updateStatesForAllCells(List<int[][]> nextStates,
