@@ -93,6 +93,16 @@ public class State {
     this.numberOfMoves = numberOfMoves;
   }
 
+  public State(int xCoord, int yCoord, String type, String colorString, int numberOfMoves, int sugarMetabolism, int vision) {
+    this.xCoord = xCoord;
+    this.yCoord = yCoord;
+    this.type = type;
+    color = colorString;
+    this.numberOfMoves = numberOfMoves;
+    this.sugarMetabolism = sugarMetabolism;
+    this.vision = vision;
+  }
+
 
   /**
    * @return xCoord associated with the state

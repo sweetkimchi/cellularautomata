@@ -11,8 +11,7 @@ import cellsociety.model.percolation.PercolationRules;
 import cellsociety.model.rules.Rules;
 import cellsociety.model.spreadingoffire.SpreadingOfFireRules;
 import cellsociety.model.segregationmodel.SegregationModelRules;
-import cellsociety.model.sugarscape.NavigatingSugarScapeRules;
-import cellsociety.model.sugarscape.SugarScapeGridManager;
+import cellsociety.model.sugarscape.SugarScapeRules;
 import cellsociety.model.watormodel.WaTorModelRules;
 import cellsociety.view.SimulationScreen;
 
@@ -148,10 +147,10 @@ public class SimulationEngine {
     }
     if (game.equals("sugarscape")) {
       //   rules = new WaTorModelRules(emptyRatio, populationRatio, randomSeed, energyFish, reproduceBoundary, sharkEnergy);
-      SugarScapeGridManager sugarScapeGridManager = new SugarScapeGridManager(decoder.getRows(), decoder.getCols());
-      rules = new NavigatingSugarScapeRules(decoder.getNumAgents(), decoder.getMaxSugar(), decoder.getGrowBackSugar(), decoder.getMetabolism(), decoder.getVision(), decoder.getFullSugarColor(), decoder.getLowSugarColor(), decoder.getAgentColor(), decoder.getEmptyColor());
+      rules = new SugarScapeRules(decoder.getNumAgents(), decoder.getMaxSugar(), decoder.getGrowBackSugar(), decoder.getMetabolism(), decoder.getVision(), decoder.getFullSugarColor(), decoder.getLowSugarColor(), decoder.getAgentColor(), decoder.getEmptyColor());
       gridManager
-          .makeSugarScapeGridWithRandomSeed(decoder.getEmptyRatio(), decoder.getPatchRatio(), decoder.getNumAgents(), decoder.getMetabolism(), decoder.getVision(),
+          .makeSugarScapeGridWithRandomSeed(decoder.getEmptyRatio(), decoder.getPatchRatio(),
+              decoder.getMetabolism(), decoder.getVision(),
                   decoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
     }
     //need to be fixed for a better design

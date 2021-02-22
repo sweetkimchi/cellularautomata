@@ -10,7 +10,7 @@
   <randomseed>3</randomseed>
   <emptyratio>0</emptyratio>
   <treeratio>0.99</treeratio>
-  <numberofsides>8</numberofsides>
+  <numberofsides>4</numberofsides>
   <shape>square</shape>
   <emptycolor>yellow</emptycolor>
   <treecolor>green</treecolor>

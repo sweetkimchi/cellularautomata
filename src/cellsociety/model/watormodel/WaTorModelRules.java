@@ -93,7 +93,8 @@ public class WaTorModelRules extends Rules {
 
   @Override
   public void decideState(List<Integer> neighborsOfEachTypeAtCoordinate, List<int[][]> nextStates,
-      int x, int y, GridManager gridManager) {
+      ArrayList<State> updateStates, int x, int y,
+      GridManager gridManager) {
     if (gridManager.getTypeAtCoordinate(x, y).equals(FISH)) {
       gridManager.setStateAtCoordinate(x, y,
           decideFishState(gridManager, x, y, gridManager.getTypeAtCoordinate(x, y), nextStates));

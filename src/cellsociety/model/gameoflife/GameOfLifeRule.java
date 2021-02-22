@@ -1,6 +1,7 @@
 package cellsociety.model.gameoflife;
 
 import cellsociety.controller.grid.GridManager;
+import cellsociety.model.cell.State;
 import cellsociety.model.rules.Rules;
 import java.util.ArrayList;
 import java.util.List;
@@ -81,14 +82,15 @@ public class GameOfLifeRule extends Rules {
 
   @Override
   public void decideState(List<Integer> neighborsOfEachTypeAtCoordinate, List<int[][]> nextStates,
-      int x, int y, GridManager gridManager) {
+      ArrayList<State> updateStates, int x, int y,
+      GridManager gridManager) {
     if (gridManager.getTypeAtCoordinate(x, y).equals(EMPTY) && neighborsOfEachTypeAtCoordinate.get(1) == 3) {
-      nextStates.get(1)[x][y] = 1;
+      updateStates.add(new State(x,y, ALIVE, ALIVE_COLOR, 0));
     }
     if (gridManager.getTypeAtCoordinate(x, y).equals(ALIVE)
         && neighborsOfEachTypeAtCoordinate.get(1) < lowerSurvivalBoundary
         || neighborsOfEachTypeAtCoordinate.get(1) > upperSurvivalBoundary){
-      nextStates.get(0)[x][y] = 1;
+      updateStates.add(new State(x,y, EMPTY, DEAD_COLOR, 0));
     }
   }
 }

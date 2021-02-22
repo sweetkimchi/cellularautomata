@@ -19,8 +19,8 @@ public class AgentState extends State {
    * @param colorString   color of the state
    * @param numberOfMoves the current, cumulative number of moves
    */
-  public AgentState(int xCoord, int yCoord, String type, String colorString, int numberOfMoves, int sugarMetabolism, int vision) {
-    super(xCoord, yCoord, type, colorString, numberOfMoves);
+  public AgentState(int xCoord, int yCoord, String type, String colorString, int numberOfMoves, int sugarMetabolism, int vision, int sugarPossession) {
+    super(xCoord, yCoord, type, colorString, numberOfMoves, sugarMetabolism, vision, sugarPossession);
     this.sugarMetabolism = sugarMetabolism;
     this.vision = vision;
   }

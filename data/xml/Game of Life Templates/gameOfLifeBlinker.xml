@@ -5,8 +5,8 @@
   <numCols>50</numCols>
   <numRows>50</numRows>
   <shapeCoords>25,25,25,26,25,27</shapeCoords>
-  <numberofsides>3</numberofsides>
-  <shape>triangle</shape>
+  <numberofsides>8</numberofsides>
+  <shape>square</shape>
   <alivecolor>black</alivecolor>
   <deadcolor>lightgrey</deadcolor>
   <template>blinker</template>

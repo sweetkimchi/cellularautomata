@@ -240,6 +240,7 @@ public class GridManager {
     List<int[][]> numberOfNeighborsForEachType = getNumberOfNeighborsForEachType(
         rules.getPossibleTypes(), numberOfSides);
     List<int[][]> nextStates = nextStatesOfCells(numberOfNeighborsForEachType);
+    ArrayList<State> updateStates = new ArrayList<>();
 
     for (int x = 0; x < row; x++) {
       for (int y = 0; y < col; y++) {
@@ -249,13 +250,20 @@ public class GridManager {
         for (int index = 0; index < numberOfNeighborsForEachType.size(); index++) {
           neighborsOfEachTypeAtCoordinate.add(numberOfNeighborsForEachType.get(index)[x][y]);
         }
-        rules.decideState(neighborsOfEachTypeAtCoordinate, nextStates, x, y, this);
+        rules.decideState(neighborsOfEachTypeAtCoordinate, nextStates, updateStates, x, y, this);
 
       }
       //     System.out.println();
     }
 
-    updateStatesForAllCells(nextStates, rules.getPossibleTypes(), rules.getPossibleColors());
+    updateStatesForNextRound(updateStates);
+   // updateStatesForAllCells(nextStates, rules.getPossibleTypes(), rules.getPossibleColors());
+  }
+
+  private void updateStatesForNextRound(ArrayList<State> updateStates) {
+    for(State state : updateStates){
+      stateOfCells[state.getxCoord()][state.getyCoord()] = state;
+    }
   }
 
   public List<String> saveSimulation(){
@@ -347,7 +355,8 @@ public class GridManager {
     return (x == row - 1 || x == 0 || y == col - 1 || y == 0);
   }
 
-  public void makeSugarScapeGridWithRandomSeed(float emptyRatio, float patchRatio, int numAgents, int metabolism, int vision, int seed,
+  public void makeSugarScapeGridWithRandomSeed(float emptyRatio, float patchRatio,
+      int metabolism, int vision, int seed,
       ArrayList<String> possibleTypes, ArrayList<String> possibleColors) {
     Random random = new Random(seed);
     State[][] stateOfCells = new State[row][col];
@@ -362,7 +371,7 @@ public class GridManager {
           State state = new State(x, y, possibleTypes.get(1), possibleColors.get(1), 0);
           stateOfCells[x][y] = state;
         } else {
-          AgentState state = new AgentState(x, y, possibleTypes.get(3), possibleColors.get(3), 0, metabolism, vision);
+          AgentState state = new AgentState(x, y, possibleTypes.get(3), possibleColors.get(3), 0, metabolism, vision, 0);
           stateOfCells[x][y] = state;
         }
       }

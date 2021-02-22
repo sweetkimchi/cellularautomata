@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <data game="game">
   <author>Jiyun</author>
-  <description>Trees are sparsely populated. Simulates fire in areas with low tree population density. </description>
+  <description>Simulates a dry environment with fire breaking out at multiple spots. The fire burns over half of the trees.</description>
   <numCols>50</numCols>
   <numRows>50</numRows>
   <shapeCoords>21,20,20,21,21,21,22,21</shapeCoords>
-  <template>basicfire</template>
-  <probsOfCatch>0.3</probsOfCatch>
-  <randomseed>140</randomseed>
-  <emptyratio>0.5</emptyratio>
-  <treeratio>0.5</treeratio>
-  <numberofsides>8</numberofsides>
-  <shape>square</shape>
+  <template>crazyfire</template>
+  <probsOfCatch>0.5</probsOfCatch>
+  <randomseed>56</randomseed>
+  <emptyratio>0</emptyratio>
+  <treeratio>0.99</treeratio>
+  <numberofsides>6</numberofsides>
+  <shape>hexagon</shape>
   <emptycolor>yellow</emptycolor>
   <treecolor>green</treecolor>
   <firecolor>red</firecolor>

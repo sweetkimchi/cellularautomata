@@ -1,6 +1,7 @@
 package cellsociety.model;
 
 import cellsociety.controller.grid.GridManager;
+import cellsociety.model.cell.State;
 import cellsociety.model.rules.Rules;
 import java.util.ArrayList;
 import java.util.List;
@@ -81,18 +82,22 @@ public class RockPaperScissorsRules extends Rules {
 
   @Override
   public void decideState(List<Integer> neighborsOfEachTypeAtCoordinate, List<int[][]> nextStates,
-      int x, int y, GridManager gridManager) {
+      ArrayList<State> updateStates, int x, int y,
+      GridManager gridManager) {
 
     System.out.println(THRESHHOLD);
 
     if(gridManager.getTypeAtCoordinate(x,y).equals(ROCK) && neighborsOfEachTypeAtCoordinate.get(2) > THRESHHOLD){
-      nextStates.get(2)[x][y] = 1;
+ //     nextStates.get(2)[x][y] = 1;
+      updateStates.add(new State(x, y, PAPER, PAPER_COLOR, 0));
     }
     if(gridManager.getTypeAtCoordinate(x,y).equals(PAPER) && neighborsOfEachTypeAtCoordinate.get(3) > THRESHHOLD){
-      nextStates.get(3)[x][y] = 1;
+ //     nextStates.get(3)[x][y] = 1;
+      updateStates.add(new State(x, y, SCISSORS, SCISSORS_COLOR, 0));
     }
     if(gridManager.getTypeAtCoordinate(x,y).equals(SCISSORS)&& neighborsOfEachTypeAtCoordinate.get(1) > THRESHHOLD){
-      nextStates.get(1)[x][y] = 1;
+  //    nextStates.get(1)[x][y] = 1;
+      updateStates.add(new State(x, y, ROCK, ROCK_COLOR, 0));
     }
   }
 }

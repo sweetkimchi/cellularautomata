@@ -1,6 +1,7 @@
 package cellsociety.model.percolation;
 
 import cellsociety.controller.grid.GridManager;
+import cellsociety.model.cell.State;
 import cellsociety.model.rules.Rules;
 import java.util.ArrayList;
 import java.util.List;
@@ -68,9 +69,10 @@ public class PercolationRules extends Rules {
 
   @Override
   public void decideState(List<Integer> neighborsOfEachTypeAtCoordinate, List<int[][]> nextStates,
-      int x, int y, GridManager gridManager) {
+      ArrayList<State> updateStates, int x, int y,
+      GridManager gridManager) {
     if (gridManager.getTypeAtCoordinate(x, y).equals(EMPTY) && neighborsOfEachTypeAtCoordinate.get(1) > 0) {
-      nextStates.get(1)[x][y] = 1;
+      updateStates.add(new State(x,y, WATER, WATER_COLOR, 0));
     }
   }
 

@@ -1,6 +1,7 @@
 package cellsociety.model.rules;
 
 import cellsociety.controller.grid.GridManager;
+import cellsociety.model.cell.State;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,5 +40,6 @@ public abstract class Rules {
   public abstract ArrayList<String> getPossibleColors();
 
   public abstract void decideState(List<Integer> neighborsOfEachTypeAtCoordinate,
-      List<int[][]> nextStates, int x, int y, GridManager gridManager);
+      List<int[][]> nextStates, ArrayList<State> updateStates,
+      int x, int y, GridManager gridManager);
 }
