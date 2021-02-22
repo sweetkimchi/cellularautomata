@@ -169,15 +169,13 @@ public class ForagingAntsRules extends Rules {
   private State decideAntState(GridManager gridManager, int x, int y) {
     ArrayList<State> emptyCells = new ArrayList<>();
     ArrayList<State> foodCells = new ArrayList<>();
-    ArrayList<State> phermoneCells = new ArrayList<>();
+    ArrayList<State> pheromoneCells = new ArrayList<>();
     ArrayList<State> nestCells = new ArrayList<>();
-
     if (!gridManager.getStateAtCoordinate(x, y).hasFood()) {
-
       checkForNeighbors(gridManager, x, y, nestCells, NEST);
       checkForNeighbors(gridManager, x, y, foodCells, FOOD);
       checkForNeighbors(gridManager, x, y, emptyCells, EMPTY);
-      checkForNeighbors(gridManager, x, y, phermoneCells, PHEROMONE);
+      checkForNeighbors(gridManager, x, y, pheromoneCells, PHEROMONE);
       AntState antStateAfterReachingFoodSource = updateStateOfFoodSourceAndReturnAnt(gridManager, x, y,
           foodCells);
       if (antStateAfterReachingFoodSource != null) {
@@ -185,12 +183,12 @@ public class ForagingAntsRules extends Rules {
       }
       //if there is phermone follow the phermone
       AntState antStateAfterReachingPheromone = updatePheromoneAndReturnAntState(gridManager, x, y,
-          emptyCells, phermoneCells);
+          emptyCells, pheromoneCells);
       if (antStateAfterReachingPheromone != null) {
         return antStateAfterReachingPheromone;
       }
       //if there are spaces to move to, MOVE
-      if (moveToEmptyCell(gridManager, x, y, emptyCells, false)) {
+      if (canMoveToEmptyCell(gridManager, x, y, emptyCells, false)) {
         return new AntState(x, y, EMPTY, EMPTY_COLOR, 0);
       }
     } else {
@@ -198,7 +196,7 @@ public class ForagingAntsRules extends Rules {
       moveTowardsNest(gridManager, x, y, nestCells, NEST);
       moveTowardsNest(gridManager, x, y, foodCells, FOOD);
       moveTowardsNest(gridManager, x, y, emptyCells, EMPTY);
-      moveTowardsNest(gridManager, x, y, phermoneCells, PHEROMONE);
+      moveTowardsNest(gridManager, x, y, pheromoneCells, PHEROMONE);
       AntState antStateWithFood = stateOfAntAfterFindingFood(gridManager, x, y,
           emptyCells, nestCells);
       if (antStateWithFood != null) {
@@ -208,7 +206,7 @@ public class ForagingAntsRules extends Rules {
     return gridManager.getStateAtCoordinate(x, y);
   }
 
-  private boolean moveToEmptyCell(GridManager gridManager, int x, int y,
+  private boolean canMoveToEmptyCell(GridManager gridManager, int x, int y,
       ArrayList<State> emptyCells, boolean b) {
     if (!emptyCells.isEmpty()) {
       //cannot reproduce yet
@@ -234,12 +232,12 @@ public class ForagingAntsRules extends Rules {
           dummy.getyCoord(), ANT, ANT_COLOR,
           0, false, determineDirection(dummy, x, y));
     }
-    if (moveToEmptyCell(gridManager, x, y, emptyCells, true)) {
+    if (canMoveToEmptyCell(gridManager, x, y, emptyCells, true)) {
       return new AntState(x, y, PHEROMONE, PHERMONE_COLOR, 0, pheromoneAmount);
     }
     emptyCells = new ArrayList<>();
     checkForNeighbors(gridManager, x, y, emptyCells, EMPTY);
-    if (moveToEmptyCell(gridManager, x, y, emptyCells, true)) {
+    if (canMoveToEmptyCell(gridManager, x, y, emptyCells, true)) {
       return new AntState(x, y, PHEROMONE, PHERMONE_COLOR, 0, pheromoneAmount);
     }
     return null;
