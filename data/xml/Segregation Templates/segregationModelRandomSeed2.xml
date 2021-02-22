@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <data game="game">
-  <agentxcolor>red</agentxcolor>
-  <agentycolor>blue</agentycolor>
+  <agentxcolor>gold</agentxcolor>
+  <agentycolor>skyblue</agentycolor>
   <author>Jiyun</author>
   <description>Red is dominated by blue. The dominating population does not have to move as often.
     Red moves until all of them find a satisfying location.

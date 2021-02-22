@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <data game="game">
-  <agentxcolor>red</agentxcolor>
-  <agentycolor>blue</agentycolor>
+  <agentxcolor>grey</agentxcolor>
+  <agentycolor>white</agentycolor>
   <author>Jiyun</author>
   <description>The agents first want to relocate to a random empty cell. However, when there are no
     other empty cells to travel to, they start switching places with other dissatisfied agents. This
     results in agents' clustering together to form big groups.
   </description>
-  <emptycolor>lightgrey</emptycolor>
+  <emptycolor>black</emptycolor>
   <emptyratio>0.1</emptyratio>
   <model>segregationmodel</model>
   <numCols>50</numCols>

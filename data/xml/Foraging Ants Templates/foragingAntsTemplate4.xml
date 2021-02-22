@@ -3,8 +3,8 @@
   <antcolor>red</antcolor>
   <author>Jiyun</author>
   <description>Generic Template</description>
-  <emptycolor>black</emptycolor>
-  <foodcolor>lightgrey</foodcolor>
+  <emptycolor>purple</emptycolor>
+  <foodcolor>silver</foodcolor>
   <model>foragingants</model>
   <movebias>0.96</movebias>
   <nestcolor>green</nestcolor>

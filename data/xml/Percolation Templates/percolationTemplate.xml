@@ -4,7 +4,7 @@
   <blockcolor>black</blockcolor>
   <blockratio>0.5</blockratio>
   <description>Formation of smaller water bodies such as ponds.</description>
-  <emptycolor>lightgrey</emptycolor>
+  <emptycolor>purple</emptycolor>
   <model>percolation</model>
   <numCols>60</numCols>
   <numRows>60</numRows>

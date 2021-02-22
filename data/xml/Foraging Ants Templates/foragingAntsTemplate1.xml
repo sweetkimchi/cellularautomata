@@ -14,7 +14,7 @@
     <nestcolor>green</nestcolor>
     <antcolor>red</antcolor>
     <phermonecolor>blue</phermonecolor>
-    <foodcolor>lightgrey</foodcolor>
+    <foodcolor>gold</foodcolor>
     <emptycolor>black</emptycolor>
     <weakphermonecolor>skyblue</weakphermonecolor>
     <template>generic</template>

@@ -7,7 +7,7 @@
   <foodcolor>lightgrey</foodcolor>
   <model>foragingants</model>
   <movebias>0.96</movebias>
-  <nestcolor>green</nestcolor>
+  <nestcolor>skyblue</nestcolor>
   <numCols>50</numCols>
   <numRows>50</numRows>
   <numberofants>50</numberofants>

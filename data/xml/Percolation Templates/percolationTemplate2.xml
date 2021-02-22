@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <data game="game">
   <author>Jiyun</author>
-  <blockcolor>black</blockcolor>
+  <blockcolor>green</blockcolor>
   <blockratio>0.4</blockratio>
   <description>Simulates water spreading in tight spaces such as caves.</description>
   <emptycolor>lightgrey</emptycolor>
