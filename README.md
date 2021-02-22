@@ -16,9 +16,8 @@ Finish Date: February 21st
 
 Hours Spent:
 Jiyun - 40 hours (February 6th - 14th) <br>
-Harrison - 40 hours (weeks 1 + 2)  
-Shaw - 30 hours (weeks 1 + 2)  
-
+Harrison - 40 hours (weeks 1 + 2)
+Shaw - 30 hours (weeks 1 + 2)
 ### Primary Roles
 
 Shaw: I created the Decoder class along with the XMLParser and XMLException classes, which dealt with
