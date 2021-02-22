@@ -28,7 +28,6 @@ public class Decoder {
   public static final String NUM_ROWS = "numRows";
   public static final String NUM_COLS = "numCols";
   public static final String MODEL = "model";
-  public static final String TEMPLATE = "template";
   public static final String COORDINATES = "shapeCoords";
   public static final String FISH_SHARK_RATIO = "fishsharkratio";
   public static final String FISH_RATE = "fishreproduce";
@@ -54,7 +53,10 @@ public class Decoder {
   public static final String SHAPE = "shape";
   public static final String SIDES = "numberofsides";
   public static final List<String> MODEL_TYPES = List.of("spreadingoffire", "navigatingsugarscape", "segregationmodel", "percolation", "wator", "gameOfLife", "rockpaperscissors", "foragingants", "langton", "sugarscape");
-
+  public static final List<String> VALID_SHAPES = List.of("square", "triangle", "hexagon");
+  public static final List<Integer> squareSides = List.of(4, 8);
+  public static final List<Integer> triangleSides = List.of(3, 12);
+  public static final int hexagonSides = 6;
   private Map<String, String> universal;
   private Map<String, String> colors;
   private Map<String, Integer> integerMap;
@@ -142,17 +144,12 @@ public class Decoder {
       shape = attributes.get(SHAPE);
       numberOfSides = Integer.parseInt(attributes.get(SIDES));
     } catch (Exception e) {
-      Alert alert = new Alert(Alert.AlertType.ERROR, "Invalid Parameter(s)");
+      Alert alert = new Alert(Alert.AlertType.ERROR, "Invalid Universal Parameter(s)");
       alert.showAndWait()
               .filter(response -> response == ButtonType.OK)
               .ifPresent(response -> alert.close());
     }
-    if (!MODEL_TYPES.contains(model)) {
-      Alert modelAlert = new Alert(Alert.AlertType.ERROR, "Invalid Model");
-      modelAlert.showAndWait()
-              .filter(response -> response == ButtonType.OK)
-              .ifPresent(response -> modelAlert.close());
-    }
+    checkValidParameters();
     switch (model) {
       case "gameOfLife" -> initializeGOL(attributes);
       case "wator" -> initializeWaTor(attributes);
@@ -164,6 +161,31 @@ public class Decoder {
       case "sugarscape" -> initializeSugarScape(attributes);
     }
   }
+  private void checkValidParameters() {
+    if (!MODEL_TYPES.contains(model)) {
+      Alert modelAlert = new Alert(Alert.AlertType.ERROR, "Invalid Model");
+      modelAlert.showAndWait()
+              .filter(response -> response == ButtonType.OK)
+              .ifPresent(response -> modelAlert.close());
+    }
+    if(!VALID_SHAPES.contains(shape)){
+      Alert shapeAlert = new Alert(Alert.AlertType.ERROR, "Invalid Shape - must be square, triangle, or hexagon");
+      shapeAlert.showAndWait()
+              .filter(response -> response == ButtonType.OK)
+              .ifPresent(response -> shapeAlert.close());
+    }
+    else{
+      if(shape.equals("square") && !squareSides.contains(numberOfSides) ||
+          shape.equals("triangle") && !triangleSides.contains(numberOfSides) ||
+          shape.equals("hexagon") && numberOfSides != 6){
+        Alert numSidesAlert = new Alert(Alert.AlertType.ERROR, "Invalid Number of Sides - Square (4, 8), Triangle (3, 12), Hexagon (6)");
+        numSidesAlert.showAndWait()
+                .filter(response -> response == ButtonType.OK)
+                .ifPresent(response -> numSidesAlert.close());
+      }
+    }
+  }
+
   /**
    * Opens save directory for saving current state of simulation as XML file
    * @param stateOfSimulation

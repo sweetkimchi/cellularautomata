@@ -195,12 +195,22 @@ public class SimulationEngine {
       animation.start();
     }
   }
+
+  /**
+   * Stops simulation and saves states as list of strings
+   * @throws FileNotFoundException
+   */
   public void saveSimulation() throws FileNotFoundException {
     stopSimulation();
     states = gridManager.saveSimulation();
     decoder.saveConfig(states);
     sendSavedConfig(decoder.returnTemplate());
   }
+
+  /**
+   * sends parsed state list to gridManager to load
+   * @param states
+   */
   public void sendSavedConfig(List<String> states){
     String[] lastState = states.get(states.size()-1).split(" ");
     int size = Integer.parseInt(lastState[0]) + 1;
