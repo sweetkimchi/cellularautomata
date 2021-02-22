@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -141,9 +140,7 @@ public class SimulationScreen {
       comboBox.getItems().add(s);
     }
     comboBox.setValue(resources.getString("DefaultColor"));
-    comboBox.setOnAction(event -> {
-      setStylesheet(colorTypes.get(comboBox.getValue()));
-    });
+    comboBox.setOnAction(event -> setStylesheet(colorTypes.get(comboBox.getValue())));
     topPanel.add(comboBox);
   }
 
@@ -267,8 +264,10 @@ public class SimulationScreen {
    */
   public void checkWindowSizeChanged() {
     if (scene.getHeight() != prevWindowHeight || scene.getWidth() != prevWindowWidth) {
-      gridGraphics.resizeGrid(scene.getWidth() - sidePanel.MAX_WIDTH,
+      gridGraphics.resizeGrid(scene.getWidth() - SidePanel.MAX_WIDTH,
           scene.getHeight() - topPanel.getHeight());
+      prevWindowHeight = scene.getHeight();
+      prevWindowWidth = scene.getWidth();
     }
   }
 
