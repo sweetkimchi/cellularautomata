@@ -4,7 +4,8 @@
     <description>Generic Template</description>
     <numCols>50</numCols>
     <numRows>50</numRows>
-    <numberofsides></numberofsides>
+    <numberofsides>8</numberofsides>
+    <shape>square</shape>
     <randomseed>10</randomseed>
     <emptyratio>0</emptyratio>
     <patchratio>0.7</patchratio>

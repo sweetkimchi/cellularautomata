@@ -5,7 +5,7 @@
   <numCols>50</numCols>
   <numRows>50</numRows>
   <shapeCoords>21,20,20,21,21,21,22,21</shapeCoords>
-  <numsides>6</numsides>
+  <numberofsides>6</numberofsides>
   <shape>hexagon</shape>
   <alivecolor>black</alivecolor>
   <deadcolor>lightgrey</deadcolor>

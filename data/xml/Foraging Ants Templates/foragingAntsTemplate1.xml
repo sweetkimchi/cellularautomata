@@ -9,8 +9,8 @@
     <radius>2</radius>
     <phermoneamount>30</phermoneamount>
     <movebias>0.96</movebias>
-    <shape>square</shape>
-    <numberofsides>4</numberofsides>
+    <shape>triangle</shape>
+    <numberofsides>3</numberofsides>
     <nestcolor>green</nestcolor>
     <antcolor>red</antcolor>
     <phermonecolor>blue</phermonecolor>

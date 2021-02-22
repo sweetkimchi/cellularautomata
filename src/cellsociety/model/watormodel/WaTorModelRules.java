@@ -5,6 +5,7 @@ import cellsociety.model.cell.State;
 import cellsociety.model.rules.Rules;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 
@@ -36,21 +37,17 @@ public class WaTorModelRules extends Rules {
    * WaTor Model Constructor that initializes the model
    *
    * @param randomSeed        random seed to reproduce the results
-   * @param energyFish        energy of the fish
-   * @param reproduceBoundary number of steps needed to reproduce
-   * @param sharkEnergy       energy of shark
    */
-  public WaTorModelRules(long randomSeed, int energyFish,
-      int reproduceBoundary, int sharkEnergy, String emptyColor, String sharkColor, String fishColor) {
+  public WaTorModelRules(long randomSeed, Map<String, Integer> ints, Map<String, String> colors) {
     random = new Random(randomSeed);
     possibleTypes = new ArrayList<>();
     possibleColors = new ArrayList<>();
-    ENERGY_FROM_FISH = energyFish;
-    REPRODUCE_BOUNDARY = reproduceBoundary;
-    DEFAULT_ENERGY = sharkEnergy;
-    this.EMPTY_COLOR = emptyColor;
-    this.FISH_COLOR = fishColor;
-    this.SHARK_COLOR = sharkColor;
+    ENERGY_FROM_FISH = ints.get("energy");
+    REPRODUCE_BOUNDARY = ints.get("fishrate");
+    DEFAULT_ENERGY = ints.get("sharklives");
+    this.EMPTY_COLOR = colors.get("empty");
+    this.FISH_COLOR = colors.get("fish");
+    this.SHARK_COLOR = colors.get("shark");
     possibleTypes.add(EMPTY);
     possibleTypes.add(SHARK);
     possibleTypes.add(FISH);

@@ -4,6 +4,7 @@ import cellsociety.controller.grid.GridManager;
 import cellsociety.model.rules.Rules;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -34,16 +35,16 @@ public class SpreadingOfFireRules extends Rules {
    * @param randomSeed  random seed so that the results can be reproduced
    * @param probsOfFire probability of catching fire if the tree is adjacent to a burning tree
    */
-  public SpreadingOfFireRules(long randomSeed, double probsOfFire, String emptyColor, String treeColor, String fireColor) {
+  public SpreadingOfFireRules(long randomSeed, double probsOfFire, Map<String, String> colors) {
     random = new Random(randomSeed);
     possibleTypes = new ArrayList<>();
     possibleColors = new ArrayList<>();
     possibleTypes.add(EMPTY);
     possibleTypes.add(TREE);
     possibleTypes.add(FIRE);
-    possibleColors.add(emptyColor);
-    possibleColors.add(treeColor);
-    possibleColors.add(fireColor);
+    possibleColors.add(colors.get("empty"));
+    possibleColors.add(colors.get("tree"));
+    possibleColors.add(colors.get("fire"));
     this.probsOfFire = probsOfFire;
   }
 

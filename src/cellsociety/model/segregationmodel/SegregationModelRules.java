@@ -5,6 +5,7 @@ import cellsociety.model.cell.State;
 import cellsociety.model.rules.Rules;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -34,12 +35,12 @@ public class SegregationModelRules extends Rules {
   /**
    * Default constructor
    */
-  public SegregationModelRules(long randomSeed, double THRESHHOLD, String colorX, String colorY, String emptyColor) {
+  public SegregationModelRules(long randomSeed, double THRESHHOLD, Map<String, String> colors) {
     random = new Random(randomSeed);
     this.THRESHHOLD = THRESHHOLD;
-    this.AGENTX_COLOR = colorX;
-    this.AGENTY_COLOR = colorY;
-    this.EMPTY_COLOR = emptyColor;
+    this.AGENTX_COLOR = colors.get("agentx");
+    this.AGENTY_COLOR = colors.get("agenty");
+    this.EMPTY_COLOR = colors.get("empty");
 
     initializeColorsAndTypes();
   }

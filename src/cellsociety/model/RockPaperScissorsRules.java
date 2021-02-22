@@ -4,6 +4,7 @@ import cellsociety.controller.grid.GridManager;
 import cellsociety.model.rules.Rules;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 public class RockPaperScissorsRules extends Rules {
@@ -25,12 +26,12 @@ public class RockPaperScissorsRules extends Rules {
     initializeColorsAndTypes();
   }
 
-  public RockPaperScissorsRules(int threshold, long randomSeed, String rockColor, String paperColor, String scissorsColor, String emptyColor) {
+  public RockPaperScissorsRules(int threshold, long randomSeed, Map<String, String> colors) {
     THRESHHOLD = threshold;
-    ROCK_COLOR = rockColor;
-    PAPER_COLOR = paperColor;
-    SCISSORS_COLOR = scissorsColor;
-    EMPTY_COLOR = emptyColor;
+    ROCK_COLOR = colors.get("rock");
+    PAPER_COLOR = colors.get("paper");
+    SCISSORS_COLOR = colors.get("scissors");
+    EMPTY_COLOR = colors.get("empty");
     System.out.println(THRESHHOLD);
     random = new Random(randomSeed);
     initializeColorsAndTypes();
