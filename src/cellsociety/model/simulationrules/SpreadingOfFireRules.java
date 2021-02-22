@@ -49,11 +49,21 @@ public class SpreadingOfFireRules extends Rules {
   }
 
 
+  /**
+   * returns the possible types (e.g. agent x, agent y, empty)
+   *
+   * @return arraylist of possible types
+   */
   @Override
   public List<String> getPossibleTypes() {
     return possibleTypes;
   }
 
+  /**
+   * Returns the possible colors for each type
+   *
+   * @return arraylist of colors
+   */
   @Override
   public List<String> getPossibleColors() {
     return possibleColors;

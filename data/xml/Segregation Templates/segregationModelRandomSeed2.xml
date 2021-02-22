@@ -11,11 +11,11 @@
   <model>segregationmodel</model>
   <numCols>50</numCols>
   <numRows>50</numRows>
-  <numberofsides>8</numberofsides>
+  <numberofsides>6</numberofsides>
   <populationratio>0.8</populationratio>
   <randomseed>12</randomseed>
   <satisfactionthreshhold>0.6</satisfactionthreshhold>
-  <shape>square</shape>
+  <shape>hexagon</shape>
   <template>random_two</template>
   <title>Segregation Model</title>
 </data>

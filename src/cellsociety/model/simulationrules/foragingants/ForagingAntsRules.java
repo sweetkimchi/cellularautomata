@@ -263,8 +263,8 @@ public class ForagingAntsRules extends Rules {
 
   private void moveTowardsNest(GridManager gridManager, int x, int y, ArrayList<State> cells,
       String type) {
-    int xNest = Integer.parseInt(gridManager.getCoordinates().get(0));
-    int yNest = Integer.parseInt(gridManager.getCoordinates().get(1));
+    int xNest = Integer.parseInt(gridManager.getNestCoordinates().get(0));
+    int yNest = Integer.parseInt(gridManager.getNestCoordinates().get(1));
     int distance = manhattanDistance(xNest, yNest, x, y);
     if (x - 1 >= 0 && gridManager.getTypeAtCoordinate(x - 1, y).equals(type)
         && manhattanDistance(xNest, yNest, x - 1, y) < distance) {

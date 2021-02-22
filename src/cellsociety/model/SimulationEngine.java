@@ -1,8 +1,6 @@
 package cellsociety.model;
 
 import cellsociety.controller.Decoder;
-import cellsociety.model.simulationrules.foragingants.ForagingAntGridManager;
-import cellsociety.model.simulationrules.foragingants.ForagingAntsRules;
 import cellsociety.model.simulationrules.GameOfLifeRule;
 import cellsociety.model.simulationrules.PercolationRules;
 import cellsociety.model.simulationrules.RockPaperScissorsRules;
@@ -10,7 +8,8 @@ import cellsociety.model.simulationrules.Rules;
 import cellsociety.model.simulationrules.SegregationModelRules;
 import cellsociety.model.simulationrules.SpreadingOfFireRules;
 import cellsociety.model.simulationrules.WaTorModelRules;
-import cellsociety.model.simulationrules.sugarscape.SugarScapeRules;
+import cellsociety.model.simulationrules.foragingants.ForagingAntGridManager;
+import cellsociety.model.simulationrules.foragingants.ForagingAntsRules;
 import cellsociety.view.SimulationScreen;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -149,17 +148,6 @@ public class SimulationEngine {
       gridManager
           .buildAntGridWithTemplate(decoder.getCoordinates(), rules.getPossibleTypes(),
               rules.getPossibleColors(), decoder.getRadius(), decoder.getNumberOfSides());
-    }
-    if (game.equals("sugarscape")) {
-      //   rules = new WaTorModelRules(emptyRatio, populationRatio, randomSeed, energyFish, reproduceBoundary, sharkEnergy);
-      rules = new SugarScapeRules(decoder.getNumAgents(), decoder.getMaxSugar(),
-          decoder.getGrowBackSugar(), decoder.getMetabolism(), decoder.getVision(),
-          decoder.getFullSugarColor(), decoder.getLowSugarColor(), decoder.getAgentColor(),
-          decoder.getEmptyColor());
-      gridManager
-          .makeSugarScapeGridWithRandomSeed(decoder.getEmptyRatio(), decoder.getPatchRatio(),
-              decoder.getMetabolism(), decoder.getVision(),
-              decoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
     }
     //need to be fixed for a better design
   }

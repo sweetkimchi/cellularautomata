@@ -11,7 +11,7 @@
   <model>segregationmodel</model>
   <numCols>50</numCols>
   <numRows>50</numRows>
-  <numberofsides>8</numberofsides>
+  <numberofsides>4</numberofsides>
   <populationratio>0.2</populationratio>
   <randomseed>100</randomseed>
   <satisfactionthreshhold>0.5</satisfactionthreshhold>

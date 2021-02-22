@@ -2,8 +2,8 @@ package cellsociety.model;
 
 import cellsociety.model.simulationrules.Rules;
 import cellsociety.model.simulationrules.foragingants.ForagingAntGridManager;
-import cellsociety.model.simulationrules.sugarscape.AgentState;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -72,7 +72,8 @@ public class GridManager {
 
   /**
    * Builds the starting states for models that require adjustments based on the parameters.
-   *
+   * Depends on the correctness of each parameter sent in. The user can call this method
+   * with the appropriate parameters after initializing a valid rules class.
    * @param emptyRatio      ratio of empty cells to occupied cells
    * @param populationRatio ratio between different types of players
    * @param seed            random seed to reproduce results
@@ -103,12 +104,17 @@ public class GridManager {
     this.stateOfCells = stateOfCells;
   }
 
+  /**
+   * Counts the number of each possible type and returns the list of all tally.
+   * Assumption is that the caller only needs to read and not modify the data.
+   * The data is sent as an unmodifiableMap to prevent the user from changing the summary.
+   * @return List containing counts for each possible type
+   */
   public Map<String, Integer> getTallyOfEachTypeToPresentAsSummary() {
-    return summary;
+    return Collections.unmodifiableMap(summary);
   }
 
-
-  public List<int[][]> getNumberOfNeighborsForEachType(List<String> possibleTypes,
+  private List<int[][]> getNumberOfNeighborsForEachType(List<String> possibleTypes,
       int numberOfSides) {
     ArrayList<int[][]> numberOfNeighborsForEachType = new ArrayList<>();
     for (String type : possibleTypes) {
@@ -189,6 +195,13 @@ public class GridManager {
     return isValidNeighbor;
   }
 
+  /**
+   * Purpose is to take orders from SimulationEngine to start updating the grid with the appropriate rules.
+   * Assumption is that the Rules class that is sent is is appropriately defined.
+   * Dependencies with a few methods such as getNumberOfNeighborsForEachType and nextStatesOfCells,
+   * both of which are private methods.
+   * @param rules a general rules class with all the rules necessary to judge the state of each cell.
+   */
   public void judgeStateOfEachCell(Rules rules) {
     List<int[][]> numberOfNeighborsForEachType = getNumberOfNeighborsForEachType(
         rules.getPossibleTypes(), numberOfSides);
@@ -228,31 +241,6 @@ public class GridManager {
     return count;
   }
 
-  public void makeSugarScapeGridWithRandomSeed(float emptyRatio, float patchRatio,
-      int metabolism, int vision, int seed,
-      List<String> possibleTypes, List<String> possibleColors) {
-    Random random = new Random(seed);
-    State[][] stateOfCells = new State[row][col];
-    for (int x = 0; x < row; x++) {
-      for (int y = 0; y < col; y++) {
-        double probability = random.nextDouble();
-        //      System.out.println(probability);
-        if (probability < emptyRatio) {
-          State state = new State(x, y, possibleTypes.get(0), possibleColors.get(0), 0);
-          stateOfCells[x][y] = state;
-        } else if (probability < emptyRatio + (1 - emptyRatio) * patchRatio) {
-          State state = new State(x, y, possibleTypes.get(1), possibleColors.get(1), 0);
-          stateOfCells[x][y] = state;
-        } else {
-          AgentState state = new AgentState(x, y, possibleTypes.get(3), possibleColors.get(3), 0,
-              metabolism, vision, 0);
-          stateOfCells[x][y] = state;
-        }
-      }
-    }
-    this.stateOfCells = stateOfCells;
-  }
-
   private boolean isOneOfTheSidesForFacingDownTriangles(int x, int y, int xCoord, int yCoord) {
     return (y == yCoord - 1 && (x <= xCoord + 2 && x >= xCoord - 2)) || (y == yCoord && (
         x <= xCoord + 2 && x >= xCoord - 2)) || (y == yCoord + 1 && (x <= xCoord + 1
@@ -274,6 +262,11 @@ public class GridManager {
         && y == i);
   }
 
+  /**
+   * Unfinished version of saving simulation. Saves each state and its basic properties.
+   * Assumption is that the user does not need to modify the states.
+   * @return Unmodifiable list of states to be saved
+   */
   public List<String> saveSimulation() {
     ArrayList<String> state = new ArrayList<>();
     for (int i = 0; i < stateOfCells.length; i++) {
@@ -286,7 +279,7 @@ public class GridManager {
         state.add(String.valueOf(stateOfCells[i][j].getNumberOfMoves()));
       }
     }
-    return state;
+    return Collections.unmodifiableList(state);
   }
 
   private boolean isOneOfTheNWSEDirection(int x, int y, int xCoord, int yCoord) {
@@ -311,6 +304,24 @@ public class GridManager {
     }
   }
 
+  /**
+   * Returns the coordinates of the nest location for Ants class.
+   * @return unmodifiable list containing the coordinates of the nest
+   */
+  public List<String> getNestCoordinates() {
+    return Collections.unmodifiableList(coordinates);
+  }
+
+  /**
+   * Builds the specific type of Grid for ant simulations. Intead of using the other template,
+   * I came up with a faster way of building a grid using x, y coordinates of nest and food plus
+   * the radius.
+   * @param coordinates coordinates of nest and food locations
+   * @param possibleTypes possible types present in the simulation
+   * @param possibleColors possible colors present in the simulation
+   * @param radius radius of the nest and food locations around the x, y coordinate
+   * @param numberOfSides number of sides specified for the simulation
+   */
   public void buildAntGridWithTemplate(List<String> coordinates,
       List<String> possibleTypes, List<String> possibleColors,
       int radius, int numberOfSides) {
@@ -331,33 +342,63 @@ public class GridManager {
     return nextStatesForEachType;
   }
 
+  /**
+   * Instead of sending the entire grid to the rules class, which is not a good practice of
+   * encapsulation, GridManager object can peek the type of object at the specified coordinate
+   * @param x x coordinate of the state
+   * @param y y coordinate of the state
+   * @return the string name of the type
+   */
   public String getTypeAtCoordinate(int x, int y) {
     return stateOfCells[x][y].getType();
   }
 
+  /**
+   * Returns the row
+   * @return row
+   */
   public int getRow() {
     return row;
   }
 
+  /**
+   * Returns the column
+   * @return column
+   */
   public int getColumn() {
     return col;
   }
 
+  /**
+   * Similar to the getTypeAtCoordinate method, the caller can peek the type at the specific coordinate.
+   * Assumption is that the user was informed of this method.
+   * @param x x coordinate
+   * @param y y coordinate
+   * @return State object at the specified location
+   */
   public State getStateAtCoordinate(int x, int y) {
     return this.stateOfCells[x][y];
   }
 
+  /**
+   * Allow to set the State at the specified Coordinate. This is necessary for simulations for which
+   * the states are not updated all at once, but are instead updated one cell at a time.
+   * @param x
+   * @param y
+   * @param state State object
+   */
   public void setStateAtCoordinate(int x, int y, State state) {
     this.stateOfCells[x][y] = state;
   }
 
+  /**
+   *
+   * @param x
+   * @param y
+   * @return
+   */
   public String getColorAtCoordinate(int x, int y) {
     return stateOfCells[x][y].getColor();
   }
-
-  public List<String> getCoordinates() {
-    return coordinates;
-  }
-
 }
 
