@@ -78,42 +78,42 @@ public class SimulationEngine {
    */
   public void initializeData() {
     initializeGrid();
-    initializeModelConstructors(decoder.getModel());
+    initializeModelConstructors(decoder.getUniversalParameters().get("model"));
     simulationScreen.setGridShape(decoder.getShape());
     simulationScreen.update(gridManager);
-    simulationScreen.setDescription(decoder.getMyDesc());
+    simulationScreen.setDescription(decoder.getUniversalParameters().get("description"));
     runSimulation();
   }
 
   protected void initializeModelConstructors(String game) {
 
     if (game.equals("gameOfLife")) {
-      rules = new GameOfLifeRule(decoder.getAliveColor(), decoder.getDeadColor());
+      rules = new GameOfLifeRule(decoder.getGOLColors());
       template = (ArrayList<State>) constructStartingStateForSimulation(decoder.getCoordinates());
 
       gridManager
           .buildGridWithTemplate(template, rules.getPossibleTypes(), rules.getPossibleColors());
     }
     if (game.equals("percolation")) {
-      rules = new PercolationRules(decoder.getSeed(), decoder.getBlockColor(),
-          decoder.getWaterColor(), decoder.getEmptyColor());
+      rules = new PercolationRules(decoder.getSeed(), decoder.getPercolationColors().get("block"),
+          decoder.getPercolationColors().get("water"), decoder.getPercolationColors().get("empty"));
       gridManager
-          .buildGridWithRandomSeed(decoder.getBlockRatio(), decoder.getWaterToEmptyRatio(),
+          .buildGridWithRandomSeed(decoder.getPercolationRatios().get("block"), decoder.getPercolationRatios().get("waterempty"),
               decoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
     }
     if (game.equals("segregationmodel")) {
-      rules = new SegregationModelRules(decoder.getSeed(), decoder.getSatisfactionThreshold(),
-          decoder.getColorX(), decoder.getColorY(), decoder.getEmptyColor());
+      rules = new SegregationModelRules(decoder.getSeed(), decoder.getSegregationRatios().get("satisfaction"),
+          decoder.getSegregationColors().get("agentx"), decoder.getSegregationColors().get("agenty"), decoder.getSegregationColors().get("empty"));
       gridManager
-          .buildGridWithRandomSeed(decoder.getEmptyRatio(), decoder.getPopulationRatio(),
+          .buildGridWithRandomSeed(decoder.getSegregationRatios().get("empty"), decoder.getSegregationRatios().get("population"),
               decoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
 
     }
     if (game.equals("spreadingoffire")) {
-      rules = new SpreadingOfFireRules(decoder.getSeed(), decoder.getProbsOfCatch(),
-          decoder.getEmptyColor(), decoder.getTreeColor(), decoder.getFireColor());
+      rules = new SpreadingOfFireRules(decoder.getSeed(), decoder.getFireRatios().get("probcatch"),
+          decoder.getFireColors().get("empty"), decoder.getFireColors().get("tree"), decoder.getFireColors().get("fire"));
       gridManager
-          .buildGridWithRandomSeed(decoder.getEmptyRatio(), decoder.getTreeRatio(),
+          .buildGridWithRandomSeed(decoder.getFireRatios().get("empty"), decoder.getFireRatios().get("tree"),
               decoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
     }
     if (game.equals("wator")) {
