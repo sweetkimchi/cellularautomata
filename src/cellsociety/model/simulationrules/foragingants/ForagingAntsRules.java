@@ -91,7 +91,7 @@ public class ForagingAntsRules extends Rules {
    * @return arraylist of possible types
    */
   @Override
-  public ArrayList<String> getPossibleTypes() {
+  public List<String> getPossibleTypes() {
     return possibleTypes;
   }
 
@@ -101,7 +101,7 @@ public class ForagingAntsRules extends Rules {
    * @return arraylist of colors
    */
   @Override
-  public ArrayList<String> getPossibleColors() {
+  public List<String> getPossibleColors() {
     return possibleColors;
   }
 
@@ -135,7 +135,7 @@ public class ForagingAntsRules extends Rules {
     }
 
     if (gridManager.getTypeAtCoordinate(x, y).equals(ANT)) {
-      gridManager.setStateAtCoordinate(x, y, decideAntState(gridManager, x, y, markStateForFurtherAnalysis, getPossibleTypes(), getPossibleColors()));
+      gridManager.setStateAtCoordinate(x, y, decideAntState(gridManager, x, y, getPossibleTypes(), getPossibleColors()));
     }
 
     if (gridManager.getTypeAtCoordinate(x, y).equals(PHEROMONE)) {
@@ -166,8 +166,7 @@ public class ForagingAntsRules extends Rules {
     }
   }
 
-  private State decideAntState(GridManager gridManager, int x, int y, List<int[][]> nextStates,
-      ArrayList<String> possibleTypes, ArrayList<String> possibleColors) {
+  private State decideAntState(GridManager gridManager, int x, int y) {
     ArrayList<State> emptyCells = new ArrayList<>();
     ArrayList<State> foodCells = new ArrayList<>();
     ArrayList<State> phermoneCells = new ArrayList<>();
@@ -336,8 +335,6 @@ public class ForagingAntsRules extends Rules {
     }
   }
 
-  //0 - up
-  //
   private String determineDirection(State dummy, int x, int y) {
     if (dummy.getxCoord() > x) {
       return "right";

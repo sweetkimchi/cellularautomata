@@ -3,11 +3,11 @@ package cellsociety.controller;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.lang.reflect.Array;
-import java.util.*;
-
-import cellsociety.controller.simulationengine.SimulationEngine;
-import cellsociety.model.cell.State;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.stage.FileChooser;
