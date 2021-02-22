@@ -7,7 +7,7 @@
     Red moves until all of them find a satisfying location.
   </description>
   <emptycolor>lightgrey</emptycolor>
-  <emptyratio>0.4</emptyratio>
+  <emptyratio>0.1</emptyratio>
   <model>segregationmodel</model>
   <numCols>50</numCols>
   <numRows>50</numRows>
