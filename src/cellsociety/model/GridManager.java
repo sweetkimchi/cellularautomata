@@ -391,10 +391,11 @@ public class GridManager {
   }
 
   /**
-   *
+   * The purpose of this is so that only the color (instead of the entire grid) is sent to view component
+   * to be displayed.
    * @param x
    * @param y
-   * @return
+   * @return the color of the state object at the location
    */
   public String getColorAtCoordinate(int x, int y) {
     return stateOfCells[x][y].getColor();
