@@ -93,8 +93,8 @@ public class SimulationEngine {
     initializeModelConstructors(descriptors.get("model"));
     gridManager.setNumberOfSides(decoder.getNumberOfSides());
     simulationScreen.setGridShape(decoder.getShape());
-    simulationScreen.update(gridManager, descriptors.get("model"));
-    simulationScreen.setDescription(descriptors.get("description"));
+    simulationScreen.update(gridManager);
+    simulationScreen.setDescription(decoder.getMyDesc());
     runSimulation();
   }
 
@@ -136,7 +136,6 @@ public class SimulationEngine {
     }
     if (game.equals("rockpaperscissors")) {
       //   rules = new WaTorModelRules(emptyRatio, populationRatio, randomSeed, energyFish, reproduceBoundary, sharkEnergy);
-      colors = decoder.getRPSColors();
       rules = new RockPaperScissorsRules(decoder.getRPSIntegers().get("threshold"), decoder.getRPSIntegers().get("seed"), decoder.getRPSColors());
 
       gridManager
@@ -145,7 +144,7 @@ public class SimulationEngine {
     }
     if (game.equals("foragingants")) {
       //   rules = new WaTorModelRules(emptyRatio, populationRatio, randomSeed, energyFish, reproduceBoundary, sharkEnergy);
-      colors = decoder.getAntColors();
+      int numberOfsides = 4;
 
       rules = new ForagingAntsRules(decoder.getAntIntegers(), decoder.getAntColors(), decoder.getMoveBias(), decoder.getNumberOfSides());
       ForagingAntGridManager foragingAntGridManager = new ForagingAntGridManager(decoder.getRows(), decoder.getCols());
@@ -175,7 +174,7 @@ public class SimulationEngine {
     gridManager.judgeStateOfEachCell(rules);
     //THIS IS A BAD EXAMPLE THAT NEEDS TO BE FIXED
     // I WILL PASS IN THE GRID OF COLORS OR MAYBE GRID OF TYPES
-    simulationScreen.update(gridManager, decoder.getUniversalParameters().get("model"));
+    simulationScreen.update(gridManager);
   }
 
   private void runSimulation() {
@@ -191,7 +190,7 @@ public class SimulationEngine {
         sleepTimer = 0;
       }
     };
-    simulationScreen.update(gridManager, decoder.getUniversalParameters().get("model"));
+    simulationScreen.update(gridManager);
   }
 
   /**
