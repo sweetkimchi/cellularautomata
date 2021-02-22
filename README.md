@@ -12,12 +12,13 @@ Harrison Huang - hlh38
 
 Start Date: February 6th
 
-Finish Date: February 14th
+Finish Date: February 21st
 
 Hours Spent:
 Jiyun - 40 hours (February 6th - 14th) <br>
-Harrison - 20 hours  
-Shaw - 30 hours
+Harrison - 40 hours (weeks 1 + 2)  
+Shaw - 30 hours (weeks 1 + 2)  
+
 ### Primary Roles
 
 Shaw: I created the Decoder class along with the XMLParser and XMLException classes, which dealt with
@@ -38,7 +39,9 @@ Harrison: I created the view component of the project, of which the main three c
 SimulationScreen, GridGraphics, and SidePanel. I also had to provide functionality of the controls
 put in SidePanel by coordinating with the SimulationEngine. I implemented the resource property 
 file and CSS file for the front end in order to have more flexibility in the display. I had
-to manage the view and state of the grid, as well as allow for resizing.
+to manage the view and state of the grid, as well as allow for resizing. This was extended in the
+complete version with the addition of an independent Graph view, multiple simultaneous simulations, 
+additional language support, and color palette functionality, among other things.
 
 ### Resources Used
 
@@ -59,6 +62,11 @@ to manage the view and state of the grid, as well as allow for resizing.
     - [Label text wrapping](https://stackoverflow.com/questions/30146560/how-to-change-animationtimer-speed)
     - [CSS Guide](https://openjfx.io/javadoc/11/javafx.graphics/javafx/scene/doc-files/cssref.html)
     - lab_bounce code for Resource Property and CSS
+    - [Tiling hexagons guide](https://www.redblobgames.com/grids/hexagons/)
+    - [Grid design notes](http://www-cs-students.stanford.edu/~amitp/game-programming/grids/)
+    - [Realtime Charts in JavaFX](https://levelup.gitconnected.com/realtime-charts-with-javafx-ed33c46b9c8d)
+    - [Multiseries JavaFX chart](https://www.tutorialspoint.com/javafx-line-chart-example-with-multiple-series-lines)
+    - Google Translate
 3. Ji Yun Hyo
     - [Branching and Merging](http://gitready.com/beginner/2009/01/25/branching-and-merging.html)
     - [Enumerated types](https://docs.oracle.com/javase/tutorial/java/javaOO/enum.html)
@@ -80,7 +88,8 @@ Data files needed: All necessary XML files are under "data" folder
 
 Features implemented: WaTor Simulation, Percolation, Spreading of Fire, Game of Life, Segregation; 6
 templates for each; simulation screen with functional start/stop/reset buttons, speed slider,
-ability to load new XML files, dynamically updating and sized grid
+ability to load new XML files, dynamically updating and sized grid, independent grid and graph 
+views, multiple simultaneous simulations, simulation appearance selection in colors and language
 
 ### Notes/Assumptions
 
@@ -93,22 +102,25 @@ GridManager was able to take in all the parameters for all models and produce th
 and update the cell states successfully. Therefore, the design became much "simpler" and more
 efficient than what we had initially imagined. As of the basic implementation, all three
 components (MVC) are working together by informing each other of its states but do not specifically
-have to know the inner-workings of each class in order to cooperate. One simplification for the 
-resource property file is that the language (English) is currently stored as a private static final 
-String rather than by being determined by an input to the main class. Another simplification is 
-that the current method of updating the Grid is by clearing all the Rectangles and re-adding
-them all one-by-one, while it would be better in the future to instead simply change the color of
-each of these Rectangles.
+have to know the inner-workings of each class in order to cooperate. One area that should be
+a focus for potential future improvement is removing the cyclic dependency between the controller
+and view, between SimulationEngine and SimulationScreen. 
 
 Interesting data files: (Jiyun) I manually tested out the templates and have selected the ones that
 produce interesting results. I think all the templates are worth your time to checkout. I tried to "
 model" real life situations with the models.
 
-Known Bugs: The grid resizing only works when the simulation is running, so when the simulation is
-stopped, the grid will not resize if the window size is changed. When Load New is pressed but no
-file is selected, the program will throw a NullPointerException, though this does not affect the 
-overall program functionality. The descriptions can also disappear too soon if a new file is not
-selected.
+Known Bugs: 
+   - The grid resizing only works when the simulation is running, so when the simulation is
+     stopped, the grid will not resize if the window size is changed.
+   - When Load New is pressed but no file is selected, the program will throw a 
+     NullPointerException, though this does not affect the overall program functionality. The 
+     descriptions can also disappear too soon if a new file is not selected. The Load New button
+     can be pressed multiple times before actually triggering, which can result in weird behavior.
+   - The graph window doesn't plot the initial states when it is first created, though it updates
+     correctly.
+   - Changing the stylesheet/CSS file will result in a strange warning in the console, though this
+     does not ultimately impact the overall functionality.
 
 Extra credit: None
 
