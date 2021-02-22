@@ -4,7 +4,7 @@
     <description>Generic Template</description>
     <numCols>50</numCols>
     <numRows>50</numRows>
-    <numberofsides></numberofsides>
+    <numberofsides>8</numberofsides>
     <randomseed>10</randomseed>
     <emptyratio>0</emptyratio>
     <patchratio>0.7</patchratio>
@@ -15,6 +15,7 @@
     <vision>2</vision>
     <fullsugarcolor>orange</fullsugarcolor>
     <lowsugarcolor>white</lowsugarcolor>
+    <shape>square</shape>
     <agentcolor>red</agentcolor>
     <emptycolor>black</emptycolor>
     <template>generic</template>

@@ -137,15 +137,8 @@ public class State {
     color = colorName;
   }
 
-  public String getDirection() {
-    return direction;
-  }
-
   public boolean hasFood(){
     return hasFood;
   }
 
-  public void setDirection(String down) {
-    this.direction = down;
-  }
 }

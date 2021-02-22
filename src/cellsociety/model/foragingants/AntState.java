@@ -43,8 +43,4 @@ public class AntState extends State {
     return amountOfFood;
   }
 
-  @Override
-  public String getDirection(){
-    return direction;
-  }
 }

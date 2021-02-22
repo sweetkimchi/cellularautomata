@@ -3,6 +3,7 @@ package cellsociety.controller.grid;
 import cellsociety.model.cell.State;
 import cellsociety.model.foragingants.ForagingAntGridManager;
 import cellsociety.model.rules.Rules;
+import cellsociety.model.sugarscape.AgentState;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -344,6 +345,29 @@ public class GridManager {
 
   public boolean isAtEdge(int x, int y) {
     return (x == row - 1 || x == 0 || y == col - 1 || y == 0);
+  }
+
+  public void makeSugarScapeGridWithRandomSeed(float emptyRatio, float patchRatio, int numAgents, int metabolism, int vision, int seed,
+      ArrayList<String> possibleTypes, ArrayList<String> possibleColors) {
+    Random random = new Random(seed);
+    State[][] stateOfCells = new State[row][col];
+    for (int x = 0; x < row; x++) {
+      for (int y = 0; y < col; y++) {
+        double probability = random.nextDouble();
+        //      System.out.println(probability);
+        if (probability < emptyRatio) {
+          State state = new State(x, y, possibleTypes.get(0), possibleColors.get(0), 0);
+          stateOfCells[x][y] = state;
+        } else if (probability < emptyRatio + (1 - emptyRatio) * patchRatio) {
+          State state = new State(x, y, possibleTypes.get(1), possibleColors.get(1), 0);
+          stateOfCells[x][y] = state;
+        } else {
+          AgentState state = new AgentState(x, y, possibleTypes.get(3), possibleColors.get(3), 0, metabolism, vision);
+          stateOfCells[x][y] = state;
+        }
+      }
+    }
+    this.stateOfCells = stateOfCells;
   }
 }
 

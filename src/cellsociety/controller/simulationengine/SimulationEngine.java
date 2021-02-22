@@ -146,11 +146,11 @@ public class SimulationEngine {
       gridManager
           .buildAntGridWithTemplate(decoder.getCoordinates(), rules.getPossibleTypes(), rules.getPossibleColors(), decoder.getRadius(), decoder.getNumberOfSides());
     }
-    if (game.equals("navigatingsugarscape")) {
+    if (game.equals("sugarscape")) {
       //   rules = new WaTorModelRules(emptyRatio, populationRatio, randomSeed, energyFish, reproduceBoundary, sharkEnergy);
       SugarScapeGridManager sugarScapeGridManager = new SugarScapeGridManager(decoder.getRows(), decoder.getCols());
       rules = new NavigatingSugarScapeRules(decoder.getNumAgents(), decoder.getMaxSugar(), decoder.getGrowBackSugar(), decoder.getMetabolism(), decoder.getVision(), decoder.getFullSugarColor(), decoder.getLowSugarColor(), decoder.getAgentColor(), decoder.getEmptyColor());
-      sugarScapeGridManager
+      gridManager
           .makeSugarScapeGridWithRandomSeed(decoder.getEmptyRatio(), decoder.getPatchRatio(), decoder.getNumAgents(), decoder.getMetabolism(), decoder.getVision(),
                   decoder.getSeed(), rules.getPossibleTypes(), rules.getPossibleColors());
     }
