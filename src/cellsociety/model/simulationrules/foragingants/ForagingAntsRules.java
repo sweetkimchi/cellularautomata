@@ -139,11 +139,11 @@ public class ForagingAntsRules extends Rules {
     }
 
     if (gridManager.getTypeAtCoordinate(x, y).equals(PHEROMONE)) {
-      gridManager.setStateAtCoordinate(x, y, decidePhermoneState(gridManager, x, y));
+      gridManager.setStateAtCoordinate(x, y, decidePheromoneState(gridManager, x, y));
     }
   }
 
-  private State decidePhermoneState(GridManager gridManager, int x, int y) {
+  private State decidePheromoneState(GridManager gridManager, int x, int y) {
     if (gridManager.getStateAtCoordinate(x, y).getEnergy() <= 0) {
       return new AntState(x, y, EMPTY, EMPTY_COLOR, 0, 0);
     } else {
