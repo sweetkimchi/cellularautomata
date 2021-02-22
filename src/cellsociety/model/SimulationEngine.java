@@ -162,8 +162,6 @@ public class SimulationEngine {
    */
   public void updateCellState() {
     gridManager.judgeStateOfEachCell(rules);
-    //THIS IS A BAD EXAMPLE THAT NEEDS TO BE FIXED
-    // I WILL PASS IN THE GRID OF COLORS OR MAYBE GRID OF TYPES
     simulationScreen.update(gridManager);
   }
 
