@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<data game="game">
+  <author>Jiyun</author>
+  <blockcolor>black</blockcolor>
+  <blockratio>0.5</blockratio>
+  <description>Formation of smaller water bodies such as ponds.</description>
+  <emptycolor>lightgrey</emptycolor>
+  <model>percolation</model>
+  <numCols>60</numCols>
+  <numRows>60</numRows>
+  <numberofsides>6</numberofsides>
+  <randomseed>2</randomseed>
+  <shape>hexagon</shape>
+  <template>random_one</template>
+  <title>Percolation</title>
+  <watercolor>blue</watercolor>
+  <watertoemptyratio>0.01</watertoemptyratio>
+</data>
