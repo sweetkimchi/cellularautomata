@@ -104,6 +104,7 @@ public class GraphGraphics {
       line.getData().clear();
     }
     lines.clear();
+    lineChart.getData().clear();
     currentTime = 0;
   }
 
