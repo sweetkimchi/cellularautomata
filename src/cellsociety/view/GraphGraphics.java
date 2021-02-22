@@ -104,7 +104,16 @@ public class GraphGraphics {
       line.getData().clear();
     }
     lines.clear();
+    lineChart.getData().clear();
     currentTime = 0;
   }
 
+  /**
+   * Returns a boolean of whether or not the graph window is open.
+   * 
+   * @return boolean if graph window is active
+   */
+  public boolean isActive() {
+    return stage.isShowing();
+  }
 }
