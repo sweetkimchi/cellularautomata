@@ -1,8 +1,8 @@
 # DESIGN Document for Cell Society Team 01
 ## Names
-Shaw Phillips ``sp422``
-Jiyun Hyo [**jh160**]
-Harrison Huang - hlh38
+Shaw Phillips sp422  
+Jiyun Hyo jh160  
+Harrison Huang hlh38  
 
 
 ## Roles
